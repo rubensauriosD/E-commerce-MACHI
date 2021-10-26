@@ -18,8 +18,8 @@ const {
   const Imagenes = ImagenesModel(sequelize)
 
   module.exports = {
-     conn: sequelize,
-     Usuario,
-     Producto,
-     Imagenes
+      conn: sequelize,
+      Usuario,
+      Producto,
+      Imagenes
   };
