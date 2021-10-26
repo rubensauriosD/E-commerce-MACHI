@@ -3,26 +3,37 @@ const { Producto, Op } = require("../db");
 async function getProductos(req, res) {
   try {
     let { nombre } = req.query;
-    let products = []
+    let products = [];
     //#region search by NAME
     if (nombre && nombre !== "") {
-        products = await Producto.findAll({
-            where: {
-                nombre: {
-                    [Op.iLike]: `%${nombre}%`
-                }
-            },
-        })
+      products = await Producto.findAll({
+        where: {
+          nombre: {
+            [Op.iLike]: `%${nombre}%`,
+          },
+        },
+      });
     } else {
-        products = await Producto.findAll() //Si no hay input devuelve todo
+      products = await Producto.findAll(); //Si no hay input devuelve todo
     }
     //#endregion NAME
 
     return res.send({
-      products: products
+      products: products,
     });
   } catch (error) {
     return res.status(404);
+  }
+}
+
+async function getProductDetail(req, res, next) {
+  try {
+    const { id } = req.params;
+    let product = await Producto.findByPk(id);
+
+    return res.send(product);
+  } catch (error) {
+    next(error);
   }
 }
 
@@ -63,21 +74,10 @@ async function putProductos(req, res) {
 }
 
 async function postProductos(req, res) {
-  const { nombre, imagen, precio, descripcion, disponibilidad } = req.body;
+  const { array } = req.body;
   try {
-    if (!nombre || !imagen || !precio || !descripcion) {
-      // Validacion
-      res.status(404).send("The product need more data");
-    } else {
-      const nuevoProduct = await Producto.create({
-        nombre: nombre,
-        imagen: imagen,
-        precio: precio,
-        descripcion: descripcion,
-        disponibilidad: disponibilidad,
-      });
-      res.json(nuevoProduct); //Falta modificar luego de realizar las relaciones de base de datos!!
-    }
+    const products = await Producto.bulkCreate(array);
+    res.json(products);
   } catch (error) {
     console.log(error);
   }
@@ -88,4 +88,5 @@ module.exports = {
   putProductos,
   postProductos,
   deleteProductos,
+  getProductDetail,
 };
