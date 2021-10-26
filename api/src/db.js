@@ -3,6 +3,7 @@ const { Sequelize, Op } = require('sequelize');
 const UsuarioModel = require('./models/usuarios');
 const ProductosModel = require('./models/productos');
 const ImagenesModel = require('./models/imagenes');
+const ComentariosModel = require('./models/comentarios');
 
 const {
     DB_USER, DB_PASSWORD, DB_HOST,
@@ -16,6 +17,7 @@ const {
   const Usuario = UsuarioModel(sequelize)
   const Producto = ProductosModel(sequelize)
   const Imagenes = ImagenesModel(sequelize)
+  const Comentarios = ComentariosModel(sequelize)
 
   // Relaciones
 
@@ -24,5 +26,6 @@ const {
       Usuario,
       Producto,
       Imagenes,
+      Comentarios,
       Op
   };
