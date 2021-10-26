@@ -27,9 +27,9 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/home"
+            to="/"
             activeClassName="selected"
-            activeStyle={{}}
+            activeStyle={{ color: "#d4b518" }}
           >
             Home
           </NavLink>
@@ -38,9 +38,9 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/home"
+            to="/contact"
             activeClassName="selected"
-            activeStyle={{}}
+            activeStyle={{ color: "#d4b518" }}
           >
             Contacto
           </NavLink>
@@ -49,7 +49,7 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/home"
+            to="/"
             activeClassName="selected"
             activeStyle={{}}
           >
@@ -60,7 +60,7 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/home"
+            to="/"
             activeClassName="selected"
             activeStyle={{}}
           >
@@ -71,7 +71,7 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/home"
+            to="/"
             activeClassName="selected"
             activeStyle={{}}
           >
@@ -79,15 +79,23 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="primary-search-account-menu"
-            aria-haspopup="true"
-            color="inherit"
+          <NavLink
+            className={NavBarCSS.navlink}
+            exact
+            to="/login"
+            activeClassName="selected"
+            activeStyle={{ color: "#d4b518" }}
           >
-            <AccountCircle />
-          </IconButton>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="primary-search-account-menu"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </NavLink>
         </li>
       </ul>
     </div>
