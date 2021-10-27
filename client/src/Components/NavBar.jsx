@@ -17,6 +17,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 // import MoreIcon from "@mui/icons-material/MoreVert";
 import React from "react";
 import NavBarCSS from "../Styles/NavBar.module.css";
+import Cart from "./Cart"
 import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
@@ -96,6 +97,9 @@ const NavBar = () => {
               <AccountCircle />
             </IconButton>
           </NavLink>
+        </li>
+        <li>
+          <Cart/>
         </li>
       </ul>
     </div>
