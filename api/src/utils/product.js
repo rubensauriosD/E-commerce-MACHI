@@ -63,29 +63,28 @@ async function putProductos(req, res) {
 }
 
 async function postProductos(req, res) {
-  const { nombre, imagen, precio, descripcion, disponibilidad } = req.body;
+  const {array} = req.body;
   try {
-    if (!nombre || !imagen || !precio || !descripcion) {
-      // Validacion
-      res.status(404).send("The product need more data");
-    } else {
-      const nuevoProduct = await Producto.create({
-        nombre: nombre,
-        imagen: imagen,
-        precio: precio,
-        descripcion: descripcion,
-        disponibilidad: disponibilidad,
-      });
-      res.json(nuevoProduct); //Falta modificar luego de realizar las relaciones de base de datos!!
-    }
+    const Productos=await Producto.bulkCreate(array)
+    res.json(Productos)
   } catch (error) {
     console.log(error);
+    res.status(404).json({error:`this is the error: ${error}`})
   }
 }
-
+async function getProducto (req,res){
+  const {id}=req.params
+try{
+  const llegadaProductoPorId=await Producto.findByPk(id)
+  res.json(llegadaProductoPorId)
+}catch(e){
+  res.status(404).json({error:`el error es: ${e}`})
+}
+} 
 module.exports = {
   getProductos,
   putProductos,
   postProductos,
   deleteProductos,
+  getProducto
 };
