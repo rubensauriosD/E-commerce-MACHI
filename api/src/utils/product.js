@@ -26,16 +26,7 @@ async function getProductos(req, res) {
   }
 }
 
-async function getProductDetail(req, res, next) {
-  try {
-    const { id } = req.params;
-    let product = await Producto.findByPk(id);
 
-    return res.send(product);
-  } catch (error) {
-    next(error);
-  }
-}
 
 async function deleteProductos(req, res) {
   const { id } = req.params;
@@ -99,7 +90,5 @@ module.exports = {
   putProductos,
   postProductos,
   deleteProductos,
-
   getProducto
-
 };
