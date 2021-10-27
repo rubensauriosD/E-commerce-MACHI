@@ -42,6 +42,7 @@ async function deleteProductos(req, res) {
   res.json(product); //devuelvo el producto eliminado
 }
 
+
 async function putProductos(req, res) {
   const { id } = req.params;
 
@@ -64,18 +65,23 @@ async function putProductos(req, res) {
   res.json(product);
 }
 
+
 async function postProductos(req, res) {
 
   const {array} = req.body;
   try {
     const Productos=await Producto.bulkCreate(array)
-    res.json(Productos)
+
+    await Productos.setUsuario(id)
+    return res.json(Productos).send('Producto publicado con exito');
 
   } catch (error) {
     console.log(error);
     res.status(404).json({error:`this is the error: ${error}`})
   }
 }
+
+
 async function getProducto (req,res){
   const {id}=req.params
 try{
@@ -84,7 +90,9 @@ try{
 }catch(e){
   res.status(404).json({error:`el error es: ${e}`})
 }
-} 
+}
+
+
 module.exports = {
   getProductos,
   putProductos,

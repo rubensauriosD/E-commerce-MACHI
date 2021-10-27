@@ -1,4 +1,4 @@
-const { Imagenes } = require("../db");
+const { Imagen } = require("../db");
 const cloudinary = require("cloudinary");
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -50,10 +50,12 @@ async function deleteImagenes(req, res) {
 async function postImagenes(req, res) {
   try {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
-    const nuevoImg = await Imagenes.create({
+    const nuevoImg = await Imagen.create({
       id: result.public_id,
       imagen: result.url,
     });
+
+    await nuevoImg.setProducto(id)
 
     res.send(nuevoImg);
   } catch (error) {
