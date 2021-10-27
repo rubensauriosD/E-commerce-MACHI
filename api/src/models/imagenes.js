@@ -3,10 +3,9 @@ module.exports = (sequelize) => {
   
   return sequelize.define('imagenes', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.STRING, //Usa el id que genera cloudinary
       allowNull: false,
-      primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
     imagen: {
       type: DataTypes.STRING,
@@ -16,5 +15,4 @@ module.exports = (sequelize) => {
   {
     timestamps: false
   });
-  
 };

@@ -1,8 +1,8 @@
-const { Comentarios } = require("../db");
+const { Comentario } = require("../db");
 
 async function getComments(req, res, next) {
   try {
-    let comments = await Comentarios.findAll();
+    let comments = await Comentario.findAll();
 
     return res.send({ comments: comments });
   } catch (error) {
@@ -14,9 +14,9 @@ async function getComments(req, res, next) {
 async function deleteComments(req, res) {
     const { id } = req.params;
   
-    const comment = await Producto.findByPk(id);
+    const comment = await Comentario.findByPk(id);
   
-    Producto.destroy({
+    Comentario.destroy({
       where: {
         id: id,
       },
@@ -30,7 +30,7 @@ async function putComments(req, res) {
 
   const { comentarios, puntaje } = req.body;
 
-  await Comentarios.update(
+  await Comentario.update(
     {
       comentarios,
       puntaje,
@@ -39,7 +39,7 @@ async function putComments(req, res) {
       where: { id: id },
     }
   );
-  const comment = await Comentarios.findByPk(id);
+  const comment = await Comentario.findByPk(id);
   res.send(comment);
 }
 
@@ -47,7 +47,7 @@ async function postComments(req, res, next) {
   const { comentarios, puntaje } = req.body;
 
   try {
-    const newComment = await Comentarios.create({
+    const newComment = await Comentario.create({
       comentarios: comentarios,
       puntaje: puntaje,
     });
