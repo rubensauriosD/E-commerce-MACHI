@@ -1,81 +1,69 @@
-const {Imagenes} = require('../db')
+const { Imagenes } = require("../db");
+const cloudinary = require("cloudinary");
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
-async function getImagenes(req, res) 
-{
-    let image = await Imagenes.findAll();
+async function getImagenes(req, res) {
+  let image = await Imagenes.findAll();
 
-    try 
-    {
-        if (image) 
-        {
-            res.json(image);
-        } 
-        else 
-        {
-            return res.status(404).send('No hay imagenes existentes.')
-        }
-    } 
-    catch (error) {
-        return res.status(404);
+  try {
+    if (image) {
+      res.json(image);
+    } else {
+      return res.status(404).send("No hay imagenes existentes.");
     }
+  } catch (error) {
+    return res.status(404);
+  }
 }
 
-async function deleteImagenes(req, res) 
-{
-    const {id} = req.params;
+async function deleteImagenes(req, res) {
+  const { id } = req.params;
 
-    let image = await Imagenes.findByPk(id)
+  const image = await Imagenes.findByIdAndDelete(id);
+  cloudinary.v2.uploader.destroy(image.id);
 
-    Imagenes.destroy({
-        where:
-        {
-            id:id
-        }
-    })
-
-    res.json(image)
+  res.json(image);
 }
 
-async function putImagenes(req, res) 
-{
-    const {id} = req.params;
+// async function putImagenes(req, res) {
+//   const { id } = req.params;
 
-    const {imagen} = req.body;
+//   const { imagen } = req.body;
 
-    await Imagenes.update(
-        {
-            imagen
-        },
-        {
-            where: {id:id}
-        }
-    )
+//   await Imagenes.update(
+//     {
+//       imagen,
+//     },
+//     {
+//       where: { id: id },
+//     }
+//   );
 
-    const img = await Imagenes.findByPk(id)
-    res.json(img)
-}
+//   const img = await Imagenes.findByPk(id);
+//   res.json(img);
+// }
 
-async function postImagenes(req, res) 
-{
-    const {imagen} = req.body;
+async function postImagenes(req, res) {
+  try {
+    const result = await cloudinary.v2.uploader.upload(req.file.path);
+    const nuevoImg = await Imagenes.create({
+      id: result.public_id,
+      imagen: result.url,
+    });
 
-    try 
-    {
-            const nuevoImg = await Imagenes.create({
-                imagen:imagen
-            })
-
-            res.json(nuevoImg)
-    } 
-    catch (error) 
-    {
-        console.log(error);
-    }
+    res.send(nuevoImg);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 module.exports = {
-    getImagenes,
-    putImagenes,
-    postImagenes,
-    deleteImagenes
+  getImagenes,
+  putImagenes,
+  postImagenes,
+  deleteImagenes,
 };
