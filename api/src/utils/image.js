@@ -7,7 +7,7 @@ cloudinary.config({
 });
 
 async function getImagenes(req, res) {
-  let image = await Imagenes.findAll();
+  let image = await Imagen.findAll();
 
   try {
     if (image) {
@@ -23,7 +23,7 @@ async function getImagenes(req, res) {
 async function deleteImagenes(req, res) {
   const { id } = req.params;
 
-  const image = await Imagenes.findByIdAndDelete(id);
+  const image = await Imagen.findByIdAndDelete(id);
   cloudinary.v2.uploader.destroy(image.id);
 
   res.json(image);
