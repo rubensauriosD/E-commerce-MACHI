@@ -3,26 +3,37 @@ const { Producto, Op } = require("../db");
 async function getProductos(req, res) {
   try {
     let { nombre } = req.query;
-    let products = []
+    let products = [];
     //#region search by NAME
     if (nombre && nombre !== "") {
-        products = await Producto.findAll({
-            where: {
-                nombre: {
-                    [Op.iLike]: `%${nombre}%`
-                }
-            },
-        })
+      products = await Producto.findAll({
+        where: {
+          nombre: {
+            [Op.iLike]: `%${nombre}%`,
+          },
+        },
+      });
     } else {
-        products = await Producto.findAll() //Si no hay input devuelve todo
+      products = await Producto.findAll(); //Si no hay input devuelve todo
     }
     //#endregion NAME
 
     return res.send({
-      products: products
+      products: products,
     });
   } catch (error) {
     return res.status(404);
+  }
+}
+
+async function getProductDetail(req, res, next) {
+  try {
+    const { id } = req.params;
+    let product = await Producto.findByPk(id);
+
+    return res.send(product);
+  } catch (error) {
+    next(error);
   }
 }
 
@@ -63,10 +74,12 @@ async function putProductos(req, res) {
 }
 
 async function postProductos(req, res) {
+
   const {array} = req.body;
   try {
     const Productos=await Producto.bulkCreate(array)
     res.json(Productos)
+
   } catch (error) {
     console.log(error);
     res.status(404).json({error:`this is the error: ${error}`})
@@ -86,5 +99,7 @@ module.exports = {
   putProductos,
   postProductos,
   deleteProductos,
+
   getProducto
+
 };

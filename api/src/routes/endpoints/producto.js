@@ -1,7 +1,9 @@
 const app = require('express').Router();
+
 const { getProductos, postProductos, putProductos, deleteProductos,getProducto} = require('../../utils/product');
 
 app.get('/',getProductos)
+app.get('/:id', getProductDetail)
 app.post('/',postProductos)
 app.route("/:id")
     .get(getProducto)
