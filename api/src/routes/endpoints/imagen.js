@@ -3,7 +3,7 @@ const { getImagenes, postImagenes, putImagenes, deleteImagenes} = require('../..
 
 app.get('/',getImagenes)
 app.post('/',postImagenes)
-app.put('/:id',putImagenes)
-app.delete('/:id',deleteImagenes)
+// app.put('/:id',putImagenes)
+app.get('/:id',deleteImagenes)
 
 module.exports = app;
