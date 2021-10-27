@@ -49,7 +49,7 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/"
+            to="/tienda"
             activeClassName="selected"
             activeStyle={{}}
           >

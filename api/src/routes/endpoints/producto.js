@@ -1,10 +1,13 @@
 const app = require('express').Router();
-const { getProductos, postProductos, putProductos, deleteProductos, getProductDetail} = require('../../utils/product');
+
+const { getProductos, postProductos, putProductos, deleteProductos,getProducto} = require('../../utils/product');
 
 app.get('/',getProductos)
 app.get('/:id', getProductDetail)
 app.post('/',postProductos)
-app.put('/:id',putProductos)
-app.delete('/:id',deleteProductos)
+app.route("/:id")
+    .get(getProducto)
+    .put(putProductos)
+    .delete(deleteProductos)
 
 module.exports = app;

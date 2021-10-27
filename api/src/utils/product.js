@@ -74,19 +74,32 @@ async function putProductos(req, res) {
 }
 
 async function postProductos(req, res) {
-  const { array } = req.body;
+
+  const {array} = req.body;
   try {
-    const products = await Producto.bulkCreate(array);
-    res.json(products);
+    const Productos=await Producto.bulkCreate(array)
+    res.json(Productos)
+
   } catch (error) {
     console.log(error);
+    res.status(404).json({error:`this is the error: ${error}`})
   }
 }
-
+async function getProducto (req,res){
+  const {id}=req.params
+try{
+  const llegadaProductoPorId=await Producto.findByPk(id)
+  res.json(llegadaProductoPorId)
+}catch(e){
+  res.status(404).json({error:`el error es: ${e}`})
+}
+} 
 module.exports = {
   getProductos,
   putProductos,
   postProductos,
   deleteProductos,
-  getProductDetail,
+
+  getProducto
+
 };

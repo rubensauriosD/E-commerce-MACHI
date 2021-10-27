@@ -13,10 +13,13 @@ import {
     GET_USERS,
     DELETE_USER,
     PUT_USER,
+    INICIARS,
+    FILTRADOCATEGORIAS
 } from "../actions/action.jsx"
 
 const initialState={
     Products:[],
+    productosPorCategorias:[],
     Product: {},
     Images: [],
     Image:{},
@@ -24,6 +27,7 @@ const initialState={
     User:{},
     Comments:[],
     Comment:{},
+    siInicio:false,
     //carrito?
     //paginacion?
 }
@@ -36,7 +40,7 @@ const rootReducer=(state=initialState,{type, payload})=>{
         }
         case GET_PRODUCTS: return {
             ...state,
-            Products: payload
+            Products: payload.products
         }
         case DELETE_PRODUCT: return {
             ...state
@@ -84,6 +88,18 @@ const rootReducer=(state=initialState,{type, payload})=>{
         case PUT_USER: return {
             ...state,
             User: payload
+        }
+        case INICIARS:return{
+            ...state,
+            siInicio:payload.checked,
+            User:payload.usuario
+        }
+        case FILTRADOCATEGORIAS:{
+
+            return{
+            ...state,
+            productosPorCategorias:state.Products.filter(producto=>producto.categoria===payload)
+        }
         }
         /* case GET_USER_ID: return {
             ...state,

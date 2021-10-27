@@ -13,9 +13,8 @@ export const POST_USER = "POST_USER"
 export const GET_USERS = "GET_USERS"
 export const DELETE_USER = "DELETE_USER"
 export const PUT_USER = "PUT_USER"
-
-
-
+export const INICIARS = "INICIAR_SESION"
+export const FILTRADOCATEGORIAS="FILTRAR_POR_CATEGORIAS"
 //PRODUCTOS
 
 //postear producto
@@ -85,7 +84,7 @@ export const putProduct = ({id})=>{
 }
 
 //obtener producto por id para su detalle
-export const getProductId = ({id})=>{
+export const getProductId = (id)=>{
   return (dispatch)=>{
     axios.get(`http://localhost:3001/productos/${id}`)
     .then(productDetail =>{
@@ -212,7 +211,15 @@ export const getUsers = ()=>{
       })
   }
 }
-
+//Iniciar Sesion
+export const IniciarSesion=(usuario)=>{
+  return(dispatch)=>{
+    axios.get("http://localhost:3001/usuarios/inicioS",usuario)
+    .then(resultadoDeUsuario=>{
+      dispatch({type:INICIARS,payload:resultadoDeUsuario})
+    })
+  }
+}
 //COMPLETAR
 //borrar usuario
 export const deleteUser = ({id})=>{
@@ -245,4 +252,11 @@ export const putUser = ({id})=>{
         console.log(err)
     })
 }
+}
+export const productosFiltrados=(nombreCategoria)=>{
+
+  return{
+    type:FILTRADOCATEGORIAS,
+    payload:nombreCategoria
+  }
 }
