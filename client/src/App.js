@@ -7,6 +7,8 @@ import Login from "./Pages/Login";
 import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
 import DetalleProducto from "./Pages/DetalleProducto";
+import Carrusel from "./Components/Carrusel/Carrusel";
+
 function App() {
   return (
     <div className="App">
@@ -18,6 +20,7 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/tienda/:nombreCategoria" render={({match})=><Tienda props={match.params.nombreCategoria}/>}/>
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
+          <Route exact path="/carrusel" component={Carrusel} />
         </Switch> 
       </Router>
     </div>
