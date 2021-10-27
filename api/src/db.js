@@ -34,7 +34,7 @@ module.exports = {
   Usuario,
   Producto,
   Imagenes,
-  Comentarios,
+  Comentario,
   Op
 };
 
