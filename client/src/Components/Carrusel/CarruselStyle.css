@@ -4,7 +4,7 @@
 
 .container-slider{
     width: 90%;
-    max-width: 900px;
+    max-width: 1200px;
     margin: auto;
     overflow: hidden;
     box-shadow:  0 0 0 10px #fff,
@@ -16,6 +16,7 @@
     width: 300%;
     height: 400px;
     margin-left: -100%;
+    cursor: pointer;
 }
 .slider_section{
     width: 100%;
@@ -45,4 +46,13 @@
 }
 .slider_btn-right{
     right: 10px;
+}
+.text-section{
+    background: rgba(0, 0, 0, 0.171);
+    color: #fff;
+    width: 100%;
+    padding: 10px 60px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
 }
