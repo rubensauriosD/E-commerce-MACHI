@@ -68,28 +68,5 @@ module.exports = {
   postComments
 };
 
-const {CommentSafePlace,User} = require('../db');
-
-async function newComment(data){
-    let newComment = await CommentSafePlace.create({
-      comment_text, userId, safePlaceId
-    })
-};
-
-
-const ServicesCommentSafePlace = require('../services/commentSafePlace');
-
-
-const newComment = async (req,res) =>{
-    const {comment_text, userId, safePlaceId} = req.body;
-    try{
-        await ServicesCommentSafePlace.newComment({comment_text, userId, safePlaceId})
-            res.status(200).json({success:true})
-    }
-    catch(error){
-    console.log(error)
-    throw error
-    }
-};
 
 
