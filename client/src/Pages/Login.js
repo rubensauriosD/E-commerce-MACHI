@@ -1,6 +1,6 @@
 import React from "react";
 import {postUser,getUsers} from "../Redux/actions/action"
-import  {useDispatch,useSelector} from "react-redux"
+import  {useDispatch} from "react-redux"
 import Login from "../Components/LogIn";
 import SignIn from "../Components/SignIn";
 const LoginPage = () => {

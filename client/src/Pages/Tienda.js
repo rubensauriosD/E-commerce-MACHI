@@ -7,7 +7,7 @@ export default function Tienda({props}){
     const dispatch=useDispatch()
     React.useEffect(()=>{
         dispatch(productosFiltrados(props))
-    },[dispatch])
+    },[dispatch,props])
     return(
         <div>
             <h1>{props.nombreCategoria}</h1>
