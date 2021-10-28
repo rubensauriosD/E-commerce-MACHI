@@ -65,7 +65,7 @@ async function postImagenes(req, res) {
 
 module.exports = {
   getImagenes,
-  putImagenes,
+  //putImagenes,
   postImagenes,
   deleteImagenes,
 };
