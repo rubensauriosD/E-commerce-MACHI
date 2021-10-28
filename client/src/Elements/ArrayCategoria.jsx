@@ -2,7 +2,7 @@ export const categoria = [
   {
     nombre: "Cajones y Cultivos",
     imagen:
-      "https://guiadejardin.com/wp-content/uploads/2014/02/cajon-cultivo1.jpg",
+      "https://i.pinimg.com/564x/75/eb/89/75eb89c694a1eb875846dd2a2ad740cf.jpg",
   },
   {
     nombre: "Plantines y Semillas",
@@ -15,7 +15,7 @@ export const categoria = [
       "https://d22fxaf9t8d39k.cloudfront.net/e7f51cec011bb22ee4dda655b9b01f4215a0841f40d20099f70ccd602cdfa78412752.png",
   },
   {
-    nombre: "Insumos y Herramientas para Huertas",
+    nombre: "Insumos y Herramientas",
     imagen: "https://news.agrofystatic.com/huerta3_agorfy_news.jpg?d=620x375",
   },
   {
