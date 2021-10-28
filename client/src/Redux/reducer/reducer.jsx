@@ -17,7 +17,8 @@ import {
     FILTRADOCATEGORIAS,
     GETPRODUCTBYNAME,
     ORDER_BY_NAME,
-    ORDER_BY_PRECIO
+    ORDER_BY_PRECIO,
+    ORDER_BY_CATEG
 } from "../actions/action.jsx"
 
 const initialState={
@@ -123,55 +124,25 @@ const rootReducer=(state=initialState,{type, payload})=>{
 
         //By Name Order:
         case ORDER_BY_NAME: {
-            const orderName = payload === 'Asc' ?
-            state.Products.sort(function(a, b) {
-                if(a.nombre > b.nombre) {
-                    return 1;
-                }
-                if(b.nombre > a.nombre) {
-                    return -1;
-                }
-                return 0;
-            }) :
-            state.Products.sort(function(a, b) {
-                if(a.nombre > b.nombre) {
-                    return -1;
-                }
-                if(b.nombre > a.nombre) {
-                    return 1;
-                }
-                return 0;
-            });
             return {
                 ...state,
-                Products: orderName
+                Products: payload
             }
         }
 
         //By Precio:
         case ORDER_BY_PRECIO: {
-            const orderPrecio = payload === 'Desc' ?
-            state.Products.sort(function(a, b) {
-                if(a.precio > b.precio) {
-                    return 1;
-                }
-                if(b.precio > a.precio) {
-                    return -1;
-                }
-                return 0;
-            }) :
-            state.Products.sort(function(a, b) {
-                if(a.precio > b.precio) {
-                    return -1;
-                }
-                if(b.precio > a.precio) {
-                    return 1;
-                }
-                return 0;
-            });
             return {
                 ...state,
-                Products: orderPrecio
+                Products: payload
+            }
+        }
+
+        //By categoria:
+        case ORDER_BY_CATEG: {
+            return {
+                ...state,
+                Products: payload
             }
         }
 

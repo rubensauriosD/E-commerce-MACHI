@@ -18,11 +18,11 @@ async function getProductos(req, res) {
       productos = await Producto.findAll(); //Si no hay input devuelve todo
     }
     //#endregion NAME
-    
+
     //#region ORDEN ALFABETICO
     if (ordenA === "asc" || !ordenA || ordenA === "") {
       productos = productos.sort((a,b) =>{
-        return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase()) 
+        return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase())
       })
     }else{
       productos = productos.sort((a,b) =>{

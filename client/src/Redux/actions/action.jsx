@@ -18,6 +18,7 @@ export const FILTRADOCATEGORIAS="FILTRAR_POR_CATEGORIAS"
 export const GETPRODUCTBYNAME = "GET_PRODUCT_BY_NAME";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_PRECIO = "ORDER_BY_PRECIO";
+export const ORDER_BY_CATEG= "ORDER_BY_CATEG";
 //PRODUCTOS
 
 //postear producto
@@ -55,7 +56,7 @@ export const getProducts = ()=>{
 // Filtrar producto por nombre:
 export const getByName = (nombre) => {
   return(dispatch) => {
-    axios.get(`http://localhost:3001/productos/${nombre}`)
+    axios.get(`http://localhost:3001/productos?nombre=${nombre}`)
     .then(res => {
       return dispatch({
         type: GETPRODUCTBYNAME,
@@ -283,19 +284,51 @@ export const productosFiltrados=(nombreCategoria)=>{
 
 //BY_ORDER:
 //Orden por nombre:
+export const orderByName = (ordenA) => {
+  return(dispatch) => {
+    axios.get(`http://localhost:3001/productos?ordenA=${ordenA}`)
+    .then(res => {
+      return dispatch({
+        type: ORDER_BY_NAME,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+}
 
-export const orderByName = (payload) => {
-  return {
-    type: ORDER_BY_NAME,
-    payload
-  };
-};
 
 //Orden por precio:
+export const orderByPrecio = (ordenP) => {
+  return(dispatch) => {
+    axios.get(`http://localhost:3001/productos?ordenP=${ordenP}`)
+    .then(res => {
+      return dispatch({
+        type: ORDER_BY_PRECIO,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+}
 
-export const orderByPrecio = (payload) => {
-  return {
-    type: ORDER_BY_PRECIO,
-    payload
+//*No se muy bien si esta remplaza a la otra, o si esta es solo para la tienda*/
+//Orden por CATEGORIA:
+export const orderByCateg = (filtroC) => {
+  return(dispatch) => {
+    axios.get(`http://localhost:3001/productos?filtroC=${filtroC}`)
+    .then(res => {
+      return dispatch({
+        type: ORDER_BY_CATEG,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 }
