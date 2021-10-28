@@ -55,8 +55,6 @@ async function postImagenes(req, res) {
       imagen: result.url,
     });
 
-    await nuevoImg.setProducto(id)
-
     res.send(nuevoImg);
   } catch (error) {
     console.log(error);
