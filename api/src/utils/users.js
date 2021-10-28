@@ -77,21 +77,11 @@ async function postUsuario(req, res)
     }
 }
 
-async function getInicio (req,res) {
-    const {email,contreseña}=req.body
-    try{
-        const validate = await Usuario.findByPk(email)
-        validate.length?res.json({checked:true,usuaio:validate}):res.json({checked:false})
-    }catch(e){
-        console.log(e)
-        res.status(400).json({error:"Mirar Consola de Server"})
-    }
-}
+
 
 module.exports = {
     getUsuario,
     putUsuario,
     postUsuario,
     deleteUsuario,
-    getInicio
 };
