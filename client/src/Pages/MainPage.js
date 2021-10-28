@@ -1,5 +1,5 @@
 import "../Styles/MainPage.css";
-import Categorias from "../Components/Categorias";
+import Categorias from "../Components/Categorias/Categorias";
 import Courses from "../Components/Courses";
 import Carrusel from "../Components/Carrusel/Carrusel"
 import { categoria } from "../Elements/ArrayCategoria";
@@ -22,9 +22,7 @@ export default function MainPage() {
         <Carrusel />
       </div>
       <div className="categoryDiv">
-        <h2>Nuestros Productos</h2>
-        
-        <Categorias categoria={categoria} />
+         <Categorias categoria={categoria} />
       </div>
 
       <div className="coursesDiv">
