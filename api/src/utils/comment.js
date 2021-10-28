@@ -13,15 +13,15 @@ async function getComments(req, res, next) {
 
 async function deleteComments(req, res) {
     const { id } = req.params;
-  
+
     const comment = await Comentario.findByPk(id);
-  
+
     Comentario.destroy({
       where: {
         id: id,
       },
     });
-  
+
     res.send(comment);
   }
 
@@ -44,15 +44,18 @@ async function putComments(req, res) {
 }
 
 async function postComments(req, res, next) {
-  const { comentarios, puntaje } = req.body;
+  const { comentarios, puntaje, productoId, usuarioId } = req.body;
 
   try {
     const newComment = await Comentario.create({
       comentarios: comentarios,
       puntaje: puntaje,
+      productoId: productoId,
+      usuarioId: usuarioId
     });
 
-    res.send(newComment); //Falta relaciones!!
+    await newComment.setUsuario(id)
+    res.send(newComment);
   } catch (error) {
     next(error);
   }
@@ -64,3 +67,29 @@ module.exports = {
   putComments,
   postComments
 };
+
+const {CommentSafePlace,User} = require('../db');
+
+async function newComment(data){
+    let newComment = await CommentSafePlace.create({
+      comment_text, userId, safePlaceId
+    })
+};
+
+
+const ServicesCommentSafePlace = require('../services/commentSafePlace');
+
+
+const newComment = async (req,res) =>{
+    const {comment_text, userId, safePlaceId} = req.body;
+    try{
+        await ServicesCommentSafePlace.newComment({comment_text, userId, safePlaceId})
+            res.status(200).json({success:true})
+    }
+    catch(error){
+    console.log(error)
+    throw error
+    }
+};
+
+

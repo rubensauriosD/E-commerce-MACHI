@@ -1,4 +1,4 @@
-const { Imagenes } = require("../db");
+const { Imagen } = require("../db");
 const cloudinary = require("cloudinary");
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -7,7 +7,7 @@ cloudinary.config({
 });
 
 async function getImagenes(req, res) {
-  let image = await Imagenes.findAll();
+  let image = await Imagen.findAll();
 
   try {
     if (image) {
@@ -23,7 +23,7 @@ async function getImagenes(req, res) {
 async function deleteImagenes(req, res) {
   const { id } = req.params;
 
-  const image = await Imagenes.findByIdAndDelete(id);
+  const image = await Imagen.findByIdAndDelete(id);
   cloudinary.v2.uploader.destroy(image.id);
 
   res.json(image);
@@ -50,10 +50,12 @@ async function deleteImagenes(req, res) {
 async function postImagenes(req, res) {
   try {
     const result = await cloudinary.v2.uploader.upload(req.file.path);
-    const nuevoImg = await Imagenes.create({
+    const nuevoImg = await Imagen.create({
       id: result.public_id,
       imagen: result.url,
     });
+
+    await nuevoImg.setProducto(id)
 
     res.send(nuevoImg);
   } catch (error) {

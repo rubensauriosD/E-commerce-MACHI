@@ -14,7 +14,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 
 const Usuario = UsuarioModel(sequelize)
 const Producto = ProductosModel(sequelize)
-const Imagenes = ImagenesModel(sequelize)
+const Imagen = ImagenesModel(sequelize)
 const Comentario = ComentariosModel(sequelize)
 
 // *Relaciones*
@@ -28,12 +28,16 @@ Usuario.hasMany(Comentario);
 Comentario.belongsTo(Usuario);
 Comentario.belongsTo(Producto);
 
+//Porducto - Imagen:
+Producto.hasMany(Imagen);
+Imagen.belongsTo(Producto);
+
 
 module.exports = {
   conn: sequelize,
   Usuario,
   Producto,
-  Imagenes,
+  Imagen,
   Comentario,
   Op
 };
