@@ -29,8 +29,8 @@ Comentario.belongsTo(Usuario);
 Comentario.belongsTo(Producto);
 
 //Porducto - Imagen:
-Producto.hasMany(Imagen);
-Imagen.belongsTo(Producto);
+//Producto.hasMany(Imagen);
+//Imagen.belongsTo(Producto);
 
 
 module.exports = {

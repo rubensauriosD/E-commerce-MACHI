@@ -3,7 +3,7 @@ export const POST_PRODUCT = "POST_PRODUCT";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const PUT_PRODUCT = "PUT_PRODUCT";
-export const GET_PRODUCT_ID = "GET_PRODUCT_ID"; 
+export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const POST_IMAGE = "POST_IMAGE";
 export const GET_IMAGES = "GET_IMAGES";
@@ -15,6 +15,9 @@ export const DELETE_USER = "DELETE_USER"
 export const PUT_USER = "PUT_USER"
 export const INICIARS = "INICIAR_SESION"
 export const FILTRADOCATEGORIAS="FILTRAR_POR_CATEGORIAS"
+export const GETPRODUCTBYNAME = "GET_PRODUCT_BY_NAME";
+export const ORDER_BY_NAME = "ORDER_BY_NAME";
+export const ORDER_BY_PRECIO = "ORDER_BY_PRECIO";
 //PRODUCTOS
 
 //postear producto
@@ -46,6 +49,22 @@ export const getProducts = ()=>{
       .catch((err)=>{
           console.log(err)
       })
+  }
+}
+
+// Filtrar producto por nombre:
+export const getByName = (nombre) => {
+  return(dispatch) => {
+    axios.get(`http://localhost:3001/productos/${nombre}`)
+    .then(res => {
+      return dispatch({
+        type: GETPRODUCTBYNAME,
+        payload: res.data
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 }
 
@@ -258,5 +277,25 @@ export const productosFiltrados=(nombreCategoria)=>{
   return{
     type:FILTRADOCATEGORIAS,
     payload:nombreCategoria
+  }
+}
+
+
+//BY_ORDER:
+//Orden por nombre:
+
+export const orderByName = (payload) => {
+  return {
+    type: ORDER_BY_NAME,
+    payload
+  };
+};
+
+//Orden por precio:
+
+export const orderByPrecio = (payload) => {
+  return {
+    type: ORDER_BY_PRECIO,
+    payload
   }
 }

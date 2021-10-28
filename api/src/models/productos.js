@@ -20,6 +20,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false
     },
+    imagen: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     disponibilidad: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
