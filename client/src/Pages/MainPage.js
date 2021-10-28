@@ -1,10 +1,12 @@
 import "../Styles/MainPage.css";
-import Categorias from "../Components/Categorias";
-import Carrusel from "../Components/Carrusel/Carrusel"
+import Categorias from "../Components/Categorias/Categorias";
+import Carrusel from "../Components/Carrusel/Carrusel";
+import Estadisticas from "../Components/Estadisticas/Estadisticas";
 import { categoria } from "../Elements/ArrayCategoria";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {getProducts} from "../Redux/actions/action"
+
 export default function MainPage() {
   const productos=useSelector(state=>state.Products)
   const dispatch=useDispatch()
@@ -48,6 +50,7 @@ export default function MainPage() {
       
       <div className="statisticsDiv">
         <h1>COMPONENTE "ESTADISTICAS"</h1>
+        <Estadisticas/>
       </div>
       
       <h1>-------------------------------------</h1>

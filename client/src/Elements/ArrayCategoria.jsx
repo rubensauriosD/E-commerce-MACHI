@@ -1,8 +1,8 @@
+
 export const categoria = [
   {
     nombre: "Cajones y Cultivos",
-    imagen:
-      "https://guiadejardin.com/wp-content/uploads/2014/02/cajon-cultivo1.jpg",
+    imagen: "https://agenda4p.com.ar/wp-content/uploads/2020/09/huerta3.jpg",
   },
   {
     nombre: "Plantines y Semillas",

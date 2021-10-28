@@ -10,9 +10,10 @@ export default function Carrusel(){
     
     const container= useRef(null)
     const intervalContainer= useRef(null)
-   
+
+       
     function handleNext(){
-        if(container.current.children.length > 0){
+        if(container.current && container.current.children.length > 0){
             //obteniendo primer elemento del container
             const firstElement = container.current.children[0];
             //transicion para el container
@@ -35,7 +36,7 @@ export default function Carrusel(){
     }
 
     function handlePrev(){
-        if(container.current.children.length > 0){
+        if(container.current && container.current.children.length > 0){
            //obtenemos al ultimo elemento
            const indexLast = container.current.children.length-1
            const lastElement = container.current.children[indexLast];

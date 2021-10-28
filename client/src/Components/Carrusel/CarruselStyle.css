@@ -31,7 +31,7 @@
     position: absolute;
     width: 40px;
     height: 40px;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.808);
     top: 50%;
     transform: translateY(-50%);
     font-size: 30px;
@@ -48,11 +48,14 @@
     right: 10px;
 }
 .text-section{
-    background: rgba(0, 0, 0, 0.171);
-    color: #fff;
+    background: rgba(10, 46, 3, 0.329);
+    color: rgb(255, 255, 255);
     width: 100%;
     padding: 10px 60px;
     text-align: center;
+    font-size: 22px;
+    text-transform: uppercase;
     position: absolute;
     bottom: 0;
+    font-weight: 500;
 }
