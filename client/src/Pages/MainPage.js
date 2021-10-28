@@ -1,10 +1,12 @@
 import "../Styles/MainPage.css";
 import Categorias from "../Components/Categorias";
+import Courses from "../Components/Courses";
 import Carrusel from "../Components/Carrusel/Carrusel"
 import { categoria } from "../Elements/ArrayCategoria";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {getProducts} from "../Redux/actions/action"
+
 export default function MainPage() {
   const productos=useSelector(state=>state.Products)
   const dispatch=useDispatch()
@@ -15,15 +17,19 @@ export default function MainPage() {
   return (
     <div>
     
-      <h1>Machi</h1>
+      <h1>MACHI</h1>
       <div className="carruselDiv">
         <Carrusel />
       </div>
       <div className="categoryDiv">
+        <h2>Nuestros Productos</h2>
+        
         <Categorias categoria={categoria} />
       </div>
+
       <div className="coursesDiv">
         <h1>COMPONENTE DE "CAPACITACION Y CURSOS" Y "COMPOSTAJE COLABORATIVO</h1>
+        <Courses/>
       </div>
 
       <h1>-------------------------------------</h1>
