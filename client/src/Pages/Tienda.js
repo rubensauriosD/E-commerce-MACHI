@@ -1,3 +1,4 @@
+import "../Styles/Tienda.css"
 import {useSelector,useDispatch} from "react-redux"
 import * as React from "react"
 // import {productosFiltrados} from "../Redux/actions/action"
@@ -23,22 +24,24 @@ export default function Tienda(props){
     }
    
     return(
-        <div>
-            <div>
+        <div className="Store" >
+            <div className="SearchContainer" >
                 <SearchBar />
-            </div>
-            <div>
+            
                 <FiltrosYOrden />
             </div>
-            <h1>{props.nombreCategoria}</h1>
-            {/* <Products productos={productosPorCategorias}/>  */}
-            <div>
-                <Products productos={products.resultado} />
+            {/* Hacerle un Componente al Paginado Por Favor ↓ */}
+            <div className="ProdContTitle">
+                <h1>{props.nombreCategoria}</h1>
+                {/* <Products productos={productosPorCategorias}/>  */}
+                <div className="ProductsContainer">
+                    <Products productos={products.resultado} />
+                </div>
             </div>
-            <div>
-            <button disabled={pagina - 1 === 0} onClick={() => { changePagina(pagina - 1) }}>Anterior</button>
-                <label>{pagina}</label>
-            <button disabled={products?.contador <= (pagina * 6)} onClick={() => { changePagina(pagina + 1) }}>Siguiente</button>
+            <div className="PageButtons">
+            <button className="Buttons" disabled={pagina - 1 === 0} onClick={() => { changePagina(pagina - 1) }}>⬅Anterior</button>
+                <label className="PageNumber">{pagina}</label>
+            <button className="Buttons" disabled={products?.contador <= (pagina * 6)} onClick={() => { changePagina(pagina + 1) }}>Siguiente➡</button>
             </div>
         </div>
     )

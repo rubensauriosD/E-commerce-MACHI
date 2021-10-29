@@ -35,7 +35,6 @@ const initialState={
     User:{},
     Comments:[],
     Comment:{},
-    siInicio:false,
     nombre: "",
     ordenA: "",
     ordenP: "",
@@ -101,12 +100,13 @@ const rootReducer=(state=initialState,{type, payload})=>{
             ...state,
             User: payload
         }
-        case INICIARS:return{
-            ...state,
-            siInicio:payload.checked,
-            User:payload.usuario
+        case INICIARS:{
+            console.log(payload)
+            return{
+                ...state,
+                User:payload
+            }
         }
-
         /* case GET_USER_ID: return {
             ...state,
             User: payload
