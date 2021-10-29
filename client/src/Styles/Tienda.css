@@ -1,0 +1,65 @@
+.Store{
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    
+}
+.SearchContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 100px;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+    position: relative;
+}
+.ProdContTitle{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin: 50px;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+    position: relative;
+}
+.ProductsContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.PageButtons{
+    width: 160px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+    position: relative;
+    background-color: rgb(217, 228, 215);
+}
+
+.Buttons{
+    border: 0;
+    background: transparent;
+}
+.PageNumber{
+    font-family: 'Roboto', sans-serif; 
+    font: bold;
+}

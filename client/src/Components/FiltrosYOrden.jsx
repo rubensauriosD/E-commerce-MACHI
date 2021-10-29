@@ -1,3 +1,4 @@
+import "../Styles/FiltrosYOrden.css"
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../Redux/actions/action"
@@ -25,7 +26,7 @@ export default function FiltrosYOrden () {
     }
      
     return (
-        <div>
+        <div className="OrderContainer">
             <div>
                 <label>Orden alfabetico</label>
                 <select onChange={handleOrdenPorNombre}>
