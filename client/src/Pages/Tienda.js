@@ -30,6 +30,7 @@ export default function Tienda(props){
             
                 <FiltrosYOrden />
             </div>
+            {/* Hacerle un Componente al Paginado Por Favor ↓ */}
             <div className="ProdContTitle">
                 <h1>{props.nombreCategoria}</h1>
                 {/* <Products productos={productosPorCategorias}/>  */}
