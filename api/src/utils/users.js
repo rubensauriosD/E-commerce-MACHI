@@ -1,5 +1,8 @@
 const {Usuario} = require('../db')
-
+const bCrypt =require("bcrypt-nodejs")
+const CreadorDeEncriptado = function (contrasenia) {
+    return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
+  };
 async function getUsuario(req, res) 
 {
     let users = await Usuario.findAll();
@@ -57,31 +60,51 @@ async function putUsuario(req, res)
 
 async function postUsuario(req, res) 
 {
-    const {nombre, apellido, email, contraseña, tipo} = req.body;
-
+    const {nombre, apellido, email, contrasenia, tipo} = req.body;
     try 
     {
-            const nuevoUser = await Usuario.create({
-                nombre: nombre,
-                apellido:apellido,
-                email:email,
-                contraseña:contraseña,
-                tipo:tipo
-            })
-
-            res.json(nuevoUser)
+        if(nombre&&apellido&&email&&contrasenia&&tipo){
+            const verficadorDeUsuario=await Usuario.findAll({where:{email}})
+            if(verficadorDeUsuario.length===0){
+                const contraseñaEncriptada=CreadorDeEncriptado(contrasenia)
+                const nuevoUsuario = await Usuario.create({
+                    nombre: nombre,
+                    apellido: apellido,
+                    email: email,
+                    contrasenia: contraseñaEncriptada,
+                    tipo: tipo
+                })
+                res.json({message:"Success"})
+            }
+            else{
+                res.status(404).json({error:"El Correo Ingresado ya Tiene Cuenta Activa en Machi"})
+            }
+        }
+        else{
+            res.status(404).json({error:"Faltan Datos"})
+        }
     } 
     catch (error) 
     {
         console.log(error);
+        res.json({error:"this is the error: "+error})
     }
 }
+async function inicioDeSesion(req,res){
+    const {nombre,apellido,email,tipo}=req.user 
+    res.json({nombre,apellido,email,tipo})
+}
 
-
+function pedidoCerrarSesion(req,res){
+    req.logout()
+    res.json({message:"Ok"})
+}
 
 module.exports = {
     getUsuario,
     putUsuario,
     postUsuario,
     deleteUsuario,
+    inicioDeSesion,
+    pedidoCerrarSesion
 };

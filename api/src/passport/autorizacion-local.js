@@ -1,7 +1,7 @@
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const bCrypt = require("bcrypt-nodejs");
-const Usuario = require("../models/usuarios");
+const {Usuario} = require("../db");
 
 passport.serializeUser((usuario, done) => {
   done(null, usuario.id);
@@ -21,35 +21,23 @@ passport.use(
       passReqToCallback: true,
     },  
     (req, email, contrasenia, done) => {
-      const { nombre, apellido, tipo } = req.body;
-      console.log("aca los datos: ",nombre,apellido,email,contrasenia,tipo)
-      const GeneradorDeEncriptado = function (contrasenia) {
-        return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
+     // console.log("aca los datos: ",email,contrasenia)
+      const ComparadorDeEncriptado = function (contraseniaEnviada,contraseniaEnBaseDeDatos) {
+       // console.log("Lo que llega al comparar: ",bCrypt.compareSync(contraseniaEnviada,contraseniaEnBaseDeDatos))
+        return bCrypt.compareSync(contraseniaEnviada,contraseniaEnBaseDeDatos)
       };
       Usuario.findOne({ where: { email } }).then(
         (resultadoUsuario) => {
-          if (resultadoUsuario) {
+          //console.log("Aca los Datos en passport: ",resultadoUsuario&&resultadoUsuario.contrasenia)
+          if (!resultadoUsuario) {
             return done(null, false, {
-              message: "Ese email esta",
+              message: "Error en Login",
             });
-          } else {
-            const constraseniaUsuario = GeneradorDeEncriptado(contrasenia);
-            const dato = {
-              email,
-              constrasenia: constraseniaUsuario,
-              nombre: nombre,
-              apellido: apellido,
-              tipo: tipo,
-            };
-            Usuario.create(dato).then((nuevoUsuario, creado) => {
-              if (!nuevoUsuario) {
-                return done(null, false);
-              }
-              if (nuevoUsuario) {
-                return done(null, nuevoUsuario);
-              }
-            });
-          }
+          } else if(ComparadorDeEncriptado(contrasenia,resultadoUsuario.contrasenia) ){
+            return done(null,resultadoUsuario)
+          }else{
+            return done(null,false)
+          } 
         }
       );
     }

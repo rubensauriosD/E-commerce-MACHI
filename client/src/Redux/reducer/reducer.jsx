@@ -27,7 +27,6 @@ const initialState={
     User:{},
     Comments:[],
     Comment:{},
-    siInicio:false,
     //carrito?
     //paginacion?
 }
@@ -89,13 +88,14 @@ const rootReducer=(state=initialState,{type, payload})=>{
             ...state,
             User: payload
         }
-        case INICIARS:return{
-            ...state,
-            siInicio:payload.checked,
-            User:payload.usuario
+        case INICIARS:{
+            console.log(payload)
+            return{
+                ...state,
+                User:payload
+            }
         }
         case FILTRADOCATEGORIAS:{
-
             return{
             ...state,
             productosPorCategorias:state.Products.filter(producto=>producto.categoria===payload)

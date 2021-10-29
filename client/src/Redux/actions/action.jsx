@@ -188,6 +188,7 @@ export const postUser = (user) => {
       .then((response) => {
         return dispatch({
           type: POST_USER,
+          payload:response
         });
       })
       .catch((err) => {
@@ -214,9 +215,9 @@ export const getUsers = ()=>{
 //Iniciar Sesion
 export const IniciarSesion=(usuario)=>{
   return(dispatch)=>{
-    axios.get("http://localhost:3001/usuarios/inicioS",usuario)
+    axios.post("http://localhost:3001/usuarios/inicioSesion",usuario)
     .then(resultadoDeUsuario=>{
-      dispatch({type:INICIARS,payload:resultadoDeUsuario})
+      dispatch({type:INICIARS,payload:resultadoDeUsuario.data})
     })
   }
 }
