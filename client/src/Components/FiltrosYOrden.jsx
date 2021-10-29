@@ -23,7 +23,7 @@ export default function FiltrosYOrden () {
         dispatch(getProducts({ pagina: 1, nombre, ordenA, ordenP, filtroC: e.target.value}))
         dispatch(setPagina(1))
     }
-
+     
     return (
         <div>
             <div>
@@ -43,11 +43,19 @@ export default function FiltrosYOrden () {
             <div>
                 <label>Categorias</label>
                 <select onChange={handleFiltroPorCategoria}>
-                    {products.productos && products.productos.map((e, i) => (
+                    <option></option>
+                    <option value="Plantines y Semillas">Plantines y Semillas</option>
+                    <option value="Composteras">Composteras</option>
+                    <option value="Cajones y Cultivos">Cajones y Cultivos</option>
+                    <option value="Insumos y Herramientas para Huertas">Insumos y Herramientas para Huertas</option>
+                    <option value="Lombrices Rojas Californeanas">Lombrices Rojas Californeanas</option>
+                    {/* {products.productos && products.productos.map((e, i) => (
                         <option key={i} value={e.categoria}>{e.categoria}</option>
-                    ))}
+                    ))} */}
+                    {console.log(products.productos)}
                 </select>
             </div>
         </div>
     )
 }
+
