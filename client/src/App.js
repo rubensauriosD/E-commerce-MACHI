@@ -16,7 +16,8 @@ function App() {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/contact" component={Contacto} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/tienda/:nombreCategoria" render={({match})=><Tienda props={match.params.nombreCategoria}/>}/>
+          <Route exact path="/tienda/:nombreCategoria" render={({match})=><Tienda props={match.params.nombreCategoria}/>}/> 
+          <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
       </Router>
