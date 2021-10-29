@@ -10,9 +10,9 @@ import {getProducts} from "../Redux/actions/action"
 export default function MainPage() {
   const productos=useSelector(state=>state.Products)
   const dispatch=useDispatch()
-  useEffect(()=>{
-    dispatch(getProducts())
-  },[dispatch])
+  // useEffect(()=>{
+  //   dispatch(getProducts())
+  // },[dispatch])
   
   return (
     <div>

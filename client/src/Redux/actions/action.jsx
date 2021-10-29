@@ -18,6 +18,11 @@ export const FILTRADOCATEGORIAS="FILTRAR_POR_CATEGORIAS"
 export const GETPRODUCTBYNAME = "GET_PRODUCT_BY_NAME";
 export const ORDER_BY_NAME = "ORDER_BY_NAME";
 export const ORDER_BY_PRECIO = "ORDER_BY_PRECIO";
+export const SET_NOMBRE = 'SET_NOMBRE';
+export const SET_PAGINA = 'SET_PAGINA';
+export const SET_ORDEN_A = 'SET_ORDEN_A';
+export const SET_ORDEN_P = 'SET_ORDEN_P';
+export const SET_FILTRO_C = 'SET_FILTRO_C';
 //PRODUCTOS
 
 //postear producto
@@ -36,35 +41,19 @@ export const postProduct = (producto) => {
   };
 };
 
-// obtener todos los productos
-export const getProducts = ()=>{
-  return (dispatch)=>{
-      axios.get(`http://localhost:3001/productos`)
-      .then(product =>{
-          return dispatch({
-              type: GET_PRODUCTS,
-              payload: product.data
-          })
-      })
-      .catch((err)=>{
-          console.log(err)
-      })
-  }
-}
-
-// Filtrar producto por nombre:
-export const getByName = (nombre) => {
-  return(dispatch) => {
-    axios.get(`http://localhost:3001/productos/${nombre}`)
-    .then(res => {
+// obtener todos los productos, paginado, filtros y ordenamientos para la tienda
+export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina })=>{
+  return async (dispatch)=>{
+    try {
+      const response = await axios.get(`http://localhost:3001/productos?pagina=${pagina ? pagina : 1}&ordenA=${ordenA ? ordenA : ""}&ordenP=${ordenP ? ordenP : ""}&filtroC=${filtroC ? filtroC : ""}&nombre=${nombre ? nombre : ""}`)
       return dispatch({
-        type: GETPRODUCTBYNAME,
-        payload: res.data
+        type: GET_PRODUCTS,
+        payload: response.data
       })
-    })
-    .catch((err) => {
+      
+    }catch(err){
       console.log(err)
-    })
+      }
   }
 }
 
@@ -297,5 +286,40 @@ export const orderByPrecio = (payload) => {
   return {
     type: ORDER_BY_PRECIO,
     payload
+  }
+}
+
+//Seteos de pagina, filtros y ordenamientos
+export const setFiltroC = (categoria) => {
+  return {
+      type: SET_FILTRO_C,
+      payload: categoria
+  }
+}
+
+export const setNombre = (nombre) => {
+  return {
+      type: SET_NOMBRE,
+      payload: nombre
+  }
+}
+export const setPagina = (pagina) => {
+  return {
+      type: SET_PAGINA,
+      payload: pagina
+  }
+}
+
+export const setOrdenA = (orden) => {
+  return {
+      type: SET_ORDEN_A,
+      payload: orden
+  }
+}
+
+export const setOrdenP = (orden) => {
+  return {
+      type: SET_ORDEN_P,
+      payload: orden
   }
 }
