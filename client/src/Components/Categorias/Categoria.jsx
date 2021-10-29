@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 export default function Categoria({nombreCategoria,imagenCategoria}){
 
     return(
-        <Link to={`/tienda/${nombreCategoria}`}>
+        <Link key={nombreCategoria} to={`/tienda/`}>
         <div class='categoria-gral'> 
              <div class='categoria-interna'>
                  <img src={imagenCategoria} alt="sin imagen" class='categoria-img'/>

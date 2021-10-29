@@ -16,11 +16,18 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 // import MoreIcon from "@mui/icons-material/MoreVert";
 import React from "react";
+import { useDispatch } from "react-redux";
 import NavBarCSS from "../Styles/NavBar.module.css";
 import Cart from "./Cart"
 import { NavLink } from "react-router-dom";
+import { getProducts } from "../Redux/actions/action";
 
 const NavBar = () => {
+  const dispatch = useDispatch()
+  const refreshTienda = () => {
+    dispatch(getProducts({}))
+}
+
   return (
     <div className={NavBarCSS.navbar}>
       <ul className={NavBarCSS.navlist}>
@@ -53,6 +60,7 @@ const NavBar = () => {
             to="/tienda"
             activeClassName="selected"
             activeStyle={{}}
+            onClick={() => { refreshTienda() }}
           >
             Tienda
           </NavLink>
