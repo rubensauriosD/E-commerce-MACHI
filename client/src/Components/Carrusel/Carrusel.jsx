@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import "./CarruselStyle.css";
-import img1 from "./img/img1.jpg";
-import img2 from "./img/img2.jpg";
-import img3 from "./img/img3.jpg";
+import img1 from "../../Imagenes/img/img1.jpg";
+import img2 from "../../Imagenes/img/img2.jpg";
+import img3 from "../../Imagenes/img/img3.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
