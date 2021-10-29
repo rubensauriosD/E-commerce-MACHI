@@ -6,20 +6,22 @@ import SearchBar from "../Components/SearchBar"
 import FiltrosYOrden from "../Components/FiltrosYOrden"
 import { getProducts, setPagina } from "../Redux/actions/action"
 
-export default function Tienda({nombreCategoria}){
+export default function Tienda(props){
+    
     // const productosPorCategorias=useSelector(state=>state.productosPorCategorias)
     const { products, nombre, ordenA, ordenP, filtroC, pagina } = useSelector(state => state)
+    
     const dispatch=useDispatch()
     React.useEffect(()=>{
         // dispatch(productosFiltrados(props))
-        dispatch(getProducts({filtroC: nombreCategoria ? nombreCategoria : "" }))
-    },[dispatch, nombreCategoria])
+        dispatch(getProducts({filtroC: props.nombreCategoria ? props.nombreCategoria : "" }))
+    },[dispatch, props.nombreCategoria])
 
     const changePagina = (pagina) => {
         dispatch(getProducts({ pagina, ordenA, ordenP, filtroC, nombre }))
         dispatch(setPagina(pagina))
     }
-
+   
     return(
         <div>
             <div>
@@ -28,7 +30,7 @@ export default function Tienda({nombreCategoria}){
             <div>
                 <FiltrosYOrden />
             </div>
-            {/* <h1>{props.nombreCategoria}</h1> */}
+            <h1>{props.nombreCategoria}</h1>
             {/* <Products productos={productosPorCategorias}/>  */}
             <div>
                 <Products productos={products.resultado} />
