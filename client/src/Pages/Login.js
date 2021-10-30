@@ -4,6 +4,7 @@ import  {useDispatch,useSelector} from "react-redux"
 import Login from "../Components/LogIn";
 import SignIn from "../Components/SignIn";
 import InterfazDeUsuario from "../Components/InterfazDeUsuario";
+import "../Styles/paginaDeLogin.css"
 const LoginPage = () => {
   const usuario=useSelector(state=>state.User)
   const dispatch=useDispatch()
@@ -15,10 +16,10 @@ const LoginPage = () => {
   }
   console.log("Aca el usuario que Inicio Sesion", usuario)
   if(usuario&&Object.values(usuario).length!==0){     
-    return <InterfazDeUsuario datosUsuario={usuario}/>
+    return (<div className="InterfazDeUsuario"> <InterfazDeUsuario datosUsuario={usuario}/></div>)
   }else{
     return (
-      <div>
+      <div className="InterfazDeFormulario">
         <Login SubmitL={InicioSesion}/>
         <SignIn SubmitS={Registrarse}/>
       </div>
