@@ -12,7 +12,7 @@
   margin: 5px;
 }
 .navlink {
-  color: #33332f;
+  color: gray;
   text-decoration: none;
   font-size: 1.2em;
   text-transform: uppercase;
@@ -23,5 +23,5 @@
   transition: all 0.2s ease-in-out;
 }
 .navlink:hover {
-  color: #fddb3a;
+  color: #000000;
 }
