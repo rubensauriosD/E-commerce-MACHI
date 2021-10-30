@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-
+import {Button, Input, TextField,Box,Alert} from "@mui/material"
 export default function Login({ SubmitL }) {
     const {
       register,
@@ -7,13 +7,26 @@ export default function Login({ SubmitL }) {
       formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
+      console.log(data)
       SubmitL(data);
     };
     return (
       <div>
+        <h2>Inicia Sesion con tu Cuenta Machi</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input
+        <Box
+        component="div"
+        sx={{
+          display:"grid",
+          gridTemplateColumns:{sm:"45vw"},
+          gap:2,
+        }}
+        >
+          <TextField
+            sx={{justifySelf:"center"}}
             type="email"
+            label="Ingresa tu Correo Machi"
+            color="success"
             {...register("email", {
               required: { value: true, message: "email requerido" },
               pattern: {
@@ -22,9 +35,12 @@ export default function Login({ SubmitL }) {
               },
             })}
           />
-          {errors.email && <p>{errors.email.message}</p>}
-          <input
+          {errors.email && <Alert severity="warning"  sx={{justifySelf:"center"}}>{errors.email.message}</Alert>}
+          <TextField
+           sx={{justifySelf:"center"}}
             type="password"
+            label="Ingresa tu Contraseña"
+            color="success"
             {...register("contrasenia", {
               required: { value: true, message: "contraseña es requerida" },
               pattern: {
@@ -33,8 +49,9 @@ export default function Login({ SubmitL }) {
               },
             })}
           />
-          {errors.contrasenia && <p>{errors.contrasenia.message}</p>}
-          <input type="submit" value="Iniciar Sesion" />
+          {errors.contrasenia && <Alert  sx={{justifySelf:"center"}} severity="warning">{errors.contrasenia.message}</Alert>}
+          <Button  sx={{justifySelf:"center"}} variant="contained" color="success" type="submit">Iniciar Sesión</Button>
+          </Box>
         </form>
       </div>
     );

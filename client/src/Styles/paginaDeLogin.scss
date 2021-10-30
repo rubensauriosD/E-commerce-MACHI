@@ -1,0 +1,12 @@
+@import "./variables.scss";
+
+.InterfazDeFormulario{
+    display: grid;
+    grid-template-columns: 50vw 50vw;
+    grid-template-rows: 74.5vh;
+    box-shadow: 5px 5px 2px $color-de-banner;
+}
+.InterfazDeUsuario{
+    display: flex;
+    justify-content: center;
+}
