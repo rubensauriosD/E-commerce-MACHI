@@ -25,9 +25,9 @@ export default function Tienda(props){
    
     return(
         <div className="Store" >
+            <h1>Tienda</h1>
             <div className="SearchContainer" >
-                <SearchBar />
-            
+                <SearchBar />            
                 <FiltrosYOrden />
             </div>
             <div className="ProdContTitle">

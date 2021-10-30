@@ -1,11 +1,27 @@
 .search{
-  border: black solid 1px;
+  /* border: black solid 1px; */
   margin: auto;
-  box-shadow: 0 0 20px 50px rgba(45, 216, 29, 0.116), 0 15px 50px rgb(0, 0, 0);
+  border-radius: 15px;
+  /* box-shadow: 0 0 20px 50px rgba(45, 216, 29, 0.055), 0 15px 50px rgb(0, 0, 0); */
+  /* box-shadow: 0 0 0 10px #fff, 0 15px 50px; */
 }
 
 .input{
-  font-family: inherit;
+
+  background-color: transparent;
+    flex-grow: 3;
+    color: rgb(102, 99, 99);
+    background-color: white;
+
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    
+    border-width: 1px;
+    border-color: rgba(124, 109, 109, 0.274);
+    border-radius: 15px 0 0 15px;
+    
+  /* font-family: inherit;
  
   border: 0;
   
@@ -13,9 +29,20 @@
   font-size: 1.3rem;
   padding: 7px 0;
   background: transparent;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s; */
 }
 
 .lupa{
-  border: 0;
+    color: rgb(77, 84, 151);
+
+    background-color: transparent;
+    padding: 9px;
+    padding-left: 8px;
+    padding-right: 16px;
+  
+    border-width: 1px;
+    border-color: rgba(124, 109, 109, 0.274);
+    border-radius: 0 15px 15px 0;
+        
+    cursor: pointer;
 }

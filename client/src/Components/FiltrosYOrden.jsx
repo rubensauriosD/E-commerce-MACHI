@@ -1,7 +1,8 @@
-import "../Styles/FiltrosYOrden.css"
-import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../Redux/actions/action"
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../Redux/actions/action";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faRedo } from '@fortawesome/free-solid-svg-icons';
 
 export default function FiltrosYOrden () {
     const { products, nombre, ordenA, ordenP, filtroC } = useSelector(state => state)
@@ -24,27 +25,30 @@ export default function FiltrosYOrden () {
         dispatch(getProducts({ pagina: 1, nombre, ordenA, ordenP, filtroC: e.target.value}))
         dispatch(setPagina(1))
     }
+
+    const rechargeHome =() =>{
+        dispatch(getProducts({ pagina: 1}))
+    }
      
     return (
         <div className="OrderContainer">
-            <div>
-                <label>Orden alfabetico</label>
+            <div className="items">
                 <select onChange={handleOrdenPorNombre}>
-                    <option selected value="asc">Ascendente</option>
-                    <option value="desc">Descendente</option>
+                    <option>Orden alfabetico:</option>
+                    <option selected value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
                 </select>
             </div>
-            <div>
-                <label>Orden por precio</label>
+            <div className="items">
                 <select onChange={handleOrdenPorPrecio}>
-                    <option value="asc">Ascendente</option>
-                    <option value="desc">Descendente</option>
+                    <option>Orden por precio:</option>
+                    <option value="asc">Menor Precio</option>
+                    <option value="desc">Mayor Precio</option>
                 </select>
             </div>
-            <div>
-                <label>Categorias</label>
+            <div className="items">
                 <select onChange={handleFiltroPorCategoria}>
-                    <option></option>
+                    <option>Categorias: </option>
                     <option value="Plantines y Semillas">Plantines y Semillas</option>
                     <option value="Composteras">Composteras</option>
                     <option value="Cajones y Cultivos">Cajones y Cultivos</option>
@@ -56,6 +60,7 @@ export default function FiltrosYOrden () {
                     {console.log(products.productos)}
                 </select>
             </div>
+            <button onClick={rechargeHome} className="recharge" ><FontAwesomeIcon icon={faRedo}/></button>
         </div>
     )
 }
