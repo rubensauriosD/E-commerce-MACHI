@@ -3,17 +3,15 @@ import Categorias from "../Components/Categorias/Categorias";
 import Courses from "../Components/Courses";
 import Carrusel from "../Components/Carrusel/Carrusel"
 import { categoria } from "../Elements/ArrayCategoria";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import {getProducts} from "../Redux/actions/action"
+import { useSelector } from "react-redux";
+
 
 export default function MainPage() {
-  const productos=useSelector(state=>state.Products)
-  const dispatch=useDispatch()
-  useEffect(()=>{
-    dispatch(getProducts())
-  },[dispatch])
   
+  const productos=useSelector(state=>state.Products)
+     
+  
+
   return (
     <div>
     

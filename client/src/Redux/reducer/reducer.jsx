@@ -17,11 +17,16 @@ import {
     FILTRADOCATEGORIAS,
     GETPRODUCTBYNAME,
     ORDER_BY_NAME,
-    ORDER_BY_PRECIO
+    ORDER_BY_PRECIO,
+    SET_NOMBRE,
+    SET_PAGINA,
+    SET_ORDEN_A,
+    SET_ORDEN_P,
+    SET_FILTRO_C
 } from "../actions/action.jsx"
 
 const initialState={
-    Products:[],
+    products:[],
     productosPorCategorias:[],
     Product: {},
     Images: [],
@@ -30,9 +35,12 @@ const initialState={
     User:{},
     Comments:[],
     Comment:{},
-    siInicio:false,
+    nombre: "",
+    ordenA: "",
+    ordenP: "",
+    filtroC: "",
+    pagina: 1
     //carrito?
-    //paginacion?
 }
 
 const rootReducer=(state=initialState,{type, payload})=>{
@@ -43,7 +51,7 @@ const rootReducer=(state=initialState,{type, payload})=>{
         }
         case GET_PRODUCTS: return {
             ...state,
-            Products: payload.products
+            products: payload
         }
         case DELETE_PRODUCT: return {
             ...state
@@ -92,12 +100,13 @@ const rootReducer=(state=initialState,{type, payload})=>{
             ...state,
             User: payload
         }
-        case INICIARS:return{
-            ...state,
-            siInicio:payload.checked,
-            User:payload.usuario
+        case INICIARS:{
+            console.log(payload)
+            return{
+                ...state,
+                User:payload
+            }
         }
-
         /* case GET_USER_ID: return {
             ...state,
             User: payload
@@ -174,6 +183,32 @@ const rootReducer=(state=initialState,{type, payload})=>{
                 Products: orderPrecio
             }
         }
+        // Seteos de pagina, filtros y ordenamientos
+        case SET_NOMBRE:
+            return {
+                ...state,
+                nombre: payload
+            }
+        case SET_PAGINA:
+            return {
+                ...state,
+                pagina: payload
+            }
+        case SET_ORDEN_A:
+            return {
+                ...state,
+                ordenA: payload
+            }
+        case SET_ORDEN_P:
+            return {
+                ...state,
+                ordenP: payload
+            }
+        case SET_FILTRO_C:
+            return {
+                ...state,
+                filtroC: payload
+            }
 
         default: return state
     }
