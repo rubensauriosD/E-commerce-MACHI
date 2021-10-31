@@ -14,7 +14,7 @@
   height: 37px;
   display: flex;
   justify-content: center;
-  background-color: #d4b518;
+  background-color: #4da45f;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -30,7 +30,7 @@
 .icons_container h2 {
   font-size: 2rem;
   text-decoration: underline;
-  text-decoration-color: #d4b518;
+  text-decoration-color: #4da45f;
 }
 .icons_container i {
   width: 100%;
@@ -68,7 +68,7 @@ textarea {
   align-self: flex-start;
 }
 .form_container form button {
-  background-color: #d4b518;
+  background-color: #4da45f;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -79,7 +79,7 @@ textarea {
   margin: 0.7rem;
 }
 .form_container form button:hover {
-  background-color: #c3a71c;
+  background-color: #115f14;
 }
 /* .form_container form input {
 
