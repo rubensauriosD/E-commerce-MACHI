@@ -7,6 +7,8 @@ import Login from "./Pages/Login";
 import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
 import DetalleProducto from "./Pages/DetalleProducto";
+import Admin from './Pages/Admin'
+
 function App() {
   return (
     <div className="App">
@@ -14,6 +16,7 @@ function App() {
         <Route path="/" component={NavBar} />
         <Switch>
           <Route exact path="/" component={MainPage} />
+          <Route exact path="/admin" component={Admin} />
           <Route exact path="/contact" component={Contacto} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/tienda/:nombreCategoria" render={({match})=><Tienda props={match.params.nombreCategoria}/>}/>
