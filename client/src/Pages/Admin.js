@@ -123,7 +123,7 @@ const Admin = () => {
 
                                 <select name='disponibilidad' onChange={(e) => handleChangeEditar(e)} >   
                                 {
-                                    //arriba al poner el value para mostrar el valor de categoria, deja de andar el put
+                                    //arriba al poner el value para mostrar el valor de categoria, deja de andar el put de esto
                                 }
                                     <option value='true'>Disponible</option>     
                                     <option value='false'>No Disponible</option>
