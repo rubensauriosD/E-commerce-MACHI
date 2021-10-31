@@ -61,7 +61,7 @@ export default function MainPage() {
       <h1>-------------------------------------</h1>
 
       <div className="contactDiv">
-        <h1>COMPONENTE "FORMULARIO DE TRABAJO Y CONTACTO"</h1>
+        <h1>COMPONENTE "FORMULARIO DE TRABAJO Y CONTACTO" (FOOTER)</h1>
       </div>
     </div>
   );
