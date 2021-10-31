@@ -18,15 +18,15 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import React from "react";
 import { useDispatch } from "react-redux";
 import NavBarCSS from "../Styles/NavBar.module.css";
-import Cart from "./Cart"
+import Cart from "./Cart";
 import { NavLink } from "react-router-dom";
 import { getProducts } from "../Redux/actions/action";
 
 const NavBar = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const refreshTienda = () => {
-    dispatch(getProducts({}))
-}
+    dispatch(getProducts({}));
+  };
 
   return (
     <div className={NavBarCSS.navbar}>
@@ -37,7 +37,7 @@ const NavBar = () => {
             exact
             to="/"
             activeClassName="selected"
-            activeStyle={{ color: "#d4b518" }}
+            activeStyle={{ color: "#4da45f" }}
           >
             Home
           </NavLink>
@@ -48,7 +48,7 @@ const NavBar = () => {
             exact
             to="/contact"
             activeClassName="selected"
-            activeStyle={{ color: "#d4b518" }}
+            activeStyle={{ color: "#4da45f" }}
           >
             Contacto
           </NavLink>
@@ -59,8 +59,10 @@ const NavBar = () => {
             exact
             to="/tienda"
             activeClassName="selected"
-            activeStyle={{}}
-            onClick={() => { refreshTienda() }}
+            activeStyle={{ color: "#4da45f" }}
+            onClick={() => {
+              refreshTienda();
+            }}
           >
             Tienda
           </NavLink>
@@ -93,7 +95,7 @@ const NavBar = () => {
             exact
             to="/login"
             activeClassName="selected"
-            activeStyle={{ color: "#d4b518" }}
+            activeStyle={{ color: "#4da45f" }}
           >
             <IconButton
               size="large"
@@ -107,7 +109,7 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li>
-          <Cart/>
+          <Cart />
         </li>
       </ul>
     </div>
