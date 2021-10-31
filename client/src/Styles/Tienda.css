@@ -101,22 +101,44 @@ h1{
     justify-content: space-around;
 }
 .PageButtons{
-    width: 160px;
-    height: 100%;
+    width: 260px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
     overflow: hidden;
-    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+    /* box-shadow: 0 0 0 10px #fff, 0 15px 50px; */
     position: relative;
-    background-color: rgb(217, 228, 215);
+    background-color: #f9f9f9;
+    border-radius: 15px;
+    margin-top: 30px;
+    margin-bottom: 60px;
 }
 
 .Buttons{
-    border: 0;
-    background: transparent;
+    position: absolute;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.808);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  border-radius: 50%;
+  cursor: pointer;
 }
+.Buttons:hover{
+    background: #fff;
+}
+
+.Buttons_Left{
+    left: 10px;
+}
+
+.Buttons_Right{
+    right: 10px;
+}
+
 .PageNumber{
     font-family: 'Roboto', sans-serif; 
     font: bold;

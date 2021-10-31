@@ -2,10 +2,15 @@ import "../Styles/Tienda.css"
 import {useSelector,useDispatch} from "react-redux"
 import * as React from "react"
 // import {productosFiltrados} from "../Redux/actions/action"
-import Products from "../Components/Products"
-import SearchBar from "../Components/SearchBar"
-import FiltrosYOrden from "../Components/FiltrosYOrden"
+import Products from "../Components/Productos/Products"
+import SearchBar from "../Components/Productos/SearchBar"
+import FiltrosYOrden from "../Components/Productos/FiltrosYOrden"
 import { getProducts, setPagina } from "../Redux/actions/action"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faChevronRight,
+  faChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Tienda(props){
     
@@ -38,9 +43,9 @@ export default function Tienda(props){
                 </div>
             </div>
             <div className="PageButtons">
-            <button className="Buttons" disabled={pagina - 1 === 0} onClick={() => { changePagina(pagina - 1) }}>⬅Anterior</button>
+            <button className="Buttons Buttons_Left" disabled={pagina - 1 === 0} onClick={() => { changePagina(pagina - 1) }}> <FontAwesomeIcon icon={faChevronLeft} /></button>
                 <label className="PageNumber">{pagina}</label>
-            <button className="Buttons" disabled={products?.contador <= (pagina * 6)} onClick={() => { changePagina(pagina + 1) }}>Siguiente➡</button>
+            <button className="Buttons Buttons_Right" disabled={products?.contador <= (pagina * 6)} onClick={() => { changePagina(pagina + 1) }}><FontAwesomeIcon icon={faChevronRight} /></button>
             </div>
         </div>
     )

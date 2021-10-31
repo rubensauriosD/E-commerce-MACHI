@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../Redux/actions/action";
+import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../../Redux/actions/action";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faRedo } from '@fortawesome/free-solid-svg-icons';
 
