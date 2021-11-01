@@ -6,14 +6,7 @@ import ContactPage from "./Pages/ContactPage";
 import Login from "./Pages/Login";
 import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
-import "./App.css";
-import { Route, Switch } from "react-router";
-import MainPage from "./Pages/MainPage";
-import { HashRouter as Router } from "react-router-dom";
-import ContactPage from "./Pages/ContactPage";
-import Login from "./Pages/Login";
-import Tienda from "./Pages/Tienda";
-import NavBar from "./Components/NavBar";
+
 import DetalleProducto from "./Pages/DetalleProducto";
 function App() {
   return (
