@@ -1,11 +1,16 @@
 import React from "react";
 import { useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux'
-import {getProducts, deleteProduct, putProduct, getImages, deleteImage, postImage, postProduct} from '../Redux/actions/action';
+import {useDispatch, useSelector} from 'react-redux';
+import { useHistory } from "react-router-dom";
+import {getProductsAdmin, deleteProduct, putProduct, getImages, deleteImage, postImage, postProduct} from '../Redux/actions/action';
 import axios from 'axios'
 
+
+
 const Admin = () => {
-    var productos = useSelector(state => state.Products);
+
+    const history = useHistory()
+    var productos = useSelector(state => state.productsAdmin);
     var imagen = useSelector(state => state.Images);
     const [inputs, setInputs] = useState({
         nombre: '',
@@ -27,7 +32,7 @@ const Admin = () => {
     const dispatch = useDispatch();
     
     useEffect(() =>{
-        dispatch(getProducts());
+        dispatch(getProductsAdmin());
         dispatch(getImages());
     },[])
 
@@ -48,13 +53,17 @@ const Admin = () => {
             [e.target.name]: e.target.value
         })
     } 
-
-    function borrar(e) {    
-        axios.delete(`http://localhost:3001/productos/${e.target.id}`)
+    
+    function borrar(e) { 
+        axios.delete(`http://localhost:3001/productos/${e.target.id}`);
+        alert(`El producto ${e.target.name} fue eliminado con exito`);
+        dispatch(getProductsAdmin())
     }
 
-    function editar(e) {    
-        axios.put(`http://localhost:3001/productos/${e.target.id}`, inputsEditar)
+    function editar(e) { 
+        axios.put(`http://localhost:3001/productos/${e.target.id}`, inputsEditar);
+        alert(`El producto ${e.target.name} fue modificado con exito`)
+        
     }
 
     return (
@@ -107,7 +116,7 @@ const Admin = () => {
             <h3>Editar Productos</h3>
             <ol>
                 {
-                    productos.map((producto,i) => {
+                     productos.productos?.map((producto,i) => {
                         return(
                             
                             <li key={producto.id}>
@@ -120,19 +129,15 @@ const Admin = () => {
                                 <input type='number' name='precio' placeholder={producto.precio} onChange={(e) => handleChangeEditar(e)}/>
 
                                 <input type='text' name='Descripcion' placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)}/>
-
+                                
+                                <label>Disponibilidad Actual: {producto.disponibilidad? 'Disponible' : 'No disponible'}</label>
                                 <select name='disponibilidad' onChange={(e) => handleChangeEditar(e)} >   
-                                {
-                                    //arriba al poner el value para mostrar el valor de categoria, deja de andar el put
-                                }
                                     <option value='true'>Disponible</option>     
                                     <option value='false'>No Disponible</option>
                                 </select>
 
+                                <label>Categoria Actual: {producto.categoria}</label>
                                 <select name='categoria'  onChange={(e) => handleChangeEditar(e)}>
-                                {
-                                    //arriba al poner el value para mostrar el valor de categoria, deja de andar el put
-                                }
                                 <option value="Cajones y Cultivos">Cajones y Cultivos</option>
                                 <option value="Plantines y Semillas">Plantines y Semillas</option>
                                 <option value="Composteras">Composteras</option>
@@ -141,9 +146,16 @@ const Admin = () => {
                                 </select>
 
                                 
-                                <button id={producto.id} onClick={(e) => 
-                                    // dispatch(putProduct(e.target.id, inputsEditar))
-                                    editar(e)
+                                <button id={producto.id} name={producto.nombre} onClick={(e) => {
+                                        inputsEditar.nombre ? inputsEditar.nombre = inputsEditar.nombre :  inputsEditar.nombre = producto.nombre;
+                                        inputsEditar.precio ? inputsEditar.precio = inputsEditar.precio :  inputsEditar.precio = producto.precio;
+                                        inputsEditar.imagen ? inputsEditar.imagen = inputsEditar.imagen :  inputsEditar.imagen = producto.imagen;
+                                        inputsEditar.precio ? inputsEditar.precio = inputsEditar.precio :  inputsEditar.precio = producto.precio;
+                                        inputsEditar.disponibilidad ? inputsEditar.disponibilidad = inputsEditar.disponibilidad :  inputsEditar.disponibilidad = producto.disponibilidad;
+                                        inputsEditar.categoria ? inputsEditar.categoria = inputsEditar.categoria :  inputsEditar.categoria = producto.categoria;
+                                        inputsEditar.descripcion ? inputsEditar.descripcion = inputsEditar.descripcion :  inputsEditar.descripcion = producto.descripcion;
+                                        editar(e)
+                                    }
                                 }>Editar</button>
 
                                 <button id={producto.id} onClick={(e) => {
@@ -151,14 +163,14 @@ const Admin = () => {
                                     borrar(e)
                                 }}>Eliminar</button>
                             </li>)
-                    })
+                    }) 
                 }   
             </ol>
 
             <h3>Editar Imagenes</h3>
             <ol>
                 {
-                    imagen.map(imagen => {
+                   /*  imagen.map(imagen => {
                         return(
                             <li key={imagen.id}>
                                 <img src={imagen.imagen}/>
@@ -169,7 +181,7 @@ const Admin = () => {
                                     dispatch(deleteImage(e.target.id));
                                 }}>Eliminar</button>
                             </li>)
-                    })
+                    }) */
                 }
             </ol>
         </div>

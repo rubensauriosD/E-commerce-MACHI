@@ -23,6 +23,7 @@ export const SET_PAGINA = 'SET_PAGINA';
 export const SET_ORDEN_A = 'SET_ORDEN_A';
 export const SET_ORDEN_P = 'SET_ORDEN_P';
 export const SET_FILTRO_C = 'SET_FILTRO_C';
+export const GET_PRODUCTS_ADMIN = 'GET_PRODUCTS_ADMIN';
 //PRODUCTOS
 
 //postear producto
@@ -56,6 +57,23 @@ export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina })=>{
       }
   }
 }
+
+
+export const getProductsAdmin = ()=>{
+  return async (dispatch)=>{
+    try {
+      const response = await axios.get(`http://localhost:3001/productos`)
+      return dispatch({
+        type: GET_PRODUCTS_ADMIN,
+        payload: response.data
+      })
+      
+    }catch(err){
+      console.log(err)
+      }
+  }
+}
+
 
 //COMPLETAR
 //borrar producto
