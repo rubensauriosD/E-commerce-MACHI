@@ -6,6 +6,7 @@ import ContactPage from "./Pages/ContactPage";
 import Login from "./Pages/Login";
 import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
+import Admin from "./Pages/Admin"
 
 import DetalleProducto from "./Pages/DetalleProducto";
 function App() {
@@ -21,7 +22,7 @@ function App() {
           <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
-        {/* <Route exact path="/admin" component={Admin} /> */}
+         <Route exact path="/admin" component={Admin} /> 
       </Router>
     </div>
   );
