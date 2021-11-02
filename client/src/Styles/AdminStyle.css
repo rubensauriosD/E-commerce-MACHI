@@ -1,0 +1,61 @@
+.adminContenedor{
+    
+    width: 90%;
+    max-width: 1200px;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.formsAdminExterno{
+    width: 100%;
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+
+}
+.formsAdmin{
+    width: 100%;
+    display: flex;
+    direction: column;
+    justify-content: space-around;
+}
+
+.levelAdmin{
+    width: 100%;
+    max-width: 800px;
+    margin: 15px;
+}
+.buttonAdmin{
+    margin: 25px;
+}
+
+.ordererAdmin{
+    display: flex;
+    direction: row;
+    justify-content: space-evenly;
+    padding: 15px;
+    margin: 20px;
+    border: rgba(97, 93, 93, 0.301) 1px solid;
+}
+.imagenAdminDiv{
+    width: 30%;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 20px;
+    
+
+}
+
+.imagenAdmin{
+    width: 150px;
+}
+.datosProductoAdmin{
+    width: 70%;
+    display: block;
+    
+}
+.labelAdminEdit{
+    margin: 8px;
+}
