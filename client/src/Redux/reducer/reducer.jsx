@@ -1,6 +1,7 @@
 import {
     POST_PRODUCT,
     GET_PRODUCTS,
+    GET_PRODUCTS_ADMIN,
     DELETE_PRODUCT,
     PUT_PRODUCT,
     GET_PRODUCT_ID,
@@ -27,6 +28,7 @@ import {
 
 const initialState={
     products:[],
+    productsAdmin:[],
     productosPorCategorias:[],
     Product: {},
     Images: [],
@@ -52,6 +54,10 @@ const rootReducer=(state=initialState,{type, payload})=>{
         case GET_PRODUCTS: return {
             ...state,
             products: payload
+        }
+        case GET_PRODUCTS_ADMIN: return {
+            ...state,
+            productsAdmin: payload
         }
         case DELETE_PRODUCT: return {
             ...state

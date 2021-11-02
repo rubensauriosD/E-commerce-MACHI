@@ -4,7 +4,7 @@ import './ProductStyle.css'
 export default function Products({productos}){
     return(
         <div className="contenedor-productos">
-            {productos&&Array.isArray(productos)?productos.map(producto=>(
+            {productos&&Array.isArray(productos)?productos?.reverse().map(producto=>(
                 <Product key={producto.id} id={producto.id} imagen={producto.imagen} nombre={producto.nombre} categoria={producto.categoria} precio={producto.precio} disponibilidad={producto.disponibilidad}/>
             )
             ):
