@@ -30,7 +30,7 @@ export const GET_PRODUCTS_ADMIN = 'GET_PRODUCTS_ADMIN';
 export const postProduct = (producto) => {
   return (dispatch) => {
     axios
-      .post(`http://localhost:3001/productos`, producto)
+      .post(`/productos`, producto)
       .then((response) => {
         return dispatch({
           type: POST_PRODUCT,
@@ -46,7 +46,7 @@ export const postProduct = (producto) => {
 export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina })=>{
   return async (dispatch)=>{
     try {
-      const response = await axios.get(`http://localhost:3001/productos?pagina=${pagina ? pagina : 1}&ordenA=${ordenA ? ordenA : ""}&ordenP=${ordenP ? ordenP : ""}&filtroC=${filtroC ? filtroC : ""}&nombre=${nombre ? nombre : ""}`)
+      const response = await axios.get(`/productos?pagina=${pagina ? pagina : 1}&ordenA=${ordenA ? ordenA : ""}&ordenP=${ordenP ? ordenP : ""}&filtroC=${filtroC ? filtroC : ""}&nombre=${nombre ? nombre : ""}`)
       return dispatch({
         type: GET_PRODUCTS,
         payload: response.data
@@ -62,7 +62,7 @@ export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina })=>{
 export const getProductsAdmin = ()=>{
   return async (dispatch)=>{
     try {
-      const response = await axios.get(`http://localhost:3001/productos`)
+      const response = await axios.get(`/productos`)
       return dispatch({
         type: GET_PRODUCTS_ADMIN,
         payload: response.data
@@ -79,7 +79,7 @@ export const getProductsAdmin = ()=>{
 //borrar producto
 export const deleteProduct = ({id})=>{
   return (dispatch)=>{
-    axios.delete(`http://localhost:3001/productos/${id}`)
+    axios.delete(`/productos/${id}`)
     .then(res =>{
         return dispatch({
             type: DELETE_PRODUCT,
@@ -96,7 +96,7 @@ export const deleteProduct = ({id})=>{
 //modificar un producto
 export const putProduct = ({id})=>{
   return (dispatch)=>{
-    axios.put(`http://localhost:3001/productos/${id}`)
+    axios.put(`/productos/${id}`)
     .then(productUpdated =>{
         return dispatch({
             type: PUT_PRODUCT,
@@ -112,7 +112,7 @@ export const putProduct = ({id})=>{
 //obtener producto por id para su detalle
 export const getProductId = (id)=>{
   return (dispatch)=>{
-    axios.get(`http://localhost:3001/productos/${id}`)
+    axios.get(`/productos/${id}`)
     .then(productDetail =>{
         return dispatch({
             type: GET_PRODUCT_ID,
@@ -141,7 +141,7 @@ export const removeProduct = ()=>{
 export const postImage = (imagen) => {
   return (dispatch) => {
     axios
-      .post(`http://localhost:3001/imagenes`, imagen)
+      .post(`/imagenes`, imagen)
       .then((response) => {
         return dispatch({
           type: POST_IMAGE,
@@ -156,7 +156,7 @@ export const postImage = (imagen) => {
 // obtener todas las imágenes
 export const getImages = ()=>{
   return (dispatch)=>{
-      axios.get(`http://localhost:3001/imagenes`)
+      axios.get(`/imagenes`)
       .then(images =>{
           return dispatch({
               type: GET_IMAGES,
@@ -173,7 +173,7 @@ export const getImages = ()=>{
 //borrar imagen
 export const deleteImage = ({id})=>{
   return (dispatch)=>{
-    axios.delete(`http://localhost:3001/imagenes/${id}`)
+    axios.delete(`/imagenes/${id}`)
     .then(res =>{
         return dispatch({
             type: DELETE_IMAGE,
@@ -190,7 +190,7 @@ export const deleteImage = ({id})=>{
 //modificar una imagen
 export const putImage = ({id})=>{
   return (dispatch)=>{
-    axios.put(`http://localhost:3001/imagenes/${id}`)
+    axios.put(`/imagenes/${id}`)
     .then(imageUpdate=>{
         return dispatch({
             type: PUT_IMAGE,
@@ -210,7 +210,7 @@ export const putImage = ({id})=>{
 export const postUser = (user) => {
   return (dispatch) => {
     axios
-      .post(`http://localhost:3001/usuarios`, user)
+      .post(`/usuarios`, user)
       .then((response) => {
         return dispatch({
           type: POST_USER,
@@ -226,7 +226,7 @@ export const postUser = (user) => {
 // obtener todos los usuarios
 export const getUsers = ()=>{
   return (dispatch)=>{
-      axios.get(`http://localhost:3001/usuarios`)
+      axios.get(`/usuarios`)
       .then(users =>{
           return dispatch({
               type: GET_USERS,
@@ -241,7 +241,7 @@ export const getUsers = ()=>{
 //Iniciar Sesion
 export const IniciarSesion=(usuario)=>{
   return(dispatch)=>{
-    axios.post("http://localhost:3001/usuarios/inicioSesion",usuario)
+    axios.post("/usuarios/inicioSesion",usuario)
     .then(resultadoDeUsuario=>{
       dispatch({type:INICIARS,payload:resultadoDeUsuario.data})
     })
@@ -251,7 +251,7 @@ export const IniciarSesion=(usuario)=>{
 //borrar usuario
 export const deleteUser = ({id})=>{
   return (dispatch)=>{
-    axios.delete(`http://localhost:3001/usuarios/${id}`)
+    axios.delete(`/usuarios/${id}`)
     .then(res =>{
         return dispatch({
             type: DELETE_USER,
@@ -268,7 +268,7 @@ export const deleteUser = ({id})=>{
 //modificar un usuario
 export const putUser = ({id})=>{
   return (dispatch)=>{
-    axios.put(`http://localhost:3001/usuarios/${id}`)
+    axios.put(`/usuarios/${id}`)
     .then(userUpdate=>{
         return dispatch({
             type: PUT_USER,
