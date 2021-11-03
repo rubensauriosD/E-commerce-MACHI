@@ -3,13 +3,8 @@ import Categorias from "../Components/Categorias/Categorias";
 import Courses from "../Components/Courses";
 import Carrusel from "../Components/Carrusel/Carrusel"
 import { categoria } from "../Elements/ArrayCategoria";
-import { useSelector } from "react-redux";
-
 
 export default function MainPage() {
-  
-  const productos=useSelector(state=>state.Products)
-     
   
 
   return (

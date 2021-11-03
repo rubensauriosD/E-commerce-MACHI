@@ -5,7 +5,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faRedo } from '@fortawesome/free-solid-svg-icons';
 
 export default function FiltrosYOrden () {
-    const { products, nombre, ordenA, ordenP, filtroC } = useSelector(state => state)
+    const { nombre, ordenA, ordenP, filtroC } = useSelector(state => state)
     const dispatch = useDispatch()
 
     const handleOrdenPorNombre = (e) => {
@@ -35,7 +35,7 @@ export default function FiltrosYOrden () {
             <div className="items">
                 <select onChange={handleOrdenPorNombre}>
                     <option>Orden alfabetico:</option>
-                    <option selected value="asc">A-Z</option>
+                    <option value="asc">A-Z</option>
                     <option value="desc">Z-A</option>
                 </select>
             </div>
@@ -57,7 +57,7 @@ export default function FiltrosYOrden () {
                     {/* {products.productos && products.productos.map((e, i) => (
                         <option key={i} value={e.categoria}>{e.categoria}</option>
                     ))} */}
-                    {console.log(products.productos)}
+                   
                 </select>
             </div>
             <button onClick={rechargeHome} className="recharge" ><FontAwesomeIcon icon={faRedo}/></button>

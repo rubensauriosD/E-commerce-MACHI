@@ -1,8 +1,7 @@
 import React from "react";
 import { useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { useHistory } from "react-router-dom";
-import {getProductsAdmin, deleteProduct, putProduct, getImages, deleteImage, postImage, postProduct} from '../Redux/actions/action';
+import {getProductsAdmin, getImages, postImage, postProduct} from '../Redux/actions/action';
 import axios from 'axios'
 import '../Styles/AdminStyle.css'
 
@@ -10,9 +9,8 @@ import '../Styles/AdminStyle.css'
 
 const Admin = () => {
 
-    const history = useHistory()
     var productos = useSelector(state => state.productsAdmin);
-    var imagen = useSelector(state => state.Images);
+  
     const [inputs, setInputs] = useState({
         nombre: '',
         precio:'',
@@ -35,7 +33,7 @@ const Admin = () => {
     useEffect(() =>{
         dispatch(getProductsAdmin());
         dispatch(getImages());
-    },[])
+    },[dispatch])
 
     function handleChange(e) {
         setInputs({
@@ -56,13 +54,13 @@ const Admin = () => {
     } 
     
     function borrar(e) { 
-        axios.delete(`http://localhost:3001/productos/${e.target.id}`);
+        axios.delete(`/productos/${e.target.id}`);
         alert(`El producto ${e.target.name} fue eliminado con exito`);
         dispatch(getProductsAdmin())
     }
 
     function editar(e) { 
-        axios.put(`http://localhost:3001/productos/${e.target.id}`, inputsEditar);
+        axios.put(`/productos/${e.target.id}`, inputsEditar);
         alert(`El producto ${e.target.name} fue modificado con exito`)
         
     }
@@ -180,13 +178,13 @@ const Admin = () => {
 
                                 <div className="labelAdminEdit">
                                     <button className="buttonAdmin" id={producto.id} name={producto.nombre} onClick={(e) => {
-                                            inputsEditar.nombre ? inputsEditar.nombre = inputsEditar.nombre :  inputsEditar.nombre = producto.nombre;
-                                            inputsEditar.precio ? inputsEditar.precio = inputsEditar.precio :  inputsEditar.precio = producto.precio;
-                                            inputsEditar.imagen ? inputsEditar.imagen = inputsEditar.imagen :  inputsEditar.imagen = producto.imagen;
-                                            inputsEditar.precio ? inputsEditar.precio = inputsEditar.precio :  inputsEditar.precio = producto.precio;
-                                            inputsEditar.disponibilidad ? inputsEditar.disponibilidad = inputsEditar.disponibilidad :  inputsEditar.disponibilidad = producto.disponibilidad;
-                                            inputsEditar.categoria ? inputsEditar.categoria = inputsEditar.categoria :  inputsEditar.categoria = producto.categoria;
-                                            inputsEditar.descripcion ? inputsEditar.descripcion = inputsEditar.descripcion :  inputsEditar.descripcion = producto.descripcion;
+                                            if(inputsEditar.nombre) return inputsEditar.nombre; else  inputsEditar.nombre = producto.nombre;
+                                            if(inputsEditar.precio) return inputsEditar.precio; else inputsEditar.precio = producto.precio;
+                                            if(inputsEditar.imagen) return inputsEditar.imagen; else  inputsEditar.imagen = producto.imagen;
+                                            if(inputsEditar.precio) return inputsEditar.precio; else  inputsEditar.precio = producto.precio;
+                                            if(inputsEditar.disponibilidad) return inputsEditar.disponibilidad; else  inputsEditar.disponibilidad = producto.disponibilidad;
+                                            if(inputsEditar.categoria) return inputsEditar.categoria; else inputsEditar.categoria = producto.categoria;
+                                            if(inputsEditar.descripcion) return inputsEditar.descripcion; else inputsEditar.descripcion = producto.descripcion;
                                             editar(e)
                                         }
                                     }>Editar</button>
