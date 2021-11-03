@@ -5,7 +5,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 
 
-export default function Product({id,nombre,categoria,imagen,precio}){
+export default function Product({id,nombre,imagen,precio}){
     
     return(
         <div className="tarjeta">
@@ -23,7 +23,7 @@ export default function Product({id,nombre,categoria,imagen,precio}){
                     </div>
                     </Link>
                     <div className="carrito-products">
-                    <Link exact to="/cart">
+                    <Link to="/cart">
                         <FontAwesomeIcon icon={faShoppingCart} style={{color: "grey"}}/>
                     </Link>
                     </div>

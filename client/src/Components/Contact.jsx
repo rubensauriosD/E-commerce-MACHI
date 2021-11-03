@@ -55,7 +55,7 @@ const Contact = () => {
         <form ref={form} onSubmit={sendEmail}>
           <label htmlFor="name">Nombre</label>
           <input type="text" name="name" id="name" required />
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input type="email" id="email" name="email" required />
           <label htmlFor="phone">Telefono</label>
           <input type="tel" id="phone" name="phone" required />
