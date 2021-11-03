@@ -23,7 +23,8 @@ import {
     SET_PAGINA,
     SET_ORDEN_A,
     SET_ORDEN_P,
-    SET_FILTRO_C
+    SET_FILTRO_C,
+    CERRARSESION
 } from "../actions/action.jsx"
 
 const initialState={
@@ -215,7 +216,12 @@ const rootReducer=(state=initialState,{type, payload})=>{
                 ...state,
                 filtroC: payload
             }
-
+        case CERRARSESION:{
+            return{
+                ...state,
+                User:{}
+            }
+        }
         default: return state
     }
 }
