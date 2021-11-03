@@ -3,8 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import {useDispatch} from "react-redux"
+import {cerrarSesion} from "../Redux/actions/action"
 import { Button, CardActionArea } from '@mui/material';
+import { Link } from "react-router-dom";
 export default function InterfazDeUsuario({ datosUsuario }) {
+  const dispatch=useDispatch()
   return (
     <div>
       <Card sx={{ maxWidth: 345, boxShadow:{sm:"5px 5px 2px #355a1d "} }}>
@@ -25,38 +29,8 @@ export default function InterfazDeUsuario({ datosUsuario }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <Button color="warning" variant="contained">Cerrar Sesion</Button>
+      <Button color="warning" variant="contained" onClick={()=>dispatch(cerrarSesion())}>Cerrar Sesion</Button>
+      {datosUsuario.tipo ==="admin"&&<Link to="/admin"><Button>Ir a la Interfaz de Administrador</Button></Link>}
     </div>
   );
 }
-/*
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-
-export default function ActionAreaCard() {
-  return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  );
-}
-*/

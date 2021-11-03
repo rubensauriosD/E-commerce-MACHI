@@ -23,7 +23,8 @@ import {
     SET_PAGINA,
     SET_ORDEN_A,
     SET_ORDEN_P,
-    SET_FILTRO_C
+    SET_FILTRO_C,
+    CONFIRMACIONCERRADODESESION
 } from "../actions/action.jsx"
 
 const initialState={
@@ -41,7 +42,8 @@ const initialState={
     ordenA: "",
     ordenP: "",
     filtroC: "",
-    pagina: 1
+    pagina: 1,
+    propiedadDeLogueo:false,
     //carrito?
 }
 
@@ -110,7 +112,8 @@ const rootReducer=(state=initialState,{type, payload})=>{
             console.log(payload)
             return{
                 ...state,
-                User:payload
+                User:payload.usuario,
+                propiedadDeLogueo:payload.autorizacion
             }
         }
         /* case GET_USER_ID: return {
@@ -215,7 +218,12 @@ const rootReducer=(state=initialState,{type, payload})=>{
                 ...state,
                 filtroC: payload
             }
-
+        case CONFIRMACIONCERRADODESESION:
+            return {
+                ...state,
+                propiedadDeLogueo:payload,
+                User:{}
+            }
         default: return state
     }
 }
