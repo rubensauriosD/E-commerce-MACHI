@@ -24,7 +24,6 @@ export const SET_ORDEN_A = 'SET_ORDEN_A';
 export const SET_ORDEN_P = 'SET_ORDEN_P';
 export const SET_FILTRO_C = 'SET_FILTRO_C';
 export const GET_PRODUCTS_ADMIN = 'GET_PRODUCTS_ADMIN';
-export const CONFIRMACIONCERRADODESESION="CERRARSESION"
 //PRODUCTOS
 
 //postear producto
@@ -262,15 +261,9 @@ export const deleteUser = ({id})=>{
     .catch((err)=>{
         console.log(err)
     })
-} 
 }
-export const cerrarSesion=()=>{
-  return (dispatch)=>{
-    axios.get("http://localhost:3001/usuarios/cerrarSesion")
-      .then(resul=>resul.data)
-      .then(respuesta=> dispatch({type:CONFIRMACIONCERRADODESESION,payload:respuesta}))
-  }
 }
+
 //REVISAR
 //modificar un usuario
 export const putUser = ({id})=>{
