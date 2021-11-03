@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {postUser,IniciarSesion} from "../Redux/actions/action"
 import  {useDispatch,useSelector} from "react-redux"
 import Login from "../Components/LogIn";
 import SignIn from "../Components/SignIn";
+import { useHistory } from "react-router-dom"
 import InterfazDeUsuario from "../Components/InterfazDeUsuario";
 import "../Styles/paginaDeLogin.css"
 const LoginPage = () => {
+  const history=useHistory ()
   const usuario=useSelector(state=>state.User)
   const dispatch=useDispatch()
-  const InicioSesion=(Usuario)=>{
-    dispatch(IniciarSesion(Usuario))
+
+  function InicioSesion(Usuario){
+    dispatch(IniciarSesion(Usuario,history)) 
   }
+
+
   const Registrarse=(Usuario)=>{
-    dispatch(postUser(Usuario))
+    dispatch(postUser(Usuario))  
   }
-  console.log("Aca el usuario que Inicio Sesion", usuario)
   if(usuario&&Object.values(usuario).length!==0){     
     return (<div className="InterfazDeUsuario"> <InterfazDeUsuario datosUsuario={usuario}/></div>)
   }else{

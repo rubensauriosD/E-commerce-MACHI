@@ -69,36 +69,36 @@ export default function Carrusel() {
 
   return (
     <div>
-      <div class="container-slider">
-        <div class="slider" id="slider" ref={container}>
-          <div class="slider_section">
-            <img src={img1} alt="" class="slider_img" />
-            <div class="text-section">
+      <div className="container-slider">
+        <div className="slider" id="slider" ref={container}>
+          <div className="slider_section">
+            <img src={img1} alt="" className="slider_img" />
+            <div className="text-section">
               <p>Cultiva en Casa!</p>
             </div>
           </div>
-          <div class="slider_section">
-            <img src={img2} alt="" class="slider_img" />
-            <div class="text-section">
+          <div className="slider_section">
+            <img src={img2} alt="" className="slider_img" />
+            <div className="text-section">
               <p>Compostemos Ya!</p>
             </div>
           </div>
-          <div class="slider_section">
-            <img src={img3} alt="" class="slider_img" />
-            <div class="text-section">
+          <div className="slider_section">
+            <img src={img3} alt="" className="slider_img" />
+            <div className="text-section">
               <p>Sos un gran generador de residuos Organicos?</p>
             </div>
           </div>
         </div>
         <div
-          class="slider_btn slider_btn-left"
+          className="slider_btn slider_btn-left"
           id="btn-left"
           onClick={handlePrev}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </div>
         <div
-          class="slider_btn slider_btn-right"
+          className="slider_btn slider_btn-right"
           id="btn-right"
           onClick={handleNext}
         >

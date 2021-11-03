@@ -1,16 +1,17 @@
 import { Controller, useForm } from "react-hook-form";
-import { Input, Button,Box,TextField,Alert } from "@mui/material";
+import { Button,Box,TextField,Alert } from "@mui/material";
 import Select from "react-select";
 export default function SignIn({ SubmitS }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data)
     SubmitS(data);
+    reset()
   };
   return (
     <div>
