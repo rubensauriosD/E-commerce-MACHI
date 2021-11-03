@@ -24,6 +24,7 @@ export const SET_ORDEN_A = 'SET_ORDEN_A';
 export const SET_ORDEN_P = 'SET_ORDEN_P';
 export const SET_FILTRO_C = 'SET_FILTRO_C';
 export const GET_PRODUCTS_ADMIN = 'GET_PRODUCTS_ADMIN';
+export const CERRARSESION="CERRADO_DE_SESION"
 //PRODUCTOS
 
 //postear producto
@@ -239,12 +240,20 @@ export const getUsers = ()=>{
   }
 }
 //Iniciar Sesion
-export const IniciarSesion=(usuario)=>{
+export const IniciarSesion=(usuario,history)=>{
   return(dispatch)=>{
     axios.post("/usuarios/inicioSesion",usuario)
     .then(resultadoDeUsuario=>{
       dispatch({type:INICIARS,payload:resultadoDeUsuario.data})
+      if(resultadoDeUsuario.data.tipo==="admin")history.push("/Admin")
+      else if(resultadoDeUsuario.data.tipo==="user")history.push("/cart")
     })
+  }
+}
+export const cerrarSesion=()=>{
+  return(dispatch)=>{
+    axios.get("/usuarios/cerrarSesion")
+    .then(resultado=>dispatch({type:CERRARSESION}))
   }
 }
 //COMPLETAR
