@@ -74,7 +74,7 @@ async function postUsuario(req, res)
                     email: email,
                     contrasenia: contraseñaEncriptada,
                     tipo: tipo.value
-                })
+                })  
                 res.json({message:"Success"})
             }
             else{
@@ -94,7 +94,13 @@ async function postUsuario(req, res)
 
 async function inicioDeSesion(req,res){
     const {nombre,apellido,email,tipo}=req.user 
-    res.json({nombre,apellido,email,tipo})
+    const usuario={
+        nombre,
+        apellido,
+        email,
+        tipo
+    }
+    res.json({usuario,autorizacion:true})
 }   
 function pedidoCerrarSesion(req,res){
     req.logout()

@@ -24,13 +24,14 @@ export const SET_ORDEN_A = 'SET_ORDEN_A';
 export const SET_ORDEN_P = 'SET_ORDEN_P';
 export const SET_FILTRO_C = 'SET_FILTRO_C';
 export const GET_PRODUCTS_ADMIN = 'GET_PRODUCTS_ADMIN';
+export const CONFIRMACIONCERRADODESESION="CERRARSESION"
 //PRODUCTOS
 
 //postear producto
 export const postProduct = (producto) => {
   return (dispatch) => {
     axios
-      .post(`http://localhost:3001/productos`, producto)
+      .post(`http://localhost:3001/productos/Admin`, producto)
       .then((response) => {
         return dispatch({
           type: POST_PRODUCT,
@@ -62,7 +63,7 @@ export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina })=>{
 export const getProductsAdmin = ()=>{
   return async (dispatch)=>{
     try {
-      const response = await axios.get(`http://localhost:3001/productos`)
+      const response = await axios.get(`http://localhost:3001/productos/Admin`)
       return dispatch({
         type: GET_PRODUCTS_ADMIN,
         payload: response.data
@@ -261,9 +262,15 @@ export const deleteUser = ({id})=>{
     .catch((err)=>{
         console.log(err)
     })
+} 
 }
+export const cerrarSesion=()=>{
+  return (dispatch)=>{
+    axios.get("http://localhost:3001/usuarios/cerrarSesion")
+      .then(resul=>resul.data)
+      .then(respuesta=> dispatch({type:CONFIRMACIONCERRADODESESION,payload:respuesta}))
+  }
 }
-
 //REVISAR
 //modificar un usuario
 export const putUser = ({id})=>{
