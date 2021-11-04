@@ -1,9 +1,10 @@
 const app = require('express').Router();
-const { getComments, deleteComments, putComments, postComments } = require('../../utils/comment');
+const {  postComentarios, getUserComentarios, getIdComentarios, getPuntajeComentarios, deleteComentarios } = require('../../utils/comment');
 
-app.get('/', getComments)
-app.post('/', postComments)
-app.put('/:id', putComments)
-app.delete('/:id', deleteComments)
+app.post('/', postComentarios)
+app.get('/:id/', getIdComentarios)
+app.get('/usuario/:idUsuario', getUserComentarios)
+app.get('/puntaje/:idUsuario/', getPuntajeComentarios)
+app.delete('/:idComentario', deleteComentarios)
 
 module.exports = app;
