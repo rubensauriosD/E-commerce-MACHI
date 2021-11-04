@@ -4,7 +4,7 @@
 export default function EditarImagenes(){
 
     return(
-        <div>
+        <div className="editarImagenesAdmin">
             <h3>Editar Imagenes</h3>
             <ol>
                 {/* imagen.map(imagen => {

@@ -1,61 +1,164 @@
 .adminContenedor{
-    
     width: 90%;
     max-width: 1200px;
     height: 100%;
     margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+    display: block; 
+       
 }
+
 .formsAdminExterno{
     width: 100%;
+    margin: auto;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
     box-shadow: 0 0 0 10px #fff, 0 15px 50px;
-
+    /* display: block; */
+    
 }
+
+.productoAdmin{
+    align-items: center;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px rgba(145, 145, 151, 0.397) solid;
+    border-radius: 4px;
+}
+
 .formsAdmin{
-    width: 100%;
+    padding-top: 3%;
+    width: 800px;
+    margin-left: 10%;
     display: flex;
-    direction: column;
-    justify-content: space-around;
+      
+}
+.formNombre{
+    margin-top: 3%;
+    width: 600px;
+    
+   
 }
 
 .levelAdmin{
-    width: 100%;
-    max-width: 800px;
-    margin: 15px;
+   display: flex;
+   direction: column;
+   justify-content: flex-start;
+   width: 400px;
+   
+    
 }
-.buttonAdmin{
-    margin: 25px;
+.levelAdmin label{
+    width: 100px; 
+    margin-top: 0px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+   
+        
+ }
+.levelAdmin input{
+    width: 300px;
+    height: 30px;
+    border: 1px rgba(145, 145, 151, 0.397) solid;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    
 }
+.levelAdmin select{
+   width: 300px;
+   height: 30px;
+   margin-top: 25px;
+   margin-bottom: 20px;
+   border-radius: 4px; 
+} 
 
+.buttonAdmin{
+    background-color: #4da45f;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: medium;
+    align-self: flex-start;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+    
+}
+.editarProductos{
+    border: rgba(97, 93, 93, 0.301) 1px solid;
+    border-radius: 4px;
+}
 .ordererAdmin{
     display: flex;
     direction: row;
     justify-content: space-evenly;
     padding: 15px;
     margin: 20px;
-    border: rgba(97, 93, 93, 0.301) 1px solid;
+    background-color: rgba(180, 174, 174, 0.048); 
+    border-radius: 4px;
+    
 }
 .imagenAdminDiv{
     width: 30%;
     padding: 10px;
     margin: 10px;
     margin-bottom: 20px;
-    
+      
 
 }
 
 .imagenAdmin{
-    width: 150px;
+    width: 170px;
+    margin-bottom: 15px;
 }
 .datosProductoAdmin{
-    width: 70%;
-    display: block;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+}
+
+.datosProductoAdmin label{
+   display: flex;
+   direction: column;
+   justify-content: flex-start;
+   width: 400px;
+   margin-top: 10px;
+}
+.datosProductoAdmin select{
+    width: 400px;
+    margin-bottom: 10px;
     
 }
-.labelAdminEdit{
-    margin: 8px;
+.datosProductoAdmin input{
+    width: 400px;
+    
+}
+
+.editarImagenesAdmin{
+    margin-top: 5%;
+    margin-bottom: 150px;
+}
+
+@media (max-width: 1024px ) {
+    .formsAdmin{
+        padding-top: 3%;
+        width: 80%;
+        margin-left: 22%;
+        display: flex;
+        flex-direction: column;
+         
+   }
+   .formNombre{
+    margin-top: 1%;
+    width: 600px;
+    margin-bottom: 30px;
+    display: flex;
+   }
 }
