@@ -15,19 +15,15 @@ function handleChange(e) {
 
 }
 
-function crear(){
-    axios.post('/checkout', input)
-   
-}
 
     return (
         <div>
-            <form onSubmit={crear} >
+            <form action="http://localhost:3001/checkout" method="POST" >
                 <Box>
                     <TextField onChange={(e)=>handleChange(e)} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
                     <TextField onChange={handleChange} name="precio" type="number" label="Precio" variant="filled" color="success"/><br/><br/>
                     <TextField onChange={handleChange} name="cantidad" type="number" label="Cantidad" variant="filled" color="success"/><br/><br/>
-                <Button type="submit">Comprar</Button>
+                    <Button type="submit">Comprar</Button>
                 </Box>     
             </form>
         </div>

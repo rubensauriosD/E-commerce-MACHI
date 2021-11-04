@@ -3,16 +3,10 @@ const mercadopago = require('mercadopago');
 const { YOUR_ACCESS_TOKEN } = process.env;
 
 
+mercadopago.configure({
+    access_token: YOUR_ACCESS_TOKEN
+}); 
 
-mercadopago.configurations.setAccessToken('APP_USR-4288979434416059-110414-ec5585f774fe9a73d06a47b32712775f-1012482719'); //ACA VA EL ACCES TOKEN DEL VENDEDOR!!
-
-/*  mercadopago.configure({
-    access_token: 'APP_USR-4288979434416059-110414-ec5585f774fe9a73d06a47b32712775f-1012482719'
-  }); */ 
-
-/* app.get('/', (req, res) =>{
-    res.send('Bienvenido a Checkout');
-}) */
 
 app.post('/', (req, res) => {
     // Crea un objeto de preferencia
