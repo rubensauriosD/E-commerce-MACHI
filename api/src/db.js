@@ -52,6 +52,7 @@ Usuario.hasMany(Comentario);
 Comentario.belongsTo(Usuario);
 Comentario.belongsTo(Producto);
 
+
 //Porducto - Imagen:
 //Producto.hasMany(Imagen);
 //Imagen.belongsTo(Producto);

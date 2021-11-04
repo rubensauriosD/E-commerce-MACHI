@@ -1,72 +1,95 @@
-const { Comentario } = require("../db");
+const {Comentario, Producto, Usuario} = require('../db.js');
+const { Op, where } = require('sequelize');
+const usuarios = require('../models/usuarios');
 
-async function getComments(req, res, next) {
-  try {
-    let comments = await Comentario.findAll();
-
-    return res.send({ comments: comments });
-  } catch (error) {
-    console.log(error);
-    next(error);
-  }
-}
-
-async function deleteComments(req, res) {
-    const { id } = req.params;
-
-    const comment = await Comentario.findByPk(id);
-
-    Comentario.destroy({
-      where: {
-        id: id,
-      },
-    });
-
-    res.send(comment);
-  }
-
-async function putComments(req, res) {
-  const { id } = req.params;
-
-  const { comentarios, puntaje } = req.body;
-
-  await Comentario.update(
-    {
-      comentarios,
-      puntaje,
-    },
-    {
-      where: { id: id },
+async function postComentarios (req, res) {
+  const {comentarios, puntaje, idProducto, idUsuario} = req.body;
+  const createComment = await Comentario.create({
+    comentarios,
+    puntaje
+  })
+  const findProducto = await Producto.findOne({
+    where: {
+      id: idProducto
     }
-  );
-  const comment = await Comentario.findByPk(id);
-  res.send(comment);
-}
+  })
+  const findUsuario = await Usuario.findOne({
+    where: {
+      id: idUsuario
+    }
+  })
+  await createComment.setProducto(findProducto)
+  await createComment.setUsuario(findUsuario)
+  return res.send(createComment);
+};
 
-async function postComments(req, res, next) {
-  const { comentarios, puntaje, productoId, usuarioId } = req.body;
 
-  try {
-    const newComment = await Comentario.create({
-      comentarios: comentarios,
-      puntaje: puntaje,
-      productoId: productoId,
-      usuarioId: usuarioId
-    });
+async function deleteComentarios (req, res) {
+  const {idComentario} = req.params;
 
-    await newComment.setUsuario(id)
-    res.send(newComment);
-  } catch (error) {
-    next(error);
-  }
-}
+  await Comentario.destroy({
+    where: {
+      id: idComentario
+    }
+  })
+  return res.send(Comentario.findAll())
+};
+
+
+async function getIdComentarios (req, res) {
+  const {id} = req.params;
+
+  const findProducto = await Comentario.findAll({
+    include: [Usuario],
+    where: {
+      productoId: id
+    }
+  })
+  return res.send(findProducto)
+};
+
+async function getUserComentarios (req, res) {
+  const {idUser} = req.params;
+
+  const comentarios = await Comentario.findAll({
+    where: {
+      usuarioId: idUser
+    }
+  })
+  return res.send(comentarios)
+};
+
+async function getPuntajeComentarios (req, res) {
+  const {idUser} = req.params;
+
+  const puntajeUser = await Producto.findAll({
+    where: {
+      usuarioId: idUser
+    },
+    include: [{
+      model: Comentario
+    }]
+  })
+  var puntaje = [];
+  puntajeUser.forEach(e => {
+    if(e.comentarios.length > 0) {
+      e.comentarios.forEach(i => puntaje.push(i.puntaje))
+    }
+  })
+  console.log('espero que funcione', puntaje.length)
+  if(puntaje.length > 0)
+  return res.json((puntaje.reduce((accumulator, currentValue) => accumulator + currentValue) / puntaje.length).toFixed(2))
+  return res.send('El puntaje')
+};
 
 module.exports = {
-  getComments,
-  deleteComments,
-  putComments,
-  postComments
+  postComentarios,
+  deleteComentarios,
+  getIdComentarios,
+  getUserComentarios,
+  getPuntajeComentarios
 };
+
 
 
 
