@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postImage } from '../../Redux/actions/action';
-
+import axios from 'axios';
 
 
 export default function CargarImagen(){   
@@ -10,8 +10,21 @@ export default function CargarImagen(){
 
     const [img, setImg] = useState('')
 
-    function handleChangeImagen(e) {
-        setImg(e.target.value)
+    const subirImagen = () => {
+        const formData = new FormData()
+        formData.append("file", img)
+        formData.append("upload_preset", "tpvdkdav")
+    
+        axios.post("https://api.cloudinary.com/v1_1/mau-ar/image/upload", formData)
+        .then((response) => {
+            return dispatch(postImage(response.data))
+        })
+        .then(() => {
+            alert('La imagen fue recibida exitosamente')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     } 
     
     return (
@@ -20,10 +33,10 @@ export default function CargarImagen(){
 
             <label>Seleccione la imagen: </label>
             <input type='file' name='imagen' onChange={(e)=>{
-                handleChangeImagen(e)
+                setImg(e.target.files[0])
             }} required/>
 
-            <br/><button className="buttonAdmin" type='submit' onClick={() => dispatch(postImage(img))}>Crear</button>
+            <br/><button className="buttonAdmin" type='submit' onClick={subirImagen}>Crear</button>
         </form> 
     )
 }    

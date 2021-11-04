@@ -24,14 +24,12 @@ const dispatch = useDispatch()
             <div className="adminContenedor">
                 <h1>Admin</h1>
                 <div className='formsAdminExterno'>
-                    <div className='formsAdmin'>
                     <CargarProducto/>
-                    </div>
-                <hr/> 
+                
                     <CargarImagen/>            
-                <hr/>
+                
                     <EditarProducto/>
-                <hr/>    
+                    
                     <EditarImagenes/>
                 </div>
             </div>

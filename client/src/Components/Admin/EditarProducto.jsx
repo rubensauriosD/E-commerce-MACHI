@@ -44,7 +44,7 @@ export default function EditarProducto(){
 
 
     return (
-        <div>
+        <div className="editarProductos">
             <h3>Editar Productos</h3>
             <ol>
                 {

@@ -22,11 +22,12 @@ async function getProductos(req, res) {
     //#endregion NAME
     
     //#region ORDEN ALFABETICO
-    if (ordenA === "asc" || !ordenA || ordenA === "") {
+    if (ordenA === "asc") {
       productos = productos.sort((a,b) =>{
         return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase()) 
       })
-    }else{
+    }
+    if (ordenA === "desc"){
       productos = productos.sort((a,b) =>{
         return b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
       })
@@ -85,8 +86,8 @@ async function deleteProductos(req, res) {
 
 async function putProductos(req, res) {
   const { id } = req.params;
-
-  const { nombre, imagen, precio, descripcion, disponibilidad } = req.body;
+  const {imagen} = req.query;
+  const { nombre, precio, descripcion, disponibilidad } = req.body;
 
   await Producto.update(
     {
@@ -121,10 +122,10 @@ async function putProductos(req, res) {
 //   }
 // }
 async function postProductos(req, res) {
-  const {nombre, imagen, precio, categoria, descripcion, disponibilidad } = req.body
+  const {nombre, precio, categoria, descripcion, disponibilidad } = req.body
+  const {imagen} = req.query;
   try {
-    const Productos=await Producto.create({ nombre, imagen, precio, categoria, descripcion, disponibilidad })
-
+    await Producto.create({ nombre, imagen, precio, categoria, descripcion, disponibilidad })
     //await Productos.setUsuario(id)
     return res.send('Producto publicado con exito');
 
