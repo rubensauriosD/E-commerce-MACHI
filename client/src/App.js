@@ -6,9 +6,10 @@ import ContactPage from "./Pages/ContactPage";
 import Login from "./Pages/Login";
 import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
-import Admin from "./Pages/Admin"
-
+import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
+import MercadoPago from "./Components/MercadoPago";
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +24,8 @@ function App() {
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
          <Route exact path="/admin" component={Admin} /> 
+         <Route exact path="/MercadoPago" component={MercadoPago} /> 
+
       </Router>
     </div>
   );

@@ -5,6 +5,7 @@ import Login from "../Components/LogIn";
 import SignIn from "../Components/SignIn";
 import InterfazDeUsuario from "../Components/InterfazDeUsuario";
 import "../Styles/paginaDeLogin.css"
+
 const LoginPage = () => {
   const usuario=useSelector(state=>state.User)
   const dispatch=useDispatch()
