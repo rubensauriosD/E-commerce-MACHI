@@ -28,11 +28,11 @@ export const CERRARSESION="CERRADO_DE_SESION"
 //PRODUCTOS
 
 //postear producto
-export const postProduct = (producto) => {
+export const postProduct = (producto, imagen) => {
   return (dispatch) => {
     axios
-      .post(`/productos`, producto)
-      .then((response) => {
+      .post(`/productos?imagen=${imagen}`, producto)
+      .then(() => {
         return dispatch({
           type: POST_PRODUCT,
         });
