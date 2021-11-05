@@ -1,34 +1,34 @@
 import {
-    POST_PRODUCT,
-    GET_PRODUCTS,
-    GET_PRODUCTS_ADMIN,
-    DELETE_PRODUCT,
-    PUT_PRODUCT,
-    GET_PRODUCT_ID,
-    REMOVE_PRODUCT,
-    POST_IMAGE,
-    GET_IMAGES,
-    DELETE_IMAGE,
-    PUT_IMAGE,
-    POST_USER,
-    GET_USERS,
-    DELETE_USER,
-    PUT_USER,
-    INICIARS,
-    FILTRADOCATEGORIAS,
-    GETPRODUCTBYNAME,
-    ORDER_BY_NAME,
-    ORDER_BY_PRECIO,
-    SET_NOMBRE,
-    SET_PAGINA,
-    SET_ORDEN_A,
-    SET_ORDEN_P,
-    SET_FILTRO_C,
-    CERRARSESION,
-    ADD_TO_CART_GUEST,
-    REMOVE_FROM_CART,
-    INICIOFACEBOOK
-} from "../actions/action.jsx"
+  POST_PRODUCT,
+  GET_PRODUCTS,
+  GET_PRODUCTS_ADMIN,
+  DELETE_PRODUCT,
+  PUT_PRODUCT,
+  GET_PRODUCT_ID,
+  REMOVE_PRODUCT,
+  POST_IMAGE,
+  GET_IMAGES,
+  DELETE_IMAGE,
+  PUT_IMAGE,
+  POST_USER,
+  GET_USERS,
+  DELETE_USER,
+  PUT_USER,
+  INICIARS,
+  FILTRADOCATEGORIAS,
+  GETPRODUCTBYNAME,
+  ORDER_BY_NAME,
+  ORDER_BY_PRECIO,
+  SET_NOMBRE,
+  SET_PAGINA,
+  SET_ORDEN_A,
+  SET_ORDEN_P,
+  SET_FILTRO_C,
+  CERRARSESION,
+  ADD_TO_CART_GUEST,
+  REMOVE_FROM_CART,
+  INICIOFACEBOOK,
+} from "../actions/action.jsx";
 
 const initialState = {
   products: [],
@@ -55,10 +55,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     //Carrito
     case ADD_TO_CART_GUEST:
-      const item = payload.product;
+      let item = payload.product;
       const existItem = state.cartItems.find((x) => x.id === item.id);
-
       if (existItem) {
+        item = { ...item, qty: ++existItem.qty };
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>
@@ -66,6 +66,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ),
         };
       } else {
+        item = { ...item, qty: 1 };
+        console.log(item.qty);
         return {
           ...state,
           cartItems: [...state.cartItems, item],
@@ -231,50 +233,51 @@ const rootReducer = (state = initialState, { type, payload }) => {
               }
               return 0;
             });
-            return {
-                ...state,
-                Products: orderPrecio
-            }
-        }
-        // Seteos de pagina, filtros y ordenamientos
-        case SET_NOMBRE:
-            return {
-                ...state,
-                nombre: payload
-            }
-        case SET_PAGINA:
-            return {
-                ...state,
-                pagina: payload
-            }
-        case SET_ORDEN_A:
-            return {
-                ...state,
-                ordenA: payload
-            }
-        case SET_ORDEN_P:
-            return {
-                ...state,
-                ordenP: payload
-            }
-        case SET_FILTRO_C:
-            return {
-                ...state,
-                filtroC: payload
-            }
-        case CERRARSESION:{
-            return{
-                ...state,
-                User:{}
-            }
-        }
-        case INICIOFACEBOOK:{
-            return{
-                ...state,
-                User:payload
-            }
-        }
-        default: return state
+      return {
+        ...state,
+        Products: orderPrecio,
+      };
     }
+    // Seteos de pagina, filtros y ordenamientos
+    case SET_NOMBRE:
+      return {
+        ...state,
+        nombre: payload,
+      };
+    case SET_PAGINA:
+      return {
+        ...state,
+        pagina: payload,
+      };
+    case SET_ORDEN_A:
+      return {
+        ...state,
+        ordenA: payload,
+      };
+    case SET_ORDEN_P:
+      return {
+        ...state,
+        ordenP: payload,
+      };
+    case SET_FILTRO_C:
+      return {
+        ...state,
+        filtroC: payload,
+      };
+    case CERRARSESION: {
+      return {
+        ...state,
+        User: {},
+      };
+    }
+    case INICIOFACEBOOK: {
+      return {
+        ...state,
+        User: payload,
+      };
+    }
+    default:
+      return state;
+  }
 };
 export default rootReducer;
