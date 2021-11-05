@@ -11,14 +11,14 @@ const Courses= () =>{return(
                 </figure>  
             </Link>
         </div>
-        <div className="linksDivs">
+        {/* <div className="linksDivs">
             <Link style ={{textDecoration:'none'}} className="ColaborationLink" to="/linkCompColab">
                 <figure className="figCourses">
                     <figcaption>COMPOSTAJE COLABORATIVO</figcaption>
                     <img className="imgCourses" src="https://www.buenosaires.gob.ar/sites/gcaba/files/field/image/ari_mg_7488_0.jpg" alt="la futura imagen"/>
                 </figure>  
             </Link>
-        </div>
+        </div> */}
     </div>
     )
 }
