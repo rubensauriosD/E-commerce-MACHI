@@ -1,4 +1,4 @@
-import { postUser, IniciarSesion } from "../Redux/actions/action";
+import { postUser, IniciarSesion,facebookIni } from "../Redux/actions/action";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "../Components/LogIn";
 import SignIn from "../Components/SignIn";
@@ -18,6 +18,9 @@ const LoginPage = () => {
   const Registrarse = (Usuario) => {
     dispatch(postUser(Usuario));
   };
+  const RegistroEInicioConFacebook=()=>{
+    dispatch(facebookIni(history))
+  }
   if (usuario && Object.values(usuario).length !== 0) {
     return (
       <div className="InterfazDeUsuario">
@@ -29,7 +32,7 @@ const LoginPage = () => {
     return (
       <div className="InterfazDeFormulario">
         <Login SubmitL={InicioSesion} />
-        <SignIn SubmitS={Registrarse} />
+        <SignIn SubmitS={Registrarse} submitFace={RegistroEInicioConFacebook}/>
       </div>
     );
   }

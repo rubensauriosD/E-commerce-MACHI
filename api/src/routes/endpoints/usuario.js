@@ -1,27 +1,38 @@
-const app = require('express').Router();
-const passport=require("passport")
-const { getUsuario, postUsuario, putUsuario, deleteUsuario,inicioDeSesion,pedidoCerrarSesion} = require('../../utils/users');
+const app = require("express").Router();
+const passport = require("passport");
+const {
+  getUsuario,
+  postUsuario,
+  putUsuario,
+  deleteUsuario,
+  inicioDeSesion,
+  pedidoCerrarSesion,
+  inicioFacebook
+} = require("../../utils/users");
+const { UsuarioAutenticado } = require("../autorizacion/autorizacionPassport");
 
-app.post("/inicioSesion",passport.authenticate("Inicio_de_Sesion",{
-        successMessage:"Logeado",
-        failureMessage:"error de Logueo"
-    }),inicioDeSesion)
-app.route("/cerrarSesion")
-    .get(pedidoCerrarSesion)
+app.post(
+  "/inicioSesion",
+  passport.authenticate("Inicio_de_Sesion"),
+  inicioDeSesion
+);
+app.get("/auth/facebook", passport.authenticate("facebook"));
+app.get(
+  "/auth/facebook/inicioDeSesion",
+  passport.authenticate("facebook", {
+    failureMessage: "Error de autenticacion",
+    successRedirect: "http://localhost:3000/#/successLogin",
+  }),
+  (req, res) => console.log(req.user)
+);
+app.get("/test", UsuarioAutenticado, (req, res) =>
+  res.json({ message: succes, usuario: req.user })
+);
+app.get("/inicioSesionFacebook",UsuarioAutenticado,inicioFacebook)
+app.route("/cerrarSesion").get(pedidoCerrarSesion);
 
-app.route("/")
-    .get(getUsuario)
-    .post(postUsuario)
+app.route("/").get(getUsuario).post(postUsuario);
 
-app.route("/:id")  
-    .put(putUsuario)
-    .delete(deleteUsuario)
-
-function UsuarioAutenticado(req,res,next){
-    if(req.isAuthenticated()){
-        return next()
-    }
-    res.json({error:"Usuario no Autenticado"})
-}
+app.route("/:id").put(putUsuario).delete(deleteUsuario);
 
 module.exports = app;

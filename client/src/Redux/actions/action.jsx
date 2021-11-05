@@ -25,6 +25,7 @@ export const SET_ORDEN_P = "SET_ORDEN_P";
 export const SET_FILTRO_C = "SET_FILTRO_C";
 export const GET_PRODUCTS_ADMIN = "GET_PRODUCTS_ADMIN";
 export const CERRARSESION = "CERRADO_DE_SESION";
+export const INICIOFACEBOOK = "INICIOSESIONCONFACEBOOK ";
 export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
@@ -127,6 +128,31 @@ export const deleteProduct = ({ id }) => {
       .catch((err) => {
         console.log(err);
       });
+  };
+};
+export const facebookIni = (history) => {
+  return (dispatch) => {
+    let timer = null;
+    const facebookLoginURL = "http://localhost:3001/usuarios/auth/facebook";
+    const newWindow = window.open(
+      facebookLoginURL,
+      "_blank",
+      "width=500,height=600"
+    );
+    if (newWindow) {
+      timer = setInterval(() => {
+        if (newWindow.closed) {
+          axios
+            .get("/usuarios/inicioSesionFacebook",{withCredentials:true})
+            .then((usuario) => {
+              dispatch({ type: INICIOFACEBOOK, payload: usuario.data });
+              history.push("/cart")
+            })
+            .catch((error) => console.log(error));
+          if (timer) clearInterval(timer);
+        }
+      });
+    }
   };
 };
 
