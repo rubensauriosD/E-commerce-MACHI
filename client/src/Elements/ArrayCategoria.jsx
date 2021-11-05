@@ -23,4 +23,8 @@ export const categoria = [
     imagen:
       "https://nuestraflora.com/wp-content/uploads/2019/11/Lombrices-Rojas-Californianas-6.jpg",
   },
+  {
+    nombre: "Servicios",
+    imagen: "https://www.buenosaires.gob.ar/sites/gcaba/files/field/image/ari_mg_7488_0.jpg",
+  },
 ];

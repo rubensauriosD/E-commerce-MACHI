@@ -11,7 +11,7 @@ const Courses= () =>{return(
                 </figure>  
             </Link>
         </div>
-        
+
     </div>
     )
 }

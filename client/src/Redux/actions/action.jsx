@@ -36,18 +36,16 @@ export const addToCartGuest = (productID, qty) => async (
   getState
 ) => {
   try {
-    {
-      const { data } = await axios.get(`/productos/${productID}`);
+    const { data } = await axios.get(`/productos/${productID}`);
 
-      dispatch({
-        type: ADD_TO_CART_GUEST,
-        payload: {
-          product: data,
-          qty,
-        },
-      });
-      localStorage.setItem("cart", JSON.stringify(getState().cartItems));
-    }
+    dispatch({
+      type: ADD_TO_CART_GUEST,
+      payload: {
+        product: data,
+        qty,
+      },
+    });
+    localStorage.setItem("cart", JSON.stringify(getState().cartItems));
   } catch (error) {
     console.log(error);
   }
