@@ -10,6 +10,7 @@ const session = require("express-session");
 const app = express();
 //Inicializaciones
 require("./src/passport/autorizacion-local");
+require("./src/passport/autorizacion-facebook")
 // configuraciones
 app.set("puerto", process.env.PORT || 3001);//puerto que pide heroku para el deploy
 //

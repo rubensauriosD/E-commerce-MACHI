@@ -269,7 +269,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
         }
         case INICIOFACEBOOK:{
-            console.log("lo que llega por payload: ",payload)
             return{
                 ...state,
                 User:payload

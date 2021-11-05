@@ -130,7 +130,7 @@ export const deleteProduct = ({ id }) => {
       });
   };
 };
-export const facebookIni = () => {
+export const facebookIni = (history) => {
   return (dispatch) => {
     let timer = null;
     const facebookLoginURL = "http://localhost:3001/usuarios/auth/facebook";
@@ -143,10 +143,10 @@ export const facebookIni = () => {
       timer = setInterval(() => {
         if (newWindow.closed) {
           axios
-            .get("/usuarios/facebook/inicioSesion",{withCredentials:true})
+            .get("/usuarios/inicioSesionFacebook",{withCredentials:true})
             .then((usuario) => {
-              console.log("aca llega", usuario);
-              return dispatch({ type: INICIOFACEBOOK, payload: usuario.data });
+              dispatch({ type: INICIOFACEBOOK, payload: usuario.data });
+              history.push("/cart")
             })
             .catch((error) => console.log(error));
           if (timer) clearInterval(timer);
