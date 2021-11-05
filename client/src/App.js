@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar";
 import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
 import Cart from "./Pages/Cart";
+import MercadoPago from "./Components/MercadoPago"
 function App() {
   return (
     <div className="App">
@@ -36,6 +37,7 @@ function App() {
           <Route exact path="/cart" component={Cart} />
         </Switch>
         <Route exact path="/admin" component={Admin} />
+         <Route exact path="/checkout" component={MercadoPago} />
       </Router>
     </div>
   );
