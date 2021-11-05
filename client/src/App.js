@@ -6,10 +6,11 @@ import ContactPage from "./Pages/ContactPage";
 import Login from "./Pages/Login";
 import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
-import Admin from "./Pages/Admin"
-
+import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
 import SuccesLogin from "./Containers/succesLogin";
+import Cart from "./Pages/Cart";
+import MercadoPago from "./Components/MercadoPago"
 function App() {
   return (
     <div className="App">
@@ -19,12 +20,28 @@ function App() {
           <Route exact path="/" component={MainPage} />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/tienda/:nombreCategoria" render={({match})=><Tienda props={match.params.nombreCategoria}/>}/> 
+          <Route
+            exact
+            path="/tienda/:nombreCategoria"
+            render={({ match }) => (
+              <Tienda props={match.params.nombreCategoria} />
+            )}
+          />
           <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
           <Route path="/successLogin" component={SuccesLogin}/>
          <Route exact path="/admin" component={Admin} /> 
+          <Route
+            exact
+            path="/producto/:idProducto"
+            render={({ match }) => (
+              <DetalleProducto props={match.params.idProducto} />
+            )}
+          />
+          <Route exact path="/cart" component={Cart} />
+        <Route exact path="/admin" component={Admin} />
+         <Route exact path="/checkout" component={MercadoPago} />
       </Router>
     </div>
   );

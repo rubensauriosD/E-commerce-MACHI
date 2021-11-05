@@ -26,14 +26,48 @@ export const SET_FILTRO_C = "SET_FILTRO_C";
 export const GET_PRODUCTS_ADMIN = "GET_PRODUCTS_ADMIN";
 export const CERRARSESION = "CERRADO_DE_SESION";
 export const INICIOFACEBOOK = "INICIOSESIONCONFACEBOOK ";
+export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
+//CARRITO
+
+//añadir al carrito como invitado
+export const addToCartGuest = (productID, qty) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    const { data } = await axios.get(`/productos/${productID}`);
+
+    dispatch({
+      type: ADD_TO_CART_GUEST,
+      payload: {
+        product: data,
+        qty,
+      },
+    });
+    localStorage.setItem("cart", JSON.stringify(getState().cartItems));
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const removeFromCart = (id) => (dispatch, getState) => {
+  dispatch({
+    type: REMOVE_FROM_CART,
+    payload: id,
+  });
+
+  localStorage.setItem("cart", JSON.stringify(getState().cartItems));
+};
+
 //PRODUCTOS
 
 //postear producto
-export const postProduct = (producto) => {
+export const postProduct = (producto, imagen) => {
   return (dispatch) => {
     axios
-      .post(`/productos`, producto)
-      .then((response) => {
+      .post(`/productos?imagen=${imagen}`, producto)
+      .then(() => {
         return dispatch({
           type: POST_PRODUCT,
         });
@@ -121,6 +155,7 @@ export const facebookIni = () => {
     }
   };
 };
+
 //CORREGIR
 //modificar un producto
 export const putProduct = ({ id }) => {
@@ -274,7 +309,7 @@ export const getUsers = () => {
 export const IniciarSesion = (usuario, history) => {
   return (dispatch) => {
     axios.post("/usuarios/inicioSesion", usuario).then((resultadoDeUsuario) => {
-      dispatch({ type: INICIARS, payload: resultadoDeUsuario.data }); // aca llega tanto usuario como productos
+      dispatch({ type: INICIARS, payload: resultadoDeUsuario.data });
       if (resultadoDeUsuario.data.tipo === "admin") history.push("/Admin");
       else if (resultadoDeUsuario.data.tipo === "user") history.push("/cart");
     });

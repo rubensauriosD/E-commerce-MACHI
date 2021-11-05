@@ -1,4 +1,5 @@
 import {
+<<<<<<< HEAD
     POST_PRODUCT,
     GET_PRODUCTS,
     GET_PRODUCTS_ADMIN,
@@ -27,72 +28,86 @@ import {
     CERRARSESION,
     INICIOFACEBOOK
 } from "../actions/action.jsx"
+=======
+  POST_PRODUCT,
+  GET_PRODUCTS,
+  GET_PRODUCTS_ADMIN,
+  DELETE_PRODUCT,
+  PUT_PRODUCT,
+  GET_PRODUCT_ID,
+  REMOVE_PRODUCT,
+  POST_IMAGE,
+  GET_IMAGES,
+  DELETE_IMAGE,
+  PUT_IMAGE,
+  POST_USER,
+  GET_USERS,
+  DELETE_USER,
+  PUT_USER,
+  INICIARS,
+  FILTRADOCATEGORIAS,
+  GETPRODUCTBYNAME,
+  ORDER_BY_NAME,
+  ORDER_BY_PRECIO,
+  SET_NOMBRE,
+  SET_PAGINA,
+  SET_ORDEN_A,
+  SET_ORDEN_P,
+  SET_FILTRO_C,
+  CERRARSESION,
+  ADD_TO_CART_GUEST,
+  REMOVE_FROM_CART,
+} from "../actions/action.jsx";
+>>>>>>> 4dbc842f08cb543705111ca4295b641159d44c2d
 
-const initialState={
-    products:[],
-    productsAdmin:[],
-    productosPorCategorias:[],
-    Product: {},
-    Images: [],
-    Image:{},
-    Users: [],
-    User:{},
-    Comments:[],
-    Comment:{},
-    nombre: "",
-    ordenA: "",
-    ordenP: "",
-    filtroC: "",
-    pagina: 1
-    //carrito?
-}
+const initialState = {
+  products: [],
+  productsAdmin: [],
+  productosPorCategorias: [],
+  Product: {},
+  Images: [],
+  Image: {},
+  Users: [],
+  User: {},
+  Comments: [],
+  Comment: {},
+  nombre: "",
+  ordenA: "",
+  ordenP: "",
+  filtroC: "",
+  pagina: 1,
+  cartItems: localStorage.getItem("cart")
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [], //tiene todo lo del producto mas la cantidad
+};
 
-const rootReducer=(state=initialState,{type, payload})=>{
-    switch (type) {
-        //Productos
-        case POST_PRODUCT: return {
-            ...state
-        }
-        case GET_PRODUCTS: return {
-            ...state,
-            products: payload
-        }
-        case GET_PRODUCTS_ADMIN: return {
-            ...state,
-            productsAdmin: payload
-        }
-        case DELETE_PRODUCT: return {
-            ...state
-        }
-        case PUT_PRODUCT: return {
-            ...state,
-            Product: payload
-        }
-        case GET_PRODUCT_ID: return {
-            ...state,
-            Product: payload
-        }
-        case REMOVE_PRODUCT: return {
-            ...state,
-            Product: payload
-        }
-        //imagenes
-        case POST_IMAGE: return {
-            ...state
-        }
-        case GET_IMAGES: return {
-            ...state,
-            Images: payload
-        }
-        case DELETE_IMAGE: return {
-            ...state,
+const rootReducer = (state = initialState, { type, payload }) => {
+  switch (type) {
+    //Carrito
+    case ADD_TO_CART_GUEST:
+      const item = payload.product;
+      const existItem = state.cartItems.find((x) => x.id === item.id);
 
-        }
-        case PUT_IMAGE: return {
-            ...state,
-            Image: payload
-        }
+      if (existItem) {
+        return {
+          ...state,
+          cartItems: state.cartItems.map((x) =>
+            x.id === existItem.id ? item : x
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          cartItems: [...state.cartItems, item],
+        };
+      }
+    case REMOVE_FROM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((x) => x.id !== payload),
+      };
 
+<<<<<<< HEAD
         //Usuarios
         case POST_USER: return {
             ...state
@@ -117,76 +132,163 @@ const rootReducer=(state=initialState,{type, payload})=>{
             }
         }
         /* case GET_USER_ID: return {
+=======
+    //Productos
+    case POST_PRODUCT:
+      return {
+        ...state,
+      };
+    case GET_PRODUCTS:
+      return {
+        ...state,
+        products: payload,
+      };
+    case GET_PRODUCTS_ADMIN:
+      return {
+        ...state,
+        productsAdmin: payload,
+      };
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+      };
+    case PUT_PRODUCT:
+      return {
+        ...state,
+        Product: payload,
+      };
+    case GET_PRODUCT_ID:
+      return {
+        ...state,
+        Product: payload,
+      };
+    case REMOVE_PRODUCT:
+      return {
+        ...state,
+        Product: payload,
+      };
+    //imagenes
+    case POST_IMAGE:
+      return {
+        ...state,
+      };
+    case GET_IMAGES:
+      return {
+        ...state,
+        Images: payload,
+      };
+    case DELETE_IMAGE:
+      return {
+        ...state,
+      };
+    case PUT_IMAGE:
+      return {
+        ...state,
+        Image: payload,
+      };
+
+    //Usuarios
+    case POST_USER:
+      return {
+        ...state,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        Users: payload,
+      };
+    case DELETE_USER:
+      return {
+        ...state,
+      };
+    case PUT_USER:
+      return {
+        ...state,
+        User: payload,
+      };
+    case INICIARS: {
+      console.log(payload);
+      return {
+        ...state,
+        User: payload,
+      };
+    }
+    /* case GET_USER_ID: return {
+>>>>>>> 4dbc842f08cb543705111ca4295b641159d44c2d
             ...state,
             User: payload
         } */
 
-        //Ordernado y filtros
-        //Filtro por Categorias:
-        case FILTRADOCATEGORIAS:{
+    //Ordernado y filtros
+    //Filtro por Categorias:
+    case FILTRADOCATEGORIAS: {
+      return {
+        ...state,
+        productosPorCategorias: state.Products.filter(
+          (producto) => producto.categoria === payload
+        ),
+      };
+    }
 
-            return{
-            ...state,
-            productosPorCategorias:state.Products.filter(producto=>producto.categoria===payload)
-        }
-        }
+    //Filtro por nombre:
+    case GETPRODUCTBYNAME: {
+      return {
+        ...state,
+        Products: payload,
+      };
+    }
 
-        //Filtro por nombre:
-        case GETPRODUCTBYNAME: {
-            return {
-                ...state,
-                Products: payload
-            }
-        }
-
-        //By Name Order:
-        case ORDER_BY_NAME: {
-            const orderName = payload === 'Asc' ?
-            state.Products.sort(function(a, b) {
-                if(a.nombre > b.nombre) {
-                    return 1;
-                }
-                if(b.nombre > a.nombre) {
-                    return -1;
-                }
-                return 0;
-            }) :
-            state.Products.sort(function(a, b) {
-                if(a.nombre > b.nombre) {
-                    return -1;
-                }
-                if(b.nombre > a.nombre) {
-                    return 1;
-                }
-                return 0;
+    //By Name Order:
+    case ORDER_BY_NAME: {
+      const orderName =
+        payload === "Asc"
+          ? state.Products.sort(function (a, b) {
+              if (a.nombre > b.nombre) {
+                return 1;
+              }
+              if (b.nombre > a.nombre) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.Products.sort(function (a, b) {
+              if (a.nombre > b.nombre) {
+                return -1;
+              }
+              if (b.nombre > a.nombre) {
+                return 1;
+              }
+              return 0;
             });
-            return {
-                ...state,
-                Products: orderName
-            }
-        }
+      return {
+        ...state,
+        Products: orderName,
+      };
+    }
 
-        //By Precio:
-        case ORDER_BY_PRECIO: {
-            const orderPrecio = payload === 'Desc' ?
-            state.Products.sort(function(a, b) {
-                if(a.precio > b.precio) {
-                    return 1;
-                }
-                if(b.precio > a.precio) {
-                    return -1;
-                }
-                return 0;
-            }) :
-            state.Products.sort(function(a, b) {
-                if(a.precio > b.precio) {
-                    return -1;
-                }
-                if(b.precio > a.precio) {
-                    return 1;
-                }
-                return 0;
+    //By Precio:
+    case ORDER_BY_PRECIO: {
+      const orderPrecio =
+        payload === "Desc"
+          ? state.Products.sort(function (a, b) {
+              if (a.precio > b.precio) {
+                return 1;
+              }
+              if (b.precio > a.precio) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.Products.sort(function (a, b) {
+              if (a.precio > b.precio) {
+                return -1;
+              }
+              if (b.precio > a.precio) {
+                return 1;
+              }
+              return 0;
             });
+<<<<<<< HEAD
             return {
                 ...state,
                 Products: orderPrecio
@@ -232,6 +334,47 @@ const rootReducer=(state=initialState,{type, payload})=>{
             }
         }
         default: return state
+=======
+      return {
+        ...state,
+        Products: orderPrecio,
+      };
     }
-}
-export default rootReducer
+    // Seteos de pagina, filtros y ordenamientos
+    case SET_NOMBRE:
+      return {
+        ...state,
+        nombre: payload,
+      };
+    case SET_PAGINA:
+      return {
+        ...state,
+        pagina: payload,
+      };
+    case SET_ORDEN_A:
+      return {
+        ...state,
+        ordenA: payload,
+      };
+    case SET_ORDEN_P:
+      return {
+        ...state,
+        ordenP: payload,
+      };
+    case SET_FILTRO_C:
+      return {
+        ...state,
+        filtroC: payload,
+      };
+    case CERRARSESION: {
+      return {
+        ...state,
+        User: {},
+      };
+>>>>>>> 4dbc842f08cb543705111ca4295b641159d44c2d
+    }
+    default:
+      return state;
+  }
+};
+export default rootReducer;
