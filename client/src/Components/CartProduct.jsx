@@ -9,6 +9,7 @@ const CartProduct = ({
   precio,
   descripcion,
   id,
+  qty,
 }) => {
   const dispatch = useDispatch();
   const handleOnClick = () => {
@@ -23,7 +24,7 @@ const CartProduct = ({
           <h1 className="nameInfo">{nombre}</h1>
           <p className="categoryInfo">{categoria}</p>
           <p className="priceInfo">$ {precio}</p>
-          <p className="desInfo">Descripción: {descripcion}</p>
+          <p>Cantidad: {qty}</p>
           <button onClick={handleOnClick}>eliminar</button>
         </div>
       </div>

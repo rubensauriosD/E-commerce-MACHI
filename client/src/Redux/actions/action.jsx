@@ -43,7 +43,6 @@ export const addToCartGuest = (productID, qty) => async (
       type: ADD_TO_CART_GUEST,
       payload: {
         product: data,
-        qty,
       },
     });
     localStorage.setItem("cart", JSON.stringify(getState().cartItems));
@@ -143,10 +142,10 @@ export const facebookIni = (history) => {
       timer = setInterval(() => {
         if (newWindow.closed) {
           axios
-            .get("/usuarios/inicioSesionFacebook",{withCredentials:true})
+            .get("/usuarios/inicioSesionFacebook", { withCredentials: true })
             .then((usuario) => {
               dispatch({ type: INICIOFACEBOOK, payload: usuario.data });
-              history.push("/cart")
+              history.push("/cart");
             })
             .catch((error) => console.log(error));
           if (timer) clearInterval(timer);

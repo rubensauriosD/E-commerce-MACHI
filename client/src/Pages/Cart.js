@@ -15,6 +15,7 @@ const Cart = () => {
             nombre={producto.nombre}
             categoria={producto.categoria}
             precio={producto.precio}
+            qty={producto.qty}
           />
         );
       })}
