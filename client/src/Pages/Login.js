@@ -5,6 +5,7 @@ import SignIn from "../Components/SignIn";
 import { useHistory } from "react-router-dom";
 import InterfazDeUsuario from "../Components/InterfazDeUsuario";
 import "../Styles/paginaDeLogin.css";
+
 const LoginPage = () => {
   const history = useHistory();
   const usuario = useSelector((state) => state.User);
