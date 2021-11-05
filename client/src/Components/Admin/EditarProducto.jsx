@@ -13,16 +13,17 @@ export default function EditarProducto(){
     var productos = useSelector(state => state.productsAdmin);
     
     const [inputsEditar, setInputsEditar] = useState({
-        nombre: '',
-        precio:'',
-        descripcion: '',
-        categoria: '',
-        imagen:'',
-        disponibilidad:''  
+        nombre: productos.nombre,
+        precio: productos.precio,
+        descripcion: productos.descripcion,
+        imagen: productos.imagen,
+        categoria: productos.categoria,
+        disponibilidad: productos.disponibilidad  
     })
-    
+    const [imagen, setImagen] = useState('')
        
     function handleChangeEditar(e) {
+        console.log(e.target.value)
         setInputsEditar({
             ...inputsEditar,
             [e.target.name]: e.target.value
@@ -35,10 +36,28 @@ export default function EditarProducto(){
         dispatch(getProductsAdmin())
     }
 
-    function editar(e) { 
-        axios.put(`/productos/${e.target.id}`, inputsEditar);
-        alert(`El producto ${e.target.name} fue modificado con exito`)
-        
+    function editar(e) {
+        e.preventDefault(); 
+        if(imagen !== '') {
+            const formData = new FormData()
+            formData.append("file", imagen)
+            formData.append("upload_preset", "tpvdkdav")
+
+            axios.post("https://api.cloudinary.com/v1_1/mau-ar/image/upload", formData)
+            .then((response)=>{
+                return response.data
+            })
+            .then(({url}) => {
+                inputsEditar.imagen = url;
+                axios.put(`/productos/${e.target.id}`, (inputsEditar));
+                alert(`El producto ${e.target.name} fue modificado con exito`)
+                dispatch(getProductsAdmin())
+            })
+        }else{
+            axios.put(`/productos/${e.target.id}`, inputsEditar);
+            alert(`El producto ${e.target.name} fue modificado con exito`)
+            dispatch(getProductsAdmin())
+        }
     }
 
 
@@ -55,7 +74,7 @@ export default function EditarProducto(){
                         <div className="ordererAdmin">        
                             <div className="imagenAdminDiv">    
                                 <img className="imagenAdmin" src={producto.imagen} alt="imagen producto"/>
-                                <input type='file' name='imagen' onChange={(e) => handleChangeEditar(e)}/>
+                                <input type='file' name='imagen' onChange={(e) => {setImagen(e.target.files[0])}}/>
                             </div>    
                             <div className="datosProductoAdmin">
                                 <div className="labelAdminEdit">
@@ -70,7 +89,7 @@ export default function EditarProducto(){
 
                                 <div className="labelAdminEdit">
                                     <label>Descripcion: </label>
-                                    <input style={{height: "60px" }} type='text' name='Descripcion' placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)}/><br/>
+                                    <input style={{height: "60px" }} type='text' name='descripcion' placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)}/><br/>
                                 </div>
 
                                 <div className="labelAdminEdit">
@@ -94,13 +113,6 @@ export default function EditarProducto(){
 
                                 <div className="labelAdminEdit">
                                     <button className="buttonAdmin" id={producto.id} name={producto.nombre} onClick={(e) => {
-                                            if(inputsEditar.nombre) return inputsEditar.nombre; else  inputsEditar.nombre = producto.nombre;
-                                            if(inputsEditar.precio) return inputsEditar.precio; else inputsEditar.precio = producto.precio;
-                                            if(inputsEditar.imagen) return inputsEditar.imagen; else  inputsEditar.imagen = producto.imagen;
-                                            if(inputsEditar.precio) return inputsEditar.precio; else  inputsEditar.precio = producto.precio;
-                                            if(inputsEditar.disponibilidad) return inputsEditar.disponibilidad; else  inputsEditar.disponibilidad = producto.disponibilidad;
-                                            if(inputsEditar.categoria) return inputsEditar.categoria; else inputsEditar.categoria = producto.categoria;
-                                            if(inputsEditar.descripcion) return inputsEditar.descripcion; else inputsEditar.descripcion = producto.descripcion;
                                             editar(e)
                                         }
                                     }>Editar</button>
