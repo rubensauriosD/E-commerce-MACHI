@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar";
 import Admin from "./Pages/Admin"
 
 import DetalleProducto from "./Pages/DetalleProducto";
+import SuccesLogin from "./Containers/succesLogin";
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
+          <Route path="/successLogin" component={SuccesLogin}/>
          <Route exact path="/admin" component={Admin} /> 
       </Router>
     </div>

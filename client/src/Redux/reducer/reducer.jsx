@@ -24,7 +24,8 @@ import {
     SET_ORDEN_A,
     SET_ORDEN_P,
     SET_FILTRO_C,
-    CERRARSESION
+    CERRARSESION,
+    INICIOFACEBOOK
 } from "../actions/action.jsx"
 
 const initialState={
@@ -111,7 +112,8 @@ const rootReducer=(state=initialState,{type, payload})=>{
             console.log(payload)
             return{
                 ...state,
-                User:payload
+                User:payload,
+               // productocarrito:state.productoCarrito.concat(payload.productos)
             }
         }
         /* case GET_USER_ID: return {
@@ -220,6 +222,13 @@ const rootReducer=(state=initialState,{type, payload})=>{
             return{
                 ...state,
                 User:{}
+            }
+        }
+        case INICIOFACEBOOK:{
+            console.log("lo que llega por payload: ",payload)
+            return{
+                ...state,
+                User:payload
             }
         }
         default: return state
