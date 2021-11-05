@@ -15,7 +15,11 @@ const CartProduct = ({
   const handleOnClick = () => {
     dispatch(removeFromCart(id));
   };
-
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  })
   return (
     <div className="infoContainer">
       <div className="allInfo">
@@ -23,7 +27,7 @@ const CartProduct = ({
         <div className="textInfo">
           <h1 className="nameInfo">{nombre}</h1>
           <p className="categoryInfo">{categoria}</p>
-          <p className="priceInfo">$ {precio}</p>
+          <p className="priceInfo"> {formatter.format(precio)}</p>
           <p>Cantidad: {qty}</p>
           <button onClick={handleOnClick}>eliminar</button>
         </div>

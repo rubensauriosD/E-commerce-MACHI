@@ -1,4 +1,4 @@
-const { Usuario } = require("../db");
+const { Usuario, Producto,Factura } = require("../db");
 const bCrypt = require("bcrypt-nodejs");
 const CreadorDeEncriptado = function (contrasenia) {
   return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
@@ -86,9 +86,19 @@ async function postUsuario(req, res) {
 }
 
 async function inicioDeSesion(req, res) {
-  const { nombre, apellido, email, tipo } = req.user;
-  res.json({ nombre, apellido, email, tipo });
+  const {idProductos}=req.body
+  console.log("el id de los productos: ",idProductos)
+  const { id,nombre, apellido, email, tipo,productos } = req.user;
+  try{
+    const usuarioEncontrado=await Usuario.findByPk(id,{include:{model:Producto}})
+    const productoEncotnrado=await Producto.findByPk(idProductos[0])
+    const usuarioConProducto=await usuarioEncontrado.addProductos(productoEncotnrado)
+    res.json({ usuarioConProducto });
+  }catch(e){
+    res.status(401).json({error:`${e}`})
+  }
 }
+
 function pedidoCerrarSesion(req, res) {
   req.logout();
   res.json({ message: "Ok" });
