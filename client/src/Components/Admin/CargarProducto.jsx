@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postProduct } from '../../Redux/actions/action'
-
+import axios from 'axios';
 
 export default function CargarProducto(){
 
@@ -12,18 +12,36 @@ export default function CargarProducto(){
         precio:'',
         descripcion: '',
         categoria: '',
-        imagen:'',
         disponibilidad:false  
     })
-    
+    const [imagen, setImagen] = useState('')
   
     function handleChange(e) {
         setInputs({
             ...inputs,
             [e.target.name]: e.target.value
         })
-    } 
+    }
 
+    const subirProducto = () =>{
+        const formData = new FormData()
+        formData.append("file", imagen)
+        formData.append("upload_preset", "tpvdkdav")
+    
+        axios.post("https://api.cloudinary.com/v1_1/mau-ar/image/upload", formData)
+        .then((response)=>{
+            return response.data
+        })
+        .then(({url}) => {
+            return dispatch(postProduct(inputs, url))
+        })
+        .then(() => {
+            alert('El producto fue creado exitosamente')
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }
 
     return ( 
         <div className="productoAdmin">
@@ -67,12 +85,12 @@ export default function CargarProducto(){
 
                         <div className="levelAdmin">
                             <label>Seleccione la imagen </label>
-                            <input type='file' name='imagen' onChange={(e) => handleChange(e)}/>
+                            <input type='file' name='imagen' onChange={(e) => {setImagen(e.target.files[0])}}/>
                         </div>
                     </form> 
                     
                 </div>            
-                <button className="buttonAdmin" type='submit' onClick={()=> dispatch(postProduct(inputs))}>Crear</button>
+                <button className="buttonAdmin" type='submit' onClick={subirProducto}>Crear</button>
         </div>
     )
 

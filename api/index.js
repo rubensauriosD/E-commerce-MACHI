@@ -11,7 +11,7 @@ const app = express();
 //Inicializaciones
 require("./src/passport/autorizacion-local");
 // configuraciones
-app.set("puerto", process.env.PORT || 3001);
+app.set("puerto", process.env.PORT || 3001);//puerto que pide heroku para el deploy
 //
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
@@ -32,7 +32,7 @@ app.use(
   
   conn.sync({ force: true }).then(() => {
     console.log("Base de Datos conectada");
-    app.listen(app.get("puerto"), () => {
+    app.listen(app.get("puerto"), () => {//puerto que pide heroku para el deploy
       console.log(`Escuchando en puerto ${app.get("puerto")}`);
     });
   });

@@ -7,7 +7,6 @@ export default function Login({ SubmitL }) {
       formState: { errors },
     } = useForm();
     const onSubmit = (data) => {
-      console.log(data)
       SubmitL(data);
     };
     return (

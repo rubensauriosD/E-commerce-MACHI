@@ -6,11 +6,12 @@ export default function SignIn({ SubmitS }) {
     register,
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data)
     SubmitS(data);
+    reset()
   };
   return (
     <div>
