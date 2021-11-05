@@ -6,6 +6,7 @@ const UsuarioModel = require('./models/usuarios');
 const ProductosModel = require('./models/productos');
 const ImagenesModel = require('./models/imagenes');
 const ComentariosModel = require('./models/comentarios');
+const FacturaModel=require("./models/factura")
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -36,15 +37,22 @@ let sequelize =
         { logging: false, native: false }
       );
 
+const Factura = FacturaModel(sequelize)
 const Usuario = UsuarioModel(sequelize)
 const Producto = ProductosModel(sequelize)
 const Imagen = ImagenesModel(sequelize)
 const Comentario = ComentariosModel(sequelize)
 
 // *Relaciones*
-//Usuario(admin) - Producto:
+// Usuario(admin) - Producto:
 Usuario.hasMany(Producto);
 Producto.belongsTo(Usuario);
+
+//Relacion entre (Un usuario puede tener varias facturas, una factura puede tener un usuario, una factura puede tener varios productos )
+
+Usuario.hasMany(Factura)
+Factura.belongsTo(Usuario)
+Factura.hasMany(Producto)
 
 //comentario - Producto - Usuario:
 Producto.hasMany(Comentario);
@@ -63,6 +71,7 @@ module.exports = {
   Producto,
   Imagen,
   Comentario,
+  Factura,
   Op
 };
 

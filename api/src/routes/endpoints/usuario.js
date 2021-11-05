@@ -16,6 +16,7 @@ app.post(
   passport.authenticate("Inicio_de_Sesion"),
   inicioDeSesion
 );
+app.get("/inicioSesionFacebook",UsuarioAutenticado,inicioFacebook)
 app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get(
   "/auth/facebook/inicioDeSesion",
@@ -28,7 +29,6 @@ app.get(
 app.get("/test", UsuarioAutenticado, (req, res) =>
   res.json({ message: succes, usuario: req.user })
 );
-app.get("/inicioSesionFacebook",UsuarioAutenticado,inicioFacebook)
 app.route("/cerrarSesion").get(pedidoCerrarSesion);
 
 app.route("/").get(getUsuario).post(postUsuario);
