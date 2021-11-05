@@ -23,7 +23,8 @@ export default function CargarProducto(){
         })
     }
 
-    const subirProducto = () =>{
+    const subirProducto = (e) =>{
+        e.preventDefault();
         const formData = new FormData()
         formData.append("file", imagen)
         formData.append("upload_preset", "tpvdkdav")
@@ -67,6 +68,7 @@ export default function CargarProducto(){
                         <div className="levelAdmin">
                             <label>Disponibilidad </label>
                             <select name='disponibilidad' onChange={(e) => handleChange(e)} required>
+                            <option>Stock</option>     
                             <option value='true'>Disponible</option>     
                             <option value='false'>No Disponible</option>
                             </select> 
@@ -75,6 +77,7 @@ export default function CargarProducto(){
                         <div className="levelAdmin">
                             <label>Categoria </label>
                             <select name='categoria' onChange={(e) => handleChange(e)} required>
+                                <option>Elige una categoria</option>
                                 <option value="Cajones y Cultivos">Cajones y Cultivos</option>
                                 <option value="Plantines y Semillas">Plantines y Semillas</option>
                                 <option value="Composteras">Composteras</option>

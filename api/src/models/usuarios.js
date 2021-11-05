@@ -9,20 +9,23 @@ module.exports = (sequelize) => {
     },
     apellido: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     contrasenia: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     tipo: {
       type: DataTypes.ENUM('admin', 'user'),
     },
-    
+    facebookId:{
+      type:DataTypes.STRING,
+      allowNull:true
+    }
   },
   {
     timestamps: false

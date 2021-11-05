@@ -86,8 +86,7 @@ async function deleteProductos(req, res) {
 
 async function putProductos(req, res) {
   const { id } = req.params;
-  const {imagen} = req.query;
-  const { nombre, precio, descripcion, disponibilidad } = req.body;
+  const { nombre, precio, imagen, descripcion, disponibilidad, categoria } = req.body;
 
   await Producto.update(
     {
@@ -96,6 +95,7 @@ async function putProductos(req, res) {
       precio,
       descripcion,
       disponibilidad,
+      categoria
     },
     {
       where: { id: id },

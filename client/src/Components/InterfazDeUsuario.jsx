@@ -33,7 +33,7 @@ export default function InterfazDeUsuario({ datosUsuario }) {
         </CardActionArea>
         <CardContent sx={{ backgroundColor: "#4da45f" }}>
           <Typography gutterBottom variant="h5" component="div">
-            {datosUsuario.nombre + " " + datosUsuario.apellido}
+            {datosUsuario.nombre}  {datosUsuario.apellido && datosUsuario.apellido}
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {datosUsuario.email} <br /> {datosUsuario.tipo}

@@ -1,7 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
-import { Button,Box,TextField,Alert } from "@mui/material";
+import { Button,Box,TextField,Alert, Typography } from "@mui/material";
+import FacebookIcon from '@mui/icons-material/Facebook';
 import Select from "react-select";
-export default function SignIn({ SubmitS }) {
+export default function SignIn({ SubmitS,submitFace }) {
   const {
     register,
     handleSubmit,
@@ -104,7 +105,8 @@ export default function SignIn({ SubmitS }) {
         {errors.validacionContrasenia && (
           <Alert variant="filled" severity="error">{errors.validacionContrasenia.message}</Alert>
         )}
-        <Button variant="outlined" color="success" type="submit">Registrate</Button>
+        <Button variant="outlined" color="success" type="submit"><Typography>Registrate</Typography></Button>
+        <Button variant="contained" onClick={submitFace}><FacebookIcon fontSize="large"/><Typography>Registrate con facebook</Typography></Button>
         </Box>
       </form>
     </div>

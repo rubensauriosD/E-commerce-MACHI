@@ -14,13 +14,27 @@ export default function Categoria({nombreCategoria,imagenCategoria}){
     }
 
     return(
-        <Link value={nombreCategoria} onClick={handleChange} key={nombreCategoria} to={`/tienda/${nombreCategoria}`}>
-        <div className='categoria-gral' value={nombreCategoria} onClick={handleChange}> 
-             <div className='categoria-interna'>
-                 <img src={imagenCategoria} alt="sin imagen" className='categoria-img'/>
-                 <div className='categoria-texto'><p>{nombreCategoria.toUpperCase()}</p></div>
-              </div>   
-        </div>
-        </Link>
+            <div>
+                { nombreCategoria !== "Servicios" ?
+            
+                    <Link value={nombreCategoria} onClick={handleChange} key={nombreCategoria} to={`/tienda/${nombreCategoria}`}>
+                    <div className='categoria-gral' value={nombreCategoria} onClick={handleChange}> 
+                        <div className='categoria-interna'>
+                            <img src={imagenCategoria} alt="sin imagen" className='categoria-img'/>
+                            <div className='categoria-texto'><p>{nombreCategoria.toUpperCase()}</p></div>
+                        </div>   
+                    </div>
+                    </Link>
+                    :
+                    <Link value={nombreCategoria} onClick={handleChange} key={nombreCategoria} to={`/Servicios`}>
+                    <div className='categoria-gral' value={nombreCategoria} onClick={handleChange}> 
+                        <div className='categoria-interna'>
+                            <img src={imagenCategoria} alt="sin imagen" className='categoria-img'/>
+                            <div className='categoria-texto'><p>{nombreCategoria.toUpperCase()}</p></div>
+                        </div>   
+                    </div>
+                    </Link>
+                }
+            </div>
     )
 }

@@ -8,7 +8,9 @@ import Tienda from "./Pages/Tienda";
 import NavBar from "./Components/NavBar";
 import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
+import SuccesLogin from "./ContenedoresTemporales/ContenedorDeFace";
 import Cart from "./Pages/Cart";
+import MercadoPago from "./Components/MercadoPago"
 function App() {
   return (
     <div className="App">
@@ -26,16 +28,12 @@ function App() {
             )}
           />
           <Route exact path="/tienda" component={Tienda} />
-          <Route
-            exact
-            path="/producto/:idProducto"
-            render={({ match }) => (
-              <DetalleProducto props={match.params.idProducto} />
-            )}
-          />
+          <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
+        </Switch> 
+          <Route path="/successLogin" component={SuccesLogin}/>
+         <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
-        </Switch>
-        <Route exact path="/admin" component={Admin} />
+         <Route exact path="/checkout" component={MercadoPago} />
       </Router>
     </div>
   );

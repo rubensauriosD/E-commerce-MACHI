@@ -10,7 +10,8 @@ export default function CargarImagen(){
 
     const [img, setImg] = useState('')
 
-    const subirImagen = () => {
+    const subirImagen = (e) => {
+        e.preventDefault();
         const formData = new FormData()
         formData.append("file", img)
         formData.append("upload_preset", "tpvdkdav")
