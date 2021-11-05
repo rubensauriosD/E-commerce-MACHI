@@ -1,5 +1,4 @@
 import {
-<<<<<<< HEAD
     POST_PRODUCT,
     GET_PRODUCTS,
     GET_PRODUCTS_ADMIN,
@@ -26,39 +25,10 @@ import {
     SET_ORDEN_P,
     SET_FILTRO_C,
     CERRARSESION,
+    ADD_TO_CART_GUEST,
+    REMOVE_FROM_CART,
     INICIOFACEBOOK
 } from "../actions/action.jsx"
-=======
-  POST_PRODUCT,
-  GET_PRODUCTS,
-  GET_PRODUCTS_ADMIN,
-  DELETE_PRODUCT,
-  PUT_PRODUCT,
-  GET_PRODUCT_ID,
-  REMOVE_PRODUCT,
-  POST_IMAGE,
-  GET_IMAGES,
-  DELETE_IMAGE,
-  PUT_IMAGE,
-  POST_USER,
-  GET_USERS,
-  DELETE_USER,
-  PUT_USER,
-  INICIARS,
-  FILTRADOCATEGORIAS,
-  GETPRODUCTBYNAME,
-  ORDER_BY_NAME,
-  ORDER_BY_PRECIO,
-  SET_NOMBRE,
-  SET_PAGINA,
-  SET_ORDEN_A,
-  SET_ORDEN_P,
-  SET_FILTRO_C,
-  CERRARSESION,
-  ADD_TO_CART_GUEST,
-  REMOVE_FROM_CART,
-} from "../actions/action.jsx";
->>>>>>> 4dbc842f08cb543705111ca4295b641159d44c2d
 
 const initialState = {
   products: [],
@@ -107,32 +77,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cartItems: state.cartItems.filter((x) => x.id !== payload),
       };
 
-<<<<<<< HEAD
-        //Usuarios
-        case POST_USER: return {
-            ...state
-        }
-        case GET_USERS: return {
-            ...state,
-            Users: payload
-        }
-        case DELETE_USER: return {
-            ...state,
-        }
-        case PUT_USER: return {
-            ...state,
-            User: payload
-        }
-        case INICIARS:{
-            console.log(payload)
-            return{
-                ...state,
-                User:payload,
-               // productocarrito:state.productoCarrito.concat(payload.productos)
-            }
-        }
-        /* case GET_USER_ID: return {
-=======
     //Productos
     case POST_PRODUCT:
       return {
@@ -214,7 +158,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
     }
     /* case GET_USER_ID: return {
->>>>>>> 4dbc842f08cb543705111ca4295b641159d44c2d
             ...state,
             User: payload
         } */
@@ -288,7 +231,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
               }
               return 0;
             });
-<<<<<<< HEAD
             return {
                 ...state,
                 Products: orderPrecio
@@ -334,47 +276,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
             }
         }
         default: return state
-=======
-      return {
-        ...state,
-        Products: orderPrecio,
-      };
     }
-    // Seteos de pagina, filtros y ordenamientos
-    case SET_NOMBRE:
-      return {
-        ...state,
-        nombre: payload,
-      };
-    case SET_PAGINA:
-      return {
-        ...state,
-        pagina: payload,
-      };
-    case SET_ORDEN_A:
-      return {
-        ...state,
-        ordenA: payload,
-      };
-    case SET_ORDEN_P:
-      return {
-        ...state,
-        ordenP: payload,
-      };
-    case SET_FILTRO_C:
-      return {
-        ...state,
-        filtroC: payload,
-      };
-    case CERRARSESION: {
-      return {
-        ...state,
-        User: {},
-      };
->>>>>>> 4dbc842f08cb543705111ca4295b641159d44c2d
-    }
-    default:
-      return state;
-  }
 };
 export default rootReducer;

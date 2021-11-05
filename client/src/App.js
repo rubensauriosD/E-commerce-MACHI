@@ -40,7 +40,6 @@ function App() {
             )}
           />
           <Route exact path="/cart" component={Cart} />
-        <Route exact path="/admin" component={Admin} />
          <Route exact path="/checkout" component={MercadoPago} />
       </Router>
     </div>
