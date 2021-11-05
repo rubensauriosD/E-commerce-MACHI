@@ -1,15 +1,35 @@
 import "../Styles/DetalleProducto.css"
-import { useEffect } from "react"
+import { useEffect,useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from 'react-router'
 import {getProductId, removeProduct} from "../Redux/actions/action"
+import { getComentarios } from "../Redux/actions/action";
+import CommentProduct from "../Components/Productos/CommentProduct"
 
 
-export default function DetalleProducto({props}){
+export default function DetalleProducto({props, id}){
 
     const {Product} =useSelector(state=>state)
     const dispatch=useDispatch()
     const history = useHistory()
+
+    useEffect(() => {
+        dispatch(getComentarios(id))
+      }, [getComentarios])
+
+    const comments = useSelector((state) => state.comentarios)
+  const productComment = comments.filter((c) => c.idProducto === id)
+
+    const [input, setInput] = useState(false);
+  const [datos, setDatos] = useState({});
+  const handleClik = (e) => {
+    if (input === false) {
+      setInput(true)
+      setDatos(e)
+    } else {
+      setInput(false)
+    }
+  }
 
     useEffect(()=>{
         dispatch(getProductId(props))
@@ -31,9 +51,23 @@ export default function DetalleProducto({props}){
                     <p className="categoryInfo">{Product.categoria}</p>
                     <p className="priceInfo">$ {Product.precio}</p>
                     <p className="desInfo">Descripción: {Product.descripcion}</p>
-                    
                 </div>
-                
+                <div>hey
+          <div>
+                <CommentProduct setInput={() => setInput()} id={datos.id} text="Dejá una reseña de nuestro producto" ></CommentProduct>
+            </div>
+          {
+            productComment?.map((e) => {
+              return (
+                <div>
+                  <div key={e.id} value={e.id}>
+                    <p key={e.id} value={e.id}>{e.comentarios}</p>
+                  </div>
+                </div>
+              )
+            })
+          }
+        </div>
             </div>
             <button className="infoButton" onClick={goToBack}>⏪Volver a la Tienda</button>
         </div>

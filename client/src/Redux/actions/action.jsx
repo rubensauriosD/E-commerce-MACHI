@@ -27,7 +27,7 @@ export const GET_PRODUCTS_ADMIN = "GET_PRODUCTS_ADMIN";
 export const CERRARSESION = "CERRADO_DE_SESION";
 export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-
+export const GET_COMENTARIOS = "GET_COMENTARIOS";
 //CARRITO
 
 //añadir al carrito como invitado
@@ -393,3 +393,15 @@ export const setOrdenP = (orden) => {
     payload: orden,
   };
 };
+
+export function getComentarios() {
+  return function(dispatch) {
+    axios.get(`/comentarios/allComments`)
+    .then(resp => {
+      dispatch({
+        type: GET_COMENTARIOS,
+        payload: resp.data
+      })
+    })
+  }
+}

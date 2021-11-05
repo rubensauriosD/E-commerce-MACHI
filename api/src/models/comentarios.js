@@ -11,11 +11,7 @@ module.exports = (sequelize) => {
   comentarios: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
-    puntaje: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
+    }
   }, {timestamps: false}
  );
 };

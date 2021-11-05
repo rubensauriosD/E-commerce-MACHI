@@ -27,6 +27,7 @@ import {
   CERRARSESION,
   ADD_TO_CART_GUEST,
   REMOVE_FROM_CART,
+  GET_COMENTARIOS
 } from "../actions/action.jsx";
 
 const initialState = {
@@ -45,6 +46,7 @@ const initialState = {
   ordenP: "",
   filtroC: "",
   pagina: 1,
+  comentarios: [],
   cartItems: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
     : [], //tiene todo lo del producto mas la cantidad
@@ -266,6 +268,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         User: {},
       };
+    }
+    //coments:
+    case GET_COMENTARIOS: {
+      return {
+        ...state,
+        comentarios: payload
+      }
     }
     default:
       return state;
