@@ -1,4 +1,3 @@
-import Cart from "../../Pages/Cart.js";
 import {
   POST_PRODUCT,
   GET_PRODUCTS,
@@ -65,8 +64,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
           ...state,
           cartItems: [...state.cartItems],
         };
-      }
-      if (action === "decrement") {
+      } else {
         itemSelected.qty > 1 && itemSelected.qty--;
         return {
           ...state,
