@@ -91,9 +91,12 @@ async function inicioDeSesion(req, res) {
   const { id,nombre, apellido, email, tipo,productos } = req.user;
   try{
     const usuarioEncontrado=await Usuario.findByPk(id,{include:{model:Producto}})
-    const productoEncotnrado=await Producto.findByPk(idProductos[0])
-    const usuarioConProducto=await usuarioEncontrado.addProductos(productoEncotnrado)
-    res.json({ usuarioConProducto });
+    if(idProductos){
+      const productoEncontrado=await Promise.all(idProductos.map(producto=>Producto.findByPk(producto)))
+      await usuarioEncontrado.setProductos(productoEncontrado)
+    }
+    const usuario= await Usuario.findByPk(id,{include:{model:Producto}})
+    res.json(usuario );
   }catch(e){
     res.status(401).json({error:`${e}`})
   }

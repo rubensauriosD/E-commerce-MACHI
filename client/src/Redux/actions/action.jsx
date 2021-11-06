@@ -314,7 +314,7 @@ export const getUsers = () => {
 //Iniciar Sesion
 export const IniciarSesion = (usuario, history) => {
   return (dispatch) => {
-    axios.post("/usuarios/inicioSesion", usuario).then((resultadoDeUsuario) => {
+    axios.post("/usuarios/inicioSesion", usuario,{withCredentials:true}).then((resultadoDeUsuario) => {
       dispatch({ type: INICIARS, payload: resultadoDeUsuario.data });
       if (resultadoDeUsuario.data.tipo === "admin") history.push("/Admin");
       else if (resultadoDeUsuario.data.tipo === "user") history.push("/cart");
