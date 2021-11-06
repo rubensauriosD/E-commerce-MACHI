@@ -1,9 +1,12 @@
 import React from "react";
 import CartProduct from "../Components/CartProduct";
 import { useSelector } from "react-redux";
+import PrecioTotal from "../Components/PrecioTotal";
 const Cart = () => {
   const { cartItems } = useSelector((state) => state);
+  
   const User = useSelector((state)=>state.User);
+  
   return (
     <div>
       <h1>Cart</h1>
@@ -34,6 +37,8 @@ const Cart = () => {
         );
       })
     }
+      })}
+      <PrecioTotal cartItems={cartItems} />
     </div>
   );
 };

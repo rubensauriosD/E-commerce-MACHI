@@ -1,7 +1,9 @@
- import { useState } from 'react';
+ import { useState } from 'react';  
  import { useDispatch, useSelector } from 'react-redux';  
+ import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
  import axios from 'axios';
- import { getProductsAdmin } from '../../Redux/actions/action';         
+ import { getProductsAdmin } from '../../Redux/actions/action';     
+ import swal from 'sweetalert';
             
             
             
@@ -32,7 +34,7 @@ export default function EditarProducto(){
 
     function borrar(e) { 
         axios.delete(`/productos/${e.target.id}`);
-        alert(`El producto ${e.target.name} fue eliminado con exito`);
+        swal(`El producto ${e.target.name} fue eliminado con exito`);
         dispatch(getProductsAdmin())
     }
 
@@ -50,12 +52,12 @@ export default function EditarProducto(){
             .then(({url}) => {
                 inputsEditar.imagen = url;
                 axios.put(`/productos/${e.target.id}`, (inputsEditar));
-                alert(`El producto ${e.target.name} fue modificado con exito`)
+                swal(`El producto ${e.target.name} fue modificado con exito`)
                 dispatch(getProductsAdmin())
             })
         }else{
             axios.put(`/productos/${e.target.id}`, inputsEditar);
-            alert(`El producto ${e.target.name} fue modificado con exito`)
+            swal(`El producto ${e.target.name} fue modificado con exito`)
             dispatch(getProductsAdmin())
         }
     }
@@ -64,63 +66,48 @@ export default function EditarProducto(){
 
     return (
         <div className="editarProductos">
-            <h3>Editar Productos</h3>
+            <h3>Editar Productos</h3> 
             <ol>
                 {
                      productos.productos?.map((producto, i) => {
-                        return(
+                        return( 
                             
                         <li key={producto.id}>
                         <div className="ordererAdmin">        
-                            <div className="imagenAdminDiv">    
-                                <img className="imagenAdmin" src={producto.imagen} alt="imagen producto"/>
-                                <input type='file' name='imagen' onChange={(e) => {setImagen(e.target.files[0])}}/>
-                            </div>    
-                            <div className="datosProductoAdmin">
-                                <div className="labelAdminEdit">
-                                    <label>Nombre: </label>
-                                    <input type='text' name='nombre' onChange={(e) => handleChangeEditar(e)} placeholder={producto.nombre}/><br/>
-                                </div>
+                                <div className="imagenAdminDiv">    
+                                    <img className="imagenAdmin" src={producto.imagen} alt="imagen producto"/>
+                                <TextField  onChange={(e) => {setImagen(e.target.files[0])}} name="imagen"  type="file" variant="filled" color="success"/><br/><br/>
+                                </div>    
+                                <div className="datosProductoAdmin">
+                             
+                                <TextField className="levelAdminMaterial" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
 
-                                <div className="labelAdminEdit">
-                                    <label>Precio: </label>
-                                    <input type='number' name='precio' placeholder={producto.precio} onChange={(e) => handleChangeEditar(e)}/><br/>
-                                </div>
+                                <TextField className="levelAdminMaterial" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.precio} name="precio" type="number" label="Precio" variant="filled" color="success"/><br/><br/>
+                                
+                                <TextField className="levelAdminMaterial" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.descripcion} name="descripcion" type="text" label="Descripcion" variant="filled" color="success"/><br/><br/>
 
-                                <div className="labelAdminEdit">
-                                    <label>Descripcion: </label>
-                                    <input style={{height: "60px" }} type='text' name='descripcion' placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)}/><br/>
-                                </div>
+                                <FormControl>
+                                <InputLabel>Disponibilidad Actual: {producto.disponibilidad? 'Disponible' : 'No disponible'}</InputLabel>
+                                <Select name='disponibilidad' className="levelAdminMaterial" label="Disponibilidad" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.disponibilidad} required>
+                                    <MenuItem value="true">Disponible</MenuItem>
+                                    <MenuItem value="false" >No Disponible</MenuItem>
+                                </Select>
+                                </FormControl><br/><br/>
 
-                                <div className="labelAdminEdit">
-                                    <label>Disponibilidad Actual: {producto.disponibilidad? 'Disponible' : 'No disponible'}</label><br/>
-                                    <select name='disponibilidad' onChange={(e) => handleChangeEditar(e)} >   
-                                        <option value='true'>Disponible</option>     
-                                        <option value='false'>No Disponible</option>
-                                    </select><br/>
-                                </div>
+                                <FormControl>    
+                                <InputLabel id="dos">Categoria Actual: {producto.categoria}</InputLabel>
+                                <Select labelId="dos" name='categoria' className="levelAdminMaterial" label="Categoria" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.categoria} required>
+                                    <MenuItem value="Cajones y Cultivos">Cajones y Cultivos</MenuItem>
+                                    <MenuItem value="Plantines y Semillas" >Plantines y Semillas</MenuItem>
+                                    <MenuItem value="Composteras">Composteras</MenuItem>
+                                    <MenuItem value="Insumos y Herramientas para Huertas">Insumos y Herramientas para Huertas</MenuItem>
+                                    <MenuItem value="Lombrices Rojas Californeanas">Lombrices Rojas Californeanas</MenuItem>
+                                </Select>
+                                </FormControl><br/><br/>
 
-                                <div className="labelAdminEdit">
-                                    <label>Categoria Actual: {producto.categoria}</label><br/>
-                                    <select name='categoria'  onChange={(e) => handleChangeEditar(e)}>
-                                    <option value="Cajones y Cultivos">Cajones y Cultivos</option>
-                                    <option value="Plantines y Semillas">Plantines y Semillas</option>
-                                    <option value="Composteras">Composteras</option>
-                                    <option value="Insumos y Herramientas para Huertas">Insumos y Herramientas para Huertas</option>
-                                    <option value="Lombrices Rojas Californeanas">Lombrices Rojas Californeanas</option>
-                                    </select><br/>
-                                </div>
-
-                                <div className="labelAdminEdit">
-                                    <button className="buttonAdmin" id={producto.id} name={producto.nombre} onClick={(e) => {
-                                            editar(e)
-                                        }
-                                    }>Editar</button>
-
-                                    <button className="buttonAdmin" id={producto.id} onClick={(e) => {
-                                        // dispatch(deleteProduct(e.target.id));
-                                        borrar(e)
-                                    }}>Eliminar</button>
+                                <div >
+                                    <Button id={producto.id} name={producto.nombre} sx={{margin: '25px'}} onClick={(e) => {editar(e)}} variant="contained" color="success" type="submit">Editar</Button>         
+                                    <Button id={producto.id} name={producto.nombre} sx={{margin: '25px'}} onClick={(e) => {borrar(e)}} variant="contained" color="success" type="submit">Eliminar</Button>         
                                 </div>
                             </div>  
                         </div>          
