@@ -16,13 +16,9 @@ const CartProduct = ({
     dispatch(removeFromCart(id));
   };
   const handleOnQtyIncrement = () => {
-    console.log(id);
-    console.log("increment");
     dispatch(changetQty(id, "increment"));
   };
   const handleOnQtyDecrement = () => {
-    console.log(id);
-    console.log("decrement");
     dispatch(changetQty(id, "decrement"));
   };
 
