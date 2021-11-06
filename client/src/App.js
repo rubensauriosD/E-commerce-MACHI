@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.css"; 
 import { Route, Switch } from "react-router";
 import MainPage from "./Pages/MainPage";
 import { HashRouter as Router } from "react-router-dom";

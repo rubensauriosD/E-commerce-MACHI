@@ -43,7 +43,7 @@ function handleChange(e) {
         [e.target.name]: e.target.value
     })
 
-} */
+} */ 
 
 const [ payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
 
