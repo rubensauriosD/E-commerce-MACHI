@@ -1,3 +1,4 @@
+import Cart from "../../Pages/Cart.js";
 import {
   POST_PRODUCT,
   GET_PRODUCTS,
@@ -28,6 +29,7 @@ import {
   ADD_TO_CART_GUEST,
   REMOVE_FROM_CART,
   INICIOFACEBOOK,
+  CHANGE_QTY,
 } from "../actions/action.jsx";
 
 const initialState = {
@@ -54,6 +56,24 @@ const initialState = {
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     //Carrito
+    case CHANGE_QTY:
+      const { id, action } = payload;
+      let itemSelected = state.cartItems.find((x) => x.id === id);
+      if (action === "increment") {
+        itemSelected.qty++;
+        return {
+          ...state,
+          cartItems: [...state.cartItems],
+        };
+      }
+      if (action === "decrement") {
+        itemSelected.qty > 1 && itemSelected.qty--;
+        return {
+          ...state,
+          cartItems: [...state.cartItems],
+        };
+      }
+
     case ADD_TO_CART_GUEST:
       let item = payload.product;
       const existItem = state.cartItems.find((x) => x.id === item.id);
