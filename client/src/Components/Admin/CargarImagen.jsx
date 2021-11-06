@@ -19,7 +19,7 @@ export default function CargarImagen(){
     
         axios.post("https://api.cloudinary.com/v1_1/mau-ar/image/upload", formData)
         .then((response) => {
-            return dispatch(postImage(response.data))
+            return dispatch(postImage(response.data) )
         })
         .then(() => {
             alert('La imagen fue recibida exitosamente')

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from 'react'; 
 import { useEffect } from 'react';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useDispatch } from 'react-redux';
@@ -42,7 +42,7 @@ export default function CargarProducto(){
             return response.data
         })
         .then(({url}) => {
-            return dispatch(postProduct(inputs, url))
+            return dispatch(postProduct(inputs, url ))
         })
         .then(() => {
             setInputs({

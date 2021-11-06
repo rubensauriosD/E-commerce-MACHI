@@ -45,7 +45,7 @@ function handleChange(e) {
 
 } */
 
-const [ payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  })
+const [ payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
 
 const [error, setError] = useState({})
 
