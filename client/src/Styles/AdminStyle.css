@@ -27,7 +27,7 @@
 }
 
 
-.levelAdminMaterial{
+.levelAdminMaterial{ 
     width: 400px;
 }
 .levelAdminMaterial Select{
@@ -69,7 +69,7 @@
     border-radius: 4px;
     
 }
-.imagenAdminDiv{
+.imagenAdminDiv{ 
     width: 30%;
     padding: 10px;
     margin: 10px;
