@@ -27,6 +27,7 @@ const CartProduct = ({
     currency: "USD",
     minimumFractionDigits: 0,
   });
+  let precioTotalProducto = precio * qty;
   return (
     <div className="infoContainer">
       <div className="allInfo">
@@ -34,7 +35,7 @@ const CartProduct = ({
         <div className="textInfo">
           <h1 className="nameInfo">{nombre}</h1>
           <p className="categoryInfo">{categoria}</p>
-          <p className="priceInfo"> {formatter.format(precio)}</p>
+          <p className="priceInfo"> {formatter.format(precioTotalProducto)}</p>
           <p>Cantidad: {qty}</p>
           <button onClick={handleOnQtyIncrement}>+</button>
           <button onClick={handleOnQtyDecrement}>-</button>
