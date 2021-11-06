@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.css"; 
 import { Route, Switch } from "react-router";
 import MainPage from "./Pages/MainPage";
 import { HashRouter as Router } from "react-router-dom";
@@ -10,14 +10,14 @@ import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
 import SuccesLogin from "./ContenedoresTemporales/ContenedorDeFace";
 import Cart from "./Pages/Cart";
-import MercadoPago from "./Components/MercadoPago"
+import MercadoPago from "./Components/MercadoPago/MercadoPago"
 function App() {
   return (
     <div className="App">
       <Router>
         <Route path="/" component={NavBar} />
         <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={MainPage}  />
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/login" component={Login} />
           <Route
