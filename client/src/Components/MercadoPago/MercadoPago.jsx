@@ -76,7 +76,7 @@ function handleChange(e) {
 
     return (
         <div>
-            <form action="http://localhost:3001/checkout" method="POST" >
+            <form action="https://e-commerce-machi.vercel.app/#/checkout" method="POST" >
                 <Box>
                     <TextField error={error.nombre}  className="input-buyer" onChange={handleChange} value={payer.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
                     <TextField error={error.apellido}  className="input-buyer" onChange={handleChange} value={payer.apellido} name="apellido" type="text" label="Apellido" variant="filled" color="success"/><br/><br/>
