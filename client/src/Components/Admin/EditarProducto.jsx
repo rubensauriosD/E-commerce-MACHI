@@ -70,7 +70,7 @@ export default function EditarProducto(){
             <ol>
                 {
                      productos.productos?.map((producto, i) => {
-                        return(
+                        return( 
                             
                         <li key={producto.id}>
                         <div className="ordererAdmin">        
