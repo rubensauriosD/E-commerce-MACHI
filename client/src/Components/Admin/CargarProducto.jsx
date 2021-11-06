@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { postProduct } from '../../Redux/actions/action'
+import { postProduct, getProductsAdmin } from '../../Redux/actions/action';
+import swal from 'sweetalert';
 import axios from 'axios';
 
 export default function CargarProducto(){
@@ -23,6 +26,11 @@ export default function CargarProducto(){
         })
     }
 
+
+    useEffect(() =>{
+        dispatch(getProductsAdmin());
+    },[dispatch])
+
     const subirProducto = (e) =>{
         e.preventDefault();
         const formData = new FormData()
@@ -37,63 +45,68 @@ export default function CargarProducto(){
             return dispatch(postProduct(inputs, url))
         })
         .then(() => {
-            alert('El producto fue creado exitosamente')
+            setInputs({
+                nombre: '',
+                precio:'',
+                descripcion: '',
+                categoria: '',
+                disponibilidad:false
+            })
+            //setImagen('');
+            swal('El producto fue creado exitosamente')
+            dispatch(getProductsAdmin());
         })
         .catch((err) => {
             console.log(err)
         })
+       
     }
+
+   /*  function limpiarInput(){
+        setInputs({
+        nombre: '',
+        precio:'',
+        descripcion: '',
+        categoria: '',
+        disponibilidad:false
+    })} */
+    
 
     return ( 
         <div className="productoAdmin">
-                
-                <div className="formsAdmin" >
-                <div className="formNombre" ><h2>Cargar Producto </h2></div>
-                    <form >
-                        <div className="levelAdmin">
-                            <label>Nombre </label>
-                            <input type='text' name='nombre' onChange={(e) => handleChange(e)} required/>
-                        </div>
-                                
-                        <div className="levelAdmin">
-                            <label>Precio </label>
-                            <input type='number' name='precio' onChange={(e) => handleChange(e)} required/>
-                        </div>
-
-                        <div className="levelAdmin" >   
-                            <label>Descripcion </label>
-                            <input style={{height: "60px" }} type='text' name='descripcion' onChange={(e) => handleChange(e)} />
-                        </div >
-
-                        <div className="levelAdmin">
-                            <label>Disponibilidad </label>
-                            <select name='disponibilidad' onChange={(e) => handleChange(e)} required>
-                            <option>Stock</option>     
-                            <option value='true'>Disponible</option>     
-                            <option value='false'>No Disponible</option>
-                            </select> 
-                        </div>                   
-
-                        <div className="levelAdmin">
-                            <label>Categoria </label>
-                            <select name='categoria' onChange={(e) => handleChange(e)} required>
-                                <option>Elige una categoria</option>
-                                <option value="Cajones y Cultivos">Cajones y Cultivos</option>
-                                <option value="Plantines y Semillas">Plantines y Semillas</option>
-                                <option value="Composteras">Composteras</option>
-                                <option value="Insumos y Herramientas para Huertas">Insumos y Herramientas para Huertas</option>
-                                <option value="Lombrices Rojas Californeanas">Lombrices Rojas Californeanas</option>
-                            </select>
-                        </div>
-
-                        <div className="levelAdmin">
-                            <label>Seleccione la imagen </label>
-                            <input type='file' name='imagen' onChange={(e) => {setImagen(e.target.files[0])}}/>
-                        </div>
-                    </form> 
+                <h2>Cargar Producto</h2><br/>
+                   <form >
+                        <TextField className="levelAdminMaterial" onChange={(e) => handleChange(e)} name="nombre" type="text" label="Nombre" value={inputs.nombre} variant="filled" color="success"/><br/><br/>
                     
-                </div>            
-                <button className="buttonAdmin" type='submit' onClick={subirProducto}>Crear</button>
+                        <TextField className="levelAdminMaterial" onChange={(e) => handleChange(e)} name="precio" type="text" label="Precio" value={inputs.precio} variant="filled" color="success"/><br/><br/>
+
+                        <TextField className="levelAdminMaterial" onChange={(e) => handleChange(e)} name="descripcion" type="text" label="Descripcion" value={inputs.descripcion} variant="filled" color="success"/><br/><br/>
+
+                        <FormControl>
+                            <InputLabel id="uno">Disponibilidad</InputLabel>
+                            <Select labelId="uno" name='disponibilidad' className="levelAdminMaterial" label="Disponibilidad" onChange={(e) => handleChange(e)}  value={inputs.disponibilidad} required>
+                                <MenuItem value="true">Disponible</MenuItem>
+                                <MenuItem value="false" >No Disponible</MenuItem>
+                            </Select>
+                        </FormControl><br/><br/>
+                        
+                        <FormControl>    
+                            <InputLabel id="dos">Categoria</InputLabel>
+                            <Select labelId="dos" name='categoria' className="levelAdminMaterial" label="Categoria" onChange={(e) => handleChange(e)}  value={inputs.categoria} required>
+                                <MenuItem value="Cajones y Cultivos">Cajones y Cultivos</MenuItem>
+                                <MenuItem value="Plantines y Semillas" >Plantines y Semillas</MenuItem>
+                                <MenuItem value="Composteras">Composteras</MenuItem>
+                                <MenuItem value="Insumos y Herramientas para Huertas">Insumos y Herramientas para Huertas</MenuItem>
+                                <MenuItem value="Lombrices Rojas Californeanas">Lombrices Rojas Californeanas</MenuItem>
+                            </Select>
+                        </FormControl><br/><br/>
+                        
+                        <TextField className="levelAdminMaterial" name="imagen" type="file" variant="filled" color="success" onChange={(e) => {setImagen(e.target.files[0])}  }  />
+                                   
+                    </form> 
+                   
+                <Button sx={{justifySelf:"center", margin: '25px'}} variant="contained" color="success" type="submit" onClick={subirProducto}>Crear</Button>         
+                
         </div>
     )
 

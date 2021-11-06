@@ -10,7 +10,7 @@ import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
 import SuccesLogin from "./ContenedoresTemporales/ContenedorDeFace";
 import Cart from "./Pages/Cart";
-import MercadoPago from "./Components/MercadoPago"
+import MercadoPago from "./Components/MercadoPago/MercadoPago"
 function App() {
   return (
     <div className="App">
