@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { removeFromCart } from "../Redux/actions/action";
+import { changetQty, removeFromCart } from "../Redux/actions/action";
 
 const CartProduct = ({
   imagen,
@@ -15,11 +15,22 @@ const CartProduct = ({
   const handleOnClick = () => {
     dispatch(removeFromCart(id));
   };
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0
-  })
+  const handleOnQtyIncrement = () => {
+    console.log(id);
+    console.log("increment");
+    dispatch(changetQty(id, "increment"));
+  };
+  const handleOnQtyDecrement = () => {
+    console.log(id);
+    console.log("decrement");
+    dispatch(changetQty(id, "decrement"));
+  };
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+  });
   return (
     <div className="infoContainer">
       <div className="allInfo">
@@ -29,6 +40,8 @@ const CartProduct = ({
           <p className="categoryInfo">{categoria}</p>
           <p className="priceInfo"> {formatter.format(precio)}</p>
           <p>Cantidad: {qty}</p>
+          <button onClick={handleOnQtyIncrement}>+</button>
+          <button onClick={handleOnQtyDecrement}>-</button>
           <button onClick={handleOnClick}>eliminar</button>
         </div>
       </div>

@@ -28,9 +28,15 @@ export const CERRARSESION = "CERRADO_DE_SESION";
 export const INICIOFACEBOOK = "INICIOSESIONCONFACEBOOK ";
 export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const CHANGE_QTY = "CHANGE_QTY";
 
 //CARRITO
-
+export const changetQty = (id, action) => {
+  return {
+    type: CHANGE_QTY,
+    payload: { id, action },
+  };
+};
 //añadir al carrito como invitado
 export const addToCartGuest = (productID, qty) => async (
   dispatch,
@@ -50,6 +56,7 @@ export const addToCartGuest = (productID, qty) => async (
     console.log(error);
   }
 };
+//borrar del carrito como invitado
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: REMOVE_FROM_CART,
