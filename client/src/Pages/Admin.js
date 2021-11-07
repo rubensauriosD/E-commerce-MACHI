@@ -7,9 +7,7 @@ import CargarImagen from "../Components/Admin/CargarImagen";
 import EditarProducto from "../Components/Admin/EditarProducto";
 import EditarImagenes from "../Components/Admin/EditarImagenes";
 import '../Styles/AdminStyle.css'
-
-
-  
+import EditarUsuario from "../Components/Admin/EditarUsuario";
 
 export default function Admin(){
 
@@ -31,6 +29,8 @@ const dispatch = useDispatch()
                     <EditarProducto/>
                     
                     <EditarImagenes/>
+
+                    <EditarUsuario/>
                 </div>
             </div>
         );
