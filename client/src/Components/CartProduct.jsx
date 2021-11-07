@@ -27,7 +27,7 @@ const CartProduct = ({
     currency: "USD",
     minimumFractionDigits: 0,
   });
-  let precioTotalProducto = precio * qty;
+  let precioTotalProducto =qty? precio * qty:precio;
   return (
     <div className="infoContainer">
       <div className="allInfo">

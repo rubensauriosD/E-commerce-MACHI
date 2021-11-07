@@ -39,7 +39,7 @@ app.post('/', (req, res) => {
       .then(function(response){
         
         console.log(response.body);
-        res.redirect(response.body.init_point);
+        res.json(response.body.init_point);
        
       }).catch(function(error){
         console.log(error);

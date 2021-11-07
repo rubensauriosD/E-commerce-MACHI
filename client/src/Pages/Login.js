@@ -7,11 +7,14 @@ import InterfazDeUsuario from "../Components/InterfazDeUsuario";
 import "../Styles/paginaDeLogin.css";
 
 const LoginPage = () => {
+  const Carritos=useSelector(state=>state.cartItems) //
+  console.log(IdCarritos)
   const history = useHistory();
   const usuario = useSelector((state) => state.User);
   const dispatch = useDispatch();
 
   function InicioSesion(Usuario) {
+    Usuario.ProductosCantidad=Carritos //se manda el objeto al back para  hacer un findOrCreate y añadirlos a la relacion con el usuario
     dispatch(IniciarSesion(Usuario, history));
   }
 

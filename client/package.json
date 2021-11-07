@@ -1,4 +1,4 @@
-{ 
+{
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -30,12 +30,13 @@
     "react-routes": "^0.2.6",
     "react-scripts": "4.0.3",
     "react-select": "^5.1.0",
+    "react-uuid": "^1.0.2",
     "redux": "^4.1.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.3",
-    "web-vitals": "^1.1.2",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -29,6 +29,7 @@ import {
   REMOVE_FROM_CART,
   INICIOFACEBOOK,
   CHANGE_QTY,
+  ACTUALIZAR_USUARIO_CARRITO,
 } from "../actions/action.jsx";
 
 const initialState = {
@@ -293,6 +294,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         User: payload,
       };
+    }
+    case ACTUALIZAR_USUARIO_CARRITO:{
+      return {
+        ...state,
+        User:payload
+      }
     }
     default:
       return state;

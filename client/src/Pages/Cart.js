@@ -37,8 +37,7 @@ const Cart = () => {
         );
       })
     }
-      })}
-      <PrecioTotal cartItems={cartItems} />
+      <PrecioTotal cartItems={User.productos? User.productos : cartItems} />
     </div>
   );
 };

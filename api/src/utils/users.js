@@ -86,17 +86,15 @@ async function postUsuario(req, res) {
 }
 
 async function inicioDeSesion(req, res) {
-  const {idProductos}=req.body
-  console.log("el id de los productos: ",idProductos)
+  const {idProductosCantidad}=req.body //llega el array de productos idProductos=["dfgbfdb","fdgbfdb","fdgbfdb"]
   const { id,nombre, apellido, email, tipo,productos } = req.user;
   try{
-    const usuarioEncontrado=await Usuario.findByPk(id,{include:{model:Producto}})
-    if(idProductos){
-      const productoEncontrado=await Promise.all(idProductos.map(producto=>Producto.findByPk(producto)))
-      await usuarioEncontrado.setProductos(productoEncontrado)
+    const usuarioEncontrado=await Usuario.findByPk(id)
+    if(idProductos.length){               //Se Verifica que llegue un array de ids
+      await usuarioEncontrado.setProductos(idProductos)     //Se añaden los productos (cambiarlo por la tabla que contendra la union)
     }
-    const usuario= await Usuario.findByPk(id,{include:{model:Producto}})
-    res.json(usuario );
+    const usuario= await Usuario.findByPk(id,{include:{model:Producto}})  //cambiar el inlude model por la nueva tabla relacionada
+    res.json(usuario);
   }catch(e){
     res.status(401).json({error:`${e}`})
   }
@@ -106,6 +104,7 @@ function pedidoCerrarSesion(req, res) {
   req.logout();
   res.json({ message: "Ok" });
 }
+
 function inicioFacebook(req, res) {
   const { id, nombre, tipo } = req.user;
   res.json({ message: "autorizado ", id, nombre, tipo });

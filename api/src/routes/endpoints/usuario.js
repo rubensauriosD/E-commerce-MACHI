@@ -24,12 +24,12 @@ app.get(
   "/auth/facebook/inicioDeSesion",
   passport.authenticate("facebook", {
     failureMessage: "Error de autenticacion",
-    successRedirect: `${process.env.DIRECCIONSUCCESFACEBOOK}/successLogin`||"http://localhost:3000/#/successLogin",
+    successRedirect: process.env.DIRECCIONSUCCESFACEBOOK ?`${process.env.DIRECCIONSUCCESFACEBOOK}/successLogin`:"http://localhost:3000/#/successLogin",
   }),
   (req, res) => console.log(req.user)
 );
 app.get("/test", UsuarioAutenticado, (req, res) =>
-  res.json({ message: succes, usuario: req.user })
+  res.json({ message: "succes", usuario: req.user })
 );
 app.route("/cerrarSesion").get(pedidoCerrarSesion);
 

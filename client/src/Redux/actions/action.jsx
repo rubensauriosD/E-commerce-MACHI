@@ -30,6 +30,7 @@ export const INICIOFACEBOOK = "INICIOSESIONCONFACEBOOK ";
 export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const CHANGE_QTY = "CHANGE_QTY";
+export const ACTUALIZAR_USUARIO_CARRITO="ACTUALIZAR_USUARIO_CARRITO"
 dotenv.config();
 //CARRITO
 export const changetQty = (id, action) => {
@@ -67,13 +68,21 @@ export const removeFromCart = (id) => (dispatch, getState) => {
   localStorage.setItem("cart", JSON.stringify(getState().cartItems));
 };
 
+export const aniadirCarrito=(data)=>{
+  return (dispatch)=>{
+    axios.post("/productos/carrito",data/*,{withCredentials:true}*/).then(resultadoDeUsuario=>{
+      console.log(resultadoDeUsuario)
+      dispatch({type:ACTUALIZAR_USUARIO_CARRITO,payload:resultadoDeUsuario})
+    }).catch(e=>console.log(e))
+  }
+}
 //PRODUCTOS
 
 //postear producto
 export const postProduct = (producto, imagen) => {
   return (dispatch) => {
     axios
-      .post(`/productos?imagen=${imagen}`, producto,{withCredentials:true})
+      .post(`/productos?imagen=${imagen}`, producto)
       .then(() => {
         return dispatch({
           type: POST_PRODUCT,
@@ -259,7 +268,7 @@ export const putImage = ({ id }) => {
 export const postUser = (user) => {
   return (dispatch) => {
     axios
-      .post(`/usuarios`, user,{withCredentials:true})
+      .post(`/usuarios`, user)
       .then((response) => {
         return dispatch({
           type: POST_USER,
@@ -291,7 +300,7 @@ export const getUsers = () => {
 //Iniciar Sesion
 export const IniciarSesion = (usuario, history) => {
   return (dispatch) => {
-    axios.post("/usuarios/inicioSesion", usuario,{withCredentials:true}).then((resultadoDeUsuario) => {
+    axios.post("/usuarios/inicioSesion", usuario).then((resultadoDeUsuario) => {
       dispatch({ type: INICIARS, payload: resultadoDeUsuario.data });
       if (resultadoDeUsuario.data.tipo === "admin") history.push("/Admin");
       else if (resultadoDeUsuario.data.tipo === "user") history.push("/cart");
@@ -301,7 +310,7 @@ export const IniciarSesion = (usuario, history) => {
 export const cerrarSesion = () => {
   return (dispatch) => {
     axios
-      .get("/usuarios/cerrarSesion",{withCredentials:true})
+      .get("/usuarios/cerrarSesion")
       .then((resultado) => dispatch({ type: CERRARSESION }));
   };
 };
@@ -405,7 +414,7 @@ export const checkout=(payer)=>{
   return (dispatch)=>{
     const setTime=null
    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
-      axios.post("/checkout",payer,{withCredentials:true}).then(resul=>{
+      axios.post("/checkout",payer).then(resul=>{
         console.log(resul.data)
         const windowMercado=window.open(resul.data,"_blank",
         "width=500,height=600")
@@ -437,3 +446,4 @@ export const facebookIni = (history) => {
     }
   };
 };
+

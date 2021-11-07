@@ -9,7 +9,7 @@ const PrecioTotal = ({ cartItems }) => {
   let PrecioTotal = 0;
   if (PrecioTotal !== []) {
     for (let item of cartItems) {
-      PrecioTotal = PrecioTotal + item.precio * item.qty;
+      PrecioTotal =item.qty? PrecioTotal + item.precio * item.qty:PrecioTotal + item.precio;
     }
   } else {
     PrecioTotal = 0;
@@ -18,7 +18,7 @@ const PrecioTotal = ({ cartItems }) => {
   return (
     <h2>
       {PrecioTotal
-        ? `Precio Total:${formatter.format(PrecioTotal)}`
+        ? `Precio Total: ${formatter.format(PrecioTotal)}`
         : "No hay productos en tu carrito"}
     </h2>
   );

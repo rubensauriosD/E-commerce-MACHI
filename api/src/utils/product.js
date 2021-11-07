@@ -1,4 +1,4 @@
-const { Producto, Op } = require("../db");
+const { Producto, Op, Usuario } = require("../db");
 
 async function getProductos(req, res) {
   try {
@@ -146,10 +146,36 @@ try{
 }
 
 
+
+const postCarrito=async (req,res)=>{
+  const {idProducto, idProductoCantidad,nombre, imagen, precio,cantidad}=req.body
+  console.log("llega lo del carrito: ",id,nombre,imagen,precio,cantidad)
+  const idUsuario = req.user.id
+  console.log("id del usuario: ",idUsuario)
+  const usuarioEncontrado = await Usuario.findByPk(idUsuario)
+  console.log("usuario encontrado: ",usuarioEncontrado)
+  const [carritoProductos,creado]=await Producto.findOrCreate({where:{idProducto:idProducto,idProductoCantidad:idProductoCantidad}})
+  console.log("aca el producto: ",carritoProductos,"y si fue creado: ",creado)
+  if(creado){
+    await usuarioEncontrado.addProductoCantidad()
+    const usuarioConCarrito=await Usuario.findByPk(idUsuario,{include:{model:ProductoCantidad } })
+    console.log("usuario con sus productos y cantidad: ",usuarioEncontrado)
+    res.json(usuarioConCarrito)
+  }else{
+    await carritoProductos.set({cantidad:cantidad})
+    const usuarioConCarrito=await Usuario.findByPk(idUsuario,{include:{model:ProductoCantidad } })
+    console.log("usuario con sus productos y cantidad: ",usuarioEncontrado)
+    res.json(usuarioConCarrito)
+  }
+} 
+
+
 module.exports = {
   getProductos,
   putProductos,
   postProductos,
   deleteProductos,
-  getProducto
+  getProducto,
+  postCarrito
 };
+
