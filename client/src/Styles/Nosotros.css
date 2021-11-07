@@ -1,0 +1,43 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    
+    max-width: 1200px;
+    height: 100%;
+    font-size: 20px;
+    margin: 50px;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+    position: relative;
+}
+
+.parrafo{
+    width: 90%;
+    margin-top: 40px;
+    text-justify: auto;
+    text-align: justify;
+    text-shadow: 1px 5px 9px rgb(17, 88, 64);
+}
+
+.video{
+    margin-top: 70px;
+    margin-bottom: 80px;
+    overflow: hidden;
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px rgb(17, 88, 64);
+    position: relative;
+    width: 640px;
+    height:370px;
+    
+}

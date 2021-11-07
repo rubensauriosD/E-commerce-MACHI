@@ -71,9 +71,9 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/"
+            to="/servicios"
             activeClassName="selected"
-            activeStyle={{}}
+            activeStyle={{ color: "#4da45f" }}
           >
             Servicios
           </NavLink>
@@ -82,11 +82,11 @@ const NavBar = () => {
           <NavLink
             className={NavBarCSS.navlink}
             exact
-            to="/"
+            to="/nosotros"
             activeClassName="selected"
-            activeStyle={{}}
+            activeStyle={{ color: "#4da45f" }}
           >
-            Cursos
+            Nosotros
           </NavLink>
         </li>
         <li>
