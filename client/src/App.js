@@ -30,7 +30,7 @@ function App() {
           <Route exact path="/tienda" component={Tienda} />
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
-          <Route path="/successLogin" component={SuccesLogin}/>
+          <Route path="/successLogin" component={SuccesLogin}/> {/*guia para ruben y vero*/}
          <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
          <Route exact path="/checkout" component={MercadoPago} />

@@ -1,8 +1,8 @@
 import { Button,Box,TextField, Typography, Alert } from "@mui/material";
 import React, { useState } from "react";
 import './MercadoPagoStyle.css';
-
-
+import {useDispatch} from "react-redux"
+import {checkout} from "../../Redux/actions/action"
 
 function validate(input){
     let error = {};
@@ -34,7 +34,7 @@ function validate(input){
 }
 
 export default function MercadoPago(){
-
+    const dispatch=useDispatch()
 /* const [ input, setInput] = useState({ nombre:"", precio:"", cantidad:"",  })
 
 function handleChange(e) {
@@ -73,10 +73,13 @@ function handleChange(e) {
         },
 
         */
-
+        const handleOnSubmit=(e )=>{
+            e.preventDefault()
+            dispatch(checkout(payer))
+        }
     return (
         <div>
-            <form action="https://e-commerce-machi.vercel.app/#/checkout" method="POST" >
+            <form  onSubmit={handleOnSubmit} >
                 <Box>
                     <TextField error={error.nombre}  className="input-buyer" onChange={handleChange} value={payer.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
                     <TextField error={error.apellido}  className="input-buyer" onChange={handleChange} value={payer.apellido} name="apellido" type="text" label="Apellido" variant="filled" color="success"/><br/><br/>
