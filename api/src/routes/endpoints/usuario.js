@@ -1,4 +1,5 @@
 const app = require("express").Router();
+
 const passport = require("passport");
 const {
   getUsuario,
@@ -18,11 +19,12 @@ app.post(
 );
 app.get("/inicioSesionFacebook",UsuarioAutenticado,inicioFacebook)
 app.get("/auth/facebook", passport.authenticate("facebook"));
+
 app.get(
   "/auth/facebook/inicioDeSesion",
   passport.authenticate("facebook", {
     failureMessage: "Error de autenticacion",
-    successRedirect: "http://localhost:3000/#/successLogin",
+    successRedirect: `${process.env.DIRECCIONSUCCESFACEBOOK}/successLogin`||"http://localhost:3000/#/successLogin",
   }),
   (req, res) => console.log(req.user)
 );
