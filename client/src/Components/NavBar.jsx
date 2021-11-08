@@ -12,9 +12,11 @@ import IconButton from "@mui/material/IconButton";
 // import MenuIcon from "@mui/icons-material/Menu";
 // import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 // import MailIcon from "@mui/icons-material/Mail";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 // import MoreIcon from "@mui/icons-material/MoreVert";
+import LogoMachi from '../../src/logo.png';
 import React from "react";
 import { useDispatch } from "react-redux";
 import NavBarCSS from "../Styles/NavBar.module.css";
@@ -31,6 +33,11 @@ const NavBar = () => {
   return (
     <div className={NavBarCSS.navbar}>
       <ul className={NavBarCSS.navlist}>
+        
+        <li className={NavBarCSS.logoMachi}>
+          <img src={LogoMachi} style={{ width: '90px'}} alt="imagen" />
+        </li>
+        
         <li className={NavBarCSS.item}>
           <NavLink
             className={NavBarCSS.navlink}
@@ -42,6 +49,7 @@ const NavBar = () => {
             Home
           </NavLink>
         </li>
+       
         <li className={NavBarCSS.item}>
           <NavLink
             className={NavBarCSS.navlink}
@@ -89,7 +97,18 @@ const NavBar = () => {
             Nosotros
           </NavLink>
         </li>
-        <li>
+        <li className={NavBarCSS.item}>
+          <a 
+            className={NavBarCSS.navlink}
+            exact
+            href="https://wa.me/543863572444?text=Hola%20Machi,%20tengo%20una%20consulta!%20"
+            activeClassName="selected"
+            activeStyle={{ color: "#4da45f" }}
+            target= "_blanck"
+          ><WhatsAppIcon style={{color: 'green', fontSize: '30px'}} />
+          </a>
+        </li>
+        <li className={NavBarCSS.item}>
           <NavLink
             className={NavBarCSS.navlink}
             exact
@@ -108,7 +127,7 @@ const NavBar = () => {
             </IconButton>
           </NavLink>
         </li>
-        <li>
+        <li className={NavBarCSS.item}>
           <Cart />
         </li>
       </ul>

@@ -1,4 +1,4 @@
-import { Button,Box,TextField, Typography, Alert } from "@mui/material";
+import { Button,Box,TextField } from "@mui/material";
 import React, { useState } from "react";
 import './MercadoPagoStyle.css';
 import {useDispatch} from "react-redux"
@@ -79,7 +79,11 @@ function handleChange(e) {
         }
     return (
         <div>
+
+            <form action="ec2-3-220-214-162.compute-1.amazonaws.com/checkout" method="POST" >
+
             <form  onSubmit={handleOnSubmit} >
+
                 <Box>
                     <TextField error={error.nombre}  className="input-buyer" onChange={handleChange} value={payer.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
                     <TextField error={error.apellido}  className="input-buyer" onChange={handleChange} value={payer.apellido} name="apellido" type="text" label="Apellido" variant="filled" color="success"/><br/><br/>

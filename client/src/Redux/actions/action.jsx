@@ -29,8 +29,12 @@ export const CERRARSESION = "CERRADO_DE_SESION";
 export const INICIOFACEBOOK = "INICIOSESIONCONFACEBOOK ";
 export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
+export const ACTUALIZAR_USUARIO_CARRITO="ACTUALIZAR_USUARIO_CARRITO"
+
 export const CHANGE_QTY = "CHANGE_QTY";
 dotenv.config();
+
 //CARRITO
 export const changetQty = (id, action) => {
   return {
@@ -401,6 +405,19 @@ export const setOrdenP = (orden) => {
   };
 };
 
+
+
+export const checkout=(payer)=>{ 
+  return (dispatch)=>{
+  const setTime=null
+    axios.post("/checkout",payer).then(resul=>{
+    console.log(resul.data)
+          const windowMercado=window.open(resul.data,"_blank",
+          "width=500,height=600")
+    });
+  }
+}
+
 export const checkout=(payer)=>{
   return (dispatch)=>{
     const setTime=null
@@ -437,3 +454,4 @@ export const facebookIni = (history) => {
     }
   };
 };
+
