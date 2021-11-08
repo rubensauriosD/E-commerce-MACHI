@@ -16,6 +16,7 @@ const LoginPage = () => {
   }
 
   const Registrarse = (Usuario) => {
+    Usuario.tipo="user"
     dispatch(postUser(Usuario));
   };
   const RegistroEInicioConFacebook=()=>{
