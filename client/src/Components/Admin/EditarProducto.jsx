@@ -78,13 +78,13 @@ export default function EditarProducto(){
                                     <img className="imagenAdmin" src={producto.imagen} alt="imagen producto"/>
                                 <TextField  onChange={(e) => {setImagen(e.target.files[0])}} name="imagen"  type="file" variant="filled" color="success"/><br/><br/>
                                 </div>    
-                                <div className="datosProductoAdmin">
+                                <div>
                              
-                                <TextField className="levelAdminMaterial" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
+                                <TextField className="levelAdminMaterial" placeholder={producto.nombre} onChange={(e) => handleChangeEditar(e)} value={inputsEditar.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
 
-                                <TextField className="levelAdminMaterial" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.precio} name="precio" type="number" label="Precio" variant="filled" color="success"/><br/><br/>
+                                <TextField className="levelAdminMaterial" placeholder={producto.precio} onChange={(e) => handleChangeEditar(e)} value={inputsEditar.precio} name="precio" type="number" label="Precio" variant="filled" color="success"/><br/><br/>
                                 
-                                <TextField className="levelAdminMaterial" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.descripcion} name="descripcion" type="text" label="Descripcion" variant="filled" color="success"/><br/><br/>
+                                <TextField className="levelAdminMaterial" placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)} value={inputsEditar.descripcion} name="descripcion" type="text" label="Descripcion" variant="filled" color="success"/><br/><br/>
 
                                 <FormControl>
                                 <InputLabel>Disponibilidad Actual: {producto.disponibilidad? 'Disponible' : 'No disponible'}</InputLabel>

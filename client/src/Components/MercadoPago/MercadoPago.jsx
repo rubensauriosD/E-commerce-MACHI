@@ -1,8 +1,8 @@
 import { Button,Box,TextField } from "@mui/material";
 import React, { useState } from "react";
 import './MercadoPagoStyle.css';
-import {useDispatch} from "react-redux"
-import {checkout} from "../../Redux/actions/action"
+import {useDispatch} from "react-redux";
+import { checkout } from "../../Redux/actions/action";
 
 function validate(input){
     let error = {};
@@ -73,10 +73,12 @@ function handleChange(e) {
         },
 
         */
+
         const handleOnSubmit=(e )=>{
             e.preventDefault()
             dispatch(checkout(payer))
-        }
+        } 
+
     return (
         <div>
             <form  onSubmit={handleOnSubmit} >

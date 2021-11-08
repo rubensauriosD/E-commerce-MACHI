@@ -13,6 +13,7 @@ import Cart from "./Pages/Cart";
 import MercadoPago from "./Components/MercadoPago/MercadoPago"
 import Nosotros from "./Pages/Nosotros";
 import Servicios from "./Pages/Servicios";
+import PieDePagina from "./Components/PieDePagina/PieDePagina";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout" component={MercadoPago} />
+          <Route path="/" component={PieDePagina} />
       </Router>
     </div>
   );
