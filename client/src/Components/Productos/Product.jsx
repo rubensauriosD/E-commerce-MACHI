@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCartGuest } from "../../Redux/actions/action";
+import React from "react";
+import DetalleProducto from "../../Pages/DetalleProducto";
 
 export default function Product({ id, nombre, imagen, precio }) {
   const dispatch = useDispatch();
@@ -16,6 +18,9 @@ export default function Product({ id, nombre, imagen, precio }) {
     console.log("existe el usuario")
     flag=true
   }
+
+  <DetalleProducto id={id}></DetalleProducto>
+
   return (
     <div className="tarjeta">
       <div className="tarjetaInterior">
