@@ -407,7 +407,7 @@ export const setOrdenP = (orden) => {
 
 
 
-export const checkout=(payer)=>{ 
+/* export const checkout=(payer)=>{ 
   return (dispatch)=>{
   const setTime=null
     axios.post("/checkout",payer).then(resul=>{
@@ -416,9 +416,9 @@ export const checkout=(payer)=>{
           "width=500,height=600")
     });
   }
-}
+} */
 
-export const checkout=(payer)=>{
+ export const checkout = (payer) => {
   return (dispatch)=>{
     const setTime=null
    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
@@ -428,7 +428,8 @@ export const checkout=(payer)=>{
         "width=500,height=600")
       }).catch(e=>console.log(e))
   }
-}
+} 
+
 export const facebookIni = (history) => {
   return (dispatch) => {
     let timer = null; 
