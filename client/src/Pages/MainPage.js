@@ -1,16 +1,17 @@
 import "../Styles/MainPage.css";
 import Categorias from "../Components/Categorias/Categorias";
-import Courses from "../Components/Courses";
+import Courses from "../Components/Courses/Courses";
 import Carrusel from "../Components/Carrusel/Carrusel"
 import { categoria } from "../Elements/ArrayCategoria";
+import logo from "../../src/logo.png";
+
 
 export default function MainPage() {
   
 
   return (
     <div>
-    
-      <h1>MACHI</h1>
+      {/* <img src={logo} width="130px"/> */}
       <div className="carruselDiv">
         <Carrusel />
       </div>
@@ -19,11 +20,10 @@ export default function MainPage() {
       </div>
 
       <div className="coursesDiv">
-        <h1>COMPONENTE DE "CAPACITACION Y CURSOS" Y "COMPOSTAJE COLABORATIVO</h1>
-        <Courses/>
+         <Courses/>
       </div>
 
-      <h1>-------------------------------------</h1>
+     {/*  <h1>-------------------------------------</h1>
       
       <div className="helpDiv">
         <h1>COMPONENTE "ESTAMOS PARA AYUDARTE"</h1>
@@ -57,7 +57,8 @@ export default function MainPage() {
 
       <div className="contactDiv">
         <h1>COMPONENTE "FORMULARIO DE TRABAJO Y CONTACTO" (FOOTER)</h1>
-      </div>
+      </div> */}
+
     </div>
   );
 }

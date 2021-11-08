@@ -10,7 +10,7 @@
 .formsAdminExterno{
     width: 100%;
     margin: auto;
-    padding-bottom: 30px;
+    padding-bottom: 30px;  
     margin-bottom: 50px;
     box-shadow: 0 0 0 10px #fff, 0 15px 50px;
     /* display: block; */
@@ -26,54 +26,16 @@
     border-radius: 4px;
 }
 
-.formsAdmin{
-    padding-top: 3%;
-    width: 800px;
-    margin-left: 10%;
-    display: flex;
-      
-}
-.formNombre{
-    margin-top: 3%;
-    width: 600px;
-    
-   
-}
 
-.levelAdmin{
-   display: flex;
-   direction: column;
-   justify-content: flex-start;
-   width: 400px;
-   
-    
+.levelAdminMaterial{ 
+    width: 400px;
 }
-.levelAdmin label{
-    width: 100px; 
-    margin-top: 0px;
-    display: flex;
-    align-items: flex-start;
-    flex-wrap: wrap;
-   
-        
- }
-.levelAdmin input{
-    width: 300px;
-    height: 30px;
-    border: 1px rgba(145, 145, 151, 0.397) solid;
-    margin-top: 25px;
-    margin-bottom: 20px;
-    border-radius: 4px;
-    
+.levelAdminMaterial Select{
+    width: 400px;
 }
-.levelAdmin select{
-   width: 300px;
-   height: 30px;
-   margin-top: 25px;
-   margin-bottom: 20px;
-   border-radius: 4px; 
-} 
-
+.labelAdminButtons{
+    align-items: center;
+}
 .buttonAdmin{
     background-color: #4da45f;
     color: white;
@@ -87,9 +49,12 @@
     margin-bottom: 3%;
     margin-left: 10px;
     margin-right: 10px;
-    
-    
 }
+.buttonAdmin:hover{
+    background-color: #306d3c;
+    border: 0.5px rgba(168, 162, 162, 0.418) solid; 
+}
+
 .editarProductos{
     border: rgba(97, 93, 93, 0.301) 1px solid;
     border-radius: 4px;
@@ -104,7 +69,7 @@
     border-radius: 4px;
     
 }
-.imagenAdminDiv{
+.imagenAdminDiv{ 
     width: 30%;
     padding: 10px;
     margin: 10px;

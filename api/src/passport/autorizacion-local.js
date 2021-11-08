@@ -1,7 +1,7 @@
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const bCrypt = require("bcrypt-nodejs");
-const {Usuario} = require("../db");
+const {Usuario,Producto} = require("../db");
 
 passport.serializeUser((usuario, done) => {
   done(null, usuario.id);
@@ -26,7 +26,7 @@ passport.use(
        // console.log("Lo que llega al comparar: ",bCrypt.compareSync(contraseniaEnviada,contraseniaEnBaseDeDatos))
         return bCrypt.compareSync(contraseniaEnviada,contraseniaEnBaseDeDatos)
       };
-      Usuario.findOne({ where: { email } }).then(
+      Usuario.findOne({ where: { email }, include:{model:Producto}}).then(
         (resultadoUsuario) => {
           //console.log("Aca los Datos en passport: ",resultadoUsuario&&resultadoUsuario.contrasenia)
           if (!resultadoUsuario) {

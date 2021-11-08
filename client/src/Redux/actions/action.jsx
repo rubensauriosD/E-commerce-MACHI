@@ -1,4 +1,5 @@
 import axios from "axios";
+import dotenv from "dotenv";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
@@ -29,21 +30,30 @@ export const INICIOFACEBOOK = "INICIOSESIONCONFACEBOOK ";
 export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
-//CARRITO
+export const ACTUALIZAR_USUARIO_CARRITO="ACTUALIZAR_USUARIO_CARRITO"
 
+export const CHANGE_QTY = "CHANGE_QTY";
+dotenv.config();
+
+//CARRITO
+export const changetQty = (id, action) => {
+  return {
+    type: CHANGE_QTY,
+    payload: { id, action },
+  };
+};
 //añadir al carrito como invitado
 export const addToCartGuest = (productID, qty) => async (
   dispatch,
   getState
 ) => {
   try {
-    const { data } = await axios.get(`/productos/${productID}`);
+    const { data } = await axios.get(`/productos/${productID}`,{withCredentials:true});
 
     dispatch({
       type: ADD_TO_CART_GUEST,
       payload: {
         product: data,
-        qty,
       },
     });
     localStorage.setItem("cart", JSON.stringify(getState().cartItems));
@@ -51,6 +61,7 @@ export const addToCartGuest = (productID, qty) => async (
     console.log(error);
   }
 };
+//borrar del carrito como invitado
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
     type: REMOVE_FROM_CART,
@@ -66,7 +77,7 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 export const postProduct = (producto, imagen) => {
   return (dispatch) => {
     axios
-      .post(`/productos?imagen=${imagen}`, producto)
+      .post(`/productos?imagen=${imagen}`, producto,{withCredentials:true})
       .then(() => {
         return dispatch({
           type: POST_PRODUCT,
@@ -88,7 +99,7 @@ export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina }) => {
         }&ordenP=${ordenP ? ordenP : ""}&filtroC=${
           filtroC ? filtroC : ""
         }&nombre=${nombre ? nombre : ""}`
-      );
+        ,{withCredentials:true});
       return dispatch({
         type: GET_PRODUCTS,
         payload: response.data,
@@ -102,7 +113,7 @@ export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina }) => {
 export const getProductsAdmin = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/productos`);
+      const response = await axios.get(`/productos`,{withCredentials:true});
       return dispatch({
         type: GET_PRODUCTS_ADMIN,
         payload: response.data,
@@ -118,7 +129,7 @@ export const getProductsAdmin = () => {
 export const deleteProduct = ({ id }) => {
   return (dispatch) => {
     axios
-      .delete(`/productos/${id}`)
+      .delete(`/productos/${id}`,{withCredentials:true})
       .then((res) => {
         return dispatch({
           type: DELETE_PRODUCT,
@@ -130,38 +141,14 @@ export const deleteProduct = ({ id }) => {
       });
   };
 };
-export const facebookIni = (history) => {
-  return (dispatch) => {
-    let timer = null;
-    const facebookLoginURL = "http://localhost:3001/usuarios/auth/facebook";
-    const newWindow = window.open(
-      facebookLoginURL,
-      "_blank",
-      "width=500,height=600"
-    );
-    if (newWindow) {
-      timer = setInterval(() => {
-        if (newWindow.closed) {
-          axios
-            .get("/usuarios/inicioSesionFacebook",{withCredentials:true})
-            .then((usuario) => {
-              dispatch({ type: INICIOFACEBOOK, payload: usuario.data });
-              history.push("/cart")
-            })
-            .catch((error) => console.log(error));
-          if (timer) clearInterval(timer);
-        }
-      });
-    }
-  };
-};
+
 
 //CORREGIR
 //modificar un producto
 export const putProduct = ({ id }) => {
   return (dispatch) => {
     axios
-      .put(`/productos/${id}`)
+      .put(`/productos/${id}`,{withCredentials:true})
       .then((productUpdated) => {
         return dispatch({
           type: PUT_PRODUCT,
@@ -178,7 +165,7 @@ export const putProduct = ({ id }) => {
 export const getProductId = (id) => {
   return (dispatch) => {
     axios
-      .get(`/productos/${id}`)
+      .get(`/productos/${id}`,{withCredentials:true})
       .then((productDetail) => {
         return dispatch({
           type: GET_PRODUCT_ID,
@@ -205,7 +192,7 @@ export const removeProduct = () => {
 export const postImage = (imagen) => {
   return (dispatch) => {
     axios
-      .post(`/imagenes`, imagen)
+      .post(`/imagenes`, imagen,{withCredentials:true})
       .then((response) => {
         return dispatch({
           type: POST_IMAGE,
@@ -221,7 +208,7 @@ export const postImage = (imagen) => {
 export const getImages = () => {
   return (dispatch) => {
     axios
-      .get(`/imagenes`)
+      .get(`/imagenes`,{withCredentials:true})
       .then((images) => {
         return dispatch({
           type: GET_IMAGES,
@@ -239,7 +226,7 @@ export const getImages = () => {
 export const deleteImage = ({ id }) => {
   return (dispatch) => {
     axios
-      .delete(`/imagenes/${id}`)
+      .delete(`/imagenes/${id}`,{withCredentials:true})
       .then((res) => {
         return dispatch({
           type: DELETE_IMAGE,
@@ -257,7 +244,7 @@ export const deleteImage = ({ id }) => {
 export const putImage = ({ id }) => {
   return (dispatch) => {
     axios
-      .put(`/imagenes/${id}`)
+      .put(`/imagenes/${id}`,{withCredentials:true})
       .then((imageUpdate) => {
         return dispatch({
           type: PUT_IMAGE,
@@ -276,7 +263,7 @@ export const putImage = ({ id }) => {
 export const postUser = (user) => {
   return (dispatch) => {
     axios
-      .post(`/usuarios`, user)
+      .post(`/usuarios`, user,{withCredentials:true})
       .then((response) => {
         return dispatch({
           type: POST_USER,
@@ -293,7 +280,7 @@ export const postUser = (user) => {
 export const getUsers = () => {
   return (dispatch) => {
     axios
-      .get(`/usuarios`)
+      .get(`/usuarios`,{withCredentials:true})
       .then((users) => {
         return dispatch({
           type: GET_USERS,
@@ -308,7 +295,7 @@ export const getUsers = () => {
 //Iniciar Sesion
 export const IniciarSesion = (usuario, history) => {
   return (dispatch) => {
-    axios.post("/usuarios/inicioSesion", usuario).then((resultadoDeUsuario) => {
+    axios.post("/usuarios/inicioSesion", usuario,{withCredentials:true}).then((resultadoDeUsuario) => {
       dispatch({ type: INICIARS, payload: resultadoDeUsuario.data });
       if (resultadoDeUsuario.data.tipo === "admin") history.push("/Admin");
       else if (resultadoDeUsuario.data.tipo === "user") history.push("/cart");
@@ -318,7 +305,7 @@ export const IniciarSesion = (usuario, history) => {
 export const cerrarSesion = () => {
   return (dispatch) => {
     axios
-      .get("/usuarios/cerrarSesion")
+      .get("/usuarios/cerrarSesion",{withCredentials:true})
       .then((resultado) => dispatch({ type: CERRARSESION }));
   };
 };
@@ -327,7 +314,7 @@ export const cerrarSesion = () => {
 export const deleteUser = ({ id }) => {
   return (dispatch) => {
     axios
-      .delete(`/usuarios/${id}`)
+      .delete(`/usuarios/${id}`,{withCredentials:true})
       .then((res) => {
         return dispatch({
           type: DELETE_USER,
@@ -345,7 +332,7 @@ export const deleteUser = ({ id }) => {
 export const putUser = ({ id }) => {
   return (dispatch) => {
     axios
-      .put(`/usuarios/${id}`)
+      .put(`/usuarios/${id}`,{withCredentials:true})
       .then((userUpdate) => {
         return dispatch({
           type: PUT_USER,
@@ -417,3 +404,54 @@ export const setOrdenP = (orden) => {
     payload: orden,
   };
 };
+
+
+
+export const checkout=(payer)=>{ 
+  return (dispatch)=>{
+  const setTime=null
+    axios.post("/checkout",payer).then(resul=>{
+    console.log(resul.data)
+          const windowMercado=window.open(resul.data,"_blank",
+          "width=500,height=600")
+    }).catch(e=>console.log(e))
+  }
+}
+
+// export const checkout=(payer)=>{
+//   return (dispatch)=>{
+//     const setTime=null
+//    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
+//       axios.post("/checkout",payer,{withCredentials:true}).then(resul=>{
+//         console.log(resul.data)
+//         const windowMercado=window.open(resul.data,"_blank",
+//         "width=500,height=600")
+//       }).catch(e=>console.log(e))
+//   } 
+// }
+export const facebookIni = (history) => {
+  return (dispatch) => {
+    let timer = null; 
+    const facebookLoginURL = "http://localhost:3001/usuarios/auth/facebook";
+    const newWindow = window.open(
+      facebookLoginURL,
+      "_blank",
+      "width=500,height=600"
+    );
+    if (newWindow) {
+      timer = setInterval(() => {
+        if (newWindow.closed) {
+          axios
+            .get("/usuarios/inicioSesionFacebook", { withCredentials: true })
+            .then((usuario) => {
+              dispatch({ type: INICIOFACEBOOK, payload: usuario.data });
+              history.push("/cart");
+            })
+            .catch((error) => console.log(error));
+          if (timer) clearInterval(timer);
+        }
+      });
+    }
+  };
+};
+
