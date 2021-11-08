@@ -79,9 +79,6 @@ function handleChange(e) {
         }
     return (
         <div>
-
-            <form action="ec2-3-220-214-162.compute-1.amazonaws.com/checkout" method="POST" >
-
             <form  onSubmit={handleOnSubmit} >
 
                 <Box>

@@ -24,7 +24,7 @@ app.get(
   "/auth/facebook/inicioDeSesion",
   passport.authenticate("facebook", {
     failureMessage: "Error de autenticacion",
-    successRedirect: `${process.env.DIRECCIONSUCCESFACEBOOK}/successLogin`||"http://localhost:3000/#/successLogin",
+    successRedirect: `${process.env.DIRECCIONSUCCESFACEBOOK ? process.env.DIRECCIONSUCCESFACEBOOK+"/successLogin":"http://localhost:3000/#/successLogin"}`
   }),
   (req, res) => console.log(req.user)
 );
