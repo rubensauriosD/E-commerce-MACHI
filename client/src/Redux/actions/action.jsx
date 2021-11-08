@@ -34,6 +34,7 @@ export const ACTUALIZAR_USUARIO_CARRITO="ACTUALIZAR_USUARIO_CARRITO"
 
 export const CHANGE_QTY = "CHANGE_QTY";
 dotenv.config();
+export const GET_COMENTARIOS = "GET_COMENTARIOS";
 
 //CARRITO
 export const changetQty = (id, action) => {
@@ -454,4 +455,16 @@ export const facebookIni = (history) => {
     }
   };
 };
+
+export function getComentarios() {
+  return function(dispatch) {
+    axios.get(`/comentarios/allComments`)
+    .then(resp => {
+      dispatch({
+        type: GET_COMENTARIOS,
+        payload: resp.data
+      })
+    })
+  }
+}
 

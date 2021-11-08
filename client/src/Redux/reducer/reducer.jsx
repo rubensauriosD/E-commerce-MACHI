@@ -29,6 +29,7 @@ import {
   REMOVE_FROM_CART,
   INICIOFACEBOOK,
   CHANGE_QTY,
+  GET_COMENTARIOS
 } from "../actions/action.jsx";
 
 const initialState = {
@@ -46,6 +47,7 @@ const initialState = {
   ordenA: "",
   ordenP: "",
   filtroC: "",
+  comentarios: [],
   pagina: 1,
   cartItems: localStorage.getItem("cart")
     ? JSON.parse(localStorage.getItem("cart"))
@@ -293,6 +295,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         User: payload,
       };
+    }
+    case GET_COMENTARIOS: {
+      return {
+        ...state,
+        comentarios: payload
+      }
     }
     default:
       return state;
