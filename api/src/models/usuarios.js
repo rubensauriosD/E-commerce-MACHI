@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
     },
     tipo: {
       type: DataTypes.ENUM('admin', 'user'),
-    },
+    },  
     facebookId:{
       type:DataTypes.STRING,
       allowNull:true

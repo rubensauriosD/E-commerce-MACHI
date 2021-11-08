@@ -66,11 +66,11 @@ export default function EditarProducto(){
 
     return (
         <div className="editarProductos">
-            <h3>Editar Productos</h3>
+            <h3>Editar Productos</h3> 
             <ol>
                 {
                      productos.productos?.map((producto, i) => {
-                        return(
+                        return( 
                             
                         <li key={producto.id}>
                         <div className="ordererAdmin">        
