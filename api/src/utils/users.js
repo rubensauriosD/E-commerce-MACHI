@@ -66,7 +66,7 @@ async function postUsuario(req, res) {
           apellido: apellido,
           email: email,
           contrasenia: contraseñaEncriptada,
-          tipo: tipo.value,
+          tipo: tipo,
         });
         res.json({ message: "Success" });
       } else {

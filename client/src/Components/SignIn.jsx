@@ -63,18 +63,6 @@ export default function SignIn({ SubmitS,submitFace }) {
           color="success"
         />
         {errors.email && <Alert variant="filled" severity="error">{errors.email.message}</Alert>}
-        <Controller
-        name="tipo"
-        control={control}
-        rules={{required:true}}
-        render={({field})=><Select
-        {...field}
-        options={[
-          { value: "admin", label: "Administrador" },
-          { value: "user", label: "Usuario" },
-        ]}
-        />}
-        />
         {errors.tipo && <Alert variant="filled" severity="error">{errors.tipo.message}</Alert>}
         <TextField
           type="password"

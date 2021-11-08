@@ -37,7 +37,6 @@ const Cart = () => {
         );
       })
     }
-      })}
       <PrecioTotal cartItems={cartItems} />
     </div>
   );
