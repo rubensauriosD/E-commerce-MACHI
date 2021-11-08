@@ -40,7 +40,7 @@ function App() {
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout" component={MercadoPago} />
-          <Route exact path="/PieDePagina" component={PieDePagina} />
+          <Route path="/" component={PieDePagina} />
       </Router>
     </div>
   );
