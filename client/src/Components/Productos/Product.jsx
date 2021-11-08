@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./ProductStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCartGuest } from "../../Redux/actions/action";
 
 export default function Product({ id, nombre, imagen, precio }) {
@@ -10,6 +10,12 @@ export default function Product({ id, nombre, imagen, precio }) {
   const handleOnClick = () => {
     dispatch(addToCartGuest(id));
   };
+  let flag=false
+  const usuario = useSelector((state)=>state.User)
+  if(Object.values(usuario).length){
+    console.log("existe el usuario")
+    flag=true
+  }
   return (
     <div className="tarjeta">
       <div className="tarjetaInterior">
@@ -31,7 +37,8 @@ export default function Product({ id, nombre, imagen, precio }) {
             </div>
           </Link>
           <div className="carrito-products">
-            <button onClick={handleOnClick}>
+          <button onClick={handleOnClick} disabled={!flag}>Usuario</button>
+            <button onClick={handleOnClick} disabled ={(flag)}>
               <FontAwesomeIcon
                 icon={faShoppingCart}
                 style={{ color: "grey" }}

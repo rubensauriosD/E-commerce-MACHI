@@ -11,6 +11,9 @@ import DetalleProducto from "./Pages/DetalleProducto";
 import SuccesLogin from "./ContenedoresTemporales/ContenedorDeFace";
 import Cart from "./Pages/Cart";
 import MercadoPago from "./Components/MercadoPago/MercadoPago"
+import Nosotros from "./Pages/Nosotros";
+import Servicios from "./Pages/Servicios";
+
 function App() {
   return (
     <div className="App">
@@ -28,12 +31,14 @@ function App() {
             )}
           />
           <Route exact path="/tienda" component={Tienda} />
+          <Route exact path="/nosotros" component={Nosotros} />
+          <Route exact path="/servicios" component={Servicios} />
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
-          <Route path="/successLogin" component={SuccesLogin}/>
-         <Route exact path="/admin" component={Admin} /> 
+          <Route path="/successLogin" component={SuccesLogin}/> {/*guia para ruben y vero*/}
+          <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
-         <Route exact path="/checkout" component={MercadoPago} />
+          <Route exact path="/checkout" component={MercadoPago} />
       </Router>
     </div>
   );

@@ -1,28 +1,28 @@
-import { useForm } from "react-hook-form"
-import {Button, TextField,Box,Alert, Typography} from "@mui/material"
+import { useForm } from "react-hook-form";
+import { Button, TextField, Box, Alert } from "@mui/material";
 export default function Login({ SubmitL }) {
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
-    const onSubmit = (data) => {
-      SubmitL(data);
-    };
-    return (
-      <div>
-        <h2>Inicia Sesion con tu Cuenta Machi</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    SubmitL(data);
+  };
+  return (
+    <div>
+      <h2>Inicia Sesion con tu Cuenta Machi</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Box
-        component="div"
-        sx={{
-          display:"grid",
-          gridTemplateColumns:{sm:"45vw"},
-          gap:2,
-        }}
+          component="div"
+          sx={{
+            display: "grid",
+            gridTemplateColumns: { sm: "45vw" },
+            gap: 2,
+          }}
         >
           <TextField
-            sx={{justifySelf:"center"}}
+            sx={{ justifySelf: "center" }}
             type="email"
             label="Ingresa tu Correo Machi"
             color="success"
@@ -34,9 +34,13 @@ export default function Login({ SubmitL }) {
               },
             })}
           />
-          {errors.email && <Alert severity="warning"  sx={{justifySelf:"center"}}>{errors.email.message}</Alert>}
+          {errors.email && (
+            <Alert severity="warning" sx={{ justifySelf: "center" }}>
+              {errors.email.message}
+            </Alert>
+          )}
           <TextField
-           sx={{justifySelf:"center"}}
+            sx={{ justifySelf: "center" }}
             type="password"
             label="Ingresa tu Contraseña"
             color="success"
@@ -48,10 +52,21 @@ export default function Login({ SubmitL }) {
               },
             })}
           />
-          {errors.contrasenia && <Alert  sx={{justifySelf:"center"}} severity="warning">{errors.contrasenia.message}</Alert>}
-          <Button  sx={{justifySelf:"center"}} variant="contained" color="success" type="submit">Iniciar Sesión</Button>
-          </Box>
-        </form>
-      </div>
-    );
-  }
+          {errors.contrasenia && (
+            <Alert sx={{ justifySelf: "center" }} severity="warning">
+              {errors.contrasenia.message}
+            </Alert>
+          )}
+          <Button
+            sx={{ justifySelf: "center" }}
+            variant="contained"
+            color="success"
+            type="submit"
+          >
+            Iniciar Sesión
+          </Button>
+        </Box>
+      </form>
+    </div>
+  );
+}
