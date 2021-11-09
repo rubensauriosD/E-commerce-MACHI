@@ -16,7 +16,7 @@ app.post(
   "/inicioSesion",
   passport.authenticate("Inicio_de_Sesion"),
   inicioDeSesion
-);
+); 
 app.get("/inicioSesionFacebook",UsuarioAutenticado,inicioFacebook)
 app.get("/auth/facebook", passport.authenticate("facebook"));
 

@@ -1,17 +1,18 @@
 import {cartConstantes} from '../constants/tipadosDespacho';
 import axios from 'axios';
-
+import {v4 as uuidv4} from "uuid"
 export const addToCartGuest = (productID, qty) => async (
     dispatch,
     getState
   ) => {
     try {
       const { data } = await axios.get(`/productos/${productID}`);
-      console.log("lo que llega de la base de datos",data)
+      //console.log("lo que llega de la base de datos",data)
       dispatch({
         type: cartConstantes.ADD_TO_CART_GUEST,
         payload: {
-          id: data.id,
+          idCarrito:uuidv4(),
+          idProducto: data.id,
           nombre: data.nombre,
           precio: data.precio,
           imagen: data.imagen,
@@ -49,7 +50,7 @@ export const checkout=(payer, items)=>{
   console.log("se disparo el boton")
   return (dispatch)=>{
    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
-     axios.post("/checkout",payer, items,{withCredentials:true}).then(resul=>{
+     axios.post("/checkout",{payer, items},{withCredentials:true}).then(resul=>{
       console.log("llego",resul.data)
        const windowMercado=window.open(resul.data,"_blank",
         "width=500,height=600")

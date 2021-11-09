@@ -24,7 +24,7 @@ const LoginPage = () => {
   const RegistroEInicioConFacebook=()=>{
     dispatch(facebookIni(history))
   }
-  console.log("aca el carrito: ",carrito&&carrito)
+  console.log("el usuario: ",usuario)
   if (usuario && Object.values(usuario).length !== 0) {
     return (
       <div className="InterfazDeUsuario">
