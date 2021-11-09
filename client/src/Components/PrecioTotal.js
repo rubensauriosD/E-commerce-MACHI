@@ -18,7 +18,7 @@ const PrecioTotal = ({ cartItems }) => {
   return (
     <h2>
       {PrecioTotal
-        ? `Precio Total:${formatter.format(PrecioTotal)}`
+        ? `Precio Total: ${formatter.format(PrecioTotal)}`
         : "No hay productos en tu carrito"}
     </h2>
   );

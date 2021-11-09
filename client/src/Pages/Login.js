@@ -1,4 +1,4 @@
-import { postUser, IniciarSesion,facebookIni } from "../Redux/actions/action";
+import { postUser, IniciarSesion,facebookIni } from "../Redux/actions/userAction";
 import { useDispatch, useSelector } from "react-redux";
 import Login from "../Components/LogIn";
 import SignIn from "../Components/SignIn";
@@ -8,19 +8,23 @@ import "../Styles/paginaDeLogin.css";
 
 const LoginPage = () => {
   const history = useHistory();
-  const usuario = useSelector((state) => state.User);
+  const carrito = useSelector((state)=>state.cart.cartItems)
+  const usuario = useSelector((state) => state.usuario.User);
   const dispatch = useDispatch();
 
   function InicioSesion(Usuario) {
+    Usuario.carritos = carrito
     dispatch(IniciarSesion(Usuario, history));
   }
 
   const Registrarse = (Usuario) => {
+    Usuario.tipo="user"
     dispatch(postUser(Usuario));
   };
   const RegistroEInicioConFacebook=()=>{
     dispatch(facebookIni(history))
   }
+  console.log("aca el carrito: ",carrito&&carrito)
   if (usuario && Object.values(usuario).length !== 0) {
     return (
       <div className="InterfazDeUsuario">

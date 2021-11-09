@@ -2,12 +2,12 @@ import { useState,useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';  
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import axios from 'axios';
-import { getUsers } from '../../Redux/actions/action';     
+import { getUsers } from '../../Redux/actions/userAction';     
 import swal from 'sweetalert';
 
 export default function EditarProducto(){      
     const dispatch = useDispatch();
-    var usuarios = useSelector(state => state.Users);
+    var usuarios = useSelector(state => state.usuario.Users);
     const [inputsTipo, setinputsTipo] = useState('')
 
     useEffect(() =>{

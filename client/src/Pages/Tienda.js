@@ -5,7 +5,7 @@ import * as React from "react";
 import Products from "../Components/Productos/Products";
 import SearchBar from "../Components/Productos/SearchBar";
 import FiltrosYOrden from "../Components/Productos/FiltrosYOrden";
-import { getProducts, setPagina } from "../Redux/actions/action";
+import { getProducts, setPagina } from "../Redux/actions/productAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
@@ -15,7 +15,7 @@ import {
 export default function Tienda(props) {
   // const productosPorCategorias=useSelector(state=>state.productosPorCategorias)
   const { products, nombre, ordenA, ordenP, filtroC, pagina } = useSelector(
-    (state) => state
+    (state) => state.productos
   );
 
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export default function Tienda(props) {
     dispatch(getProducts({ pagina, ordenA, ordenP, filtroC, nombre }));
     dispatch(setPagina(pagina));
   };
-
+  console.log("lo que llega a la tienda: ", pagina)
   return (
     <div className="Store">
       <h1>Tienda</h1>

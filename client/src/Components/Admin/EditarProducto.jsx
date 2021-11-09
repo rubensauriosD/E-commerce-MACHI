@@ -2,7 +2,7 @@
  import { useDispatch, useSelector } from 'react-redux';  
  import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
  import axios from 'axios';
- import { getProductsAdmin } from '../../Redux/actions/action';     
+ import { getProductsAdmin } from '../../Redux/actions/productAction';     
  import swal from 'sweetalert';
             
             
@@ -12,7 +12,7 @@ export default function EditarProducto(){
     
     const dispatch = useDispatch();
     
-    var productos = useSelector(state => state.productsAdmin);
+    var productos = useSelector(state => state.productos.productsAdmin);
     
     const [inputsEditar, setInputsEditar] = useState({
         nombre: productos.nombre,

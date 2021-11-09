@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import './MercadoPagoStyle.css';
 import {useDispatch} from "react-redux";
-import { checkout } from "../../Redux/actions/action";
 import CartProductCheckout from "./CartProductCheckout";
 import PrecioTotal from "../PrecioTotal"; 
+import { checkout } from "../../Redux/actions/cartAction";
 
 function validate(input){
+    // const contenedor = document.querySelector(".contenedor")
     let error = {};
     if(!input.nombre){
         error.nombre = ' * Campo Requerido';
@@ -37,13 +38,15 @@ function validate(input){
 }
 
 export default function MercadoPago(){
+ 
     const dispatch=useDispatch()
 
-const { cartItems } = useSelector((state) => state);
-
-const [ payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
+const [payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
 
 const [error, setError] = useState({})
+
+const { cartItems } = useSelector((state) => state.cart);
+
 
 function handleChange(e) {
     setPayer({
@@ -57,23 +60,24 @@ function handleChange(e) {
         [e.target.name]: e.target.value
     }))
 }
-    const items = cartItems.map(producto => {
-        return(
-                {
-                    title: producto.nombre,
-                    unit_price: producto.precio,
-                    quantity: producto.qty,
-                        
-                }
-            ) 
-        }
-    )
 
+        const items= cartItems.map(producto => {
+            return(
+                    {
+                        title: producto.nombre,
+                        unit_price: producto.precio,
+                        quantity: producto.qty,
+                               
+                    }
+                ) 
+            }
+        )
+        
         const handleOnSubmit=(e )=>{
             e.preventDefault()
             dispatch(checkout(payer, items))
         } 
-
+       
         
     return (
         <div className="contenedorMercadoGral">
@@ -113,6 +117,5 @@ function handleChange(e) {
             </div>        
         </div>
     )
-
-
 }
+

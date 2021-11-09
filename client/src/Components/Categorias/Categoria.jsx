@@ -1,7 +1,7 @@
 import './CategoriaStyle.css';
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux"
-import {setFiltroC, getProducts} from "../../Redux/actions/action"
+import {setFiltroC, getProducts} from "../../Redux/actions/productAction"
 
 export default function Categoria({nombreCategoria,imagenCategoria}){
 

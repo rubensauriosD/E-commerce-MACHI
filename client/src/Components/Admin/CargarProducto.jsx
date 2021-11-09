@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useDispatch } from 'react-redux';
-import { postProduct, getProductsAdmin } from '../../Redux/actions/action';
+import { postProduct, getProductsAdmin } from '../../Redux/actions/productAction';
 import swal from 'sweetalert';
 import axios from 'axios';
 

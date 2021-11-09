@@ -9,13 +9,9 @@ mercadopago.configure({
 
 app.post('/', (req, res) => {
     // Crea un objeto de preferencia
-    
-console.log("el numero es: ",parseInt(req.body.payer.altura))
-    console.log("lo que llega por body: ",req.body.items)
    
   const itemsMercadoPago=req.body.items
     //const [ payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"",  codigoPostal:"", calle:"", altura:"",  })    
-  console.log("Aca llegan los datos del item quantity " + itemsMercadoPago.map(el => el))
     let preference = {
          items: itemsMercadoPago.map(item=>({ 
           title: item.title, // nombre del producto

@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import NavBarCSS from "../Styles/NavBar.module.css";
 import Cart from "./Cart";
 import { NavLink } from "react-router-dom";
-import { getProducts } from "../Redux/actions/action";
+import { getProducts } from "../Redux/actions/productAction";
 
 const NavBar = () => {
   const dispatch = useDispatch();

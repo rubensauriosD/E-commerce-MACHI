@@ -1,4 +1,4 @@
-const { Usuario, Producto,Factura } = require("../db");
+const { Usuario, Carrito, Producto } = require("../db");
 const bCrypt = require("bcrypt-nodejs");
 const CreadorDeEncriptado = function (contrasenia) {
   return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
@@ -66,15 +66,13 @@ async function postUsuario(req, res) {
           apellido: apellido,
           email: email,
           contrasenia: contraseñaEncriptada,
-          tipo: tipo.value,
+          tipo: tipo,
         });
         res.json({ message: "Success" });
       } else {
-        res
-          .status(404)
-          .json({
-            error: "El Correo Ingresado ya Tiene Cuenta Activa en Machi",
-          });
+        res.status(404).json({
+          error: "El Correo Ingresado ya Tiene Cuenta Activa en Machi",
+        });
       }
     } else {
       res.status(404).json({ error: "Faltan Datos" });
@@ -86,19 +84,40 @@ async function postUsuario(req, res) {
 }
 
 async function inicioDeSesion(req, res) {
-  const {idProductos}=req.body
-  console.log("el id de los productos: ",idProductos)
-  const { id,nombre, apellido, email, tipo,productos } = req.user;
-  try{
-    const usuarioEncontrado=await Usuario.findByPk(id,{include:{model:Producto}})
-    if(idProductos){
-      const productoEncontrado=await Promise.all(idProductos.map(producto=>Producto.findByPk(producto)))
-      await usuarioEncontrado.setProductos(productoEncontrado)
+  const { carritos } = req.body;
+  //console.log("aca el carrito: ",carritos&& carritos)
+  //console.log("el id de los productos: ",idProductos)
+  //const {id} = req.user;
+  const usuario=req.user
+  try {
+    if(carritos &&carritos.length){
+    const carrito = await Promise.all(
+      carritos.map((carrito) =>
+        Carrito.findOrCreate({
+          where: { idCarrito: carrito.idCarrito },
+          defaults: {
+            idProducto: carrito.idProducto,
+            cantidad: carrito.cantidad,
+            nombre: carrito.nombre,
+            precio: carrito.precio,
+            categoria: carrito.categoria,
+          },
+        })
+      )
+    );
+    console.log("id de los carritos: ",carritos.map(carrito=>carrito.idCarrito))
+       //const agregador = await usuario.setModels(carritos.map(cart=>cart.idCarrito))
+    //console.log("aca en la base de datos: ",carrito);
+    await usuario.setModels(carritos.map(cart=>cart.idCarrito))
+    const usuarioActualizado = await Usuario.findByPk(usuario.id,{include:{model:Carrito}})
+    res.json(usuarioActualizado);
     }
-    const usuario= await Usuario.findByPk(id,{include:{model:Producto}})
-    res.json(usuario );
-  }catch(e){
-    res.status(401).json({error:`${e}`})
+    else{
+      res.json(usuario)
+    }
+
+  } catch (e) {
+    res.status(401).json({ error: `${e}` });
   }
 }
 
@@ -118,5 +137,5 @@ module.exports = {
   deleteUsuario,
   inicioDeSesion,
   pedidoCerrarSesion,
-  inicioFacebook
+  inicioFacebook,
 };
