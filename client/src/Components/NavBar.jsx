@@ -100,10 +100,7 @@ const NavBar = () => {
         <li className={NavBarCSS.item}>
           <a 
             className={NavBarCSS.navlink}
-            exact
             href="https://wa.me/543863572444?text=Hola%20Machi,%20tengo%20una%20consulta!%20"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
             target= "_blanck"
           ><WhatsAppIcon style={{color: 'green', fontSize: '30px'}} />
           </a>

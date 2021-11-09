@@ -15,7 +15,7 @@ export default function Nosotros() {
                     orgánicos brindándoles asesoría y herramientas para la correcta disposición de los mismos.
                     </p>
                     
-                    <iframe className="pdf" src="https://docs.google.com/document/d/e/2PACX-1vRNhLuPoCvlfdaQjn-0L_v2Wwr71iyascPS10Itg_ha--u_HGq6wXyxX7GwzVQvRL4_qAm-UXjbiRNT/pub?embedded=true" width="80%" height="500px" type="application/pdf"></iframe>
+                    <iframe title="pdf de la empresa" className="pdf" src="https://docs.google.com/document/d/e/2PACX-1vRNhLuPoCvlfdaQjn-0L_v2Wwr71iyascPS10Itg_ha--u_HGq6wXyxX7GwzVQvRL4_qAm-UXjbiRNT/pub?embedded=true" width="80%" height="500px" type="application/pdf"></iframe>
                     {/* <img src="https://drive.google.com/file/d/1k0SDHHUbug-4NqL4gphyEKrf4UCA60F8/view?usp=sharing" alt="Bleh"/> */}
                 </div>
             </div>

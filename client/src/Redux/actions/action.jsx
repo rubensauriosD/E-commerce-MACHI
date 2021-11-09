@@ -418,11 +418,12 @@ export const setOrdenP = (orden) => {
   }
 } */
 
- export const checkout=(payer)=>{
+ export const checkout=(payer, items)=>{
+   console.table(items)
    return (dispatch)=>{
      const setTime=null
     // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
-      axios.post("/checkout",payer,{withCredentials:true}).then(resul=>{
+      axios.post("/checkout", {payer , items} /*, {withCredentials:true} */).then(resul=>{
          console.log(resul.data)
         const windowMercado=window.open(resul.data,"_blank",
          "width=500,height=600")
