@@ -17,8 +17,8 @@ module.exports =(sequelize)=>{
         precio:{
             type:DataTypes.DOUBLE,
         },
-        categoria:{
-            type: DataTypes.ENUM("Cajones y Cultivos","Plantines y Semillas","Composteras","Insumos y Herramientas para Huertas","Lombrices Rojas Californeanas"),
-        }
+        // categoria:{
+        //     type: DataTypes.ENUM("Cajones y Cultivos","Plantines y Semillas","Composteras","Insumos y Herramientas para Huertas","Lombrices Rojas Californeanas"),
+        // }
     }) 
 }

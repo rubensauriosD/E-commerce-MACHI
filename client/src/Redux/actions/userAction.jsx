@@ -36,12 +36,13 @@ export const postUser = (user) => {
   };
   //Iniciar Sesion
   export const IniciarSesion = (usuario, history) => {
+    console.log(usuario)
     return (dispatch) => {
       axios.post("/usuarios/inicioSesion", usuario,{withCredentials:true}).then((resultadoDeUsuario) => {
         dispatch({ type: constanteUsuarios.INICIARS, payload: resultadoDeUsuario.data });
         if (resultadoDeUsuario.data.tipo === "admin") history.push("/Admin");
         else if (resultadoDeUsuario.data.tipo === "user") history.push("/cart");
-      });
+      }).catch(e=>console.log(e));
     };
   };
   export const cerrarSesion = () => {

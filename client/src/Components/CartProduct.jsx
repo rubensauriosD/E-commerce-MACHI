@@ -8,18 +8,18 @@ const CartProduct = ({
   categoria,
   precio,
   descripcion,
-  id,
+  idCarrito,
   qty,
 }) => {
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    dispatch(removeFromCart(id));
+    dispatch(removeFromCart(idCarrito));
   };
   const handleOnQtyIncrement = () => {
-    dispatch(changetQty(id, "increment"));
+    dispatch(changetQty(idCarrito, "increment"));
   };
   const handleOnQtyDecrement = () => {
-    dispatch(changetQty(id, "decrement"));
+    dispatch(changetQty(idCarrito, "decrement"));
   };
 
   const formatter = new Intl.NumberFormat("en-US", {

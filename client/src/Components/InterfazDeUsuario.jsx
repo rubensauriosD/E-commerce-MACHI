@@ -8,6 +8,7 @@ import { Button, CardActionArea } from "@mui/material";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import {cerrarSesion} from "../Redux/actions/userAction"
+import { removeFromCart } from "../Redux/actions/cartAction"
 export default function InterfazDeUsuario({ datosUsuario }) {
   const dispatch=useDispatch()
   const history=useHistory()
@@ -19,6 +20,7 @@ export default function InterfazDeUsuario({ datosUsuario }) {
   }
   const cerradoDeSesion=()=>{
     dispatch(cerrarSesion())
+    dispatch(removeFromCart())
   }
   return (
     <div>

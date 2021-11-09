@@ -54,10 +54,10 @@ async function putUsuario(req, res) {
 }
 
 async function postUsuario(req, res) {
-  const { nombre, apellido, email, contrasenia, tipo } = req.body;
+  const { nombre, apellido, email, contrasenia } = req.body;
 
   try {
-    if (nombre && apellido && email && contrasenia && tipo) {
+    if (nombre && apellido && email && contrasenia) {
       const verficadorDeUsuario = await Usuario.findAll({ where: { email } });
       if (verficadorDeUsuario.length === 0) {
         const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
@@ -66,7 +66,7 @@ async function postUsuario(req, res) {
           apellido: apellido,
           email: email,
           contrasenia: contraseñaEncriptada,
-          tipo: tipo,
+          tipo: "user",
         });
         res.json({ message: "Success" });
       } else {
@@ -79,43 +79,38 @@ async function postUsuario(req, res) {
     }
   } catch (error) {
     console.log(error);
-    +apellidores.json({ error: "this is the error: " + error });
+    apellidores.json({ error: "this is the error: " + error });
   }
 }
 
 async function inicioDeSesion(req, res) {
   const { carritos } = req.body;
-  //console.log("aca el carrito: ",carritos&& carritos)
-  //console.log("el id de los productos: ",idProductos)
-  //const {id} = req.user;
+
   const usuario=req.user
   try {
     if(carritos &&carritos.length){
     const carrito = await Promise.all(
-      carritos.map((carrito) =>
+      carritos.map((carrito) => 
         Carrito.findOrCreate({
           where: { idCarrito: carrito.idCarrito },
           defaults: {
             idProducto: carrito.idProducto,
-            cantidad: carrito.cantidad,
+            cantidad: carrito.qty,
             nombre: carrito.nombre,
             precio: carrito.precio,
-            categoria: carrito.categoria,
           },
-        })
+        }) 
       )
     );
-    console.log("id de los carritos: ",carritos.map(carrito=>carrito.idCarrito))
-       //const agregador = await usuario.setModels(carritos.map(cart=>cart.idCarrito))
-    //console.log("aca en la base de datos: ",carrito);
-    await usuario.setModels(carritos.map(cart=>cart.idCarrito))
+    //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
+    await usuario.addModels(carrito.flat().map(cart=>cart.idCarrito))
     const usuarioActualizado = await Usuario.findByPk(usuario.id,{include:{model:Carrito}})
-    res.json(usuarioActualizado);
+    res.json(usuarioActualizado);  
     }
     else{
+      console.log("pasor por aca")
       res.json(usuario)
     }
-
   } catch (e) {
     res.status(401).json({ error: `${e}` });
   }
