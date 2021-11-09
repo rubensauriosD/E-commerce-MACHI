@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../../Redux/actions/action";
+import { getProducts, setPagina, setOrdenA, setOrdenP, setFiltroC } from "../../Redux/actions/productAction";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faRedo } from '@fortawesome/free-solid-svg-icons';
 
 export default function FiltrosYOrden () {
-    const { nombre, ordenA, ordenP, filtroC } = useSelector(state => state)
+    const { nombre, ordenA, ordenP, filtroC } = useSelector(state => state.productos)
     const dispatch = useDispatch()
 
     const handleOrdenPorNombre = (e) => {

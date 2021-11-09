@@ -1,7 +1,7 @@
 import "../../Styles/SearchBar.css"
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getProducts, setNombre, setPagina } from "../../Redux/actions/action"
+import { getProducts, setNombre, setPagina } from "../../Redux/actions/productAction"
 
 export default function SearchBar() {
     const [input, setInput] = useState("")

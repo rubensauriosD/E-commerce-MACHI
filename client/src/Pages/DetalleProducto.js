@@ -2,17 +2,16 @@ import "../Styles/DetalleProducto.css"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory } from 'react-router'
-import {getProductId, removeProduct, addToCartGuest} from "../Redux/actions/action"
+import {addToCartGuest} from "../Redux/actions/cartAction"
+import {getProductId, removeProduct, getComentarios} from "../Redux/actions/productAction"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { getComentarios } from "../Redux/actions/action";
 import CommentProduct from "../Components/Productos/CommentProduct"
 import "../Styles/Comments.css";
 
-
 export default function DetalleProducto({props, id}){
 
-    const {Product} =useSelector(state=>state)
+    const {Product, comentarios} =useSelector(state=>state.productos)
     const dispatch=useDispatch()
     const history = useHistory()
 
@@ -20,8 +19,7 @@ export default function DetalleProducto({props, id}){
         dispatch(getComentarios(id))
     }, [getComentarios])
 
-    const comments = useSelector((state) => state.comentarios)
-    const productComment = comments.filter((c) => c.idProducto === id)
+    const productComment = comentarios.filter((c) => c.idProducto === id)
 
     const [input, setInput] = useState(false);
     const [datos, setDatos] = useState({});

@@ -17,9 +17,9 @@ app.post('/', (req, res) => {
          items: [
           {
             //category_id: req.body.id, // 1235641348
-            title: 'Compostera', //req.body.nombre, // nombre del producto
-            unit_price: 8000, //parseInt(req.body.precio),
-            quantity: 2,//parseInt(req.body.cantidad), //esto hay q crearlo
+            title: req.body.title, // nombre del producto
+            unit_price: parseInt(req.body.unit_price),
+            quantity: parseInt(req.body.quantity), //esto hay q crearlo
             currency_id: 'ARS'
           }
         ], 

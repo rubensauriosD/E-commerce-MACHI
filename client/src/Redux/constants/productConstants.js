@@ -1,0 +1,14 @@
+export const POST_PRODUCT = "POST_PRODUCT";
+export const GET_PRODUCTS = "GET_PRODUCTS";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const PUT_PRODUCT = "PUT_PRODUCT";
+export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
+export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+export const FILTRADOCATEGORIAS = "FILTRAR_POR_CATEGORIAS";
+export const GET_PRODUCTS_ADMIN = "GET_PRODUCTS_ADMIN";
+export const SET_NOMBRE = "SET_NOMBRE";
+export const SET_PAGINA = "SET_PAGINA";
+export const SET_ORDEN_A = "SET_ORDEN_A";
+export const SET_ORDEN_P = "SET_ORDEN_P";
+export const SET_FILTRO_C = "SET_FILTRO_C";
+export const GET_COMENTARIOS = "GET_COMENTARIOS";

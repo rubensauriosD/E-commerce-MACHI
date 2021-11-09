@@ -7,7 +7,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button, CardActionArea } from "@mui/material";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
-import {cerrarSesion} from "../Redux/actions/action"
+import {cerrarSesion} from "../Redux/actions/userAction"
 export default function InterfazDeUsuario({ datosUsuario }) {
   const dispatch=useDispatch()
   const history=useHistory()

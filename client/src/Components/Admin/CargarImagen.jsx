@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postImage } from '../../Redux/actions/action';
+import { postImage } from '../../Redux/actions/imageAction';
 import { Button, TextField } from "@mui/material";
 import axios from 'axios';
 
