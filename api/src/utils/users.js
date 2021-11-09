@@ -90,6 +90,7 @@ async function inicioDeSesion(req, res) {
   //const {id} = req.user;
   const usuario=req.user
   try {
+    if(carritos &&carritos.length){
     const carrito = await Promise.all(
       carritos.map((carrito) =>
         Carrito.findOrCreate({
@@ -105,12 +106,16 @@ async function inicioDeSesion(req, res) {
       )
     );
     console.log("id de los carritos: ",carritos.map(carrito=>carrito.idCarrito))
-   
-    //const agregador = await usuario.setModels(carritos.map(cart=>cart.idCarrito))
+       //const agregador = await usuario.setModels(carritos.map(cart=>cart.idCarrito))
     //console.log("aca en la base de datos: ",carrito);
     await usuario.setModels(carritos.map(cart=>cart.idCarrito))
     const usuarioActualizado = await Usuario.findByPk(usuario.id,{include:{model:Carrito}})
     res.json(usuarioActualizado);
+    }
+    else{
+      res.json(usuario)
+    }
+
   } catch (e) {
     res.status(401).json({ error: `${e}` });
   }
