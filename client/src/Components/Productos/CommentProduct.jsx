@@ -25,7 +25,7 @@ export default function Comment({ text, id, setInput }) {
     const [errors, setErrors] = useState({})
 
 
-    const usuario = useSelector((e) => e.User)
+    const usuario = useSelector((state) => state.usuario.User)
 
 
 

@@ -3,7 +3,7 @@ import "./ProductStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartGuest } from "../../Redux/actions/action";
+import { addToCartGuest } from "../../Redux/actions/cartAction";
 import React from "react";
 import DetalleProducto from "../../Pages/DetalleProducto";
 
@@ -12,11 +12,9 @@ export default function Product({ id, nombre, imagen, precio }) {
   const handleOnClick = () => {
     dispatch(addToCartGuest(id));
   };
-  let flag=false
-  const usuario = useSelector((state)=>state.User)
+  const usuario = useSelector((state)=>state.usuario.User)
   if(Object.values(usuario).length){
     console.log("existe el usuario")
-    flag=true
   }
 
   <DetalleProducto id={id}></DetalleProducto>
@@ -42,8 +40,7 @@ export default function Product({ id, nombre, imagen, precio }) {
             </div>
           </Link>
           <div className="carrito-products">
-          <button onClick={handleOnClick} disabled={!flag}>Usuario</button>
-            <button onClick={handleOnClick} disabled ={(flag)}>
+            <button onClick={handleOnClick}>
               <FontAwesomeIcon
                 icon={faShoppingCart}
                 style={{ color: "grey" }}

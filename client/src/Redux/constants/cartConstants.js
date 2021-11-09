@@ -1,0 +1,3 @@
+export const ADD_TO_CART_GUEST = "ADD_TO_CART_GUEST";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const CHANGE_QTY = "CHANGE_QTY";

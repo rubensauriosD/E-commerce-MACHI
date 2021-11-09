@@ -7,6 +7,7 @@ const ProductosModel = require('./models/productos');
 const ImagenesModel = require('./models/imagenes');
 const ComentariosModel = require('./models/comentarios');
 const FacturaModel=require("./models/factura")
+const CarritosModel=require("./models/carrito")
 
 let sequelize =
   process.env.NODE_ENV === "production"
@@ -42,7 +43,7 @@ const Usuario = UsuarioModel(sequelize)
 const Producto = ProductosModel(sequelize)
 const Imagen = ImagenesModel(sequelize)
 const Comentario = ComentariosModel(sequelize)
-
+const Carrito = CarritosModel(sequelize)
 // *Relaciones*
 // Usuario(admin) - Producto:
 Usuario.hasMany(Producto);
@@ -53,6 +54,11 @@ Producto.belongsTo(Usuario);
 Usuario.hasMany(Factura)
 Factura.belongsTo(Usuario)
 Factura.hasMany(Producto)
+
+//Relacion entre Usuario-carrito
+
+Usuario.hasMany(Carrito)
+Carrito.belongsTo(Usuario)
 
 //comentario - Producto - Usuario:
 Producto.hasMany(Comentario);
@@ -72,6 +78,7 @@ module.exports = {
   Imagen,
   Comentario,
   Factura,
+  Carrito,
   Op
 };
 

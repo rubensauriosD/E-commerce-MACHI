@@ -29,7 +29,7 @@ app.get(
   (req, res) => console.log(req.user)
 );
 app.get("/test", UsuarioAutenticado, (req, res) =>
-  res.json({ message: succes, usuario: req.user })
+  res.json({ message: "success", usuario: req.user })
 );
 app.route("/cerrarSesion").get(pedidoCerrarSesion);
 

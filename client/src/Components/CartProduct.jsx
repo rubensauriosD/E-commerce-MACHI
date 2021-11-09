@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { changetQty, removeFromCart } from "../Redux/actions/action";
+import { changetQty, removeFromCart } from "../Redux/actions/cartAction";
 
 const CartProduct = ({
   imagen,

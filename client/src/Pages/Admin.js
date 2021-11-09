@@ -1,7 +1,8 @@
 import React from "react";
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import {getProductsAdmin, getImages } from '../Redux/actions/action';
+import {getImages} from '../Redux/actions/imageAction'
+import {getProductsAdmin} from '../Redux/actions/productAction';
 import CargarProducto from '../Components/Admin/CargarProducto'
 import CargarImagen from "../Components/Admin/CargarImagen";
 import EditarProducto from "../Components/Admin/EditarProducto";
