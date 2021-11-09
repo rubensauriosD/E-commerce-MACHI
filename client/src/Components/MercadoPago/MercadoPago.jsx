@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import './MercadoPagoStyle.css';
 import {useDispatch} from "react-redux";
+import CartProductCheckout from "./CartProductCheckout";
+import PrecioTotal from "../PrecioTotal"; 
 import { checkout } from "../../Redux/actions/cartAction";
-import CartProduct from "../CartProduct";
-import PrecioTotal from "../PrecioTotal";
 
 function validate(input){
     // const contenedor = document.querySelector(".contenedor")
@@ -41,18 +41,6 @@ export default function MercadoPago(){
  
     const dispatch=useDispatch()
 
-
-
-/* const [ input, setInput] = useState({ nombre:"", precio:"", cantidad:"",  })
-
-function handleChange(e) {
-    setInput({
-        ...input,
-        [e.target.name]: e.target.value
-    })
-
-} */ 
-
 const [payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
 
 const [error, setError] = useState({})
@@ -72,18 +60,7 @@ function handleChange(e) {
         [e.target.name]: e.target.value
     }))
 }
-/*payer: {
-          phone: { area_code: '', number: '' },
-          address: { zip_code: '', street_name: '', street_number: null },
-          email: '',
-          identification: { number: '', type: '' },
-          name: '',
-          surname: '',
-          date_created: null,
-          last_purchase: null
-        },
 
-*/
         const items= cartItems.map(producto => {
             return(
                     {
@@ -100,27 +77,11 @@ function handleChange(e) {
             e.preventDefault()
             dispatch(checkout(payer, items))
         } 
+       
         
-
     return (
+        <div className="contenedorMercadoGral">
             <div>
-                <div>       
-                    {cartItems && cartItems.map((producto) => {
-                        return (
-                        <CartProduct
-                            key={producto.id}
-                            id={producto.id}
-                            imagen={producto.imagen}
-                            nombre={producto.nombre}
-                            categoria={producto.categoria}
-                            precio={producto.precio}
-                            qty={producto.qty}
-                        />
-                        );
-                    })}
-                    <PrecioTotal cartItems={cartItems}/>
-                </div>
-                <div>
                 <form  onSubmit={handleOnSubmit} >
                     <Box>
                         <TextField error={error.nombre}  className="input-buyer" onChange={handleChange} value={payer.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
@@ -138,19 +99,23 @@ function handleChange(e) {
                         <Button  sx={{justifySelf:"center"}} variant="contained" color="success" type="submit">Finalizar Compra</Button>
                         
                     </Box>
-                
-                {/* <div>
-                    <form action="http://localhost:3001/checkout" method="POST" >
-                        <Box>
-                            <TextField onChange={(e)=>handleChange(e)} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
-                            <TextField onChange={handleChange} name="precio" type="number" label="Precio" variant="filled" color="success"/><br/><br/>
-                            <TextField onChange={handleChange} name="cantidad" type="number" label="Cantidad" variant="filled" color="success"/><br/><br/>
-                            <Button type="submit">Comprar</Button>
-                        </Box>     
-                    </form>
-                </div>*/}
                 </form>
-                </div>
             </div>
-        )
-    }
+            <div>       
+                {cartItems && cartItems.map((producto) => {
+                    return (
+                     <CartProductCheckout
+                            key={producto.id}
+                            imagen={producto.imagen}
+                            nombre={producto.nombre}
+                            precio={producto.precio}
+                            quantity={producto.qty}
+                        />
+                    );
+                })}
+                    <PrecioTotal cartItems={cartItems}/>
+            </div>        
+        </div>
+    )
+}
+

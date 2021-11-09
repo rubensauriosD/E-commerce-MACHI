@@ -15,7 +15,7 @@ export default function Nosotros() {
                     Tambien fomentamos una alimentación 100% natural con el cultivo agroecológico, donde ofrecemos un servicio completo de instalación de huertas urbanas en los hogares, cajones de cultivo, Plantines, Tierra abonada, Humus de lombriz, Compost y pesticidas orgánicos.
 
                     </p>
-                    <iframe className="video" src="https://drive.google.com/file/d/1Ke2dUE25oVJUvzhvQlSuPkW1a8J1nJ_-/preview" ></iframe>
+                    <iframe title="video presentacion Machi" className="video" src="https://drive.google.com/file/d/1Ke2dUE25oVJUvzhvQlSuPkW1a8J1nJ_-/preview" ></iframe>
                 </div>
             </div>
         </div>

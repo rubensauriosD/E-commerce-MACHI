@@ -1,3 +1,12 @@
+.contenedorMercadoGral{
+    width: 80%;
+    margin: auto;
+    margin-top: 5vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .input-buyer{  
     width: 400px;
     
@@ -13,4 +22,27 @@
 
 .input-buyer-short{
     width: 100px;
+}
+.Mercado-infoContainer{
+    box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+    width: 24vw;
+    height: 8vw;
+    padding: 12px; 
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Mercado-allInfo{
+    width: 30%;
+    
+}
+.Mercado-textInfo{
+    width: 70%;
+    
+}
+.Mercado-imgInfo{
+    width: 120px;
+    height: 100%;
+    object-fit: cover;
 }

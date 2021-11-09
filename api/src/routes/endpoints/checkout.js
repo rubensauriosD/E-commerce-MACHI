@@ -7,29 +7,26 @@ mercadopago.configure({
     access_token: YOUR_ACCESS_TOKEN
 }); 
 
-
 app.post('/', (req, res) => {
     // Crea un objeto de preferencia
-
+   
+  const itemsMercadoPago=req.body.items
     //const [ payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"",  codigoPostal:"", calle:"", altura:"",  })    
-
     let preference = {
-         items: [
-          {
-            //category_id: req.body.id, // 1235641348
-            title: req.body.title, // nombre del producto
-            unit_price: parseInt(req.body.unit_price),
-            quantity: parseInt(req.body.quantity), //esto hay q crearlo
-            currency_id: 'ARS'
-          }
-        ], 
+         items: itemsMercadoPago.map(item=>({ 
+          title: item.title, // nombre del producto
+          unit_price: parseInt(item.unit_price),
+          quantity: parseInt(item.quantity), //esto hay q crearlo
+          currency_id: 'ARS'
+         })
+         ),
         payer: {
-          phone: { area_code: req.body.codigo, number: parseInt(req.body.telefono) },
-          address: { zip_code: req.body.codigoPostal, street_name: req.body.calle, street_number: parseInt(req.body.altura) },
-          email: req.body.email,
-          identification: { number: req.body.codigo, type: req.body.telefono },
-          name: req.body.nombre,
-          surname: req.body.apellido,
+          phone: { area_code: req.body.payer.codigo, number: parseInt(req.body.payer.telefono) },
+          address: { zip_code: req.body.payer.codigoPostal, street_name: req.body.payer.calle, street_number: parseInt(req.body.payer.altura) },
+          email: req.body.payer.email,
+          identification: { number: req.body.payer.codigo, type: req.body.payer.telefono },
+          name: req.body.payer.nombre,
+          surname: req.body.payer.apellido,
           date_created: null,
           last_purchase: null
         },
@@ -49,3 +46,12 @@ app.post('/', (req, res) => {
 
 
 module.exports = app;
+        //  [
+        //   {
+        //     //category_id: req.body.id, // 1235641348
+        //     title: req.body.title, // nombre del producto
+        //     unit_price: parseInt(req.body.unit_price),
+        //     quantity: parseInt(req.body.quantity), //esto hay q crearlo
+        //     currency_id: 'ARS'
+        //   }
+        // ], 

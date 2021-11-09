@@ -12,7 +12,7 @@ export default function EditarProducto(){
 
     useEffect(() =>{
         dispatch(getUsers());
-    },[])
+    },[dispatch])
 
     function handleChangeEditar(e) {
         setinputsTipo({

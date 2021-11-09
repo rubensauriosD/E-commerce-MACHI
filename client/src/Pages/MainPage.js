@@ -3,7 +3,6 @@ import Categorias from "../Components/Categorias/Categorias";
 import Courses from "../Components/Courses/Courses";
 import Carrusel from "../Components/Carrusel/Carrusel"
 import { categoria } from "../Elements/ArrayCategoria";
-import logo from "../../src/logo.png";
 
 
 export default function MainPage() {
@@ -11,7 +10,7 @@ export default function MainPage() {
 
   return (
     <div>
-      {/* <img src={logo} width="130px"/> */}
+    
       <div className="carruselDiv">
         <Carrusel />
       </div>
