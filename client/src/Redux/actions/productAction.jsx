@@ -5,7 +5,7 @@ import axios from 'axios';
 export const postProduct = (producto, imagen) => {
     return (dispatch) => {
       axios
-        .post(`/productos?imagen=${imagen}`, producto,{withCredentials:true})
+        .post(`/productos?imagen=${imagen}`, producto/* ,{withCredentials:true} */)
         .then(() => {
           return dispatch({
             type: productoConstante.POST_PRODUCT,
@@ -27,7 +27,7 @@ export const postProduct = (producto, imagen) => {
           }&ordenP=${ordenP ? ordenP : ""}&filtroC=${
             filtroC ? filtroC : ""
           }&nombre=${nombre ? nombre : ""}`
-          ,{withCredentials:true});
+          /* ,{withCredentials:true} */);
         return dispatch({
           type: productoConstante.GET_PRODUCTS,
           payload: response.data,
@@ -41,7 +41,7 @@ export const postProduct = (producto, imagen) => {
   export const getProductsAdmin = () => {
     return async (dispatch) => {
       try {
-        const response = await axios.get(`/productos`,{withCredentials:true});
+        const response = await axios.get(`/productos`/* ,{withCredentials:true} */);
         return dispatch({
           type: productoConstante.GET_PRODUCTS_ADMIN,
           payload: response.data,
@@ -57,7 +57,7 @@ export const postProduct = (producto, imagen) => {
   export const deleteProduct = ({ id }) => {
     return (dispatch) => {
       axios
-        .delete(`/productos/${id}`,{withCredentials:true})
+        .delete(`/productos/${id}`/* ,{withCredentials:true} */)
         .then((res) => {
           return dispatch({
             type: productoConstante.DELETE_PRODUCT,
@@ -76,7 +76,7 @@ export const postProduct = (producto, imagen) => {
   export const putProduct = ({ id }) => {
     return (dispatch) => {
       axios
-        .put(`/productos/${id}`,{withCredentials:true})
+        .put(`/productos/${id}`/* ,{withCredentials:true} */)
         .then((productUpdated) => {
           return dispatch({
             type: productoConstante.PUT_PRODUCT,
@@ -93,7 +93,7 @@ export const postProduct = (producto, imagen) => {
   export const getProductId = (id) => {
     return (dispatch) => {
       axios
-        .get(`/productos/${id}`,{withCredentials:true})
+        .get(`/productos/${id}`/* ,{withCredentials:true} */)
         .then((productDetail) => {
           return dispatch({
             type: productoConstante.GET_PRODUCT_ID,

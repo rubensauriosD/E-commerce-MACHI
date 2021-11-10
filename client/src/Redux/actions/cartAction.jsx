@@ -45,12 +45,12 @@ export const changetQty = (id, action) => (dispatch,getState)=>{
 };
 
 export const checkout=(payer, items)=>{
-  //const data={payer,items}
-  console.log("se disparo el boton")
+  console.table(items)
   return (dispatch)=>{
+    const setTime=null
    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
-     axios.post("/checkout",payer, items,{withCredentials:true}).then(resul=>{
-      console.log("llego",resul.data)
+     axios.post("/checkout", {payer , items} /*, {withCredentials:true} */).then(resul=>{
+        console.log(resul.data)
        const windowMercado=window.open(resul.data,"_blank",
         "width=500,height=600")
       }).catch(e=>console.log(e))
