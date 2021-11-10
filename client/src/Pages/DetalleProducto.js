@@ -6,31 +6,19 @@ import {addToCartGuest} from "../Redux/actions/cartAction"
 import {getProductId, removeProduct, getComentarios} from "../Redux/actions/productAction"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import CommentProduct from "../Components/Productos/CommentProduct"
 import "../Styles/Comments.css";
 
-export default function DetalleProducto({props, id}){
+export default function DetalleProducto({props}){
 
-    const {Product, comentarios} =useSelector(state=>state.productos)
+    const {Product, commets} =useSelector(state=>state.productos)
     const dispatch=useDispatch()
     const history = useHistory()
 
     useEffect(() => {
-        dispatch(getComentarios(id))
+        dispatch(getComentarios(props))
     }, [getComentarios])
 
-    const productComment = comentarios.filter((c) => c.idProducto === id)
-
-    const [input, setInput] = useState(false);
-    const [datos, setDatos] = useState({});
-    const handleClik = (e) => {
-        if (input === false) {
-            setInput(true)
-            setDatos(e)
-        } else {
-            setInput(false)
-        }
-    }
+    const productComment = commets.filter((c) => c.productoId === props)
 
     const handleOnClick = () => {
         dispatch(addToCartGuest(Product.id));
@@ -65,11 +53,7 @@ export default function DetalleProducto({props, id}){
                     </div>
                 </div>
                 <div>
-                    <div>Deja tu comentario
-                        <div>
-                            <CommentProduct setInput={() => setInput()} id=     {datos.id} text="Dejá una reseña de nuestro producto" >
-                            </CommentProduct>
-                        </div>
+                    <div>Reseñas de los productos
                         <div className="comm-scrll">
                             {
                                 productComment?.map((e) => {

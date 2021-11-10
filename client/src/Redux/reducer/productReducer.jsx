@@ -8,9 +8,8 @@ const productState = {
     ordenA: "",
     ordenP: "",
     filtroC: "",
-    comentarios: [],
+    commets: [],
     pagina: 1,
-    comentarios: []
 }
 
 export const productReducer = (state = productState, {type, payload}) => {
@@ -85,7 +84,7 @@ export const productReducer = (state = productState, {type, payload}) => {
     case productoConstante.GET_COMENTARIOS: {
       return {
         ...state,
-        comentarios: payload
+        commets: payload
       }
     }
     default:
