@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { changetQty, removeFromCart } from "../Redux/actions/cartAction";
+import { changetQty, removeFromCart,CambiarCantidadDb,removerDeDb } from "../Redux/actions/cartAction";
 
 const CartProduct = ({
   imagen,
@@ -8,18 +8,26 @@ const CartProduct = ({
   categoria,
   precio,
   descripcion,
-  idCarrito,
+  id,
+  idProducto,
+  usuarioId,
   qty,
 }) => {
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    dispatch(removeFromCart(idCarrito));
+    usuarioId ?dispatch(removerDeDb(id))
+    :
+    dispatch(removeFromCart(id));
   };
   const handleOnQtyIncrement = () => {
-    dispatch(changetQty(idCarrito, "increment"));
+    usuarioId ? dispatch(CambiarCantidadDb(id,1))
+    :
+    dispatch(changetQty(id, "increment"));
   };
   const handleOnQtyDecrement = () => {
-    dispatch(changetQty(idCarrito, "decrement"));
+    usuarioId ? dispatch(CambiarCantidadDb(id,-1))
+    :
+    dispatch(changetQty(id, "decrement"));
   };
 
   const formatter = new Intl.NumberFormat("en-US", {

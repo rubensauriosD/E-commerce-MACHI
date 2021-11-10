@@ -45,7 +45,7 @@ const [payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono
 
 const [error, setError] = useState({})
 
-const { cartItems } = useSelector((state) => state.cart);
+const { itemsCarritoDb } = useSelector((state) => state.cart);
 
 
 function handleChange(e) {
@@ -61,12 +61,12 @@ function handleChange(e) {
     }))
 }
 
-        const items= cartItems.map(producto => {
+        const items= itemsCarritoDb.map(producto => {
             return(
                     {
                         title: producto.nombre,
                         unit_price: producto.precio,
-                        quantity: producto.qty,
+                        quantity: producto.cantidad,
                                
                     }
                 ) 
@@ -102,7 +102,7 @@ function handleChange(e) {
                 </form>
             </div>
             <div>       
-                {cartItems && cartItems.map((producto) => {
+                {itemsCarritoDb && itemsCarritoDb.map((producto) => {
                     return (
                      <CartProductCheckout
                             key={producto.id}
@@ -113,7 +113,7 @@ function handleChange(e) {
                         />
                     );
                 })}
-                    <PrecioTotal cartItems={cartItems}/>
+                    <PrecioTotal cartItems={itemsCarritoDb}/>
             </div>        
         </div>
     )

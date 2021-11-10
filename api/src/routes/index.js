@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const imagenes = require('./endpoints/imagen')
+const imagenes = require('./endpoints/imagen') 
 const productos = require('./endpoints/producto')
 const usuarios = require('./endpoints/usuario')
 const comentarios = require('./endpoints/comentarios')

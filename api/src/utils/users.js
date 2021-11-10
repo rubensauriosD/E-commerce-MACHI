@@ -98,14 +98,14 @@ async function inicioDeSesion(req, res) {
             cantidad: carrito.qty,
             nombre: carrito.nombre,
             precio: carrito.precio,
+            imagen: carrito.imagen
           },
         }) 
       )
     );
     //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
     await usuario.addModels(carrito.flat().map(cart=>cart.idCarrito))
-    const usuarioActualizado = await Usuario.findByPk(usuario.id,{include:{model:Carrito}})
-    res.json(usuarioActualizado);  
+    res.json(usuario);  
     }
     else{
       console.log("pasor por aca")
