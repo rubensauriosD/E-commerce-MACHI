@@ -2,8 +2,9 @@ import {cartConstantes} from "../constants/tipadosDespacho";
 
 const CART_INITIAL_STATE = {
   cartItems: localStorage.getItem("cart")
-? JSON.parse(localStorage.getItem("cart"))
-: []
+    ? JSON.parse(localStorage.getItem("cart"))
+    : [],
+  itemsCarritoDb:[]
 };
 export const cartReducer = (state = CART_INITIAL_STATE, {type, payload}) =>{
     switch (type) {
@@ -11,13 +12,13 @@ export const cartReducer = (state = CART_INITIAL_STATE, {type, payload}) =>{
           let item = payload;
           console.log(item)
             
-            const existItem = state.cartItems.find((x) => x.id === item.id)
+            const existItem = state.cartItems.find((x) => x.idCarrito === item.idCarrito)
             if (existItem) {
               item = { ...item, qty: ++existItem.qty };
                 return {
                   ...state,
                   cartItems: state.cartItems.map((x) =>
-                    x.product === existItem.id ? item : x
+                    x.product === existItem.idCarrito ? item : x
                   ),
                 };
               } else {
@@ -48,11 +49,11 @@ export const cartReducer = (state = CART_INITIAL_STATE, {type, payload}) =>{
         case cartConstantes.REMOVE_FROM_CART:
             return {
             ...state,
-            cartItems: state.cartItems.filter((x) => x.id !== payload)
+            cartItems: state.cartItems.filter((x) => x.idCarrito !== payload)
         };
         case cartConstantes.CHANGE_QTY:
           const { id, action } = payload;
-          let itemSelected = state.cartItems.find((x) => x.id === id);
+          let itemSelected = state.cartItems.find((x) => x.idCarrito === id);
           if (action === "increment") {
             itemSelected.qty++;
             return {
@@ -65,6 +66,43 @@ export const cartReducer = (state = CART_INITIAL_STATE, {type, payload}) =>{
               ...state,
               cartItems: [...state.cartItems],
             };
+          }
+          case cartConstantes.OBTENCIONDELADB:{
+            console.log("si paso por aca con: ",payload)
+            state.itemsCarritoDb.length=0
+            return{
+              ...state,
+              itemsCarritoDb:state.itemsCarritoDb.concat(payload)
+            }
+          }
+          case cartConstantes.REMOVIDODELADB:{
+            state.itemsCarritoDb.length=0
+            return{
+              ...state,
+              itemsCarritoDb:state.itemsCarritoDb.concat(payload)
+            }
+          }
+          case cartConstantes.CAMBIOCANTIDAD:{
+            state.itemsCarritoDb.length=0
+            return{
+              ...state,
+              itemsCarritoDb:state.itemsCarritoDb.concat(payload)
+            }
+          }
+          case cartConstantes.ANIADIRALCARRO:{
+            state.itemsCarritoDb.length=0
+            return{
+              ...state,
+              itemsCarritoDb:state.itemsCarritoDb.concat(payload)
+            }
+          }
+          case cartConstantes.REMOVERDELCARROCERRARSESION:{
+            console.log("llego al reducer")
+            return{
+              ...state,
+              itemsCarritoDb:[],
+              cartItems:[]
+            }
           }
             default:
                 return state;
