@@ -7,7 +7,7 @@ app.get('/',getProductos)
 app.post('/',UsuarioAutenticadoAdmin,postProductos)
 app.route("/:id")
     .get(getProducto)
-    .put(UsuarioAutenticadoAdmin,putProductos)
-    .delete(UsuarioAutenticadoAdmin,deleteProductos)
+    .put(putProductos)
+    .delete(deleteProductos)
 
 module.exports = app;

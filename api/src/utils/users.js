@@ -34,23 +34,19 @@ async function deleteUsuario(req, res) {
 async function putUsuario(req, res) {
   const { id } = req.params;
 
-  const { nombre, apellido, email, contraseña, tipo } = req.body;
-
-  await Usuario.update(
+  const { nombre, apellido, email, tipo } = req.body;
+  const user = await Usuario.findByPk(id);
+  await user.update(
     {
       nombre,
       apellido,
       email,
-      contraseña,
       tipo,
-    },
-    {
-      where: { id: id },
     }
   );
-
-  const user = await Usuario.findByPk(id);
-  res.json(user);
+  await user.save()
+  const todosLosUsuarios = await Usuario.findAll()
+  res.json(todosLosUsuarios);
 }
 
 async function postUsuario(req, res) {
@@ -123,21 +119,25 @@ function pedidoCerrarSesion(req, res) {
 async function inicioFacebook(req, res) {
   const usuario = req.user;
   const {carritos} = req.body
-  console.table("aca lo que llega por carrito: ",carritos)
+  console.log("aca lo que llega por carrito: ",carritos)
   try{
-    const carritosCreadosOEncontrados= await Promise.all(carritos.map(carrito=>{
-      return Carrito.findOrCreate({
-        where: { idCarrito: carrito.idCarrito },
-        defaults: {
-          idProducto: carrito.idProducto,
-          cantidad: carrito.qty,
-          nombre: carrito.nombre,
-          precio: carrito.precio,
-          imagen: carrito.imagen
-        },
-      }) 
-    }))
-    await usuario.addModels(carritosCreadosOEncontrados.flat().map(carrito=>carrito.idCarrito))
+    if(carritos){
+      console.log("paso por aca")
+      const carritosCreadosOEncontrados= await Promise.all(carritos.map(carrito=>{
+        return Carrito.findOrCreate({
+          where: { idCarrito: carrito.idCarrito },
+          defaults: {
+            idProducto: carrito.idProducto,
+            cantidad: carrito.qty,
+            nombre: carrito.nombre,
+            precio: carrito.precio,
+            imagen: carrito.imagen
+          },
+        }) 
+      }))
+      await usuario.addModels(carritosCreadosOEncontrados.flat().map(carrito=>carrito.idCarrito))
+      return res.json(usuario)
+    }
     res.json(usuario)
   }catch(e){
     res.status(401).json({error:`el error que a ocurrido al intentar loguearse con el usuario: ${usuario.nombre} es: ${e}`})

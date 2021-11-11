@@ -44,7 +44,7 @@ app.route("/").get(UsuarioAutenticadoAdmin, getUsuario).post(postUsuario);
 
 app
   .route("/:id")
-  .put(UsuarioAutenticado, putUsuario)
-  .delete(UsuarioAutenticadoAdmin, deleteUsuario);
+  .put(putUsuario)
+  .delete(deleteUsuario);
 
 module.exports = app;
