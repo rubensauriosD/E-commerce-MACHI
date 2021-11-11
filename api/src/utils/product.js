@@ -1,4 +1,4 @@
-const { Producto, Op } = require("../db");
+const { Producto, Op, cloud } = require("../db");
 
 async function getProductos(req, res) {
   try {
@@ -73,7 +73,9 @@ async function deleteProductos(req, res) {
   const { id } = req.params;
 
   let product = await Producto.findByPk(id);
+  const idImagenCloudinary = product.imagen.split('/').slice(-1).split('.').shift();
   await product.destroy();
+  await cloud.uploader.destroy(idImagenCloudinary);
   const todosLosProductos = await Producto.findAll
   res.json(todosLosProductos); //devuelvo el producto eliminado
 }
@@ -84,6 +86,7 @@ async function putProductos(req, res) {
   const { nombre, precio, imagen, descripcion, disponibilidad, categoria,cantidadDeProducto } = req.body;
   try{
     const product = await Producto.findByPk(id);
+    const idImagenCloudinary = product.imagen.split('/').slice(-1).split('.').shift();
     await product.update(
       {
         nombre, 
@@ -96,6 +99,7 @@ async function putProductos(req, res) {
       }
     );
       await product.save()
+      await cloud.uploader.destroy(idImagenCloudinary);
       const todosLosProductos=await Producto.findAll()
       res.json(todosLosProductos);
   }catch(e){
@@ -105,27 +109,10 @@ async function putProductos(req, res) {
 
 }
 
-
-// async function postProductos(req, res) {
-
-//   const {array} = req.body;
-//   try {
-//     const Productos=await Producto.bulkCreate(array)
-
-//     await Productos.setUsuario(id)
-//     return res.json(Productos).send('Producto publicado con exito');
-
-//   } catch (error) {
-//     console.log(error);
-//     res.status(404).json({error:`this is the error: ${error}`})
-//   }
-// }
 async function postProductos(req, res) {
-  const {nombre, precio, categoria, descripcion, disponibilidad, cantidadDeProducto } = req.body
-  const {imagen} = req.query;
+  const {nombre, precio, imagen, categoria, descripcion, disponibilidad, cantidadDeProducto } = req.body
   try {
     await Producto.create({ nombre, imagen, precio, categoria, descripcion, disponibilidad, cantidadDeProducto })
-    //await Productos.setUsuario(id)
     return res.send('Producto publicado con exito');
 
   } catch (error) {

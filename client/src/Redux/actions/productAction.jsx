@@ -2,10 +2,10 @@ import {productoConstante} from "../constants/tipadosDespacho";
 import axios from 'axios';
 
 //postear producto
-export const postProduct = (producto, imagen) => {
+export const postProduct = (producto) => {
     return (dispatch) => {
       axios
-        .post(`/productos?imagen=${imagen}`, producto ,{withCredentials:true} )
+        .post(`/productos`, producto ,{withCredentials:true} )
         .then(() => {
           return dispatch({
             type: productoConstante.POST_PRODUCT,

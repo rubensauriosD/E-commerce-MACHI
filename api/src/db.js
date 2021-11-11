@@ -1,7 +1,12 @@
 require('dotenv').config();
 const { Sequelize, Op } = require('sequelize');
-const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
-
+const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET} = process.env;
+const cloudinary = require("cloudinary").v2;
+cloudinary.config({
+  cloud_name: CLOUDINARY_CLOUD_NAME,
+  api_key: CLOUDINARY_API_KEY,
+  api_secret: CLOUDINARY_API_SECRET,
+});
 const UsuarioModel = require('./models/usuarios');
 const ProductosModel = require('./models/productos');
 const ImagenesModel = require('./models/imagenes');
@@ -79,6 +84,7 @@ module.exports = {
   Comentario,
   Factura,
   Carrito,
-  Op
+  Op,
+  cloud: cloudinary
 };
 
