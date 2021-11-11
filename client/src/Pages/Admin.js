@@ -6,7 +6,6 @@ import {getProductsAdmin} from '../Redux/actions/productAction';
 import CargarProducto from '../Components/Admin/CargarProducto'
 import CargarImagen from "../Components/Admin/CargarImagen";
 import EditarProducto from "../Components/Admin/EditarProducto";
-import EditarImagenes from "../Components/Admin/EditarImagenes";
 import '../Styles/AdminStyle.css'
 import EditarUsuario from "../Components/Admin/EditarUsuario";
 
@@ -25,12 +24,12 @@ const dispatch = useDispatch()
                 <div className='formsAdminExterno'>
                     <CargarProducto/>
                 
-                    <CargarImagen/>            
-                
+                    <CargarImagen/> 
+
+                    <h3>Editar Productos</h3>
                     <EditarProducto/>
                     
-                    <EditarImagenes/>
-
+                    <h3>Editar Usuarios</h3> 
                     <EditarUsuario/>
                 </div>
             </div>
