@@ -20,21 +20,20 @@ export default function EditarProducto(){
         })
     }
 
-    function borrar(e) { 
-        axios.delete(`/usuarios/${e.target.id}`);
+    async function borrar(e) { 
+        await axios.delete(`/usuarios/${e.target.id}`);
         swal(`El usuario ${e.target.name} fue eliminado con exito`);
         return dispatch(getUsers())
     }
 
-    function editar(e) {
-        axios.put(`/usuarios/${e.target.id}`, inputsTipo);
+    async function editar(e) {
+        await axios.put(`/usuarios/${e.target.id}`, inputsTipo);
         swal(`El usuario ${e.target.name} fue editado con exito`);
         dispatch(getUsers())
     }
 
 return (
     <div className="editarProductos">
-    
     <ol>
         {
             usuarios?.map((usuario, i) => {
@@ -56,10 +55,8 @@ return (
                             <MenuItem value="admin" >Admin</MenuItem>
                         </Select>
                         </FormControl>
-                        
                         <Button className="adminButtonED" id={usuario.id} name={usuario.nombre} sx={{margin: '7px', marginLeft: "16px" }} onClick={(e) => {editar(e)}} variant="contained" color="success" type="submit">Editar</Button>         
                         <Button className="adminButtonED" id={usuario.id} name={usuario.nombre} sx={{margin: "7px"}} onClick={(e) => {borrar(e)}} variant="contained" color="error" type="submit">X</Button>         
-                         
                     </div>  
                 </div>          
                 </li>)

@@ -81,7 +81,7 @@ async function deleteProductos(req, res) {
 
 async function putProductos(req, res) {
   const { id } = req.params;
-  const { nombre, precio, imagen, descripcion, disponibilidad, categoria } = req.body;
+  const { nombre, precio, imagen, descripcion, disponibilidad, categoria,cantidadDeProducto } = req.body;
   try{
     const product = await Producto.findByPk(id);
     await product.update(
@@ -90,8 +90,9 @@ async function putProductos(req, res) {
         imagen,
         precio,
         descripcion,
-        disponibilidad,
-        categoria
+        disponibilidad:Number(cantidadDeProducto)===0?false:disponibilidad||product.disponibilidad,
+        categoria,
+        cantidadDeProducto
       }
     );
       await product.save()
@@ -120,16 +121,16 @@ async function putProductos(req, res) {
 //   }
 // }
 async function postProductos(req, res) {
-  const {nombre, precio, categoria, descripcion, disponibilidad } = req.body
+  const {nombre, precio, categoria, descripcion, disponibilidad, cantidadDeProducto } = req.body
   const {imagen} = req.query;
   try {
-    await Producto.create({ nombre, imagen, precio, categoria, descripcion, disponibilidad })
+    await Producto.create({ nombre, imagen, precio, categoria, descripcion, disponibilidad, cantidadDeProducto })
     //await Productos.setUsuario(id)
     return res.send('Producto publicado con exito');
 
   } catch (error) {
     console.log(error);
-    res.status(404).json({error:`this is the error: ${error}`})
+    res.status(404).json({error:`Error al generar un  nuevo producto, debido a: ${error}`})
   }
 }
 

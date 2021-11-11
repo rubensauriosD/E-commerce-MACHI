@@ -32,8 +32,11 @@ module.exports = (sequelize) => {
     categoria:{
       type: DataTypes.ENUM("Cajones y Cultivos","Plantines y Semillas","Composteras","Insumos y Herramientas para Huertas","Lombrices Rojas Californeanas"),
       allowNull:false
+    },
+    cantidadDeProducto:{
+      type: DataTypes.INTEGER,
+      allowNull:false
     }
-
   },
   {
     timestamps: false
