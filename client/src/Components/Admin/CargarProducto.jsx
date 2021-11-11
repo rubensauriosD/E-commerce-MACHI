@@ -13,6 +13,7 @@ export default function CargarProducto(){
     const [inputs, setInputs] = useState({
         nombre: '',
         precio:'',
+        imagen:'',
         descripcion: '',
         categoria: '',
         disponibilidad:false  
@@ -42,18 +43,19 @@ export default function CargarProducto(){
             return response.data
         })
         .then(({url}) => {
-            return dispatch(postProduct(inputs, url ))
+            inputs.imagen = url;
+            return dispatch(postProduct(inputs))
         })
         .then(() => {
             setInputs({
                 nombre: '',
                 precio:'',
+                imagen:'',
                 descripcion: '',
                 categoria: '',
                 disponibilidad:false,
                 cantidadDeProducto:0
             })
-            //setImagen('');
             swal('El producto fue creado exitosamente')
             dispatch(getProductsAdmin());
         })
