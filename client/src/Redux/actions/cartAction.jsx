@@ -150,3 +150,16 @@ export const removerAlCerrarSesion = () => {
     type: cartConstantes.REMOVERDELCARROCERRARSESION,
   };
 };
+
+export const datosDeFactura = (payer, items) => {
+  console.log('recibir datos de factura')
+  const data = {
+    payer,
+    items
+  }
+  console.log(data);
+  return {
+    type: cartConstantes.DATOSDEFACTURA,
+    payload: data
+  }
+}
