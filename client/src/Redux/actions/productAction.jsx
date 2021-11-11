@@ -5,7 +5,7 @@ import axios from 'axios';
 export const postProduct = (producto, imagen) => {
     return (dispatch) => {
       axios
-        .post(`/productos?imagen=${imagen}`, producto/* ,{withCredentials:true} */)
+        .post(`/productos?imagen=${imagen}`, producto ,{withCredentials:true} )
         .then(() => {
           return dispatch({
             type: productoConstante.POST_PRODUCT,
@@ -27,7 +27,7 @@ export const postProduct = (producto, imagen) => {
           }&ordenP=${ordenP ? ordenP : ""}&filtroC=${
             filtroC ? filtroC : ""
           }&nombre=${nombre ? nombre : ""}`
-          /* ,{withCredentials:true} */);
+         );
         return dispatch({
           type: productoConstante.GET_PRODUCTS,
           payload: response.data,
@@ -51,7 +51,7 @@ export const postProduct = (producto, imagen) => {
       }
     };
   };
-  
+   
   //COMPLETAR
   //borrar producto
   export const deleteProduct = ({ id }) => {

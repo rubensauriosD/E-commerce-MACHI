@@ -7,7 +7,9 @@ import { addToCartGuest,CambiarCantidadDb,aniadirObjetoCarritoDb } from "../../R
 import React from "react";
 import DetalleProducto from "../../Pages/DetalleProducto";
 import {v4 as uuidv4} from "uuid"
-export default function Product({ id, nombre, imagen, precio }) {
+import {Alert} from "@mui/material"
+export default function Product({ id, nombre, imagen, precio, disponibilidad }) {
+
   const usuario = useSelector((state)=>state.usuario.User)
   const objetosCarrito = useSelector((state)=>state.cart.itemsCarritoDb)
   const dispatch = useDispatch();
@@ -51,14 +53,14 @@ export default function Product({ id, nombre, imagen, precio }) {
               <p className="product-nombre">{nombre}</p>
               <p className="product-precio">${precio}</p>
             </div>
-          </Link>
+          </Link> 
           <div className="carrito-products">
-            <button onClick={handleOnClick}>
-              <FontAwesomeIcon
+          {!disponibilidad?<Alert severity="warning">Sin Stock</Alert>:<button onClick={handleOnClick} disabled={disponibilidad?false:true}>
+              <FontAwesomeIcon 
                 icon={faShoppingCart}
                 style={{ color: "grey" }}
               />
-            </button>
+            </button>}
           </div>
         </div>
       </div>

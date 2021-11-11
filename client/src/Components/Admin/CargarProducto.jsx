@@ -50,7 +50,8 @@ export default function CargarProducto(){
                 precio:'',
                 descripcion: '',
                 categoria: '',
-                disponibilidad:false
+                disponibilidad:false,
+                cantidadDeProducto:0
             })
             //setImagen('');
             swal('El producto fue creado exitosamente')
@@ -89,7 +90,9 @@ export default function CargarProducto(){
                                 <MenuItem value="false" >No Disponible</MenuItem>
                             </Select>
                         </FormControl><br/><br/>
-                        
+                        <FormControl>
+                            <TextField label="cantidad del producto" type="number" name="cantidadDeProducto" variant="filled" onChange={(e) => handleChange(e)} value={inputs.cantidadDeProducto} color="success" required/>
+                        </FormControl>
                         <FormControl>    
                             <InputLabel id="dos">Categoria</InputLabel>
                             <Select labelId="dos" name='categoria' className="levelAdminMaterial" label="Categoria" onChange={(e) => handleChange(e)}  value={inputs.categoria} required>

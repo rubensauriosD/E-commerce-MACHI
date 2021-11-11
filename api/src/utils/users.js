@@ -33,20 +33,22 @@ async function deleteUsuario(req, res) {
 
 async function putUsuario(req, res) {
   const { id } = req.params;
+  const { tipo } = req.body;
+  try{
+    const user = await Usuario.findByPk(id);
+    user.set(
+      {
+        tipo:tipo || user.tipo,
+      }
+    );
+    await user.save()
+    const todosLosUsuarios = await Usuario.findAll()
+    console.log("todos los usuario despues de actualizar: ", todosLosUsuarios)
+    res.json(todosLosUsuarios);
+  }catch(e){
+    res.status(404).json({error:`error al actualizar el usuario ${nombre} con id: ${id} debido a: ${e}`})
+  }
 
-  const { nombre, apellido, email, tipo } = req.body;
-  const user = await Usuario.findByPk(id);
-  await user.update(
-    {
-      nombre,
-      apellido,
-      email,
-      tipo,
-    }
-  );
-  await user.save()
-  const todosLosUsuarios = await Usuario.findAll()
-  res.json(todosLosUsuarios);
 }
 
 async function postUsuario(req, res) {
