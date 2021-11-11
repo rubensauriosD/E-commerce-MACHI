@@ -1,4 +1,4 @@
-const { Producto, Op } = require("../db");
+const { Producto, Op, cloud } = require("../db");
 
 async function getProductos(req, res) {
   try {
