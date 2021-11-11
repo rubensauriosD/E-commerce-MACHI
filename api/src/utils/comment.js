@@ -12,8 +12,9 @@ const newComment = async (req,res) =>{
   }
 };
 
-const getComments = async (_req,res)=>{
-  res.json( await utilsComments.getComments())
+const getComments = async (req,res)=>{
+  const {id} = req.params;
+  res.json( await utilsComments.getComments(id))
 };
 
 
