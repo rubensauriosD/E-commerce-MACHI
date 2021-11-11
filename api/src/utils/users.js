@@ -34,30 +34,26 @@ async function deleteUsuario(req, res) {
 async function putUsuario(req, res) {
   const { id } = req.params;
 
-  const { nombre, apellido, email, contraseña, tipo } = req.body;
-
-  await Usuario.update(
+  const { nombre, apellido, email, tipo } = req.body;
+  const user = await Usuario.findByPk(id);
+  await user.update(
     {
       nombre,
       apellido,
       email,
-      contraseña,
       tipo,
-    },
-    {
-      where: { id: id },
     }
   );
-
-  const user = await Usuario.findByPk(id);
-  res.json(user);
+  await user.save()
+  const todosLosUsuarios = await Usuario.findAll()
+  res.json(todosLosUsuarios);
 }
 
 async function postUsuario(req, res) {
-  const { nombre, apellido, email, contrasenia, tipo } = req.body;
+  const { nombre, apellido, email, contrasenia } = req.body;
 
   try {
-    if (nombre && apellido && email && contrasenia && tipo) {
+    if (nombre && apellido && email && contrasenia) {
       const verficadorDeUsuario = await Usuario.findAll({ where: { email } });
       if (verficadorDeUsuario.length === 0) {
         const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
@@ -66,7 +62,7 @@ async function postUsuario(req, res) {
           apellido: apellido,
           email: email,
           contrasenia: contraseñaEncriptada,
-          tipo: tipo,
+          tipo: "user",
         });
         res.json({ message: "Success" });
       } else {
@@ -79,43 +75,38 @@ async function postUsuario(req, res) {
     }
   } catch (error) {
     console.log(error);
-    +apellidores.json({ error: "this is the error: " + error });
+    apellidores.json({ error: "this is the error: " + error });
   }
 }
 
 async function inicioDeSesion(req, res) {
   const { carritos } = req.body;
-  //console.log("aca el carrito: ",carritos&& carritos)
-  //console.log("el id de los productos: ",idProductos)
-  //const {id} = req.user;
+
   const usuario=req.user
   try {
     if(carritos &&carritos.length){
     const carrito = await Promise.all(
-      carritos.map((carrito) =>
+      carritos.map((carrito) => 
         Carrito.findOrCreate({
           where: { idCarrito: carrito.idCarrito },
           defaults: {
             idProducto: carrito.idProducto,
-            cantidad: carrito.cantidad,
+            cantidad: carrito.qty,
             nombre: carrito.nombre,
             precio: carrito.precio,
-            categoria: carrito.categoria,
+            imagen: carrito.imagen
           },
-        })
+        }) 
       )
     );
-    console.log("id de los carritos: ",carritos.map(carrito=>carrito.idCarrito))
-       //const agregador = await usuario.setModels(carritos.map(cart=>cart.idCarrito))
-    //console.log("aca en la base de datos: ",carrito);
-    await usuario.setModels(carritos.map(cart=>cart.idCarrito))
-    const usuarioActualizado = await Usuario.findByPk(usuario.id,{include:{model:Carrito}})
-    res.json(usuarioActualizado);
+    //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
+    await usuario.addModels(carrito.flat().map(cart=>cart.idCarrito))
+    res.json(usuario);  
     }
     else{
+      console.log("pasor por aca")
       res.json(usuario)
     }
-
   } catch (e) {
     res.status(401).json({ error: `${e}` });
   }
@@ -125,9 +116,32 @@ function pedidoCerrarSesion(req, res) {
   req.logout();
   res.json({ message: "Ok" });
 }
-function inicioFacebook(req, res) {
-  const { id, nombre, tipo } = req.user;
-  res.json({ message: "autorizado ", id, nombre, tipo });
+async function inicioFacebook(req, res) {
+  const usuario = req.user;
+  const {carritos} = req.body
+  console.log("aca lo que llega por carrito: ",carritos)
+  try{
+    if(carritos){
+      console.log("paso por aca")
+      const carritosCreadosOEncontrados= await Promise.all(carritos.map(carrito=>{
+        return Carrito.findOrCreate({
+          where: { idCarrito: carrito.idCarrito },
+          defaults: {
+            idProducto: carrito.idProducto,
+            cantidad: carrito.qty,
+            nombre: carrito.nombre,
+            precio: carrito.precio,
+            imagen: carrito.imagen
+          },
+        }) 
+      }))
+      await usuario.addModels(carritosCreadosOEncontrados.flat().map(carrito=>carrito.idCarrito))
+      return res.json(usuario)
+    }
+    res.json(usuario)
+  }catch(e){
+    res.status(401).json({error:`el error que a ocurrido al intentar loguearse con el usuario: ${usuario.nombre} es: ${e}`})
+  }
 }
 
 module.exports = {

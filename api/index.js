@@ -20,14 +20,14 @@ app.use(setHeaders);
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
-app.use(
+app.use( 
     session({
       secret: "eMachiComercioWebPage",
-      resave: false,
-      saveUninitialized: false
+       resave: false,
+       saveUninitialized: false,
+      // cookie:{sameSite:true,secure:true}
     })
   );
-  
   app.use(passport.initialize());
   app.use(passport.session());
   //CREAR MIDDLEWARE PARA AUTENTICACIONES

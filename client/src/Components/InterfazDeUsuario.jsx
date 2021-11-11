@@ -8,6 +8,7 @@ import { Button, CardActionArea } from "@mui/material";
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import {cerrarSesion} from "../Redux/actions/userAction"
+import { removerAlCerrarSesion } from "../Redux/actions/cartAction"
 export default function InterfazDeUsuario({ datosUsuario }) {
   const dispatch=useDispatch()
   const history=useHistory()
@@ -19,6 +20,7 @@ export default function InterfazDeUsuario({ datosUsuario }) {
   }
   const cerradoDeSesion=()=>{
     dispatch(cerrarSesion())
+    dispatch(removerAlCerrarSesion())
   }
   return (
     <div>
@@ -27,7 +29,7 @@ export default function InterfazDeUsuario({ datosUsuario }) {
         <CardMedia
           component="img"
           height="300"
-          image={avatar}
+          image={datosUsuario.fotoDePerfil||avatar}
           alt="Sin imagen de perfil"
         />
         </CardActionArea>

@@ -25,6 +25,9 @@ module.exports = (sequelize) => {
     facebookId:{
       type:DataTypes.STRING,
       allowNull:true
+    },
+    fotoDePerfil:{
+      type:DataTypes.STRING
     }
   },
   {

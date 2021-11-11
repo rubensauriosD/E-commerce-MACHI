@@ -92,8 +92,7 @@ export const postProduct = (producto, imagen) => {
   //obtener producto por id para su detalle
   export const getProductId = (id) => {
     return (dispatch) => {
-      axios
-        .get(`/productos/${id}`/* ,{withCredentials:true} */)
+      axios.get(`/productos/${id}`)
         .then((productDetail) => {
           return dispatch({
             type: productoConstante.GET_PRODUCT_ID,
@@ -156,9 +155,9 @@ export const setOrdenP = (orden) => {
   };
 };
 
-export function getComentarios() {
+export function getComentarios(id) {
   return function(dispatch) {
-    axios.get(`/comentarios/allComments`)
+    axios.get(`/comentarios/${id}`)
     .then(resp => {
       dispatch({
         type: productoConstante.GET_COMENTARIOS,

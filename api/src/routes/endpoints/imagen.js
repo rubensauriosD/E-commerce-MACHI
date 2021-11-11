@@ -4,6 +4,6 @@ const {UsuarioAutenticado,UsuarioAutenticadoAdmin} = require("../autorizacion/au
 app.get('/',getImagenes)
 app.post('/',UsuarioAutenticadoAdmin,postImagenes)
 // app.put('/:id',putImagenes)
-app.get('/:id',deleteImagenes)
+app.get('/:id',UsuarioAutenticadoAdmin,deleteImagenes)
 
 module.exports = app;

@@ -36,12 +36,13 @@ export const postUser = (user) => {
   };
   //Iniciar Sesion
   export const IniciarSesion = (usuario, history) => {
+    console.log(usuario)
     return (dispatch) => {
       axios.post("/usuarios/inicioSesion", usuario,{withCredentials:true}).then((resultadoDeUsuario) => {
         dispatch({ type: constanteUsuarios.INICIARS, payload: resultadoDeUsuario.data });
         if (resultadoDeUsuario.data.tipo === "admin") history.push("/Admin");
         else if (resultadoDeUsuario.data.tipo === "user") history.push("/cart");
-      });
+      }).catch(e=>console.log(e));
     };
   };
   export const cerrarSesion = () => {
@@ -86,7 +87,7 @@ export const postUser = (user) => {
         });
     };
   };
-  export const facebookIni = (history) => {
+  export const facebookIni = (carritos,history) => {
   return (dispatch) => {
     let timer = null; 
     const facebookLoginURL = "http://localhost:3001/usuarios/auth/facebook";
@@ -99,7 +100,7 @@ export const postUser = (user) => {
       timer = setInterval(() => {
         if (newWindow.closed) {
           axios
-            .get("/usuarios/inicioSesionFacebook", { withCredentials: true })
+            .post("/usuarios/inicioSesionFacebook",{carritos}, { withCredentials: true })
             .then((usuario) => {
               dispatch({ type: constanteUsuarios.INICIOFACEBOOK, payload: usuario.data });
               history.push("/cart");
@@ -111,3 +112,10 @@ export const postUser = (user) => {
     }
   };
 };
+export const comprobanteSiEsAdmin=(history)=>{
+  return(dispatch)=>{
+    axios.get("usuarios/test",{withCredentials:true})
+    .then(resu=>console.log("si es admin"))
+    .catch(e=>history.push("/login"))
+  }
+}

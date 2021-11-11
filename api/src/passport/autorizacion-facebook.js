@@ -7,12 +7,13 @@ passport.use(
       clientID: "593541735027050",
       clientSecret: "f60d89eff6085886da441c385c43f8de",
       callbackURL: "http://localhost:3001/usuarios/auth/facebook/inicioDeSesion",
+      profileFields:["id","name","photos","email","displayName"]
     },
     async function (accessToken, refreshToken, profile, cb) {
       try {
         const [usuario,creado]=await Usuario.findOrCreate({
-          where: { facebookId: profile.id },
-          defaults: { nombre: profile._json.name,tipo:"user" },
+          where: { facebookId: profile._json.id },
+          defaults: { nombre: profile._json.first_name,tipo:"user",apellido:profile._json.last_name,fotoDePerfil:profile._json.picture.data.url },
         });
         return cb(null,usuario)
       } catch (e) {
