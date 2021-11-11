@@ -7,9 +7,12 @@ async function newComment(data){
 };
 
 
-async function getComments(){
+async function getComments(id){
     try{
         return await Comentario.findAll({
+            where:{
+                productoId: id
+            },
             include:[{
                 model: Usuario,
                 attributes : ['nombre','id']

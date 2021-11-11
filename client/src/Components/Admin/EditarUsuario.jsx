@@ -34,7 +34,7 @@ export default function EditarProducto(){
 
 return (
     <div className="editarProductos">
-    <h3>Editar Usuarios</h3> 
+    
     <ol>
         {
             usuarios?.map((usuario, i) => {
@@ -42,25 +42,24 @@ return (
                 <li key={usuario.id}>
                 <div className="ordererAdmin"> 
 
-                        <div>
-                        <TextField className="levelAdminMaterial"  value={usuario.nombre} label="Nombre" name="nombre" type="text" variant="filled" color="success"/><br/><br/>
+                    <div>
+                        <TextField className="levelAdminMaterialUser"  value={usuario.nombre} label="Nombre" name="nombre" type="text" variant="filled" color="success"/>
 
-                        <TextField className="levelAdminMaterial" value={usuario.apellido} label="Apellido" name="apellido" type="text"variant="filled" color="success"/><br/><br/>
+                        <TextField className="levelAdminMaterialUser" value={usuario.apellido} label="Apellido" name="apellido" type="text"variant="filled" color="success"/>
                         
-                        <TextField className="levelAdminMaterial" value={usuario.email} name="email" label="Email" type="text" variant="filled" color="success"/><br/><br/>
+                        <TextField className="levelAdminMaterialUser" value={usuario.email} name="email" label="Email" type="text" variant="filled" color="success"/>
 
                         <FormControl>    
                         <InputLabel id="dos">Tipo Actual: {usuario.tipo}</InputLabel>
-                        <Select labelId="dos" name='tipo' className="levelAdminMaterial" label="Tipo" onChange={(e) => handleChangeEditar(e)} required>
+                        <Select labelId="dos" name='tipo' className="levelAdminMaterialUser" label="Tipo" onChange={(e) => handleChangeEditar(e)} required>
                             <MenuItem value="user">Usuario</MenuItem>
                             <MenuItem value="admin" >Admin</MenuItem>
                         </Select>
-                        </FormControl><br/><br/>
-
-                        <div >
-                            <Button id={usuario.id} name={usuario.nombre} sx={{margin: '25px'}} onClick={(e) => {editar(e)}} variant="contained" color="success" type="submit">Editar</Button>         
-                            <Button id={usuario.id} name={usuario.nombre} sx={{margin: '25px'}} onClick={(e) => {borrar(e)}} variant="contained" color="success" type="submit">Eliminar</Button>         
-                        </div>
+                        </FormControl>
+                        
+                        <Button className="adminButtonED" id={usuario.id} name={usuario.nombre} sx={{margin: '7px', marginLeft: "16px" }} onClick={(e) => {editar(e)}} variant="contained" color="success" type="submit">Editar</Button>         
+                        <Button className="adminButtonED" id={usuario.id} name={usuario.nombre} sx={{margin: "7px"}} onClick={(e) => {borrar(e)}} variant="contained" color="error" type="submit">X</Button>         
+                         
                     </div>  
                 </div>          
                 </li>)

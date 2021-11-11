@@ -156,9 +156,9 @@ export const setOrdenP = (orden) => {
   };
 };
 
-export function getComentarios() {
+export function getComentarios(id) {
   return function(dispatch) {
-    axios.get(`/comentarios/allComments`)
+    axios.get(`/comentarios/${id}`)
     .then(resp => {
       dispatch({
         type: productoConstante.GET_COMENTARIOS,
