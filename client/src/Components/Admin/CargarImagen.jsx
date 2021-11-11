@@ -30,19 +30,21 @@ export default function CargarImagen(){
     } 
     
     return (
-        <form>
-            <h3>Imagen Galeria</h3>
+        <div className="subirImagenesGaleria">
+            <form>
+                <h3>Imagen Galeria</h3>
 
-           {/*  <label>Seleccione la imagen: </label>
-            <input type='file' name='imagen' onChange={(e)=>{
-                setImg(e.target.files[0])
-            }} required/>
+            {/*  <label>Seleccione la imagen: </label>
+                <input type='file' name='imagen' onChange={(e)=>{
+                    setImg(e.target.files[0])
+                }} required/>
 
-            <br/><button className="buttonAdmin" type='submit' onClick={subirImagen}>Crear</button> */}
+                <br/><button className="buttonAdmin" type='submit' onClick={subirImagen}>Crear</button> */}
+                
+                <TextField className="levelAdminMaterial" name="imagen" type="file" variant="filled" color="success" onChange={(e)=>{setImg(e.target.files[0])}} required/><br/><br/>
+                <Button sx={{justifySelf:"center", margin: '25px'}} variant="contained" color="success" type="submit" onClick={subirImagen}>Crear</Button>     
             
-            <TextField className="levelAdminMaterial" name="imagen" type="file" variant="filled" color="success" onChange={(e)=>{setImg(e.target.files[0])}} required/><br/><br/>
-            <Button sx={{justifySelf:"center", margin: '25px'}} variant="contained" color="success" type="submit" onClick={subirImagen}>Crear</Button>     
-        
-        </form> 
+            </form>
+        </div> 
     )
 }    
