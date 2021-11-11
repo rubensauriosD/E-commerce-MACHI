@@ -63,26 +63,41 @@ export const checkout = (payer, items) => {
       .catch((e) => console.log(e));
   };
 };
-export const CambioDeLocalADb=()=>{
-  return (dispatch)=>{
-    axios.get("/carrito",{withCredentials:true})
-    .then(objetosDelCarrito=>objetosDelCarrito.data)
-    .then(resultado=>{console.log("aca el resultado",resultado);return resultado})
-    .then(payload=>dispatch({type:cartConstantes.OBTENCIONDELADB,payload}))
-    .catch(e=>console.error(`el error al intentar obtener los items del carro son: ${e}`))
-  }
-}
-
-export const CambiarCantidadDb = (idCarrito, valor) => {
-  console.log("lo que se le envia para encontrar le item del carro: ",idCarrito)
+export const CambioDeLocalADb = () => {
   return (dispatch) => {
     axios
-      .put(`/carrito/${idCarrito}`, {valor},{withCredentials:true})
+      .get("/carrito", { withCredentials: true })
+      .then((objetosDelCarrito) => objetosDelCarrito.data)
+      .then((resultado) => {
+        console.log("aca el resultado", resultado);
+        return resultado;
+      })
+      .then((payload) =>
+        dispatch({ type: cartConstantes.OBTENCIONDELADB, payload })
+      )
+      .catch((e) =>
+        console.error(
+          `el error al intentar obtener los items del carro son: ${e}`
+        )
+      );
+  };
+};
+//arregle esto para que no se mostraran numeros negativos en la cantidad
+export const CambiarCantidadDb = (idCarrito, valor) => {
+  console.log(
+    "lo que se le envia para encontrar le item del carro: ",
+    idCarrito
+  );
+  return (dispatch) => {
+    axios
+      .put(`/carrito/${idCarrito}`, { valor }, { withCredentials: true })
       .then((resultadoDeCarrito) => {
         console.log("hubo cambio, y el cambio fue: ", resultadoDeCarrito.data);
-        return resultadoDeCarrito.data
+        return resultadoDeCarrito.data;
       })
-      .then(payload=>dispatch({type:cartConstantes.CAMBIOCANTIDAD,payload}))
+      .then((payload) =>
+        dispatch({ type: cartConstantes.CAMBIOCANTIDAD, payload })
+      )
       .catch((e) => console.log("el error en el cambio del carro fue: ", e));
   };
 };
@@ -90,27 +105,40 @@ export const CambiarCantidadDb = (idCarrito, valor) => {
 export const removerDeDb = (idCarrito) => {
   return (dispatch) => {
     axios
-      .delete(`/carrito/${idCarrito}`,{withCredentials:true})
-      .then((resultado) =>{ console.log(resultado.data); return resultado.data })
-      .then(payload=>dispatch({type:cartConstantes.REMOVIDODELADB,payload}))
+      .delete(`/carrito/${idCarrito}`, { withCredentials: true })
+      .then((resultado) => {
+        console.log(resultado.data);
+        return resultado.data;
+      })
+      .then((payload) =>
+        dispatch({ type: cartConstantes.REMOVIDODELADB, payload })
+      )
       .catch((e) => console.error("el error al eliminar del carro fue: ", e));
   };
 };
 
-export const aniadirObjetoCarritoDb=(data) =>{
-  return (dispatch)=>{
-    axios.post("/carrito",data,{withCredentials:true})
-    .then(resultado=>{
-      console.log("aca el resultado de añadir desde el carro: ",resultado.data)
-      return resultado.data
-    })
-    .then(payload=>dispatch({type:cartConstantes.ANIADIRALCARRO,payload}))
-    .catch(error=>console.error("error al postear el item al carro: ",error))
-  }
-}
-export const removerAlCerrarSesion=()=>{
-  console.log("llego al action")
-  return{
-    type:cartConstantes.REMOVERDELCARROCERRARSESION
-  }
-}
+export const aniadirObjetoCarritoDb = (data) => {
+  return (dispatch) => {
+    axios
+      .post("/carrito", data, { withCredentials: true })
+      .then((resultado) => {
+        console.log(
+          "aca el resultado de añadir desde el carro: ",
+          resultado.data
+        );
+        return resultado.data;
+      })
+      .then((payload) =>
+        dispatch({ type: cartConstantes.ANIADIRALCARRO, payload })
+      )
+      .catch((error) =>
+        console.error("error al postear el item al carro: ", error)
+      );
+  };
+};
+export const removerAlCerrarSesion = () => {
+  console.log("llego al action");
+  return {
+    type: cartConstantes.REMOVERDELCARROCERRARSESION,
+  };
+};
