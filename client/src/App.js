@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar";
 import Admin from "./Pages/Admin";
 import DetalleProducto from "./Pages/DetalleProducto";
 import SuccesLogin from "./ContenedoresTemporales/ContenedorDeFace";
+import SuccesPayment from "./ContenedoresTemporales/SuccesPayment";
 import Cart from "./Pages/Cart";
 import MercadoPago from "./Components/MercadoPago/MercadoPago"
 import Nosotros from "./Pages/Nosotros";
@@ -37,6 +38,7 @@ function App() {
           <Route exact path="/producto/:idProducto" render={({match})=><DetalleProducto props={match.params.idProducto}/>}/>
         </Switch> 
           <Route path="/successLogin" component={SuccesLogin}/> {/*guia para ruben y vero*/}
+          <Route path="/successPayment" component={SuccesPayment}/>
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/checkout" component={MercadoPago} />

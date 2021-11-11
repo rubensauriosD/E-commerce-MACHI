@@ -10,7 +10,7 @@ export default function SuccesLogin() {
   return (
     <div>
       <h1>
-        <Typography>Feliciades! Te haz logueado</Typography>
+        <Typography>Felicidades! Te haz logueado</Typography>
       </h1>
     </div>
   );
