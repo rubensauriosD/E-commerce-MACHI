@@ -16,7 +16,7 @@ const Cart = () => {
   return (
     <div>
       <div>
-        <h1>Cart</h1>
+        <h2>Carrito</h2>
         {itemsCarrito && itemsCarrito.length
           ? itemsCarrito.map((producto) => {
               console.log(
@@ -29,7 +29,8 @@ const Cart = () => {
                   id={producto.idCarrito}
                   imagen={producto.imagen}
                   nombre={producto.nombre}
-                  //categoria={producto.categoria}
+                  categoria={producto.categoria}
+                  disponibilidad={producto.disponibilidad}
                   precio={producto.precio}
                   qty={producto.cantidad}
                   usuarioId={producto.usuarioId}
@@ -46,6 +47,7 @@ const Cart = () => {
                   nombre={producto.nombre}
                   categoria={producto.categoria}
                   precio={producto.precio}
+                  disponibilidad={producto.disponibilidad}
                   qty={producto.qty}
                 />
               );
