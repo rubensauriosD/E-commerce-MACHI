@@ -120,9 +120,28 @@ function pedidoCerrarSesion(req, res) {
   req.logout();
   res.json({ message: "Ok" });
 }
-function inicioFacebook(req, res) {
-  const { id, nombre, tipo } = req.user;
-  res.json({ message: "autorizado ", id, nombre, tipo });
+async function inicioFacebook(req, res) {
+  const usuario = req.user;
+  const {carritos} = req.body
+  console.table("aca lo que llega por carrito: ",carritos)
+  try{
+    const carritosCreadosOEncontrados= await Promise.all(carritos.map(carrito=>{
+      return Carrito.findOrCreate({
+        where: { idCarrito: carrito.idCarrito },
+        defaults: {
+          idProducto: carrito.idProducto,
+          cantidad: carrito.qty,
+          nombre: carrito.nombre,
+          precio: carrito.precio,
+          imagen: carrito.imagen
+        },
+      }) 
+    }))
+    await usuario.addModels(carritosCreadosOEncontrados.flat().map(carrito=>carrito.idCarrito))
+    res.json(usuario)
+  }catch(e){
+    res.status(401).json({error:`el error que a ocurrido al intentar loguearse con el usuario: ${usuario.nombre} es: ${e}`})
+  }
 }
 
 module.exports = {

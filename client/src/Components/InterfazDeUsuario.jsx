@@ -29,7 +29,7 @@ export default function InterfazDeUsuario({ datosUsuario }) {
         <CardMedia
           component="img"
           height="300"
-          image={avatar}
+          image={datosUsuario.fotoDePerfil||avatar}
           alt="Sin imagen de perfil"
         />
         </CardActionArea>

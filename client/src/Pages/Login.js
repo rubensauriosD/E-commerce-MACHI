@@ -22,7 +22,7 @@ const LoginPage = () => {
     dispatch(postUser(Usuario));
   };
   const RegistroEInicioConFacebook=()=>{
-    dispatch(facebookIni(history))
+    dispatch(facebookIni(carrito,history))
   }
   console.log("el usuario: ",usuario)
   if (usuario && Object.values(usuario).length !== 0) {
