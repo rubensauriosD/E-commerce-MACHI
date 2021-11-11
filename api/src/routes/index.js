@@ -7,17 +7,19 @@ const comentarios = require('./endpoints/comentarios')
 const checkout = require('./endpoints/checkout')
 const carrito = require('./endpoints/carrito')
 const factura = require("./endpoints/factura")
+const mailer = require("./endpoints/mailer")
 
 router.use('/imagenes', imagenes);
 router.use('/productos', productos);
 router.use('/usuarios', usuarios);
 router.use('/comentarios', comentarios);
 router.use('/checkout', checkout);
-router.use('/carrito',carrito)
-router.use("/factura",factura)
+router.use('/carrito', carrito);
+router.use("/factura", factura);
+router.use("/mailer", mailer);
 router.get('/', (req, res)=>{
     res.send('Ruta Principal (Home)')
-})
+});
 
 
 module.exports = router;
