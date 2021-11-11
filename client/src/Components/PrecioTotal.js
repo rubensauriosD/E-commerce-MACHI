@@ -9,7 +9,7 @@ const PrecioTotal = ({ cartItems }) => {
   let PrecioTotal = 0;
   if (PrecioTotal !== []) {
     for (let item of cartItems) {
-      PrecioTotal = PrecioTotal + item.precio * (item.qty || item.cantidad) ;
+      PrecioTotal = PrecioTotal + item.precio * (item.qty || item.cantidad);
     }
   } else {
     PrecioTotal = 0;
