@@ -6,7 +6,7 @@ const setHeaders = require("./src/utils/middlewares/setHeaders");
 const { conn } = require("./src/db");
 const passport = require("passport");
 const session = require("express-session");
-const cors = require('cors')
+//const cors = require('cors')
 const app = express();
 //Inicializaciones
 require("./src/passport/autorizacion-local");
