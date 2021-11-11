@@ -53,7 +53,7 @@ export default function Product({ id, nombre, imagen, precio, disponibilidad }) 
               <p className="product-nombre">{nombre}</p>
               <p className="product-precio">${precio}</p>
             </div>
-          </Link>
+          </Link> 
           <div className="carrito-products">
           {!disponibilidad?<Alert severity="warning">Sin Stock</Alert>:<button onClick={handleOnClick} disabled={disponibilidad?false:true}>
               <FontAwesomeIcon 

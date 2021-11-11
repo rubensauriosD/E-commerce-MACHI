@@ -10,7 +10,7 @@ export default function Products({ productos }) {
             key={producto.id}
             id={producto.id}
             imagen={producto.imagen}
-            nombre={producto.nombre}
+            nombre={producto.nombre} 
             categoria={producto.categoria}
             precio={producto.precio}
             disponibilidad={producto.disponibilidad}

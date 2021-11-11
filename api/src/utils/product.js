@@ -86,7 +86,7 @@ async function putProductos(req, res) {
     const product = await Producto.findByPk(id);
     await product.update(
       {
-        nombre,
+        nombre, 
         imagen,
         precio,
         descripcion,

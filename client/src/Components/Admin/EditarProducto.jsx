@@ -91,7 +91,7 @@ export default function EditarProducto(){
                                 <TextField className="levelAdminMaterialEdit" placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)}  name="descripcion" type="text" label={producto.descripcion} variant="filled" color="success"/>
 
                                 <TextField className="levelAdminMaterialEdit" placeholder={producto.cantidadDeProducto} onChange={(e) => handleChangeEditar(e)}  name="cantidadDeProducto" type="number" label={producto.cantidadDeProducto} variant="filled" color="success"/>
-
+ 
                                 <FormControl>
                                 <InputLabel>Disponibilidad: {producto.disponibilidad? 'Disponible' : 'No disponible'}</InputLabel>
                                 <Select name='disponibilidad' className="levelAdminMaterialEdit" label="Disponibilidad" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.disponibilidad} required>

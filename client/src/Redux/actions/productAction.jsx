@@ -51,7 +51,7 @@ export const postProduct = (producto, imagen) => {
       }
     };
   };
-  
+   
   //COMPLETAR
   //borrar producto
   export const deleteProduct = ({ id }) => {

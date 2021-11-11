@@ -4,7 +4,7 @@ const { getProductos, postProductos, putProductos, deleteProductos,getProducto} 
 const { UsuarioAutenticadoAdmin } = require('../autorizacion/autorizacionPassport');
 
 app.get('/',getProductos)
-app.post('/',UsuarioAutenticadoAdmin,postProductos)
+app.post('/',UsuarioAutenticadoAdmin,postProductos) 
 app.route("/:id")
     .get(getProducto)
     .put(putProductos)
