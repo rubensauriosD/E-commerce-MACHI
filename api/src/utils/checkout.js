@@ -29,6 +29,12 @@ const checkoutPase=(req, res) => {
           date_created: null,
           last_purchase: null
         },
+        back_urls: {
+            success: "http://localhost:3000/#/successPayment",
+            failure: "http://localhost:3000/#/",
+            pending: "http://localhost:3000/#/",
+          },
+          auto_return: "approved",
       };
       
       mercadopago.preferences.create(preference)
