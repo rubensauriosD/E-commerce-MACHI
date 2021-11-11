@@ -27,10 +27,10 @@ const LoginPage = () => {
     Usuario.tipo = "user";
     dispatch(postUser(Usuario));
   };
-  const RegistroEInicioConFacebook = () => {
-    dispatch(facebookIni(history));
-  };
-  console.log("el usuario: ", usuario);
+  const RegistroEInicioConFacebook=()=>{
+    dispatch(facebookIni(carrito,history))
+  }
+  console.log("el usuario: ",usuario)
   if (usuario && Object.values(usuario).length !== 0) {
     return (
       <div className="InterfazDeUsuario">

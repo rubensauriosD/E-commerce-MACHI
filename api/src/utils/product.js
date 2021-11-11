@@ -73,37 +73,35 @@ async function deleteProductos(req, res) {
   const { id } = req.params;
 
   let product = await Producto.findByPk(id);
-
-  Producto.destroy({
-    where: {
-      id: id,
-    },
-  });
-
-  res.json(product); //devuelvo el producto eliminado
+  await product.destroy();
+  const todosLosProductos = await Producto.findAll
+  res.json(todosLosProductos); //devuelvo el producto eliminado
 }
 
 
 async function putProductos(req, res) {
   const { id } = req.params;
   const { nombre, precio, imagen, descripcion, disponibilidad, categoria } = req.body;
+  try{
+    const product = await Producto.findByPk(id);
+    await product.update(
+      {
+        nombre,
+        imagen,
+        precio,
+        descripcion,
+        disponibilidad,
+        categoria
+      }
+    );
+      await product.save()
+      const todosLosProductos=await Producto.findAll()
+      res.json(todosLosProductos);
+  }catch(e){
+    res.status(401).json({error:`el error al tratar de modificar el producto con el nombre: ${nombre}, es: ${e}`})
+  }
+  
 
-  await Producto.update(
-    {
-      nombre,
-      imagen,
-      precio,
-      descripcion,
-      disponibilidad,
-      categoria
-    },
-    {
-      where: { id: id },
-    }
-  );
-
-  const product = await Producto.findByPk(id);
-  res.json(product);
 }
 
 

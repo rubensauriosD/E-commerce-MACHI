@@ -93,7 +93,7 @@ export const postProduct = (producto, imagen) => {
   export const getProductId = (id) => {
     return (dispatch) => {
       axios
-        .get(`/productos/${id}`,{withCredentials:true})
+        .get(`/productos/${id}`)
         .then((productDetail) => {
           return dispatch({
             type: productoConstante.GET_PRODUCT_ID,
