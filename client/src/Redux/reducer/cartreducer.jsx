@@ -8,6 +8,11 @@ const CART_INITIAL_STATE = {
 };
 export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
   switch (type) {
+    case cartConstantes.REMOVEALLITEMSFROMCARTITEMS:
+      return {
+        ...state,
+        cartItems: [],
+      };
     case cartConstantes.ADD_TO_CART_GUEST:
       let item = payload;
       console.log(item);

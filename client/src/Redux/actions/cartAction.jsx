@@ -1,6 +1,14 @@
 import { cartConstantes } from "../constants/tipadosDespacho";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
+
+export const removeAllCartItems = () => (dispatch, getState) => {
+  dispatch({
+    type: cartConstantes.REMOVEALLITEMSFROMCARTITEMS,
+  });
+  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+};
+
 export const addToCartGuest = (productID, qty) => async (
   dispatch,
   getState
