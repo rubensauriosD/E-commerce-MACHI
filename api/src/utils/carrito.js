@@ -1,26 +1,45 @@
 const { Carrito } = require("../db");
 
-const obtenerCarrito =async(req,res)=>{
-  const usuario=req.user
-  try{
-    const carritodelUsuario = await Carrito.findAll({where:{usuarioId:usuario.id}})
-    res.json(carritodelUsuario)
+const obtenerCarrito = async (req, res) => {
+  const usuario = req.user;
+  try {
+    const carritodelUsuario = await Carrito.findAll({
+      where: { usuarioId: usuario.id },
+    });
+    res.json(carritodelUsuario);
     //Naruto >:v hacer orden del carro
-  }catch(e){
-    res.status(401).json({error:`no se pudo obtener los items del carro del usuario: ${usuario.nombre} debido a: ${e}`})
+  } catch (e) {
+    res
+      .status(401)
+      .json({
+        error: `no se pudo obtener los items del carro del usuario: ${usuario.nombre} debido a: ${e}`,
+      });
   }
-}
+};
 
 const postCarrito = async (req, res) => {
-  const usuario=req.user
-  const {idCarrito,idProducto,imagen,precio,nombre} = req.body
-  try{
-    const objetoCarritoNuevo=await Carrito.create({idCarrito,idProducto,imagen,precio,nombre,cantidad:1})
-    await usuario.addModels(idCarrito)
-    const objetosDelCarro = await Carrito.findAll({where:{usuarioId:usuario.id}})
-    res.json(objetosDelCarro)
-  }catch(error){
-    res.status(401).json({error:`al momento de crear un objeto en el carro con el usuario: ${usuario.nombre} se genero: ${error}`})
+  const usuario = req.user;
+  const { idCarrito, idProducto, imagen, precio, nombre } = req.body;
+  try {
+    const objetoCarritoNuevo = await Carrito.create({
+      idCarrito,
+      idProducto,
+      imagen,
+      precio,
+      nombre,
+      cantidad: 1,
+    });
+    await usuario.addModels(idCarrito);
+    const objetosDelCarro = await Carrito.findAll({
+      where: { usuarioId: usuario.id },
+    });
+    res.json(objetosDelCarro);
+  } catch (error) {
+    res
+      .status(401)
+      .json({
+        error: `al momento de crear un objeto en el carro con el usuario: ${usuario.nombre} se genero: ${error}`,
+      });
   }
 };
 
@@ -30,7 +49,14 @@ const cambiarCantidadDeCarrito = async (req, res) => {
   const cifraDeCantidadACambiar = Number(req.body.valor);
   try {
     const carritoEncontradoPorId = await Carrito.findByPk(idCarrito);
-    carritoEncontradoPorId.set({ cantidad:carritoEncontradoPorId.cantidad + cifraDeCantidadACambiar });
+    if (
+      cifraDeCantidadACambiar === 1 ||
+      (cifraDeCantidadACambiar === -1 && carritoEncontradoPorId.cantidad > 1)
+    ) {
+      carritoEncontradoPorId.set({
+        cantidad: carritoEncontradoPorId.cantidad + cifraDeCantidadACambiar,
+      });
+    }
     await carritoEncontradoPorId.save();
     const carritoActualizado = await Carrito.findAll({
       where: { usuarioId: usuario.id },
@@ -63,5 +89,5 @@ module.exports = {
   postCarrito,
   cambiarCantidadDeCarrito,
   eliminarCarritoDeLaDB,
-  obtenerCarrito
+  obtenerCarrito,
 };
