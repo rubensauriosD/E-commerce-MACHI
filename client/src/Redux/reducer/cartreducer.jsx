@@ -5,6 +5,7 @@ const CART_INITIAL_STATE = {
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
   itemsCarritoDb: [],
+  datosFactura: {}
 };
 export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
   switch (type) {
@@ -109,6 +110,13 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
         itemsCarritoDb: [],
         cartItems: [],
       };
+    }
+    case cartConstantes.DATOSDEFACTURA: {
+      console.log('llego al reducer los datos de la factura')
+      return {
+        ...state,
+        datosFactura: payload
+      }
     }
     default:
       return state;

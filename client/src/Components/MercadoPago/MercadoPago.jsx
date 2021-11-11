@@ -5,7 +5,7 @@ import './MercadoPagoStyle.css';
 import {useDispatch} from "react-redux";
 import CartProductCheckout from "./CartProductCheckout";
 import PrecioTotal from "../PrecioTotal"; 
-import { checkout } from "../../Redux/actions/cartAction";
+import { checkout, datosDeFactura } from "../../Redux/actions/cartAction";
 
 function validate(input){
     // const contenedor = document.querySelector(".contenedor")
@@ -75,6 +75,7 @@ function handleChange(e) {
         
         const handleOnSubmit=(e )=>{
             e.preventDefault()
+            dispatch(datosDeFactura(payer, items))
             dispatch(checkout(payer, items))
         } 
        
