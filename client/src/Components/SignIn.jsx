@@ -1,7 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import { Button, Box, TextField, Alert, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
-import Select from "react-select";
 export default function SignIn({ SubmitS, submitFace }) {
   const {
     register,
@@ -12,7 +11,13 @@ export default function SignIn({ SubmitS, submitFace }) {
   } = useForm();
   const onSubmit = (data) => {
     SubmitS(data);
-    reset();
+    reset({
+      nombre:"",
+      apellido:"",
+      email:"",
+      contrasenia:"",
+      validarContrasenia:""
+    });
   };
   return (
     <div>
