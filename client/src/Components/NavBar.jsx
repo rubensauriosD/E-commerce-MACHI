@@ -1,354 +1,269 @@
-// import * as React from "react";
-// import { styled, alpha } from "@mui/material/styles";
-// import AppBar from "@mui/material/AppBar";
-// import Box from "@mui/material/Box";
-// import Toolbar from "@mui/material/Toolbar";
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-// import Typography from "@mui/material/Typography";
-// import InputBase from "@mui/material/InputBase";
-// import Badge from "@mui/material/Badge";
-// import MenuItem from "@mui/material/MenuItem";
-// import Menu from "@mui/icons-material/Menu";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import SearchIcon from "@mui/icons-material/Search";
+import Typography from "@mui/material/Typography";
+import Badge from "@mui/material/Badge";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { Link } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-// import MailIcon from "@mui/icons-material/Mail";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
-// import MoreIcon from "@mui/icons-material/MoreVert";
-import LogoMachi from '../../src/logo.png';
-import React from "react";
-import { useDispatch } from "react-redux";
-import NavBarCSS from "../Styles/NavBar.module.css";
-import Cart from "./Cart";
-import { NavLink } from "react-router-dom";
+import MailIcon from "@mui/icons-material/Mail";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import MoreIcon from "@mui/icons-material/MoreVert";
 import { getProducts } from "../Redux/actions/productAction";
+import { useDispatch, useSelector } from "react-redux";
+import LogoMachi from "../../src/logo.png";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
-const NavBar = () => {
+export default function NavBar() {
+  const preguntarSiHayAlgoEnElCarro = useSelector(
+    (state) => state.cart.cartItems
+  );
+  const preguntarSiHayAlgoEnElCarroDb = useSelector(
+    (state) => state.cart.itemsCarritoDb
+  );
   const dispatch = useDispatch();
   const refreshTienda = () => {
     dispatch(getProducts({}));
   };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Typography>Perfil</Typography>
+        </MenuItem>
+      </Link>
+      <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+        <MenuItem onClick={handleMenuClose}>
+          <Typography>Tus Compras</Typography>
+        </MenuItem>
+      </Link>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "right",
+      }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+          <Badge badgeContent={4} color="error">
+            <MailIcon />
+          </Badge>
+        </IconButton>
+        <p>Messages</p>
+      </MenuItem>
+      <MenuItem>
+        <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={17} color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Tus Compras</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Perfil</p>
+      </MenuItem>
+    </Menu>
+  );
 
   return (
-    <div className={NavBarCSS.navbar}>
-      <ul className={NavBarCSS.navlist}>
-        
-        <li className={NavBarCSS.logoMachi}>
-          <img src={LogoMachi} style={{ width: '90px'}} alt="imagen" />
-        </li>
-        
-        <li className={NavBarCSS.item}>
-          <NavLink
-            className={NavBarCSS.navlink}
-            exact
-            to="/"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
-          >
-            Home
-          </NavLink>
-        </li>
-       
-        <li className={NavBarCSS.item}>
-          <NavLink
-            className={NavBarCSS.navlink}
-            exact
+    <Box sx={{ flexColumn: 5, flexGrow: 1, justifyContent: "space-between" }}>
+      <AppBar position="static" color="inherit">
+        <Toolbar>
+          <img src={LogoMachi} style={{ width: "90px" }} alt="imagen" />
+          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Home
+            </Typography>
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
             to="/contact"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
           >
-            Contacto
-          </NavLink>
-        </li>
-        <li className={NavBarCSS.item}>
-          <NavLink
-            className={NavBarCSS.navlink}
-            exact
-            to="/tienda"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
-            onClick={() => {
-              refreshTienda();
-            }}
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Contacto
+            </Typography>
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
+            onClick={refreshTienda}
+            to="/Tienda"
           >
-            Tienda
-          </NavLink>
-        </li>
-        <li className={NavBarCSS.item}>
-          <NavLink
-            className={NavBarCSS.navlink}
-            exact
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Tienda
+            </Typography>
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
             to="/servicios"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
           >
-            Servicios
-          </NavLink>
-        </li>
-        <li className={NavBarCSS.item}>
-          <NavLink
-            className={NavBarCSS.navlink}
-            exact
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Servicios
+            </Typography>
+          </Link>
+          <Link
+            style={{ textDecoration: "none", color: "black" }}
             to="/nosotros"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
           >
-            Nosotros
-          </NavLink>
-        </li>
-        <li className={NavBarCSS.item}>
-          <a 
-            className={NavBarCSS.navlink}
-            href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20"
-            target= "_blanck"
-          ><WhatsAppIcon style={{color: 'green', fontSize: '30px'}} />
-          </a>
-        </li>
-        <li className={NavBarCSS.item}>
-          <NavLink
-            className={NavBarCSS.navlink}
-            exact
-            to="/login"
-            activeClassName="selected"
-            activeStyle={{ color: "#4da45f" }}
-          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Nosotros
+            </Typography>
+          </Link>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+            <a
+              href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20"
+              target="_blanck"
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <WhatsAppIcon fontSize="large" />
+              </IconButton>
+            </a>
+            <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge
+                  badgeContent={
+                    preguntarSiHayAlgoEnElCarro.length ||
+                    preguntarSiHayAlgoEnElCarroDb.length
+                      ? "!"
+                      : 0
+                  }
+                  color="success"
+                >
+                  <ShoppingCartIcon fontSize="large" />
+                </Badge>
+              </IconButton>
+            </Link>
             <IconButton
               size="large"
+              edge="end"
               aria-label="account of current user"
-              aria-controls="primary-search-account-menu"
+              aria-controls={menuId}
               aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle fontSize="large" />
             </IconButton>
-          </NavLink>
-        </li>
-        <li className={NavBarCSS.item}>
-          <Cart />
-        </li>
-      </ul>
-    </div>
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon fontSize="large" />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {renderMobileMenu}
+      {renderMenu}
+    </Box>
   );
-};
-export default NavBar;
-
-// const Search = styled("div")(({ theme }) => ({
-//   position: "relative",
-//   borderRadius: theme.shape.borderRadius,
-//   backgroundColor: alpha(theme.palette.common.white, 0.15),
-//   "&:hover": {
-//     backgroundColor: alpha(theme.palette.common.white, 0.25),
-//   },
-//   marginRight: theme.spacing(2),
-//   marginLeft: 0,
-//   width: "100%",
-//   [theme.breakpoints.up("sm")]: {
-//     marginLeft: theme.spacing(3),
-//     width: "auto",
-//   },
-// }));
-
-// const SearchIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
-// const StyledInputBase = styled(InputBase)(({ theme }) => ({
-//   color: "inherit",
-//   "& .MuiInputBase-input": {
-//     padding: theme.spacing(1, 1, 1, 0),
-//     // vertical padding + font size from searchIcon
-//     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-//     transition: theme.transitions.create("width"),
-//     width: "100%",
-//     [theme.breakpoints.up("md")]: {
-//       width: "20ch",
-//     },
-//   },
-// }));
-
-// export default function PrimarySearchAppBar() {
-//   const [anchorEl, setAnchorEl] = React.useState(null);
-//   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-//   const isMenuOpen = Boolean(anchorEl);
-//   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-//   const handleProfileMenuOpen = (event) => {
-//     setAnchorEl(event.currentTarget);
-//   };
-
-//   const handleMobileMenuClose = () => {
-//     setMobileMoreAnchorEl(null);
-//   };
-
-//   const handleMenuClose = () => {
-//     setAnchorEl(null);
-//     handleMobileMenuClose();
-//   };
-
-//   const handleMobileMenuOpen = (event) => {
-//     setMobileMoreAnchorEl(event.currentTarget);
-//   };
-
-//   const menuId = "primary-search-account-menu";
-//   const renderMenu = (
-//     <Menu
-//       anchorEl={anchorEl}
-//       anchorOrigin={{
-//         vertical: "top",
-//         horizontal: "right",
-//       }}
-//       id={menuId}
-//       keepMounted
-//       transformOrigin={{
-//         vertical: "top",
-//         horizontal: "right",
-//       }}
-//       open={isMenuOpen}
-//       onClose={handleMenuClose}
-//     >
-//       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-//       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-//     </Menu>
-//   );
-
-//   const mobileMenuId = "primary-search-account-menu-mobile";
-//   const renderMobileMenu = (
-//     <Menu
-//       anchorEl={mobileMoreAnchorEl}
-//       anchorOrigin={{
-//         vertical: "top",
-//         horizontal: "right",
-//       }}
-//       id={mobileMenuId}
-//       keepMounted
-//       transformOrigin={{
-//         vertical: "top",
-//         horizontal: "right",
-//       }}
-//       open={isMobileMenuOpen}
-//       onClose={handleMobileMenuClose}
-//     >
-//       <MenuItem>
-//         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-//           <Badge badgeContent={4} color="error">
-//             <MailIcon />
-//           </Badge>
-//         </IconButton>
-//         <p>Messages</p>
-//       </MenuItem>
-//       <MenuItem>
-//         <IconButton
-//           size="large"
-//           aria-label="show 17 new notifications"
-//           color="inherit"
-//         >
-//           <Badge badgeContent={17} color="error">
-//             <NotificationsIcon />
-//           </Badge>
-//         </IconButton>
-//         <p>Notifications</p>
-//       </MenuItem>
-//       <MenuItem onClick={handleProfileMenuOpen}>
-//         <IconButton
-//           size="large"
-//           aria-label="account of current user"
-//           aria-controls="primary-search-account-menu"
-//           aria-haspopup="true"
-//           color="inherit"
-//         >
-//           <AccountCircle />
-//         </IconButton>
-//         <p>Profile</p>
-//       </MenuItem>
-//     </Menu>
-//   );
-
-//   return (
-//     <Box sx={{ flexGrow: 1 }}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <IconButton
-//             size="large"
-//             edge="start"
-//             color="inherit"
-//             aria-label="open drawer"
-//             sx={{ mr: 2 }}
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography
-//             variant="h6"
-//             noWrap
-//             component="div"
-//             sx={{ display: { xs: "none", sm: "block" } }}
-//           >
-//             MUI
-//           </Typography>
-//           <Search>
-//             <SearchIconWrapper>
-//               <SearchIcon />
-//             </SearchIconWrapper>
-//             <StyledInputBase
-//               placeholder="Search…"
-//               inputProps={{ "aria-label": "search" }}
-//             />
-//           </Search>
-//           <Box sx={{ flexGrow: 1 }} />
-//           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-//             <IconButton
-//               size="large"
-//               aria-label="show 4 new mails"
-//               color="inherit"
-//             >
-//               <Badge badgeContent={4} color="error">
-//                 <MailIcon />
-//               </Badge>
-//             </IconButton>
-//             <IconButton
-//               size="large"
-//               aria-label="show 17 new notifications"
-//               color="inherit"
-//             >
-//               <Badge badgeContent={17} color="error">
-//                 <NotificationsIcon />
-//               </Badge>
-//             </IconButton>
-//             <IconButton
-//               size="large"
-//               edge="end"
-//               aria-label="account of current user"
-//               aria-controls={menuId}
-//               aria-haspopup="true"
-//               onClick={handleProfileMenuOpen}
-//               color="inherit"
-//             >
-//               <AccountCircle />
-//             </IconButton>
-//           </Box>
-//           <Box sx={{ display: { xs: "flex", md: "none" } }}>
-//             <IconButton
-//               size="large"
-//               aria-label="show more"
-//               aria-controls={mobileMenuId}
-//               aria-haspopup="true"
-//               onClick={handleMobileMenuOpen}
-//               color="inherit"
-//             >
-//               <MoreIcon />
-//             </IconButton>
-//           </Box>
-//         </Toolbar>
-//       </AppBar>
-//       {renderMobileMenu}
-//       {renderMenu}
-//     </Box>
-//   );
-// }
+}
