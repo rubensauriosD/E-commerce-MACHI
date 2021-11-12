@@ -119,3 +119,11 @@ export const comprobanteSiEsAdmin=(history)=>{
     .catch(e=>history.push("/login"))
   }
 }
+
+export const comprobanteSiEsUsuario=(history)=>{
+  return(dispatch)=>{
+    axios.get("usuarios/testUsuario",{withCredentials:true})
+    .then(()=>console.log("si es usuario"))
+    .catch(()=>history.push("/login"))
+  }
+}

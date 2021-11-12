@@ -1,11 +1,13 @@
 import { Button,Box,TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { useSelector } from 'react-redux';
 import './MercadoPagoStyle.css';
 import {useDispatch} from "react-redux";
 import CartProductCheckout from "./CartProductCheckout";
 import PrecioTotal from "../PrecioTotal"; 
 import { checkout, datosDeFactura } from "../../Redux/actions/cartAction";
+import {comprobanteSiEsUsuario} from "../../Redux/actions/userAction";
 
 function validate(input){
     // const contenedor = document.querySelector(".contenedor")
@@ -39,7 +41,11 @@ function validate(input){
 
 export default function MercadoPago(){
  
-    const dispatch=useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
+    useEffect(()=>{
+    dispatch(comprobanteSiEsUsuario(history))
+    })
 
 const [payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
 

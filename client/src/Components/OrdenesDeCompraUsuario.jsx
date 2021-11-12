@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
@@ -12,8 +14,15 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { comprobanteSiEsUsuario } from '../Redux/actions/userAction';
 
 function Compras() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  React.useEffect(()=>{
+    dispatch(comprobanteSiEsUsuario(history))
+  })
+
   const [open, setOpen] = React.useState(false);
 
   return (

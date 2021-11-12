@@ -36,7 +36,10 @@ app.get(
   (req, res) => console.log(req.user)
 );
 app.get("/test", UsuarioAutenticadoAdmin, (req, res) =>
-  res.json({ message: "success", usuario: req.user })
+  res.json({ message: "success"})
+);
+app.get("/testUsuario", UsuarioAutenticado, (req, res) =>
+  res.json({message: "success"})
 );
 app.route("/cerrarSesion").get(pedidoCerrarSesion);
 
