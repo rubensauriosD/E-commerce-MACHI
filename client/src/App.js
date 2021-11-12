@@ -15,7 +15,7 @@ import MercadoPago from "./Components/MercadoPago/MercadoPago"
 import Nosotros from "./Pages/Nosotros";
 import Servicios from "./Pages/Servicios";
 import PieDePagina from "./Components/PieDePagina/PieDePagina";
-
+import factura from "./Components/OrdenesDeCompraUsuario"
 function App() {
   return (
     <div className="App">
@@ -41,6 +41,7 @@ function App() {
           <Route path="/successPayment" component={SuccesPayment}/>
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
+          <Route exact path="/facturas" component={factura} /> 
           <Route exact path="/checkout" component={MercadoPago} />
           <Route path="/" component={PieDePagina} />
       </Router>
