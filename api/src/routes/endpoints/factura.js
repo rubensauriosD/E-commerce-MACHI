@@ -3,9 +3,9 @@ const {UsuarioAutenticado,UsuarioAutenticadoAdmin} = require("../autorizacion/au
 const {edicionDeFacturas,eliminarFactura,generarFacturas,obtenerFacturas,obtenerTodasLasFacturasAdmin}= require("../../utils/factura")
 const app = require("express").Router()
 
-app.route("/",UsuarioAutenticado)
-    .get(obtenerFacturas)
-    .post(generarFacturas)
+app.route("/")
+    .get(UsuarioAutenticado,obtenerFacturas)
+    .post(UsuarioAutenticado,generarFacturas)
 app.route("/admin",UsuarioAutenticadoAdmin)
     .get(obtenerTodasLasFacturasAdmin)
 app.route("/:id",UsuarioAutenticadoAdmin)

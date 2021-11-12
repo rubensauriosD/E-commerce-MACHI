@@ -8,12 +8,14 @@ import {cartReducer} from "../reducer/cartreducer";
 import {imageReducer} from "../reducer/imageReducer";
 import {productReducer} from "../reducer/productReducer";
 import {userReducer} from "../reducer/userReducer";
+import {facturaReducer} from "../reducer/facturaReducer";
 
 const reducer = combineReducers({
   cart: cartReducer,
   productos: productReducer,
   imagen: imageReducer,
-  usuario: userReducer
+  usuario: userReducer,
+  factura: facturaReducer
 })
 
 // const cartItemsInLocalStorage = localStorage.getItem("cart")
