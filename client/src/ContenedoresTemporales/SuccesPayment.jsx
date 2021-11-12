@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useEffect } from "react";
-import { sendMail } from "../../Redux/actions/cartAction";
-import {useDispatch} from "react-redux";
+import { sendMail } from "../Redux/actions/cartAction";
+import {useDispatch,useSelector} from "react-redux";
 
 export default function SuccesPayment() {
   const { datosFactura } = useSelector((state) => state);

@@ -68,13 +68,13 @@ export default function NavBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    >
+    > 
       <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem onClick={handleMenuClose}>
           <Typography>Perfil</Typography>
         </MenuItem>
       </Link>
-      <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+      <Link to="/facturas" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem onClick={handleMenuClose}>
           <Typography>Tus Compras</Typography>
         </MenuItem>
