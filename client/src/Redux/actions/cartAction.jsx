@@ -163,3 +163,15 @@ export const datosDeFactura = (payer, items) => {
     payload: data
   }
 }
+
+export const sendMail = (payer, items) => {
+  //const data={payer,items}
+  console.log("se hace el envio");
+  return (dispatch) => {
+    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
+    axios
+      .post("/mailer", { payer, items })
+      .then((result) => { console.log("Mail enviado")})
+      .catch((e) => console.log(e));
+  };
+};
