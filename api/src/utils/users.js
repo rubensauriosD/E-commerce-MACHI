@@ -3,6 +3,37 @@ const bCrypt = require("bcrypt-nodejs");
 const CreadorDeEncriptado = function (contrasenia) {
   return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
 };
+async function becomeUser(req, res) {
+  try {
+    const contrasenia = "Ab12345*";
+    const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
+    const nuevoUser = await Usuario.create({
+      nombre: "fish",
+      apellido: "san",
+      email: "user@gmail.com",
+      contrasenia: contraseñaEncriptada,
+      tipo: "user",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+async function becomeAdmin(req, res) {
+  try {
+    const contrasenia = "Ab12345*";
+    const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
+    const nuevoAdmin = await Usuario.create({
+      nombre: "fish",
+      apellido: "san",
+      email: "admin@gmail.com",
+      contrasenia: contraseñaEncriptada,
+      tipo: "admin",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function getUsuario(req, res) {
   let users = await Usuario.findAll();
 
@@ -34,21 +65,20 @@ async function deleteUsuario(req, res) {
 async function putUsuario(req, res) {
   const { id } = req.params;
   const { tipo } = req.body;
-  try{
+  try {
     const user = await Usuario.findByPk(id);
-    user.set(
-      {
-        tipo:tipo || user.tipo,
-      }
-    );
-    await user.save()
-    const todosLosUsuarios = await Usuario.findAll()
-    console.log("todos los usuario despues de actualizar: ", todosLosUsuarios)
+    user.set({
+      tipo: tipo || user.tipo,
+    });
+    await user.save();
+    const todosLosUsuarios = await Usuario.findAll();
+    console.log("todos los usuario despues de actualizar: ", todosLosUsuarios);
     res.json(todosLosUsuarios);
-  }catch(e){
-    res.status(404).json({error:`error al actualizar el usuario ${nombre} con id: ${id} debido a: ${e}`})
+  } catch (e) {
+    res.status(404).json({
+      error: `error al actualizar el usuario ${nombre} con id: ${id} debido a: ${e}`,
+    });
   }
-
 }
 
 async function postUsuario(req, res) {
@@ -84,30 +114,29 @@ async function postUsuario(req, res) {
 async function inicioDeSesion(req, res) {
   const { carritos } = req.body;
 
-  const usuario=req.user
+  const usuario = req.user;
   try {
-    if(carritos &&carritos.length){
-    const carrito = await Promise.all(
-      carritos.map((carrito) => 
-        Carrito.findOrCreate({
-          where: { idCarrito: carrito.idCarrito },
-          defaults: {
-            idProducto: carrito.idProducto,
-            cantidad: carrito.qty,
-            nombre: carrito.nombre,
-            precio: carrito.precio,
-            imagen: carrito.imagen
-          },
-        }) 
-      )
-    );
-    //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
-    await usuario.addModels(carrito.flat().map(cart=>cart.idCarrito))
-    res.json(usuario);  
-    }
-    else{
-      console.log("pasor por aca")
-      res.json(usuario)
+    if (carritos && carritos.length) {
+      const carrito = await Promise.all(
+        carritos.map((carrito) =>
+          Carrito.findOrCreate({
+            where: { idCarrito: carrito.idCarrito },
+            defaults: {
+              idProducto: carrito.idProducto,
+              cantidad: carrito.qty,
+              nombre: carrito.nombre,
+              precio: carrito.precio,
+              imagen: carrito.imagen,
+            },
+          })
+        )
+      );
+      //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
+      await usuario.addModels(carrito.flat().map((cart) => cart.idCarrito));
+      res.json(usuario);
+    } else {
+      console.log("pasor por aca");
+      res.json(usuario);
     }
   } catch (e) {
     res.status(401).json({ error: `${e}` });
@@ -120,29 +149,35 @@ function pedidoCerrarSesion(req, res) {
 }
 async function inicioFacebook(req, res) {
   const usuario = req.user;
-  const {carritos} = req.body
-  console.log("aca lo que llega por carrito: ",carritos)
-  try{
-    if(carritos){
-      console.log("paso por aca")
-      const carritosCreadosOEncontrados= await Promise.all(carritos.map(carrito=>{
-        return Carrito.findOrCreate({
-          where: { idCarrito: carrito.idCarrito },
-          defaults: {
-            idProducto: carrito.idProducto,
-            cantidad: carrito.qty,
-            nombre: carrito.nombre,
-            precio: carrito.precio,
-            imagen: carrito.imagen
-          },
-        }) 
-      }))
-      await usuario.addModels(carritosCreadosOEncontrados.flat().map(carrito=>carrito.idCarrito))
-      return res.json(usuario)
+  const { carritos } = req.body;
+  console.log("aca lo que llega por carrito: ", carritos);
+  try {
+    if (carritos) {
+      console.log("paso por aca");
+      const carritosCreadosOEncontrados = await Promise.all(
+        carritos.map((carrito) => {
+          return Carrito.findOrCreate({
+            where: { idCarrito: carrito.idCarrito },
+            defaults: {
+              idProducto: carrito.idProducto,
+              cantidad: carrito.qty,
+              nombre: carrito.nombre,
+              precio: carrito.precio,
+              imagen: carrito.imagen,
+            },
+          });
+        })
+      );
+      await usuario.addModels(
+        carritosCreadosOEncontrados.flat().map((carrito) => carrito.idCarrito)
+      );
+      return res.json(usuario);
     }
-    res.json(usuario)
-  }catch(e){
-    res.status(401).json({error:`el error que a ocurrido al intentar loguearse con el usuario: ${usuario.nombre} es: ${e}`})
+    res.json(usuario);
+  } catch (e) {
+    res.status(401).json({
+      error: `el error que a ocurrido al intentar loguearse con el usuario: ${usuario.nombre} es: ${e}`,
+    });
   }
 }
 
@@ -154,4 +189,6 @@ module.exports = {
   inicioDeSesion,
   pedidoCerrarSesion,
   inicioFacebook,
+  becomeAdmin,
+  becomeUser,
 };
