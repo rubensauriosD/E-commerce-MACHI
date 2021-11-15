@@ -29,7 +29,7 @@ const postCarrito = async (req, res) => {
       nombre,
       cantidad: 1,
     });
-    await usuario.addModels(idCarrito);
+    await usuario.addCarritos(idCarrito);
     const objetosDelCarro = await Carrito.findAll({
       where: { usuarioId: usuario.id },
     });

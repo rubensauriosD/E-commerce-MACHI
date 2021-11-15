@@ -64,8 +64,6 @@ export const checkout = (payer, items) => {
         console.log("llego", resul.data);
         const windowMercado = window.open(
           resul.data,
-          "_blank",
-          "width=500,height=600"
         );
       })
       .catch((e) => console.log(e));
@@ -151,24 +149,24 @@ export const removerAlCerrarSesion = () => {
   };
 };
 
-export const datosDeFactura = (payer, items) => {
-  console.log('recibir datos de factura')
-  const data = {
+export const datosDeFactura = (payer, items) =>(dispatch,getState)=>{
+  console.log('recibir datos de factura: ',payer,items)
+  const datosFacturas = {
     payer,
     items
   }
-  console.log(data);
-  return {
+  dispatch({
     type: cartConstantes.DATOSDEFACTURA,
-    payload: data
-  }
+    payload: datosFacturas
+  })
+  console.log("se lleva al local storage")
+  localStorage.setItem("datosFactura",JSON.stringify(getState().cart.datosFactura))
 }
 
+
 export const sendMail = (payer, items) => {
-  //const data={payer,items}
-  console.log("se hace el envio");
-  return (dispatch) => {
-    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
+  console.log("se hace el envio",payer ,items);
+  return (dispatch) => {    
     axios
       .post("/mailer", { payer, items })
       .then((result) => { console.log("Mail enviado")})

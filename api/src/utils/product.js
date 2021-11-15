@@ -73,7 +73,7 @@ async function deleteProductos(req, res) {
   const { id } = req.params;
 
   let product = await Producto.findByPk(id);
-  const idImagenCloudinary = product.imagen.split('/').slice(-1).split('.').shift();
+  const idImagenCloudinary = product.imagen.split('/').pop().split('.').shift();
   await product.destroy();
   await cloud.uploader.destroy(idImagenCloudinary);
   const todosLosProductos = await Producto.findAll
@@ -86,7 +86,7 @@ async function putProductos(req, res) {
   const { nombre, precio, imagen, descripcion, disponibilidad, categoria,cantidadDeProducto } = req.body;
   try{
     const product = await Producto.findByPk(id);
-    const idImagenCloudinary = product.imagen.split('/').slice(-1).split('.').shift();
+    const idImagenCloudinary = product.imagen.split('/').pop().split('.').shift();
     await product.update(
       {
         nombre, 

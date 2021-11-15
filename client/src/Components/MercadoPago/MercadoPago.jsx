@@ -45,7 +45,7 @@ export default function MercadoPago(){
     const history = useHistory();
     useEffect(()=>{
     dispatch(comprobanteSiEsUsuario(history))
-    })
+    },[dispatch, history])
 
 const [payer, setPayer] = useState({ nombre:"", apellido:"", codigo:"", telefono:"", codigoPostal:"", calle:"", altura:"",  } )
 
@@ -67,13 +67,13 @@ function handleChange(e) {
     }))
 }
 
-        const items= itemsCarritoDb.map(producto => {
+        const items = itemsCarritoDb.map(producto => {
             return(
                     {
+                        idProductos: producto.idProducto,
                         title: producto.nombre,
                         unit_price: producto.precio,
                         quantity: producto.cantidad,
-                               
                     }
                 ) 
             }
@@ -81,8 +81,9 @@ function handleChange(e) {
         
         const handleOnSubmit=(e )=>{
             e.preventDefault()
+            
             dispatch(datosDeFactura(payer, items))
-            dispatch(checkout(payer, items))
+            dispatch(checkout(payer, items,history))
         } 
        
         

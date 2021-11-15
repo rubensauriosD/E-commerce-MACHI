@@ -132,7 +132,7 @@ async function inicioDeSesion(req, res) {
         )
       );
       //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
-      await usuario.addModels(carrito.flat().map((cart) => cart.idCarrito));
+      await usuario.addCarritos(carrito.flat().map((cart) => cart.idCarrito));
       res.json(usuario);
     } else {
       console.log("pasor por aca");
@@ -168,7 +168,7 @@ async function inicioFacebook(req, res) {
           });
         })
       );
-      await usuario.addModels(
+      await usuario.addCarritos(
         carritosCreadosOEncontrados.flat().map((carrito) => carrito.idCarrito)
       );
       return res.json(usuario);
