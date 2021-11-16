@@ -24,9 +24,9 @@ app.use(morgan("dev"));
 app.use(
   session({
     secret: "eMachiComercioWebPage",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    cookie:{sameSite:none,secure:true}
+    cookie:{sameSite:true,secure:true}
   })
 );
 app.use(passport.initialize());
