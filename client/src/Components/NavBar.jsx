@@ -9,9 +9,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Link } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
+import { Avatar } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { getProducts } from "../Redux/actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,6 +24,7 @@ export default function NavBar() {
   const preguntarSiHayAlgoEnElCarroDb = useSelector(
     (state) => state.cart.itemsCarritoDb
   );
+  const perfilImage = useSelector(state=>state.usuario.User)
   const dispatch = useDispatch();
   const refreshTienda = () => {
     dispatch(getProducts({}));
@@ -68,7 +68,7 @@ export default function NavBar() {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    > 
+    >
       <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
         <MenuItem onClick={handleMenuClose}>
           <Typography>Perfil</Typography>
@@ -99,25 +99,27 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
+      <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
         <IconButton
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
+          <Badge
+            badgeContent={
+              preguntarSiHayAlgoEnElCarro.length ||
+              preguntarSiHayAlgoEnElCarroDb.length
+                ? "!"
+                : 0
+            }
+            color="success"
+          >
+            <ShoppingCartIcon />
           </Badge>
         </IconButton>
-        <p>Tus Compras</p>
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -220,7 +222,6 @@ export default function NavBar() {
             <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
               <IconButton
                 size="large"
-                aria-label="show 4 new mails"
                 color="inherit"
               >
                 <Badge
