@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -15,13 +15,11 @@ import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { comprobanteSiEsUsuario } from '../Redux/actions/userAction';
+import { getFacturasUsuario } from '../Redux/actions/facturaAction';
+import { getProducts } from '../Redux/actions/productAction';
 
-function Compras() {
-  const dispatch = useDispatch();
-  const history = useHistory();
-  React.useEffect(()=>{
-    dispatch(comprobanteSiEsUsuario(history))
-  })
+function Compras({estado,total,fecha,productos}) {
+
 
   const [open, setOpen] = React.useState(false);
 
@@ -37,12 +35,9 @@ function Compras() {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          ID CARRITO
-        </TableCell>
-        <TableCell align="right">ESTADO</TableCell>
-        <TableCell align="right">PRECIO TOTAL</TableCell>
-        <TableCell align="right">FECHA DE COMPRA</TableCell>
+        <TableCell align="right">{estado}</TableCell>
+        <TableCell align="right">{total}</TableCell>
+        <TableCell align="right">{fecha}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -55,26 +50,22 @@ function Compras() {
                 <TableHead>
                   <TableRow>
                     <TableCell>Nombre</TableCell>
-                    <TableCell>Descripcion</TableCell>
                     <TableCell align="right">Categoria</TableCell>
-                    <TableCell align="right">Precio individual</TableCell>
+                    <TableCell align="right">Precio</TableCell>
                     <TableCell align="right">Cantidad</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/* Mapeo de productos */}
-                    <TableRow >
+                  {productos.map((producto)=>(
+                    <TableRow key={producto.id}>
                       <TableCell component="th" scope="row">
-                        Producto
+                        {producto.nombre}
                       </TableCell>
-                      <TableCell>descripcion</TableCell>
-                      <TableCell align="right">categoria</TableCell>
-                      <TableCell align="right"> 
-                        precio
-                      </TableCell>
-                      <TableCell align="right">cantidad</TableCell>
+                      <TableCell align="right">{producto.categoria}</TableCell>
+                      <TableCell align="right">{producto.precio}</TableCell>
+                      <TableCell align="right">{producto.cantidadDeProducto}</TableCell>
                     </TableRow>
-                  {/* ))} */}
+                  ))}
                 </TableBody>
               </Table>
             </Box>
@@ -86,6 +77,15 @@ function Compras() {
 }
 
 export default function CollapsibleTable() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  React.useEffect(()=>{
+    dispatch(comprobanteSiEsUsuario(history))
+    dispatch(getFacturasUsuario())
+    dispatch(getProducts({}))
+  },[dispatch,history])
+  const facturas = useSelector(state => state.factura.FacturasUsuario)
+  console.log(facturas);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -99,8 +99,16 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-            {/* Mapeo de ordenes de compra */}
-            <Compras />
+            {facturas?facturas.map((factura) => {
+              <Compras key={factura.id} 
+                id={factura.id} 
+                estado={factura.status} 
+                cantidad={factura.ammount} 
+                fecha={factura.createDate} 
+                total={factura.total} 
+                productos={factura.productos}
+              />
+            }): <p>No hay facturas</p>}
         </TableBody>
       </Table>
     </TableContainer>

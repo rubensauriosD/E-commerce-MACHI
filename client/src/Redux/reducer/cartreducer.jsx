@@ -5,7 +5,9 @@ const CART_INITIAL_STATE = {
     ? JSON.parse(localStorage.getItem("cart"))
     : [],
   itemsCarritoDb: [],
-  datosFactura: {}
+  datosFactura: localStorage.getItem("datosFactura")
+  ? JSON.parse(localStorage.getItem("datosFactura"))
+  :{}
 };
 export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
   switch (type) {
@@ -29,7 +31,7 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
           ),
         };
       } else {
-        item = { ...item, qty: 2 };
+        item = { ...item, qty: 1 };
         return {
           ...state,
           cartItems: [...state.cartItems, item],
@@ -112,7 +114,7 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
       };
     }
     case cartConstantes.DATOSDEFACTURA: {
-      console.log('llego al reducer los datos de la factura')
+      console.log('llego al reducer los datos de la factura: ', payload)
       return {
         ...state,
         datosFactura: payload

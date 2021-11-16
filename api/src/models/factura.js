@@ -14,6 +14,18 @@ return sequelize.define('factura', {
         allowNull: true,
         defaultValue: null
     },
+    nombreReceptor:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    direccion:{
+        type:DataTypes.STRING,
+        allowNull:false,
+    },
+    telefono:{
+        type:DataTypes.INTEGER,
+        allowNull:false 
+    },
     createDate: {
         type: DataTypes.DATE,
         defaultValue: Sequelize.fn('NOW')
