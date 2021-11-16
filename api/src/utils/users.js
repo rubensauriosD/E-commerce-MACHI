@@ -115,24 +115,53 @@ async function inicioDeSesion(req, res) {
   const { carritos } = req.body;
 
   const usuario = req.user;
+  console.log("este es el usuario", usuario);
+  const idProductosusuario = usuario.carritos.map((item) => item.idProducto);
+  console.log("los id de los productos del usuario", idProductosusuario);
+  console.log("y aca el carrito de invitado", carritos);
   try {
-    if (carritos && carritos.length) {
-      const carrito = await Promise.all(
-        carritos.map((carrito) =>
-          Carrito.findOrCreate({
-            where: { idCarrito: carrito.idCarrito },
-            defaults: {
-              idProducto: carrito.idProducto,
-              cantidad: carrito.qty,
-              nombre: carrito.nombre,
-              precio: carrito.precio,
-              imagen: carrito.imagen,
-            },
-          })
-        )
-      );
+    if (carritos.length) {
+      console.log("primer hola");
+      for (let i = 0; i < carritos.length; i++) {
+        console.log("i", i);
+        for (let j = 0; j < idProductosusuario.length; j++) {
+          console.log("j", j);
+          if (carritos[i].idProducto == idProductosusuario[j]) {
+            console.log("entro en el break");
+            break;
+          }
+          if (j >= idProductosusuario.length - 1) {
+            console.log("entro en la creacion", carritos[i].idCarrito);
+            let carritoCreado = await Carrito.create({
+              idCarrito: carritos[i].idCarrito,
+              idProducto: carritos[i].idProducto,
+              cantidad: carritos[i].qty,
+              nombre: carritos[i].nombre,
+              precio: carritos[i].precio,
+              imagen: carritos[i].imagen,
+            });
+            console.log(carritoCreado);
+            await usuario.addCarrito(carritoCreado);
+          }
+        }
+      }
+      // const carrito = await Promise.all(
+      //   carritos.map((carrito) =>
+      //     Carrito.findOrCreate({
+      //       where: { idCarrito: carrito.idCarrito },
+      //       defaults: {
+      //         idCarrito: carrito.idCarrito,
+      //         idProducto: carrito.idProducto,
+      //         cantidad: carrito.qty,
+      //         nombre: carrito.nombre,
+      //         precio: carrito.precio,
+      //         imagen: carrito.imagen,
+      //       },
+      //     })
+      //   )
+      // );
       //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
-      await usuario.addCarritos(carrito.flat().map((cart) => cart.idCarrito));
+      // await usuario.addCarritos(carrito.flat().map((cart) => cart.idCarrito));
       res.json(usuario);
     } else {
       console.log("pasor por aca");
