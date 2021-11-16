@@ -47,8 +47,9 @@ export const putFactura = ({ id }) => {
     }
 }
 
-export const postFactura = (payer, items) => {
-    const {nombre, apellido,telefono,calle,altura} = payer
+export const postFactura = async (payer, items) => {
+    const payer2 = await payer
+    const {nombre, apellido,telefono,calle,altura} = payer2
     const nombrecompleto = nombre + ' ' + apellido;
     const direccion = calle + ' ' + altura;
     const ammount = items.reduce((total, item) => total + item.quantity, 0);
