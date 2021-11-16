@@ -17,7 +17,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { comprobanteSiEsUsuario } from '../Redux/actions/userAction';
 import { getFacturasUsuario } from '../Redux/actions/facturaAction';
 import { getProducts } from '../Redux/actions/productAction';
-
+import { Link } from "react-router-dom"
 function Compras({estado,total,fecha,productos}) {
 
 
@@ -59,7 +59,9 @@ function Compras({estado,total,fecha,productos}) {
                   {productos.map((producto)=>(
                     <TableRow key={producto.id}>
                       <TableCell component="th" scope="row">
+                        <Link style={{textDecoration:"none", color:"black"}} to={`/producto/${producto.id}`}>
                         {producto.nombre}
+                        </Link>
                       </TableCell>
                       <TableCell align="right">{producto.categoria}</TableCell>
                       <TableCell align="right">{producto.precio}</TableCell>
@@ -99,7 +101,7 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-            {facturas?facturas.map((factura) => {
+            {facturas?facturas.map((factura) => 
               <Compras key={factura.id} 
                 id={factura.id} 
                 estado={factura.status} 
@@ -108,7 +110,7 @@ export default function CollapsibleTable() {
                 total={factura.total} 
                 productos={factura.productos}
               />
-            }): <p>No hay facturas</p>}
+            ): <p>No hay facturas</p>}
         </TableBody>
       </Table>
     </TableContainer>

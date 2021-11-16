@@ -9,6 +9,8 @@ const {
   inicioDeSesion,
   pedidoCerrarSesion,
   inicioFacebook,
+  CambioContraseñaUsuario,
+  CambiarSeguridadDeContrasenia
 } = require("../../utils/users");
 const {
   UsuarioAutenticado,
@@ -43,7 +45,8 @@ app.get("/testUsuario", UsuarioAutenticado, (req, res) =>
 );
 app.route("/cerrarSesion").get(pedidoCerrarSesion);
 
-app.route("/").get(UsuarioAutenticadoAdmin, getUsuario).post(postUsuario);
+app.route("/").get(UsuarioAutenticadoAdmin, getUsuario).post(postUsuario).put(CambiarSeguridadDeContrasenia,CambioContraseñaUsuario);
+
 
 app
   .route("/:id")

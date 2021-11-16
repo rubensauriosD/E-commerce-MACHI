@@ -3,10 +3,10 @@ const { Factura, Producto } = require("../db")
 const obtenerFacturas=async(req,res)=>{
     const usuario=req.user
     try{    
-        const todasLasFacturas = await Factura.findAll({where:{usuarioId:usuario.id},include:{model:Producto}})
+        const todasLasFacturas = await Factura.findAll({where:{usuarioId:usuario.id},include:{model:Producto},order:[["createDate","DESC"]]})
         res.json(todasLasFacturas)
     }catch(e){ 
-        res.json({error:`No se pudo obtener todas las facturas del usuario: ${usuario.nombre} debido a: ${e}`})
+        res.status(401 ).json({error:`No se pudo obtener todas las facturas del usuario: ${usuario.nombre} debido a: ${e}`})
     }
 }
 const obtenerTodasLasFacturasAdmin=async(req,res)=>{

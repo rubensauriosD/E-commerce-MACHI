@@ -36,6 +36,7 @@ export const putFactura = ({ id }) => {
     return async (dispatch) => {
         try {
            const response = await axios.get("/factura",{withCredentials:true})
+           console.log("lo que llega al action",response.data)
            return dispatch({
                type: facturaConstante.GET_FACTURAS_USUARIO,
                payload: response.data

@@ -28,6 +28,12 @@ module.exports = (sequelize) => {
     },
     fotoDePerfil:{
       type:DataTypes.STRING
+    },
+    pregunta:{
+      type:DataTypes.ENUM("¿Cual es tu mascota?","¿Super Heroe Favorito?","¿Nombre de la pareja?","¿Cual es tu Comida Favorita?")
+    },
+    respuesta:{
+      type:DataTypes.STRING
     }
   },
   {
