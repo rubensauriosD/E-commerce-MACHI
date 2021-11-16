@@ -30,7 +30,7 @@ const checkoutPase=(req, res) => {
           last_purchase: null
         },
         back_urls: {
-            success: "http://localhost:3000/#/successPayment",
+            success: process.env.RUTA_FRONT_DEPLOY/#/successPayment||"http://localhost:3000/#/successPayment",
             failure: "http://localhost:3000/#/",
             pending: "http://localhost:3000/#/",
           },
