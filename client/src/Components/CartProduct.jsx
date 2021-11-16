@@ -57,6 +57,7 @@ const CartProduct = ({
         justifyContent: "space-between",
         width: "50%",
         margin: "auto",
+        mt: 2,
       }}
     >
       <Box sx={{ display: "flex" }}>

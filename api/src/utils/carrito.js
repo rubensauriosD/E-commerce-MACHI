@@ -9,11 +9,9 @@ const obtenerCarrito = async (req, res) => {
     res.json(carritodelUsuario);
     //Naruto >:v hacer orden del carro
   } catch (e) {
-    res
-      .status(401)
-      .json({
-        error: `no se pudo obtener los items del carro del usuario: ${usuario.nombre} debido a: ${e}`,
-      });
+    res.status(401).json({
+      error: `no se pudo obtener los items del carro del usuario: ${usuario.nombre} debido a: ${e}`,
+    });
   }
 };
 
@@ -35,11 +33,9 @@ const postCarrito = async (req, res) => {
     });
     res.json(objetosDelCarro);
   } catch (error) {
-    res
-      .status(401)
-      .json({
-        error: `al momento de crear un objeto en el carro con el usuario: ${usuario.nombre} se genero: ${error}`,
-      });
+    res.status(401).json({
+      error: `al momento de crear un objeto en el carro con el usuario: ${usuario.nombre} se genero: ${error}`,
+    });
   }
 };
 
@@ -53,13 +49,20 @@ const cambiarCantidadDeCarrito = async (req, res) => {
       cifraDeCantidadACambiar === 1 ||
       (cifraDeCantidadACambiar === -1 && carritoEncontradoPorId.cantidad > 1)
     ) {
-      carritoEncontradoPorId.set({
-        cantidad: carritoEncontradoPorId.cantidad + cifraDeCantidadACambiar,
-      });
+      await carritoEncontradoPorId.update(
+        {
+          cantidad: carritoEncontradoPorId.cantidad + cifraDeCantidadACambiar,
+        },
+        { fields: ["cantidad"] }
+      );
+      // carritoEncontradoPorId.set({
+      //   cantidad: carritoEncontradoPorId.cantidad + cifraDeCantidadACambiar,
+      // });
     }
-    await carritoEncontradoPorId.save();
+    // await carritoEncontradoPorId.save();
     const carritoActualizado = await Carrito.findAll({
       where: { usuarioId: usuario.id },
+      order: [["createdAt", "DESC"]],
     });
     res.json(carritoActualizado);
   } catch (error) {
