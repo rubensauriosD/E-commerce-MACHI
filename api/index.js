@@ -26,7 +26,7 @@ app.use(
     secret: "eMachiComercioWebPage",
     resave: true,
     saveUninitialized: false,
-    cookie:{sameSite:true,secure:true}
+    cookie:{sameSite:strict,secure:true}
   })
 );
 app.use(passport.initialize());
