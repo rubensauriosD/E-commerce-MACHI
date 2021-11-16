@@ -8,9 +8,9 @@ export default function SuccesPayment() {
   const dispatch=useDispatch()
   console.log(datosFactura)
   useEffect(()=>{
-      setTimeout(()=>{
-          window.close()
-      },5000)
+//       setTimeout(()=>{
+//           window.close()
+//       },5000)
       dispatch(postFactura(datosFactura.payer, datosFactura.items))
       dispatch(sendMail(datosFactura.payer, datosFactura.items))
     },[dispatch, datosFactura])
