@@ -2,18 +2,19 @@ import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import { sendMail } from "../Redux/actions/cartAction";
 import {useDispatch,useSelector} from "react-redux";
-
+import { postFactura } from "../Redux/actions/facturaAction"
 export default function SuccesPayment() {
-  const { datosFactura } = useSelector((state) => state);
+  const { datosFactura } = useSelector((state) => state.cart);
   const dispatch=useDispatch()
-
+  console.log(datosFactura)
   useEffect(()=>{
       setTimeout(()=>{
           window.close()
-      },3000)
-      dispatch(sendMail(datosFactura.data.payer, datosFactura.data.items))
-    },[dispatch])
-
+      },5000)
+      dispatch(postFactura(datosFactura.payer, datosFactura.items))
+      dispatch(sendMail(datosFactura.payer, datosFactura.items))
+    },[dispatch, datosFactura])
+ 
   return (
     <div>
       <h1>

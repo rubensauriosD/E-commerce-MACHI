@@ -18,11 +18,13 @@ const obtenerTodasLasFacturasAdmin=async(req,res)=>{
         res.json({error: `no se pudo obtener todas las facturas para el administrador: ${usuario.nombre} debido a: ${e}`})
     }
 }
+
 const generarFacturas=async(req,res)=>{
     const usuario=req.user
-    const {ammount,total,arregloDeIdsProductos}=req.body
+    const {ammount,total,arregloDeIdsProductos,telefono,direccion,nombrecompleto}=req.body
+    const parseTelefono = parseInt(telefono);
     try{
-        const facturaGenerada = await Factura.create({ammount,total})
+        const facturaGenerada = await Factura.create({ammount,total,telefono:parseTelefono,direccion,nombreReceptor:nombrecompleto})
         await facturaGenerada.addProductos(arregloDeIdsProductos)
         await usuario.addFacturas(facturaGenerada.id)
         res.json({mensaje:`la factura con el codigo: ${facturaGenerada.id} fue creada` })
@@ -30,6 +32,7 @@ const generarFacturas=async(req,res)=>{
         res.status(401).json({error: `sucedio un error al intentar generar una nueva factura debido a: ${e}`})
     }
 }
+
 const edicionDeFacturas=async(req,res)=>{
     const {id} = req.params
     const {status} = req.body

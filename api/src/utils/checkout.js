@@ -40,10 +40,11 @@ const checkoutPase=(req, res) => {
       mercadopago.preferences.create(preference)
       .then(function(response){
         
-        console.log(response.body);
-        res.json(response.body.init_point);
+        const container = response.body
+        return res.json(response.body.init_point);
        
       }).catch(function(error){
+        res.status(404).json({error})
         console.log(error);
       });
     }
