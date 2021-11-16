@@ -21,10 +21,10 @@ const obtenerTodasLasFacturasAdmin=async(req,res)=>{
 
 const generarFacturas=async(req,res)=>{
     const usuario=req.user
-    const {ammount,total,arregloDeIdsProductos,telefono,direccion,nombrecompleto}=req.body
+    const {ammount,total,arregloDeIdsProductos,telefono,direccion,nombrecompleto,cantidadporProducto}=req.body
     const parseTelefono = parseInt(telefono);
     try{
-        const facturaGenerada = await Factura.create({ammount,total,telefono:parseTelefono,direccion,nombreReceptor:nombrecompleto})
+        const facturaGenerada = await Factura.create({ammount:cantidadporProducto,total,telefono:parseTelefono,direccion,nombreReceptor:nombrecompleto})
         await facturaGenerada.addProductos(arregloDeIdsProductos)
         await usuario.addFacturas(facturaGenerada.id)
         res.json({mensaje:`la factura con el codigo: ${facturaGenerada.id} fue creada` })
