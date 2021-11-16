@@ -54,12 +54,13 @@ export const postFactura = (payer, items) => {
     const ammount = items?.reduce((total, item) => total + item.quantity, 0);
     //const ammount = items.reduce((a, b) => a.quantity + b.quantity);
     const totalPorProducto = items?.map(item=>(item.unit_price)*(item.quantity))
+    const cantidadporProducto = items?.map(item=>item.quantity)
     const total = totalPorProducto.reduce((a,b)=>{
         return a + b;
     })
     const arregloDeIdsProductos=items?.map(item=>item.idProductos)
     return (dispatch) => {
-        console.log("datos factura ruben",{nombrecompleto,telefono,direccion,arregloDeIdsProductos,ammount,total})
+        console.log("datos factura ruben",{nombrecompleto,telefono,direccion,arregloDeIdsProductos,ammount,total, cantidadporProducto})
         axios.post(`/factura`, {nombrecompleto,telefono,direccion,arregloDeIdsProductos,ammount,total}, {withCredentials:true})
         .then(()=>  {
             console.log('Los datos de factura fueron enviados al back: Ammount: ', ammount, '/ Total: ', total)
