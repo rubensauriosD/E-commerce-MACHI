@@ -3,11 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Avatar } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -140,8 +141,17 @@ export default function NavBar() {
     <Box sx={{ flexColumn: 5, flexGrow: 1, justifyContent: "space-between" }}>
       <AppBar position="static" color="inherit">
         <Toolbar>
-          <img src={LogoMachi} style={{ width: "90px" }} alt="imagen" />
-          <Link style={{ textDecoration: "none", color: "black" }} to="/">
+          <Link to="/">
+            <img src={LogoMachi} style={{ width: "90px" }} alt="imagen" />
+          </Link>
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
+            exact
+            to="/"
+          >
             <Typography
               variant="h6"
               noWrap
@@ -150,9 +160,12 @@ export default function NavBar() {
             >
               Home
             </Typography>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
+          </NavLink>
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
             to="/contact"
           >
             <Typography
@@ -163,9 +176,12 @@ export default function NavBar() {
             >
               Contacto
             </Typography>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
+          </NavLink>
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
             onClick={refreshTienda}
             to="/Tienda"
           >
@@ -177,9 +193,12 @@ export default function NavBar() {
             >
               Tienda
             </Typography>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
+          </NavLink>
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
             to="/servicios"
           >
             <Typography
@@ -190,9 +209,12 @@ export default function NavBar() {
             >
               Servicios
             </Typography>
-          </Link>
-          <Link
-            style={{ textDecoration: "none", color: "black" }}
+          </NavLink>
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
             to="/nosotros"
           >
             <Typography
@@ -203,7 +225,7 @@ export default function NavBar() {
             >
               Nosotros
             </Typography>
-          </Link>
+          </NavLink>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <a
@@ -219,7 +241,13 @@ export default function NavBar() {
                 <WhatsAppIcon fontSize="large" />
               </IconButton>
             </a>
-            <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
+            <NavLink
+              to="/cart"
+              style={(isActive) => ({
+                textDecoration: "none",
+                color: "black",
+              })}
+            >
               <IconButton
                 size="large"
                 color="inherit"
@@ -228,7 +256,8 @@ export default function NavBar() {
                   badgeContent={
                     preguntarSiHayAlgoEnElCarro.length ||
                     preguntarSiHayAlgoEnElCarroDb.length
-                      ? "!"
+                      ? preguntarSiHayAlgoEnElCarro.length ||
+                        preguntarSiHayAlgoEnElCarroDb.length
                       : 0
                   }
                   color="success"
@@ -236,7 +265,7 @@ export default function NavBar() {
                   <ShoppingCartIcon fontSize="large" />
                 </Badge>
               </IconButton>
-            </Link>
+            </NavLink>
             <IconButton
               size="large"
               edge="end"

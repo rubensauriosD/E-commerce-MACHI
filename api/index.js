@@ -15,23 +15,18 @@ require("./src/passport/autorizacion-facebook");
 
 app.set("puerto", process.env.PORT || 3001); //puerto que pide heroku para el deploy
 
-app.use(cors());
+//app.use(cors({credentials: true, origin: 'https://6193cf628aa05f200450a3e9--laughing-fermi-226ba3.netlify.app'}));
 app.use(setHeaders);
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
-//   res.header('Access-Control-Allow-Credentials', 'true');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-//   });
+app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
 app.use(
   session({
     secret: "eMachiComercioWebPage",
-    resave: false,
+    resave: true,
     saveUninitialized: false,
-    // cookie:{sameSite:true,secure:true}
+    cookie:{sameSite:'none',secure:true}
   })
 );
 app.use(passport.initialize());
