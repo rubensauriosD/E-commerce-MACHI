@@ -82,10 +82,11 @@ async function putUsuario(req, res) {
 }
 
 async function postUsuario(req, res) {
-  const { nombre, apellido, email, contrasenia } = req.body;
+  const { nombre, apellido, email, contrasenia, pregunta, respuesta } =
+    req.body;
 
   try {
-    if (nombre && apellido && email && contrasenia) {
+    if (nombre && apellido && email && contrasenia && pregunta && respuesta) {
       const verficadorDeUsuario = await Usuario.findAll({ where: { email } });
       if (verficadorDeUsuario.length === 0) {
         const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
@@ -94,6 +95,8 @@ async function postUsuario(req, res) {
           apellido: apellido,
           email: email,
           contrasenia: contraseñaEncriptada,
+          pregunta,
+          respuesta,
           tipo: "user",
         });
         res.json({ message: "Success" });
@@ -181,6 +184,50 @@ async function inicioFacebook(req, res) {
   }
 }
 
+const CambiarSeguridadDeContrasenia = async (req, res, next) => {
+  const { email, respuesta, pregunta } = req.body;
+  try {
+    const usuarioEncontrado = await Usuario.findOne({ where: { email } });
+    if (
+      usuarioEncontrado.respuesta !== respuesta ||
+      usuarioEncontrado.pregunta !== pregunta
+    )
+      return res
+        .status(401)
+        .json({ mensaje: "Pregunta o Respuesta Incorrecta" });
+    // res.json({ mensaje: "Respuesta y Pregunta Correcta" });
+    next();
+  } catch (error) {
+    res
+      .status(401)
+      .json({
+        mensaje: `error al cambiar la seguridad de la contraseña ${error}`,
+      });
+  }
+};
+
+const CambioContraseñaUsuario = async (req, res) => {
+  const { nuevaContrasenia, email } = req.body;
+  const contraseniaEncriptada = CreadorDeEncriptado(nuevaContrasenia);
+  try {
+    const usuario = await Usuario.findOne({
+      where: {
+        email,
+      },
+    });
+
+    usuario.set({ contrasenia: contraseniaEncriptada });
+    await usuario.save();
+    res.json({
+      message: `La contraseña para el usuario: ${usuario.nombre}, se cambio exitosamente`,
+    });
+  } catch (e) {
+    res.status(401).json({
+      error: `Aparecio un error al intentar cambiar la contraseña: ${e}`,
+    });
+  }
+};
+
 module.exports = {
   getUsuario,
   putUsuario,
@@ -191,4 +238,6 @@ module.exports = {
   inicioFacebook,
   becomeAdmin,
   becomeUser,
+  CambioContraseñaUsuario,
+  CambiarSeguridadDeContrasenia,
 };
