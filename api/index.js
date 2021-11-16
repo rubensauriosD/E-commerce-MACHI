@@ -15,7 +15,7 @@ require("./src/passport/autorizacion-facebook");
 
 app.set("puerto", process.env.PORT || 3001); //puerto que pide heroku para el deploy
 
-app.use(cors());
+//app.use(cors());
 app.use(setHeaders);
 // app.use((req, res, next) => {
 //   res.header('Access-Control-Allow-Origin', '*'); // update to match the domain you will make the request from
