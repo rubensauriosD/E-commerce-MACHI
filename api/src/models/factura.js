@@ -10,7 +10,7 @@ return sequelize.define('factura', {
         defaultValue: DataTypes.UUIDV4,
     },
     ammount: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: null
     },
