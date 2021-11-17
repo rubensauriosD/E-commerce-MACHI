@@ -57,7 +57,7 @@ export default function CargarProducto(){
                 cantidadDeProducto:0
             })
             swal('El producto fue creado exitosamente')
-            dispatch(getProductsAdmin());
+            return dispatch(getProductsAdmin());
         })
         .catch((err) => {
             console.log(err)
@@ -93,8 +93,8 @@ export default function CargarProducto(){
                             </Select>
                         </FormControl><br/><br/>
                         <FormControl>
-                            <TextField label="cantidad del producto" type="number" name="cantidadDeProducto" variant="filled" onChange={(e) => handleChange(e)} value={inputs.cantidadDeProducto} color="success" required/>
-                        </FormControl>
+                            <TextField className="levelAdminMaterial" label="Cantidad del producto" type="number" name="cantidadDeProducto" variant="filled" onChange={(e) => handleChange(e)} value={inputs.cantidadDeProducto} color="success" required/>
+                        </FormControl><br/><br/>
                         <FormControl>    
                             <InputLabel id="dos">Categoria</InputLabel>
                             <Select labelId="dos" name='categoria' className="levelAdminMaterial" label="Categoria" onChange={(e) => handleChange(e)}  value={inputs.categoria} required>
