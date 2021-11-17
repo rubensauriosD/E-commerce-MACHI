@@ -57,7 +57,7 @@ export default function CargarProducto(){
                 cantidadDeProducto:0
             })
             swal('El producto fue creado exitosamente')
-            dispatch(getProductsAdmin());
+            return dispatch(getProductsAdmin());
         })
         .catch((err) => {
             console.log(err)
