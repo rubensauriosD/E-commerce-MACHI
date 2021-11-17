@@ -45,7 +45,7 @@ app.get("/testUsuario", UsuarioAutenticado, (req, res) =>
 );
 app.route("/cerrarSesion").get(pedidoCerrarSesion);
 
-app.route("/").get(UsuarioAutenticadoAdmin, getUsuario).post(postUsuario).put(CambiarSeguridadDeContrasenia,CambioContraseñaUsuario);
+app.route("/").get(UsuarioAutenticadoAdmin, getUsuario).post(postUsuario).put(CambioContraseñaUsuario);
 
 
 app

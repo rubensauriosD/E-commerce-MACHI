@@ -21,7 +21,7 @@ const dispatch = useDispatch()
         dispatch(comprobanteSiEsAdmin(history))
         dispatch(getProductsAdmin());
         dispatch(getImages());
-        dispatch(getFacturasAdmin());
+        dispatch(getFacturasAdmin({}));
     },[dispatch,history])
 
         return (

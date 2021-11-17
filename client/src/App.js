@@ -16,6 +16,9 @@ import Nosotros from "./Pages/Nosotros";
 import Servicios from "./Pages/Servicios";
 import PieDePagina from "./Components/PieDePagina/PieDePagina";
 import factura from "./Components/OrdenesDeCompraUsuario"
+import Reset from "./Pages/Reset";
+import NuevaContraseña from "./ContenedoresTemporales/NuevaContraseña";
+
 function App() {
   return (
     <div className="App">
@@ -39,10 +42,12 @@ function App() {
         </Switch> 
           <Route path="/successLogin" component={SuccesLogin}/> {/*guia para ruben y vero*/}
           <Route path="/successPayment" component={SuccesPayment}/>
+          {/* <Route path="/mailer/reset" component={NuevaContraseña} /> */}
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/facturas" component={factura} /> 
           <Route exact path="/checkout" component={MercadoPago} />
+          <Route exact path="/reset" component={Reset} />
           <Route path="/" component={PieDePagina} />
       </Router>
     </div>

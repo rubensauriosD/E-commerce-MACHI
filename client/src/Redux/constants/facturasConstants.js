@@ -2,3 +2,4 @@ export const GET_FACTURAS = "GET_FACTURAS";
 export const PUT_FACTURA = "PUT_FACTURA";
 export const GET_FACTURAS_USUARIO = "GET_FACTURAS_USUARIO";
 export const POST_FACTURA = "POST_FACTURA";
+export const SET_ESTADO = "SET_ESTADO";

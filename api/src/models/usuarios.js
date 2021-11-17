@@ -19,6 +19,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    resetToken: {
+      type: DataTypes.STRING,
+    },
+    expireToken: {
+      type: DataTypes.DATE,
+    },
     tipo: {
       type: DataTypes.ENUM('admin', 'user'),
     },  
@@ -29,12 +35,12 @@ module.exports = (sequelize) => {
     fotoDePerfil:{
       type:DataTypes.STRING
     },
-    pregunta:{
+   /*  pregunta:{
       type:DataTypes.ENUM("¿Cual es tu mascota?","¿Super Heroe Favorito?","¿Nombre de la pareja?","¿Cual es tu Comida Favorita?")
     },
     respuesta:{
       type:DataTypes.STRING
-    }
+    } */
   },
   {
     timestamps: false
