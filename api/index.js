@@ -21,12 +21,19 @@ app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
-app.use(
+process.env.COOKIE ? app.use(
   session({
-    secret: "eMachiComercioWebPage",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: false,
-    cookie:{sameSite:'none',secure:true}
+    cookie:{sameSite: 'none',secure:true} 
+  })
+):
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: false,
   })
 );
 app.use(passport.initialize());
