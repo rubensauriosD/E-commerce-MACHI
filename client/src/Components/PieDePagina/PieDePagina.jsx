@@ -15,12 +15,9 @@ import Ingemax from "../../imgEmpresas/Ingemax.png"
 
 export default function PieDePagina(){
     return (
-        <div className="footer">
-            <Box px={{xs : 3, sm: 10}} 
-                 py={{xs: 5, sm: 10}} 
-                 className="BoxContenedora-footer">
-                <Container className="container-footer">
-                    <Grid container spacing="110" >
+        <div  className="BoxContenedora-footer">     
+                
+                
                         <div className="grid-interno">
                             <Box><img src={logo} alt="imagen" width="140px"/></Box>
                             {/* <Box><Link href="/contact" color="inherit"> Contacto</Link></Box> */}
@@ -37,7 +34,7 @@ export default function PieDePagina(){
                             <a className="innerBox-footer-red" href="https://www.facebook.com/Elmachi/?ref=pages_you_manage" target="_blanck"  color="inherit" style={{textDecoration: "none"}}><FacebookIcon style={{color: 'blue', fontSize: '50px'}}/></a>
                             <a className="innerBox-footer-red" href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20" target="_blanck" color="inherit" style={{textDecoration: "none"}}><WhatsAppIcon style={{color: 'green', fontSize: '50px'}}/></a>
                         </div>
-                        <div className="grid-interno">
+                        <div className="grid-interno-confia">
                             <Box className="innerBox-footer" borderBottom={1}>Confian en nosotros</Box>
                             <Box className="innerBox-footer-img">
                                 <img className="imgFooter" src={greenTech} alt="greentech" />
@@ -49,9 +46,8 @@ export default function PieDePagina(){
                                 <img className="imgFooter" src={Ingemax} alt="Ingemax" />
                             </Box>
                         </div>
-                    </Grid>
-                </Container>
-            </Box>
+                       
+            
         </div>
     )
 }

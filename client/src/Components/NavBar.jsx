@@ -163,22 +163,7 @@ export default function NavBar() {
               Home
             </Typography>
           </NavLink>
-          <NavLink
-            style={(isActive) => ({
-              textDecoration: "none",
-              color: isActive ? "#2e7d32" : "black",
-            })}
-            to="/contact"
-          >
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
-            >
-              Contacto
-            </Typography>
-          </NavLink>
+
           <NavLink
             style={(isActive) => ({
               textDecoration: "none",
@@ -196,6 +181,7 @@ export default function NavBar() {
               Tienda
             </Typography>
           </NavLink>
+
           <NavLink
             style={(isActive) => ({
               textDecoration: "none",
@@ -212,6 +198,7 @@ export default function NavBar() {
               Servicios
             </Typography>
           </NavLink>
+
           <NavLink
             style={(isActive) => ({
               textDecoration: "none",
@@ -228,6 +215,24 @@ export default function NavBar() {
               Nosotros
             </Typography>
           </NavLink>
+
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
+            to="/contact"
+          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Contacto
+            </Typography>
+          </NavLink>
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <a

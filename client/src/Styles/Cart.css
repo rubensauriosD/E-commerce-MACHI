@@ -8,7 +8,6 @@
 }
 
 .carrito:hover {
-    
     height: 46px;
     width: 46px;
     box-shadow: 0px 10px 20px rgba(44, 44, 44, 0.541);
@@ -17,8 +16,25 @@
 
 .NavCart{
     display: block;
-    
     height: 50px;
     width: 50px;
+    
+}
+
+.parrafoCompra{
+   display: flex;
+   flex-direction: row;
+   width: 70%;
+   max-width: 1000px; 
+   margin: auto;
+}
+.parrafoCompraInterno{
+    width: 50%;
+    max-width: 490px;
+    margin: 20px;
+    margin-top: 100px;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2);
     
 }
