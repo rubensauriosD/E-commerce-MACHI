@@ -41,13 +41,13 @@ const Contact = () => {
           <div className={ContactCSS.icon_decoration}>
             <PhoneIcon />
           </div>
-          <a href="tel://1234567920">+ 1235 2355 98</a>
+          <a href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20">+54 351 290-0724</a>
         </i>
         <i>
           <div className={ContactCSS.icon_decoration}>
             <MailIcon />
           </div>
-          <a href="mailto:info@machi.com">info@machi.com</a>
+          <a href="#">machiwebsite@gmail.com</a>
         </i>
       </div>
       <div className={ContactCSS.form_container}>
