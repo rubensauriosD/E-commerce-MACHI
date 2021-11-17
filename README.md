@@ -7,4 +7,4 @@ Proyecto E-Commerce
 *Para correr Front , posicionados en la carpeta /client, escribir en la teminal el comando 'npm start'. 
 
 LINK DEPLOY
-https://e-commerce-machi.vercel.app/#/
+https://ecommerce-machi.netlify.app
