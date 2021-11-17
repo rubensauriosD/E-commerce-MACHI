@@ -21,7 +21,7 @@ const obtenerTodasLasFacturasAdmin=async(req,res)=>{
 
 const generarFacturas=async(req,res)=>{
     const usuario=req.user
-    const {ammount,total,arregloDeIdsProductos,telefono,direccion,nombrecompleto}=req.body
+    const {ammount,total,arregloDeIdsProductos,telefono,direccion,nombrecompleto,cantidadporProducto}=req.body
     const parseTelefono = parseInt(telefono);
     try{
         const facturaGenerada = await Factura.create({ammount,total,telefono:parseTelefono,direccion,nombreReceptor:nombrecompleto})

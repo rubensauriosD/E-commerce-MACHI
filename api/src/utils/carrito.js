@@ -5,6 +5,7 @@ const obtenerCarrito = async (req, res) => {
   try {
     const carritodelUsuario = await Carrito.findAll({
       where: { usuarioId: usuario.id },
+      order: [["createdAt", "DESC"]],
     });
     res.json(carritodelUsuario);
     //Naruto >:v hacer orden del carro
