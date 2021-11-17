@@ -138,6 +138,8 @@ export default function NavBar() {
   );
 
   return (
+
+
     <Box sx={{ flexColumn: 5, flexGrow: 1, justifyContent: "space-between" }}>
       <AppBar position="static" color="inherit">
         <Toolbar>
@@ -231,7 +233,7 @@ export default function NavBar() {
             <a
               href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20"
               target="_blanck"
-              style={{ textDecoration: "none", color: "black" }}
+              style={{ textDecoration: "none", color: "green" }}
             >
               <IconButton
                 size="large"
