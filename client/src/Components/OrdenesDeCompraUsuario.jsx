@@ -101,7 +101,7 @@ export default function CollapsibleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-            {facturas?facturas.map((factura) => 
+            {facturas?facturas.map((factura) => (
               <Compras key={factura.id} 
                 id={factura.id} 
                 estado={factura.status} 
@@ -110,6 +110,7 @@ export default function CollapsibleTable() {
                 total={factura.total} 
                 productos={factura.productos}
               />
+              )
             ): <p>No hay facturas</p>}
         </TableBody>
       </Table>
