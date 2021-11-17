@@ -25,8 +25,8 @@ export default function PieDePagina(){
                         </div>
                         <div className="grid-interno">
                             <Box className="innerBox-footer" borderBottom={1}>Secciones</Box>
-                            <Box className="innerBox-footer"><Link href="/contact" color="inherit" style={{textDecoration: "none" }}> Contacto</Link></Box>
-                            <Box className="innerBox-footer"><Link href="/nosotros" color="inherit" style={{textDecoration: "none" }}> Nosotros</Link></Box>
+                            <Box className="innerBox-footer"><Link href="#/contact" color="inherit" style={{textDecoration: "none" }}> Contacto</Link></Box>
+                            <Box className="innerBox-footer"><Link href="#/nosotros" color="inherit" style={{textDecoration: "none" }}> Nosotros</Link></Box>
                         </div>
                         <div className="grid-interno">
                             <Box className="innerBox-footer" borderBottom={1}>Nuestras Redes</Box>
