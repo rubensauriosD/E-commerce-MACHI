@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import PrecioTotal from "../Components/PrecioTotal";
 import { NavLink } from "react-router-dom";
 import { CambioDeLocalADb } from "../Redux/actions/cartAction";
+
 import PaymentIcon from '@mui/icons-material/Payment';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import "../Styles/Cart.css"
+
 
 const Cart = () => {
   const dispatch = useDispatch();

@@ -27,7 +27,7 @@ const resetPassword = (req,res)=>{
                   subject:"password reset",
                   html:`
                   <p>You requested for password reset</p>
-                  <p>click in this to reset </p> <a href="http://localhost:3000/reset/${hash}">link</a> 
+                  <p>click in this to reset </p> <a href="http://localhost:3000/mailer/reset/${hash}">link</a> 
                   `
               })
               res.json({message:"check your email"})
@@ -35,6 +35,19 @@ const resetPassword = (req,res)=>{
 
       })
   // })
+}
+
+const traerUsuarioPorToken = async (req, res) => {
+  const { token } = req.params;
+  try {
+    const resultado = await Usuario.findOne({
+    where:
+      {resetToken: token}
+  })
+  res.json(resultado)
+  } catch(error) {
+    return res.status(404).send("no se ha encontrado un usuario con token válido")
+  }  
 }
 
 
@@ -1032,4 +1045,5 @@ const successMail = async (req,res) =>{
   module.exports = {
     successMail,
     resetPassword,
+    traerUsuarioPorToken,
   };

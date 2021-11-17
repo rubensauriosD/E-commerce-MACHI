@@ -21,7 +21,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 import FiltroEstado from "./FiltroEstado";
 
-function Row({status, ammount, createDate, total, productos, id}) {
+function Row({status, ammount, createDate, total, productos, nombreReceptor, id}) {
         const [open, setOpen] = React.useState(false);
         const [estado, setEstado] = useState('');
         const dispatch = useDispatch();
@@ -47,9 +47,8 @@ function Row({status, ammount, createDate, total, productos, id}) {
                 <IconButton
                 aria-label="expand row"
                 size="small"
-                onClick={() => setOpen(!open)}
                 >
-                {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                🟢
                 </IconButton>
             </TableCell>    
             <TableCell align="left">{ammount}</TableCell>
@@ -69,7 +68,7 @@ function Row({status, ammount, createDate, total, productos, id}) {
             <Button className="adminButtonED" sx={{margin: "4px", marginLeft: "16px" }} id={id} onClick={(e) => {editar(e)}} variant="contained" color="success" type="submit">Editar</Button> 
 
             </TableRow>
-            <TableRow>
+            {/* <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>
                 <Box sx={{ margin: 1 }}>
@@ -86,7 +85,7 @@ function Row({status, ammount, createDate, total, productos, id}) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {productos.map((historyRow) => (
+                        {productos&&productos.map((historyRow) => (
                         <TableRow key={historyRow.id}>
                             <TableCell component="th" scope="row">
                             {historyRow.nombre}
@@ -103,7 +102,7 @@ function Row({status, ammount, createDate, total, productos, id}) {
                 </Box>
                 </Collapse>
             </TableCell>
-            </TableRow>
+            </TableRow> */}
         </React.Fragment>
         );
 }
@@ -127,6 +126,7 @@ export default function EditarFacturas()
                         <TableHead>
                             <TableRow>
                                 <TableCell />
+                                <TableCell>Comprador</TableCell>
                                 <TableCell>Cantidad</TableCell>
                                 <TableCell align="center">Estado</TableCell>
                                 <TableCell align="right">Total</TableCell>
@@ -136,7 +136,7 @@ export default function EditarFacturas()
 
                     <TableBody>
                     {Array.isArray(facturas)&&facturas.map((fac) => (
-                        <Row key={fac.id} id={fac.id} status={fac.status} ammount={fac.ammount}createDate={fac.createDate} total={fac.total} productos={fac.productos}/>
+                        <Row key={fac.id} id={fac.id} status={fac.status} ammount={fac.ammount}createDate={fac.createDate} total={fac.total} productos={fac.productos} nombreReceptor={fac.nombreReceptor}/>
                     ))}
                     </TableBody>
                     </Table>

@@ -151,3 +151,18 @@ export const nuevaContraseña= ({nuevaContrasenia, email}) => {
     })
   }
 }
+
+export const pedirUsuarioPorToken = ({token}) => {
+  return (dispatch) => {
+    axios.get(`mailer/reset/${token}`)
+    .then((usuario) => {
+      return dispatch({
+        type: constanteUsuarios.GET_USUARIO_POR_TOKEN,
+        payload: usuario.data,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+}

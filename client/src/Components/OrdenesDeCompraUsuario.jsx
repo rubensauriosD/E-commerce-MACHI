@@ -18,8 +18,8 @@ import { comprobanteSiEsUsuario } from '../Redux/actions/userAction';
 import { getFacturasUsuario } from '../Redux/actions/facturaAction';
 import { getProducts } from '../Redux/actions/productAction';
 import { Link } from "react-router-dom"
-function Compras({estado,total,fecha,productos}) {
 
+function Compras({estado,total,fecha,productos}) {
 
   const [open, setOpen] = React.useState(false);
 
@@ -52,7 +52,7 @@ function Compras({estado,total,fecha,productos}) {
                     <TableCell>Nombre</TableCell>
                     <TableCell align="right">Categoria</TableCell>
                     <TableCell align="right">Precio</TableCell>
-                    <TableCell align="right">Cantidad</TableCell>
+                    {/* <TableCell align="right">Cantidad</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -65,7 +65,7 @@ function Compras({estado,total,fecha,productos}) {
                       </TableCell>
                       <TableCell align="right">{producto.categoria}</TableCell>
                       <TableCell align="right">{producto.precio}</TableCell>
-                      <TableCell align="right">{producto.cantidadDeProducto}</TableCell>
+                      {/* <TableCell align="right">{producto.cantidadDeProducto}</TableCell> */}
                     </TableRow>
                   ))}
                 </TableBody>

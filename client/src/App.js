@@ -17,7 +17,7 @@ import Servicios from "./Pages/Servicios";
 import PieDePagina from "./Components/PieDePagina/PieDePagina";
 import factura from "./Components/OrdenesDeCompraUsuario"
 import Reset from "./Pages/Reset";
-import NuevaContraseña from "./ContenedoresTemporales/NuevaContraseña";
+import NuevaContrasenia from "./ContenedoresTemporales/NuevaContraseña";
 
 function App() {
   return (
@@ -42,7 +42,7 @@ function App() {
         </Switch> 
           <Route path="/successLogin" component={SuccesLogin}/> {/*guia para ruben y vero*/}
           <Route path="/successPayment" component={SuccesPayment}/>
-          {/* <Route path="/mailer/reset" component={NuevaContraseña} /> */}
+          <Route path="/mailer/reset/:token" render={({match}) => <NuevaContrasenia props={match.params.token}/>}/>
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/facturas" component={factura} /> 
