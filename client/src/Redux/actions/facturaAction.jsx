@@ -2,10 +2,10 @@ import axios from 'axios';
 import {facturaConstante} from "../constants/tipadosDespacho";
 
 //traer facturas 
-export const getFacturasAdmin = () => {
+export const getFacturasAdmin = ({ estado }) => {
     return async (dispatch) => {
         try {
-        const response = await axios.get(`/factura`,{withCredentials:true});
+        const response = await axios.get(`/factura?estado=${estado ? estado : ""}`,{withCredentials:true});
         return dispatch({
             type: facturaConstante.GET_FACTURAS,
             payload: response.data,
@@ -70,4 +70,11 @@ export const postFactura = (payer, items) => {
         })
         .catch((error)=>console.log('Error al enviar datos factura al back: ', error))
     }
+}
+
+export const setEstado = (estado) => {
+    return {
+        type: facturaConstante.SET_ESTADO,
+        payload: estado,
+      };
 }

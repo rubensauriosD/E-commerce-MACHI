@@ -82,11 +82,11 @@ async function putUsuario(req, res) {
 }
 
 async function postUsuario(req, res) {
-  const { nombre, apellido, email, contrasenia, pregunta, respuesta } =
+  const { nombre, apellido, email, contrasenia } =
     req.body;
 
   try {
-    if (nombre && apellido && email && contrasenia && pregunta && respuesta) {
+    if (nombre && apellido && email && contrasenia) {
       const verficadorDeUsuario = await Usuario.findAll({ where: { email } });
       if (verficadorDeUsuario.length === 0) {
         const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
@@ -95,8 +95,8 @@ async function postUsuario(req, res) {
           apellido: apellido,
           email: email,
           contrasenia: contraseñaEncriptada,
-          pregunta,
-          respuesta,
+          // pregunta,
+          // respuesta,
           tipo: "user",
         });
         res.json({ message: "Success" });

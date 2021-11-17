@@ -16,9 +16,10 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useState } from 'react';  
-import{getFacturasAdmin} from '../../Redux/actions/facturaAction'
+import{getFacturasAdmin, setEstado} from '../../Redux/actions/facturaAction'
 import axios from 'axios';
 import swal from 'sweetalert';
+import FiltroEstado from "./FiltroEstado";
 
 function Row({status, ammount, createDate, total, productos, id}) {
         const [open, setOpen] = React.useState(false);
@@ -36,7 +37,7 @@ function Row({status, ammount, createDate, total, productos, id}) {
             e.preventDefault(); 
             await axios.put(`/factura/${e.target.id}`, estado);
             swal(`La factura con id ${e.target.id} fue modificada con exito`)
-            return dispatch(getFacturasAdmin())    
+            return dispatch(getFacturasAdmin({}))    
         }
 
         return (
@@ -114,27 +115,32 @@ export default function EditarFacturas()
 
     console.log(facturas)
 
-    return(            
+    return(
         <div>
-            <TableContainer component={Paper}>
-                <Table aria-label="collapsible table">
+            <div>
+                <FiltroEstado dispatch={dispatch} setEstado={setEstado} getFacturasAdmin={getFacturasAdmin}/>
+            </div>
+            <div>
+                <TableContainer component={Paper}>
+                    <Table aria-label="collapsible table">
 
-                    <TableHead>
-                        <TableRow>
-                            <TableCell />
-                            <TableCell>Cantidad</TableCell>
-                            <TableCell align="center">Estado</TableCell>
-                            <TableCell align="right">Total</TableCell>
-                            <TableCell align="right">Fecha</TableCell>
-                        </TableRow>
-                    </TableHead>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell />
+                                <TableCell>Cantidad</TableCell>
+                                <TableCell align="center">Estado</TableCell>
+                                <TableCell align="right">Total</TableCell>
+                                <TableCell align="right">Fecha</TableCell>
+                            </TableRow>
+                        </TableHead>
 
-                <TableBody>
-                {Array.isArray(facturas)&&facturas.map((fac) => (
-                    <Row key={fac.id} id={fac.id} status={fac.status} ammount={fac.ammount}createDate={fac.createDate} total={fac.total} productos={fac.productos}/>
-                ))}
-                </TableBody>
-                </Table>
-            </TableContainer>
-    </div>)
+                    <TableBody>
+                    {Array.isArray(facturas)&&facturas.map((fac) => (
+                        <Row key={fac.id} id={fac.id} status={fac.status} ammount={fac.ammount}createDate={fac.createDate} total={fac.total} productos={fac.productos}/>
+                    ))}
+                    </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </div>)
 }

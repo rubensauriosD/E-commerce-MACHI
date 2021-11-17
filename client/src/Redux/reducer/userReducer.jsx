@@ -43,7 +43,13 @@ export const userReducer = (state = userState, {type, payload}) => {
             User: payload,
         };
         }
-            
+        
+        case constanteUsuarios.NUEVA_CONTRASENIA: {
+            return {
+                ...state,
+                User: payload
+            }
+        }
         default:
             return state;
     }
