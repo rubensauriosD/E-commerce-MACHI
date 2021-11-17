@@ -17,5 +17,4 @@ const getComments = async (req,res)=>{
   res.json( await utilsComments.getComments(id))
 };
 
-
 module.exports = {newComment,getComments}
