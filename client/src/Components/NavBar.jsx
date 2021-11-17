@@ -138,6 +138,8 @@ export default function NavBar() {
   );
 
   return (
+
+
     <Box sx={{ flexColumn: 5, flexGrow: 1, justifyContent: "space-between" }}>
       <AppBar position="static" color="inherit">
         <Toolbar>
@@ -161,22 +163,7 @@ export default function NavBar() {
               Home
             </Typography>
           </NavLink>
-          <NavLink
-            style={(isActive) => ({
-              textDecoration: "none",
-              color: isActive ? "#2e7d32" : "black",
-            })}
-            to="/contact"
-          >
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
-            >
-              Contacto
-            </Typography>
-          </NavLink>
+
           <NavLink
             style={(isActive) => ({
               textDecoration: "none",
@@ -194,6 +181,7 @@ export default function NavBar() {
               Tienda
             </Typography>
           </NavLink>
+
           <NavLink
             style={(isActive) => ({
               textDecoration: "none",
@@ -210,6 +198,7 @@ export default function NavBar() {
               Servicios
             </Typography>
           </NavLink>
+
           <NavLink
             style={(isActive) => ({
               textDecoration: "none",
@@ -226,12 +215,30 @@ export default function NavBar() {
               Nosotros
             </Typography>
           </NavLink>
+
+          <NavLink
+            style={(isActive) => ({
+              textDecoration: "none",
+              color: isActive ? "#2e7d32" : "black",
+            })}
+            to="/contact"
+          >
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ marginLeft: "5vw", display: { xs: "none", sm: "block" } }}
+            >
+              Contacto
+            </Typography>
+          </NavLink>
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <a
               href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20"
               target="_blanck"
-              style={{ textDecoration: "none", color: "black" }}
+              style={{ textDecoration: "none", color: "green" }}
             >
               <IconButton
                 size="large"

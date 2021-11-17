@@ -1,35 +1,45 @@
-.footer{
-    height: 100%;
-    margin-bottom: 10px;
-     
-}
 
 .BoxContenedora-footer{
-    background-color: #F9F9F9;
-    /* background-color: rgba(61, 55, 55, 0.514); */
-    height: 230px;
+    background-color: rgba(161, 148, 148, 0.329);
+    height: 100%;
+    margin-top: 15%;
     width: 100%;
-    margin-top: 30%;
-    
-}
-.container-footer{
-    width: 100%;
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     
     
 }
+.container-footer{
+    background-color: khaki;
+    width: 100%;
+    margin: auto;
+
+}
 
 .grid-interno{
     width: 250px;
-    margin: 30px;
+    margin-top: 30px;
+    margin: auto;
     padding: 20px;
     transition: transform 1s;
 }
-
+.grid-interno-confia{
+    display: flex;
+    flex-wrap: wrap;
+    width: 250px;
+    margin-top: 30px;
+    margin: auto;
+    padding: 20px;
+    transition: transform 1s;
+}
 .innerBox-footer{
+    padding: 10px;
     width: 200px;
-    margin: 15px;
+    margin: auto;
     font-size: 17px;
     color: rgb(88, 80, 80);
     font-weight: 600;
@@ -37,7 +47,8 @@
 
 .innerBox-footer-red{
     width: 200px;
-    margin: 15px;
+    margin: auto;
+    padding: 15px;
     font-size: 17px;
     color: rgba(58, 53, 53, 0.678);
     font-weight: 600;
@@ -54,6 +65,7 @@
 }
 
 .imgFooter{
+    
     display: block;
     object-fit: cover;
     height: 35px;
