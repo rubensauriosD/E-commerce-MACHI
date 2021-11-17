@@ -50,6 +50,12 @@ export const userReducer = (state = userState, {type, payload}) => {
                 User: payload
             }
         }
+        case constanteUsuarios.GET_USUARIO_POR_TOKEN: {
+            return {
+                ...state,
+                User: payload
+            }
+        }
         default:
             return state;
     }

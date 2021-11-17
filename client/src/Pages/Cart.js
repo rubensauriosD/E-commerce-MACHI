@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import PrecioTotal from "../Components/PrecioTotal";
 import { NavLink } from "react-router-dom";
 import { CambioDeLocalADb } from "../Redux/actions/cartAction";
+
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);

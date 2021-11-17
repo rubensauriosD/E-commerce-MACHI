@@ -1,4 +1,4 @@
-const { Usuario, Carrito, Producto } = require("../db");
+const { Usuario, Carrito, Producto,Factura, Comentario } = require("../db");
 const bCrypt = require("bcrypt-nodejs");
 const CreadorDeEncriptado = function (contrasenia) {
   return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
@@ -256,6 +256,27 @@ const CambioContraseñaUsuario = async (req, res) => {
     });
   }
 };
+
+const verficacionUsuarioFactura=async (req,res)=>{
+  const usuario=req.user                    // el usuario que posteo el comentario
+  const  { comentario,idProducto } = req.body       // el comentario que llega y el id del producto
+  try{
+    const facturaDeUsuario=await Factura.findAll({      // Buscar facturas del usuario
+      where:{
+        usuarioId:usuario.id
+      },
+      include:{
+        model:Producto
+      }
+    })
+    const productoEncontrado=facturaDeUsuario.map(factura=>factura.productos.filter(producto=>producto.id===idProducto)).flat()     // encontrar el producto entre las facturas del usuario
+    if(!productoEncontrado.length)return res.status(401).json({error:`no se encontro que el usuario  ${usuario.nombre} halla hecho una compra de este producto`})
+    const comentariosParaModificar=await Comentario.create({comentarios:comentario})
+    res.json({mensaje:"comentario modificado"})
+  }catch(e){
+    res.status(401).json({error:`error al postear un comentario por parte del usuario ${usuario.nombre}, el error es: ${e}`})
+  }
+}
 
 module.exports = {
   getUsuario,
