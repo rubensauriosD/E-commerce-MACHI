@@ -1,7 +1,8 @@
 import { facturaConstante } from "../constants/tipadosDespacho";
 const facturaState = {
     Facturas: [],
-    FacturasUsuario: []
+    FacturasUsuario: [],
+    estado: ""
 }
 
 export const facturaReducer = (state = facturaState, {type, payload}) => {
@@ -21,6 +22,11 @@ export const facturaReducer = (state = facturaState, {type, payload}) => {
                 ...state,
                 FacturasUsuario: [...payload]
             }
+        case facturaConstante.SET_ESTADO:
+        return {
+            ...state,
+            estado: payload
+        }
         default:
             return state;
     } 

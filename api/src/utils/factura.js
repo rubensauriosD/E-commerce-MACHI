@@ -11,8 +11,15 @@ const obtenerFacturas=async(req,res)=>{
 }
 const obtenerTodasLasFacturasAdmin=async(req,res)=>{
     const usuario = req.user
+    let { estado } = req.query;
+    let todasLasFacturas = []
     try{
-        const todasLasFacturas=await Factura.findAll()
+        todasLasFacturas=await Factura.findAll()
+
+        if(estado && estado !== "") {
+            todasLasFacturas = todasLasFacturas.filter((factura) => {return factura.status === estado}
+        )}
+
         res.json(todasLasFacturas)
     }catch(e){
         res.json({error: `no se pudo obtener todas las facturas para el administrador: ${usuario.nombre} debido a: ${e}`})

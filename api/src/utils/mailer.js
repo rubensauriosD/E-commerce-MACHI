@@ -1,8 +1,41 @@
 //const { Factura, Producto } = require("../db");
 const  transporter  = require("../config/mailer");
+const crypto = require('crypto-js')
+const {Usuario} = require("../db")
 
 
+const resetPassword = (req,res)=>{
+  const { email } = req.body;
+  // crypto.SHA256(32,(err,buffer)=>{
+  //     if(err){
+  //         console.log(err)
+  //     }
+      var hash = crypto.AES.encrypt(email, 'secret key 123').toString();
+      console.log(hash)
+      // const token = buffer.toString("hex");
+      Usuario.findOne({where: {email: email}})
+      .then(user=>{
+          if(!user){
+              return res.status(422).json({error:"User dont exists with that email"})
+          }
+          user.resetToken = hash
+          user.expireToken = Date.now() + 3600000
+          user.save().then((result)=>{
+              transporter.sendMail({
+                  to:user.email,
+                  from: '"Machi" <Machiwebsite@gmail.com>',
+                  subject:"password reset",
+                  html:`
+                  <p>You requested for password reset</p>
+                  <p>click in this to reset </p> <a href="http://localhost:3000/reset/${hash}">link</a> 
+                  `
+              })
+              res.json({message:"check your email"})
+          })
 
+      })
+  // })
+}
 
 
 const successMail = async (req,res) =>{ 
@@ -713,7 +746,7 @@ const successMail = async (req,res) =>{
     <div class="v-text-align" align="left">
       <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:arial,helvetica,sans-serif;"><tr><td class="v-text-align" style="font-family:arial,helvetica,sans-serif;" align="left"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:29px; v-text-anchor:middle; width:171px;" arcsize="14%" stroke="f" fillcolor="#ffffff"><w:anchorlock/><center style="color:#555555;font-family:arial,helvetica,sans-serif;"><![endif]-->
         <a href="" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:arial,helvetica,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #555555; background-color: #ffffff; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;">
-          <span style="display:block;padding:10px 20px 0px;line-height:120%;"><span style="text-decoration: underline; font-size: 14px; line-height: 16.8px;"><span style="font-size: 16px; line-height: 19.2px;"><strong>${"url de machi"}</strong></span></span></span>
+          <span style="display:block;padding:10px 20px 0px;line-height:120%;"><span style="text-decoration: underline; font-size: 14px; line-height: 16.8px;"><span style="font-size: 16px; line-height: 19.2px;"><strong>https://ecommerce-machi.netlify.app/#/</strong></span></span></span>
         </a>
       <!--[if mso]></center></v:roundrect></td></tr></table><![endif]-->
     </div>
@@ -998,4 +1031,5 @@ const successMail = async (req,res) =>{
 
   module.exports = {
     successMail,
+    resetPassword,
   };

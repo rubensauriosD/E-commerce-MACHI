@@ -127,3 +127,27 @@ export const comprobanteSiEsUsuario=(history)=>{
     .catch(()=>history.push("/login"))
   }
 }
+
+export const resetearContraseña= (email) => {
+  console.log("se envia el mail a", email)
+  
+  return (dispatch) => { axios
+    .post("/mailer/reset", {email})
+    .then((result) => { console.log("Mail enviado desde el front")})
+    .catch((e) => console.log(e));
+  };
+};
+  
+
+
+export const nuevaContraseña= ({nuevaContrasenia, email}) => {
+  return (dispatch) => {
+    axios.put(`usuarios`,{nuevaContrasenia, email})
+    .then((updateContrasenia)=>{
+      return dispatch({
+        type: constanteUsuarios.NUEVA_CONTRASENIA,
+        payload: updateContrasenia.data
+      })
+    })
+  }
+}
