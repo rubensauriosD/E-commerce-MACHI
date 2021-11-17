@@ -30,7 +30,7 @@ export default function PieDePagina(){
                         </div>
                         <div className="grid-interno">
                             <Box className="innerBox-footer" borderBottom={1}>Nuestras Redes</Box>
-                            <a className="innerBox-footer-red" href="https://instagram.com/machi_arg?utm_medium=copy_link" target="_blanck" color="inherit" style={{textDecoration: "none"}}><InstagramIcon style={{color: '#C32AA3', fontSize: '50px'}}/></a>
+                            <a className="innerBox-footer-red" href="https://www.instagram.com/machi_arg/" target="_blanck" color="inherit" style={{textDecoration: "none"}}><InstagramIcon style={{color: '#C32AA3', fontSize: '50px'}}/></a>
                             <a className="innerBox-footer-red" href="https://www.facebook.com/Elmachi/?ref=pages_you_manage" target="_blanck"  color="inherit" style={{textDecoration: "none"}}><FacebookIcon style={{color: 'blue', fontSize: '50px'}}/></a>
                             <a className="innerBox-footer-red" href="https://wa.me/543512900724?text=Hola%20Machi,%20tengo%20una%20consulta!%20" target="_blanck" color="inherit" style={{textDecoration: "none"}}><WhatsAppIcon style={{color: 'green', fontSize: '50px'}}/></a>
                         </div>
