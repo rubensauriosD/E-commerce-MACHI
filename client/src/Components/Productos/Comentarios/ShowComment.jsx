@@ -1,14 +1,15 @@
 import React from 'react';
+import '../../../Styles/Comments.css'
 
 
-export default function Targeta_Factura({ comentarios, puntuacion, usuario}) {
+export default function ShowComment({ comentarios, puntuacion, usuario}) {
 
     return (
-        <div className="comment-container-card">
+        <div className="commentsCont">
             {/* <div className="img-card-userName" > */}
-            <div className='ParteDerechaComments'>
+            <div className='commentsCont'>
                 <h5 className="comment-card-userName">{usuario}</h5>
-                <p>{comentarios}</p>
+                <p className="conte">{comentarios}</p>
                                 <strong className='puntacionStyle'>Puntuación: <label className={parseInt(puntuacion) >= 1 ? 'estrellitaActiva' : 'EstrellitasGrises'}  >★</label>
                                     <label className={parseInt(puntuacion)>= 2 ? 'estrellitaActiva' : 'EstrellitasGrises'}  >★</label>
                                     <label className={parseInt(puntuacion) >= 4 ? 'estrellitaActiva' : 'EstrellitasGrises'}  >★</label>
