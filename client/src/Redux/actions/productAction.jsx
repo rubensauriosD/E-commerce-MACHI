@@ -167,6 +167,30 @@ export function getComentarios(id) {
   }
 }
 
+export function addComentarios(usuarioId, productoId, comentarios, puntuacion) {
+  return function(dispath) {
+    const request = {
+      method: 'POST',
+      headers: {'Content-Type': 'applicaton/json'},
+      body: JSON.stringify({usuarioId, productoId, comentarios, puntuacion})  
+    }
+    return fetch(`/comentarios/newComment`, request)
+      .then(res => res.json())
+      .then(obj => {
+        dispath({
+          type: productoConstante.ADD_COMENTARIOS,
+          payload: {
+            id: obj.id,
+            comentarios: obj.comentarios,
+            puntuacion: obj.puntuacion,
+            usuarioId: obj.usuarioId,
+            productoId: obj.productoId
+          }
+        })
+      })
+  }
+}
+
 export const reset = () => {
   return {
     type: productoConstante.RESET,

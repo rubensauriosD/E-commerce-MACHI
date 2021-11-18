@@ -12,4 +12,5 @@ export const SET_ORDEN_A = "SET_ORDEN_A";
 export const SET_ORDEN_P = "SET_ORDEN_P";
 export const SET_FILTRO_C = "SET_FILTRO_C";
 export const GET_COMENTARIOS = "GET_COMENTARIOS";
+export const ADD_COMENTARIOS = "ADD_COMENTARIOS";
 export const RESET = "RESET";

@@ -9,6 +9,7 @@ const productState = {
     ordenP: "",
     filtroC: "",
     comments: [],
+    addComments: [],
     pagina: 1
 }
 
@@ -87,6 +88,12 @@ export const productReducer = (state = productState, {type, payload}) => {
         comments: payload
       }
     }
+    case productoConstante.ADD_COMENTARIOS: {
+      return {
+        ...state,
+        addComments: payload
+      }
+    };
     case productoConstante.RESET: {
       return {
         ...state,

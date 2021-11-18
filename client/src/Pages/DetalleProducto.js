@@ -15,7 +15,7 @@ import {
 } from "../Redux/actions/productAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import CommentProduct from "../Components/Productos/CommentProduct";
+import ShowComment from '../Components/Productos/Comentarios/ShowComment'
 import "../Styles/Comments.css";
 
 export default function DetalleProducto({ props }) {
@@ -35,17 +35,6 @@ export default function DetalleProducto({ props }) {
   }, [getComentarios]);
 
   const productComment = comments.filter((c) => c.productoId === props);
-
-  const [input, setInput] = useState(false);
-  const [datos, setDatos] = useState({});
-  const handleClik = (e) => {
-    if (input === false) {
-      setInput(true);
-      setDatos(e);
-    } else {
-      setInput(false);
-    }
-  };
 
   const handleOnClick = () => {
     if (usuario.id) {
@@ -99,18 +88,19 @@ export default function DetalleProducto({ props }) {
           <div>
             Reseñas del producto
             <div className="comm-scrll">
-              {productComment?.map((e) => {
-                return (
-                  <div>
-                    <div key={e.id} value={e.id} className="commentsCont">
-                      <p key={e.id} value={e.id} className="conte">
-                        {e.comentarios}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                            {
+                                productComment?.length !== 0 ?
+                                productComment?.map((e) => <ShowComment
+                                key={e.id} 
+                                value={e.id} 
+                                comentarios={e.comentarios}
+                                puntuacion={e.puntuacion}
+                                usuario={e.usuario.nombre}
+                                productoId={e.productoId}
+                                ></ShowComment>) :
+                                <div>No hay comentarios</div>
+                            }
+                        </div>
           </div>
         </div>
       </div>
