@@ -46,7 +46,7 @@ export default function EditarProducto(){
             formData.append("file", imagen)
             formData.append("upload_preset", "tpvdkdav")
 
-            axios.post("https://api.cloudinary.com/v1_1/mau-ar/image/upload", formData)
+            axios.post(`https://api.cloudinary.com/v1_1/mau-ar/image/upload`, formData)
             .then((response)=>{
                 return response.data
             })

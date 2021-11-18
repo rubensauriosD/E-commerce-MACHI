@@ -321,5 +321,5 @@ module.exports = {
   becomeAdmin,
   becomeUser,
   CambioContraseñaUsuario,
-  CambiarSeguridadDeContrasenia,
+  // CambiarSeguridadDeContrasenia,
 };

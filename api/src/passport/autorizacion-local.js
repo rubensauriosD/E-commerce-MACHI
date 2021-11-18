@@ -9,7 +9,6 @@ passport.serializeUser((usuario, done) => {
 
 passport.deserializeUser(async (id, done) => {
   const usuario = await Usuario.findByPk(id);
-  console.log("aca el usuario cuando se hace un pedido: ", usuario)
   done(null, usuario);
 });
 

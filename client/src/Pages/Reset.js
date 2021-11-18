@@ -1,5 +1,4 @@
 import React,{useState} from 'react'
-import {useHistory} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import { resetearContraseña } from '../Redux/actions/userAction';
 import swal from 'sweetalert';
@@ -14,8 +13,6 @@ const Reset  = ()=>{
         e.preventDefault()
         dispatch (resetearContraseña(email))
         swal('Revisa tu email. Si el mail no llega, intente de nuevo!')
-            
-        //history.push('/login')
     }
 
 

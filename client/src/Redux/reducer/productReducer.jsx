@@ -5,12 +5,15 @@ const productState = {
     productosPorCategorias: [],
     Product: {},
     nombre: "",
-    ordenA: "",
-    ordenP: "",
-    filtroC: "",
     comments: [],
+
+    pagina: 1,
+    categoria:"",
+    ordenamiento:"",
     addComments: [],
-    pagina: 1
+    
+
+   
 }
 
 export const productReducer = (state = productState, {type, payload}) => {
@@ -67,21 +70,6 @@ export const productReducer = (state = productState, {type, payload}) => {
         ...state,
         pagina: payload,
       };
-    case productoConstante.SET_ORDEN_A:
-      return {
-        ...state,
-        ordenA: payload,
-      };
-    case productoConstante.SET_ORDEN_P:
-      return {
-        ...state,
-        ordenP: payload,
-      };
-    case productoConstante.SET_FILTRO_C:
-      return {
-        ...state,
-        filtroC: payload,
-      };
     case productoConstante.GET_COMENTARIOS: {
       return {
         ...state,
@@ -97,10 +85,32 @@ export const productReducer = (state = productState, {type, payload}) => {
     case productoConstante.RESET: {
       return {
         ...state,
-        filtroC:"",
-        nombre:"",
-        ordenP:"",
-        ordenA:""
+        ordenamiento: payload
+      }
+    }
+    case "CAMBIO_DE_CATEGORIA":{
+      return{
+        ...state,
+        categoria:payload
+      }
+    }
+
+    case productoConstante.ADD_COMENTARIOS: {
+      return {
+        ...state,
+        addComments: payload
+      }
+    };
+    case productoConstante.RESET: {
+      return {
+        ...state,
+        ordenamiento: payload
+      }
+
+    case "CAMBIO_ORDENAMIENTO":{
+      return{
+        ...state,
+        ordenamiento: payload
       }
     }
     default:

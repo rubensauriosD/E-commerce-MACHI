@@ -11,6 +11,7 @@ import EditarProducto from "../Components/Admin/EditarProducto";
 import '../Styles/AdminStyle.css'
 import EditarUsuario from "../Components/Admin/EditarUsuario";
 import EditarFactura from "../Components/Admin/EditarFacturas";
+import EditarImagenes from "../Components/Admin/EditarImagenes";
 import { useHistory } from "react-router";
 
 export default function Admin(){
@@ -30,7 +31,8 @@ const dispatch = useDispatch()
                 <div className='formsAdminExterno'>
                     <CargarProducto/>
                 
-                    <CargarImagen/> 
+                    <CargarImagen/>
+                    <EditarImagenes/> 
 
                     <h3>Editar Productos</h3>
                     <EditarProducto/>

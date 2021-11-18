@@ -62,6 +62,7 @@ export default function Product({
           <Link to={`/producto/${id}`} style={{ textDecoration: "none" }}>
             <div className="nombre-precio">
               <p className="product-nombre">{nombre}</p>
+              {/* <p className="product-nombre">{categoria}</p> */}
               <p className="product-precio">${precio}</p>
             </div>
           </Link>
