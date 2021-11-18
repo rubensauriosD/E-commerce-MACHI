@@ -119,7 +119,14 @@ const CartProduct = ({
       <Typography
         variant="h4"
         component="div"
-        sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1, mr: 7 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          pl: 1,
+          pb: 1,
+          mr: 7,
+          width: 120,
+        }}
       >
         {precioTotalProducto}
       </Typography>

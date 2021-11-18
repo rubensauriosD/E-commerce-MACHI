@@ -1,0 +1,36 @@
+.formEstrellitas {
+    width: 250px;
+    height: 25px;
+}
+
+.clasificacion {
+    text-align: center;
+    direction: rtl;
+    unicode-bidi: bidi-override;
+}
+
+.labelEstrellitas{
+    font-size: 20px;
+    color: grey;
+}
+
+.estrellitaTA{
+    display: none;
+}
+
+.labelEstrellitas:hover,
+.labelEstrellitas:hover ~ .labelEstrellitas {
+    color: orange;
+    cursor: pointer;
+}
+
+.estrellitaActiva{
+    color: orange;
+}
+
+.EstrellitasGrises{
+    color:gray
+}
+.estrellitaTA:checked ~ label {
+    color: orange;
+}

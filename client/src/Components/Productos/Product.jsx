@@ -3,36 +3,47 @@ import "./ProductStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCartGuest,CambiarCantidadDb,aniadirObjetoCarritoDb } from "../../Redux/actions/cartAction";
+import {
+  addToCartGuest,
+  CambiarCantidadDb,
+  aniadirObjetoCarritoDb,
+} from "../../Redux/actions/cartAction";
 import React from "react";
 import DetalleProducto from "../../Pages/DetalleProducto";
-import {v4 as uuidv4} from "uuid"
-import {Alert} from "@mui/material"
-export default function Product({ id, nombre, imagen, precio, disponibilidad, categoria }) {
-
-  const usuario = useSelector((state)=>state.usuario.User)
-  const objetosCarrito = useSelector((state)=>state.cart.itemsCarritoDb)
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import IconButton from "@mui/material/IconButton";
+import { v4 as uuidv4 } from "uuid";
+import { Alert } from "@mui/material";
+export default function Product({
+  id,
+  nombre,
+  imagen,
+  precio,
+  disponibilidad,
+}) {
+  const usuario = useSelector((state) => state.usuario.User);
+  const objetosCarrito = useSelector((state) => state.cart.itemsCarritoDb);
   const dispatch = useDispatch();
   const handleOnClick = () => {
-    if(usuario.id){
-      const data={nombre,imagen,precio}
-      const objetoEncontrado=objetosCarrito.find(objeto=>objeto.idProducto===id)
-      if(objetoEncontrado){
-        dispatch(CambiarCantidadDb(objetoEncontrado.idCarrito,1))
+    if (usuario.id) {
+      const data = { nombre, imagen, precio };
+      const objetoEncontrado = objetosCarrito.find(
+        (objeto) => objeto.idProducto === id
+      );
+      if (objetoEncontrado) {
+        dispatch(CambiarCantidadDb(objetoEncontrado.idCarrito, 1));
         //dispatch(añadirCarritoPost(data))
-      }else{
-        data.idCarrito=uuidv4()
-        data.idProducto=id
-        dispatch(aniadirObjetoCarritoDb(data))
+      } else {
+        data.idCarrito = uuidv4();
+        data.idProducto = id;
+        dispatch(aniadirObjetoCarritoDb(data));
       }
+    } else {
+      dispatch(addToCartGuest(id));
     }
-   else{
-    dispatch(addToCartGuest(id));
-   }
   };
 
-
-  <DetalleProducto id={id}></DetalleProducto>
+  <DetalleProducto id={id}></DetalleProducto>;
 
   return (
     <div className="tarjeta">
@@ -54,14 +65,20 @@ export default function Product({ id, nombre, imagen, precio, disponibilidad, ca
               {/* <p className="product-nombre">{categoria}</p> */}
               <p className="product-precio">${precio}</p>
             </div>
-          </Link> 
+          </Link>
           <div className="carrito-products">
-          {!disponibilidad?<Alert severity="warning">Sin Stock</Alert>:<button onClick={handleOnClick} disabled={disponibilidad?false:true}>
-              <FontAwesomeIcon 
-                icon={faShoppingCart}
-                style={{ color: "grey" }}
-              />
-            </button>}
+            {!disponibilidad ? (
+              <Alert severity="warning">Sin Stock</Alert>
+            ) : (
+              <IconButton
+                color="primary"
+                aria-label="add to shopping cart"
+                onClick={handleOnClick}
+                disabled={disponibilidad ? false : true}
+              >
+                <AddShoppingCartIcon />
+              </IconButton>
+            )}
           </div>
         </div>
       </div>
