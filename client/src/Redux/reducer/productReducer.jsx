@@ -6,11 +6,14 @@ const productState = {
     Product: {},
     nombre: "",
     comments: [],
+
     pagina: 1,
     categoria:"",
     ordenamiento:"",
     addComments: [],
     
+
+   
 }
 
 export const productReducer = (state = productState, {type, payload}) => {
@@ -91,6 +94,19 @@ export const productReducer = (state = productState, {type, payload}) => {
         categoria:payload
       }
     }
+
+    case productoConstante.ADD_COMENTARIOS: {
+      return {
+        ...state,
+        addComments: payload
+      }
+    };
+    case productoConstante.RESET: {
+      return {
+        ...state,
+        ordenamiento: payload
+      }
+
     case "CAMBIO_ORDENAMIENTO":{
       return{
         ...state,
