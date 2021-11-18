@@ -6,7 +6,6 @@ const setHeaders = require("./src/utils/middlewares/setHeaders");
 const { conn } = require("./src/db");
 const passport = require("passport");
 const session = require("express-session");
-const cors = require('cors')
 const app = express();
 //Inicializaciones
 require("./src/passport/autorizacion-local");
@@ -21,21 +20,22 @@ app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
 app.use(morgan("dev"));
-process.env.COOKIE ? app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: false,
-    cookie:{sameSite: 'none',secure:true} 
-  })
-):
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: false,
-  })
-);
+process.env.COOKIE
+  ? app.use(
+      session({
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: false,
+        cookie: { sameSite: "none", secure: true },
+      })
+    )
+  : app.use(
+      session({
+        secret: "eMachiComercioWebPage",
+        resave: true,
+        saveUninitialized: false,
+      })
+    );
 app.use(passport.initialize());
 app.use(passport.session());
 //CREAR MIDDLEWARE PARA AUTENTICACIONES
