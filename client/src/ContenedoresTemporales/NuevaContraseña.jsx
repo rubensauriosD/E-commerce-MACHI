@@ -1,25 +1,33 @@
 import { useForm, Controller } from "react-hook-form";
 import { TextField, Button, Box } from "@mui/material";
 import { nuevaContraseña, pedirUsuarioPorToken } from "../Redux/actions/userAction";
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { useEffect} from "react"
-export default function NuevaContrasenia({props}) {
-    console.log("aca llega el token",props)
 
-     const dispatch=useDispatch()
-     useEffect(()=>{
-       dispatch(pedirUsuarioPorToken(props))
-     },[dispatch,props])
-     console.log(props);
-  const {
-    control,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm();
+
+export default function NuevaContrasenia({props}) {
+  console.log("aca llega el token",props)
+  const dispatch=useDispatch()
+  useEffect(()=>{
+     dispatch(pedirUsuarioPorToken(props))
+   },[dispatch,props])
+
+   
+   const {
+     control,
+     formState: { errors },
+     handleSubmit,
+     reset,
+    } = useForm();
+    
+  const {User} = useSelector((state) => state.usuario);
+  console.log(User);
+  const mail = User.email;
+
   const handleOnSubmit = (data) => {
       console.log(data)
-    //dispatch(nuevaContraseña({nuevaContrasenia, props.email}));
+    const {nuevaContrasenia} = data
+    dispatch(nuevaContraseña(nuevaContrasenia,mail));
     reset({ nuevaContrasenia: "", repetirContrasenia: "" });
   };
 
@@ -33,8 +41,8 @@ export default function NuevaContrasenia({props}) {
           rules={{
             required: { value: true, message: "input requerido" },
             pattern: {
-              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-              message: "Debe tener minus, mayus y un simbolo",
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+              message: "Debe tener 8 caracteres, minus, mayus y un numero",
             },
           }}
           render={({ field }) => (
@@ -59,8 +67,8 @@ export default function NuevaContrasenia({props}) {
           rules={{
             required: { value: true, message: "input requerido" },
             pattern: {
-              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-              message: "Debe tener minus, mayus y un simbolo",
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+              message: "Repite la nueva contraseña",
             },
           }}
           render={({ field }) => (

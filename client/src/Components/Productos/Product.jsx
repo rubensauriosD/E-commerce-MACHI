@@ -8,7 +8,7 @@ import React from "react";
 import DetalleProducto from "../../Pages/DetalleProducto";
 import {v4 as uuidv4} from "uuid"
 import {Alert} from "@mui/material"
-export default function Product({ id, nombre, imagen, precio, disponibilidad }) {
+export default function Product({ id, nombre, imagen, precio, disponibilidad, categoria }) {
 
   const usuario = useSelector((state)=>state.usuario.User)
   const objetosCarrito = useSelector((state)=>state.cart.itemsCarritoDb)
@@ -51,6 +51,7 @@ export default function Product({ id, nombre, imagen, precio, disponibilidad }) 
           <Link to={`/producto/${id}`} style={{ textDecoration: "none" }}>
             <div className="nombre-precio">
               <p className="product-nombre">{nombre}</p>
+              {/* <p className="product-nombre">{categoria}</p> */}
               <p className="product-precio">${precio}</p>
             </div>
           </Link> 

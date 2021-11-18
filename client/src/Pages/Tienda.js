@@ -5,44 +5,47 @@ import * as React from "react";
 import Products from "../Components/Productos/Products";
 import SearchBar from "../Components/Productos/SearchBar";
 import FiltrosYOrden from "../Components/Productos/FiltrosYOrden";
-import { getProducts, setPagina } from "../Redux/actions/productAction";
+import {
+  getProducts,
+  setPagina,
+} from "../Redux/actions/productAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronRight,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-export default function Tienda(props) {
+export default function Tienda({ props }) {
+  const history = useHistory();
   // const productosPorCategorias=useSelector(state=>state.productosPorCategorias)
-  const { products, nombre, ordenA, ordenP, filtroC, pagina } = useSelector(
-    (state) => state.productos
-  );
-
+  const { products, nombre, pagina, ordenamiento, categoria } =
+    useSelector((state) => state.productos);
   const dispatch = useDispatch();
-  React.useEffect(() => {
-    // dispatch(productosFiltrados(props))
-    dispatch(
-      getProducts({
-        filtroC: props.nombreCategoria ? props.nombreCategoria : "",
-      })
-    );
-  }, [dispatch, props.nombreCategoria]);
-
   const changePagina = (pagina) => {
-    dispatch(getProducts({ pagina, ordenA, ordenP, filtroC, nombre }));
+    dispatch(getProducts({ pagina, ordenamiento, categoria, nombre }));
     dispatch(setPagina(pagina));
   };
-  console.log("lo que llega a la tienda: ", pagina)
+
+  useEffect(() => {
+    dispatch(
+      getProducts({
+        categoria: props ? props : "",
+      })
+    );
+  }, [dispatch, props]);
+
+
   return (
     <div className="Store">
       <h1>Tienda</h1>
       <div className="SearchContainer">
         <SearchBar />
-        <FiltrosYOrden />
+        <FiltrosYOrden seteoDePropiedad={props} />
       </div>
       {/* Hacerle un Componente al Paginado Por Favor ↓ */}
       <div className="ProdContTitle">
-        <h1>{props.nombreCategoria}</h1>
         {/* <Products productos={productosPorCategorias}/>  */}
         <div className="ProductsContainer">
           <Products productos={products?.resultado} />

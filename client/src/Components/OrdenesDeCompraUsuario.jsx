@@ -55,8 +55,9 @@ function Compras({estado,total,fecha,productos}) {
                     {/* <TableCell align="right">Cantidad</TableCell> */}
                   </TableRow>
                 </TableHead>
+
                 <TableBody>
-                  {productos.map((producto)=>(
+                {productos&&productos.map((producto)=>(
                     <TableRow key={producto.id}>
                       <TableCell component="th" scope="row">
                         <Link style={{textDecoration:"none", color:"black"}} to={`/producto/${producto.id}`}>
@@ -69,6 +70,7 @@ function Compras({estado,total,fecha,productos}) {
                     </TableRow>
                   ))}
                 </TableBody>
+
               </Table>
             </Box>
           </Collapse>
@@ -93,15 +95,15 @@ export default function CollapsibleTable() {
       <Table aria-label="collapsible table">
         <TableHead>
           <TableRow>
-            <TableCell />
-            <TableCell>Historial de compras</TableCell>
-            <TableCell align="right">Estado</TableCell>
-            <TableCell align="right">Precio total</TableCell>
-            <TableCell align="right">fecha de compra</TableCell>
+            
+            <TableCell >Historial de compras</TableCell>
+            <TableCell align="auto">Estado</TableCell>
+            <TableCell align="auto">Precio total</TableCell>
+            <TableCell align="auto">fecha de compra</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-            {facturas?facturas.map((factura) => (
+        {facturas?facturas.map((factura) => (
               <Compras key={factura.id} 
                 id={factura.id} 
                 estado={factura.status} 
@@ -109,9 +111,8 @@ export default function CollapsibleTable() {
                 fecha={factura.createDate} 
                 total={factura.total} 
                 productos={factura.productos}
-              />
-              )
-            ): <p>No hay facturas</p>}
+              />)                     
+            ): <p>No hay compras realizadas</p>}  
         </TableBody>
       </Table>
     </TableContainer>

@@ -19,11 +19,6 @@ export const imageReducer = (state = imageState, {type, payload}) => {
             return {
             ...state,
             };
-        case imagenConstantes.PUT_IMAGE:
-            return {
-                ...state,
-            Image: payload,
-            };
         default:
         return state;
     }

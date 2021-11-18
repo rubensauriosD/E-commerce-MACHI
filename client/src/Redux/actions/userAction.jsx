@@ -140,7 +140,8 @@ export const resetearContraseña= (email) => {
   
 
 
-export const nuevaContraseña= ({nuevaContrasenia, email}) => {
+export const nuevaContraseña= (nuevaContrasenia, email) => {
+  console.log("email pa",email)
   return (dispatch) => {
     axios.put(`usuarios`,{nuevaContrasenia, email})
     .then((updateContrasenia)=>{
@@ -152,7 +153,8 @@ export const nuevaContraseña= ({nuevaContrasenia, email}) => {
   }
 }
 
-export const pedirUsuarioPorToken = ({token}) => {
+export const pedirUsuarioPorToken = (token) => {
+  console.log("token en la action", token)
   return (dispatch) => {
     axios.get(`mailer/reset/${token}`)
     .then((usuario) => {

@@ -47,7 +47,7 @@ const Contact = () => {
           <div className={ContactCSS.icon_decoration}>
             <MailIcon />
           </div>
-          <a href="#">machiwebsite@gmail.com</a>
+          <a href="mailto:machiwebsite@gmail.com">machiwebsite@gmail.com</a>
         </i>
       </div>
       <div className={ContactCSS.form_container}>

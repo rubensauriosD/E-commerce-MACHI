@@ -18,7 +18,7 @@ export default function EditarImagenes(){
         <div className="editarImagenesAdmin">
             <h3>Editar Imagenes</h3>
             <ol>
-                {imagenes.imagenes?.map((imagen, i) => {
+                {imagenes&&imagenes.map((imagen, i) => {
                         return(
                             <li key={imagen.id}>
                                 <div>

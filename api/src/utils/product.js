@@ -1,58 +1,47 @@
 const { Producto, Op, cloud } = require("../db");
 
 async function getProductos(req, res) {
+  console.log("lo que llega por query",req.query)
   try {
-    let { nombre, ordenA, ordenP, filtroC, pagina } = req.query;
+    let { nombre, ordenamiento, categoria, pagina } = req.query;
     let productos = []
     let resultado
-    pagina = pagina ? pagina : 1
     const productosXpagina = 6
     //#region search by NAME
-    if (nombre && nombre !== "") {
+    if (nombre !== "" && typeof nombre === "string") {
+      console.log("paso por la busqueda de nombre")
       productos = await Producto.findAll({
         where: {
           nombre: {
             [Op.iLike]: `%${nombre}%`,
           },
         },
+        order:[["createdAt","DESC"]]
       });
+      console.log("paso por nombre y devolvio esto: ",productos)
     } else {
-      productos = await Producto.findAll(); //Si no hay input devuelve todo
-    }
-    //#endregion NAME
-    
-    //#region ORDEN ALFABETICO
-    if (ordenA === "asc") {
-      productos = productos.sort((a,b) =>{
-        return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase()) 
-      })
-      console.log("asc " + productos)
-    }
-    if (ordenA === "desc"){
-      productos = productos.sort((a,b) =>{
-       return b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase()) 
-        
-      })
-      console.log("desc" + productos)
+      console.log("paso por la traida de todos los productos")
+      productos = await Producto.findAll({order:[["createdAt","DESC"]]}); //Si no hay input devuelve todo
     }
     //#endregion
 
-    //#region ORDEN PRECIO
-    if (ordenP === "asc") {
-      productos = productos.sort((a, b) => {
-        return a.precio > b.precio ? 1 : a.precio < b.precio ? -1 : 0
+     //#region ORDEN
+     if(ordenamiento !== "") {
+       productos = productos.sort((a,b) =>{
+         switch (ordenamiento) {
+           case "ascendente": return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase())
+           case "descendente": return b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())  
+          case "menor precio": return a.precio > b.precio ? 1 : a.precio < b.precio ? -1 : 0
+           case "mayor precio": return b.precio > a.precio ? 1 : b.precio < a.precio ? -1 : 0
+           default: return 0;
+         }
       })
-    }
-    if (ordenP === "desc") {
-      productos = productos.sort((a,b) => {
-        return b.precio > a.precio ? 1 : b.precio < a.precio ? -1 : 0
-      })
-    }
+     }
     //#endregion
 
     //#region FILTRO POR CATEGORIA
-    if (filtroC && filtroC !== "") {
-      productos = productos.filter((producto) => {return producto.categoria === filtroC})
+    if (categoria && categoria !== "") {
+      productos = productos.filter((producto) => {return producto.categoria === categoria})
     }
     //#endregion
 
@@ -60,13 +49,13 @@ async function getProductos(req, res) {
     resultado = productos.slice((productosXpagina * (pagina -  1)) , (productosXpagina * (pagina -  1)) + productosXpagina )
     //#endregion
 
-    return res.send({
+    return res.json({
       resultado: resultado,
       productos: productos,
       contador: productos.length
     });
   } catch (error) {
-    return res.status(404);
+    return res.status(404).json({error:`el error al intentar sacar productos a la tienda es ${error}`});
   }
 }
 

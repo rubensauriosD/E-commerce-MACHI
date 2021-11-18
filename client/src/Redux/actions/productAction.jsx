@@ -18,14 +18,15 @@ export const postProduct = (producto) => {
   };
   
   // obtener todos los productos, paginado, filtros y ordenamientos para la tienda
-  export const getProducts = ({ nombre, ordenA, ordenP, filtroC, pagina }) => {
+  export const getProducts = ({ nombre, ordenamiento, categoria, pagina }) => {
+    console.log("aca el nombre",nombre,"aca el ordenamiento:",ordenamiento,"aca la categoria",categoria,"el numero de pagina es:", pagina)
     return async (dispatch) => {
       try {
         const response = await axios.get(
-          `/productos?pagina=${pagina ? pagina : 1}&ordenA=${
-            ordenA ? ordenA : ""
-          }&ordenP=${ordenP ? ordenP : ""}&filtroC=${
-            filtroC ? filtroC : ""
+          `/productos?pagina=${pagina ? pagina : 1}&ordenamiento=${
+            ordenamiento ? ordenamiento : ""
+          }&categoria=${
+            categoria ? categoria : ""
           }&nombre=${nombre ? nombre : ""}`
          );
         return dispatch({
@@ -121,10 +122,10 @@ export const postProduct = (producto) => {
   };
 
   //Seteos de pagina, filtros y ordenamientos
-export const setFiltroC = (categoria) => {
+export const setCategoria = (categoria) => {
   return {
-    type: productoConstante.SET_FILTRO_C,
-    payload: categoria,
+    type: "CAMBIO_DE_CATEGORIA",
+    payload: categoria
   };
 };
 
@@ -141,17 +142,10 @@ export const setPagina = (pagina) => {
   };
 };
 
-export const setOrdenA = (orden) => {
+export const setOrdenamiento = (ordenamiento) => {
   return {
-    type: productoConstante.SET_ORDEN_A,
-    payload: orden,
-  };
-};
-
-export const setOrdenP = (orden) => {
-  return {
-    type: productoConstante.SET_ORDEN_P,
-    payload: orden,
+    type: "CAMBIO_ORDENAMIENTO",
+    payload: ordenamiento
   };
 };
 
@@ -172,3 +166,10 @@ export const reset = () => {
     type: productoConstante.RESET,
   };
 };
+
+// export const setCategoria=(categoria)=>{
+//   return{
+//     type:"CAMBIO_DE_CATEGORIA",
+//     payload:categoria
+//   }
+// }

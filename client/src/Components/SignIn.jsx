@@ -3,7 +3,6 @@ import { Button, Box, TextField, Alert, Typography } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 export default function SignIn({ SubmitS, submitFace }) {
   const {
-    register,
     handleSubmit,
     formState: { errors },
     control,
@@ -36,6 +35,7 @@ export default function SignIn({ SubmitS, submitFace }) {
           <Controller
             name="nombre"
             control={control}
+            defaultValue=""
             rules={{ required: { value: true, message: "nombre requerido" } }}
             render={({ field }) => (
               <TextField
@@ -54,6 +54,7 @@ export default function SignIn({ SubmitS, submitFace }) {
           <Controller
             name="apellido"
             control={control}
+            defaultValue=""
             rules={{ required: { value: true, message: "apellido requerido" } }}
             render={({ field }) => (
               <TextField
@@ -72,6 +73,7 @@ export default function SignIn({ SubmitS, submitFace }) {
           <Controller
             name="email"
             control={control}
+            defaultValue=""
             rules={{
               required: { value: true, message: "email requerido" },
               pattern: {
@@ -97,10 +99,11 @@ export default function SignIn({ SubmitS, submitFace }) {
           <Controller
             name="contrasenia"
             control={control}
+            defaultValue=""
             rules={{
               required: { value: true, message: "contraseña requerida" },
               pattern: {
-                value: /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
                 message: "debe tener Min, Mayu, y un simbolo",
               },
             }}
@@ -122,6 +125,7 @@ export default function SignIn({ SubmitS, submitFace }) {
           <Controller
             name="validarContrasenia"
             control={control}
+            defaultValue=""
             rules={{
               required: {
                 value: true,

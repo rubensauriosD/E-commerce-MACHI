@@ -4,7 +4,6 @@ import { postImage } from '../../Redux/actions/imageAction';
 import { Button, TextField } from "@mui/material";
 import axios from 'axios';
 
-
 export default function CargarImagen(){   
     
     const dispatch = useDispatch();
@@ -17,7 +16,7 @@ export default function CargarImagen(){
         formData.append("file", img)
         formData.append("upload_preset", "tpvdkdav")
     
-        axios.post("https://api.cloudinary.com/v1_1/mau-ar/image/upload", formData)
+        axios.post(`https://api.cloudinary.com/v1_1/mau-ar/image/upload`, formData)
         .then((response) => {
             return dispatch(postImage(response.data) )
         })
