@@ -80,7 +80,7 @@ export default function EditarProducto(){
 
                                 {/* <div className="imagenAdminDiv"> */}   
                                     <img className="imagenAdmin" src={producto.imagen} alt="imagen producto"/>
-                                <TextField  className="levelAdminMaterialEdit" onChange={(e) => {setImagen(e.target.files[0])}} name="imagen"  type="file" variant="filled" color="success"/>
+                                <TextField  className="levelAdminMaterialEditimg" onChange={(e) => {setImagen(e.target.files[0])}} name="imagen"  type="file" variant="filled" color="success"/>
                                 {/* </div>  */}   
                                 
                              

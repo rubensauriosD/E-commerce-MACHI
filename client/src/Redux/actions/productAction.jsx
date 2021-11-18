@@ -166,3 +166,9 @@ export function getComentarios(id) {
     })
   }
 }
+
+export const reset = () => {
+  return {
+    type: productoConstante.RESET,
+  };
+};

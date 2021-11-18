@@ -44,7 +44,7 @@ app.use(errorHandler);
 //precargar un usuario y un admin
 const { becomeAdmin, becomeUser } = require("./src/utils/users");
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   const preloadAdmin = await becomeAdmin();
   const preloadUser = await becomeUser();
   console.log("Base de Datos conectada");
