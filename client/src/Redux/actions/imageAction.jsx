@@ -51,21 +51,3 @@ export const postImage = (imagen) => {
         });
     };
   };
-  
-  //REVISAR
-  //modificar una imagen
-  export const putImage = ({ id }) => {
-    return (dispatch) => {
-      axios
-        .put(`/imagenes/${id}`,{withCredentials:true})
-        .then((imageUpdate) => {
-          return dispatch({
-            type: imagenConstantes.PUT_IMAGE,
-            payload: imageUpdate.data,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-  };

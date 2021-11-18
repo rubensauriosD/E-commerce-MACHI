@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import swal from "sweetalert";
 import axios from "axios";
 import "../../Styles/Comments.css";
@@ -16,7 +16,7 @@ function validate(input2) {
 
 
 export default function Comment({ text, id, setInput }) {
-    const dispatch = useDispatch();
+   // const dispatch = useDispatch();
 
     const [input2, setInput2] = useState({
         comentarios: "",

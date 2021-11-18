@@ -5,11 +5,10 @@ const productState = {
     productosPorCategorias: [],
     Product: {},
     nombre: "",
-    ordenA: "",
-    ordenP: "",
-    filtroC: "",
     comments: [],
-    pagina: 1
+    pagina: 1,
+    categoria:"",
+    ordenamiento:""
 }
 
 export const productReducer = (state = productState, {type, payload}) => {
@@ -66,34 +65,22 @@ export const productReducer = (state = productState, {type, payload}) => {
         ...state,
         pagina: payload,
       };
-    case productoConstante.SET_ORDEN_A:
-      return {
-        ...state,
-        ordenA: payload,
-      };
-    case productoConstante.SET_ORDEN_P:
-      return {
-        ...state,
-        ordenP: payload,
-      };
-    case productoConstante.SET_FILTRO_C:
-      return {
-        ...state,
-        filtroC: payload,
-      };
     case productoConstante.GET_COMENTARIOS: {
       return {
         ...state,
         comments: payload
       }
     }
-    case productoConstante.RESET: {
-      return {
+    case "CAMBIO_DE_CATEGORIA":{
+      return{
         ...state,
-        filtroC:"",
-        nombre:"",
-        ordenP:"",
-        ordenA:""
+        categoria:payload
+      }
+    }
+    case "CAMBIO_ORDENAMIENTO":{
+      return{
+        ...state,
+        ordenamiento: payload
       }
     }
     default:

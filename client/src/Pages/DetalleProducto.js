@@ -1,5 +1,5 @@
 import "../Styles/DetalleProducto.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import {
@@ -15,7 +15,7 @@ import {
 } from "../Redux/actions/productAction";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import CommentProduct from "../Components/Productos/CommentProduct";
+//import CommentProduct from "../Components/Productos/CommentProduct";
 import "../Styles/Comments.css";
 
 export default function DetalleProducto({ props }) {
@@ -32,20 +32,20 @@ export default function DetalleProducto({ props }) {
   ];
   useEffect(() => {
     dispatch(getComentarios(props));
-  }, [getComentarios]);
+  }, [ dispatch, props]);
 
   const productComment = comments.filter((c) => c.productoId === props);
-
+/*
   const [input, setInput] = useState(false);
   const [datos, setDatos] = useState({});
-  const handleClik = (e) => {
+   const handleClik = (e) => {
     if (input === false) {
       setInput(true);
       setDatos(e);
     } else {
       setInput(false);
     }
-  };
+  }; */
 
   const handleOnClick = () => {
     if (usuario.id) {

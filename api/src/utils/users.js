@@ -213,27 +213,27 @@ async function inicioFacebook(req, res) {
   }
 }
 
-const CambiarSeguridadDeContrasenia = async (req, res, next) => {
-  const { email, respuesta, pregunta } = req.body;
-  try {
-    const usuarioEncontrado = await Usuario.findOne({ where: { email } });
-    if (
-      usuarioEncontrado.respuesta !== respuesta ||
-      usuarioEncontrado.pregunta !== pregunta
-    )
-      return res
-        .status(401)
-        .json({ mensaje: "Pregunta o Respuesta Incorrecta" });
-    // res.json({ mensaje: "Respuesta y Pregunta Correcta" });
-    next();
-  } catch (error) {
-    res
-      .status(401)
-      .json({
-        mensaje: `error al cambiar la seguridad de la contraseña ${error}`,
-      });
-  }
-};
+// const CambiarSeguridadDeContrasenia = async (req, res, next) => {
+//   const { email, respuesta, pregunta } = req.body;
+//   try {
+//     const usuarioEncontrado = await Usuario.findOne({ where: { email } });
+//     if (
+//       usuarioEncontrado.respuesta !== respuesta ||
+//       usuarioEncontrado.pregunta !== pregunta
+//     )
+//       return res
+//         .status(401)
+//         .json({ mensaje: "Pregunta o Respuesta Incorrecta" });
+//     // res.json({ mensaje: "Respuesta y Pregunta Correcta" });
+//     next();
+//   } catch (error) {
+//     res
+//       .status(401)
+//       .json({
+//         mensaje: `error al cambiar la seguridad de la contraseña ${error}`,
+//       });
+//   }
+// };
 
 const CambioContraseñaUsuario = async (req, res) => {
   const { nuevaContrasenia, email } = req.body;
@@ -289,5 +289,5 @@ module.exports = {
   becomeAdmin,
   becomeUser,
   CambioContraseñaUsuario,
-  CambiarSeguridadDeContrasenia,
+  // CambiarSeguridadDeContrasenia,
 };

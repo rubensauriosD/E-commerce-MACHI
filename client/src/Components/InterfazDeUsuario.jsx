@@ -22,6 +22,10 @@ export default function InterfazDeUsuario({ datosUsuario }) {
     dispatch(cerrarSesion())
     dispatch(removerAlCerrarSesion())
   }
+  const redirectToReset=()=>{
+    history.push("/reset")
+  }
+
   return (
     <div>
       <Card sx={{ maxWidth: 345, boxShadow: { sm: "5px 5px 2px #355a1d " } }}>
@@ -42,6 +46,9 @@ export default function InterfazDeUsuario({ datosUsuario }) {
           </Typography>
           <Button color="warning" onClick={cerradoDeSesion} variant="contained">
             Cerrar Sesion
+          </Button>
+          <Button color="warning" onClick={redirectToReset} variant="contained">
+            Resetear Contraseña
           </Button>
           {datosUsuario.tipo === "admin" && (
             <Button

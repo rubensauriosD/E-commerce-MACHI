@@ -15,7 +15,7 @@ export const categoria = [
       "https://d22fxaf9t8d39k.cloudfront.net/e7f51cec011bb22ee4dda655b9b01f4215a0841f40d20099f70ccd602cdfa78412752.png",
   },
   {
-    nombre: "Insumos y Herramientas",
+    nombre: "Insumos y Herramientas para Huertas",
     imagen: "https://news.agrofystatic.com/huerta3_agorfy_news.jpg?d=620x375",
   },
   {
