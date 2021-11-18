@@ -13,7 +13,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
-import { height } from "@mui/system";
+//import { height } from "@mui/system";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 const CartProduct = ({
@@ -119,7 +119,14 @@ const CartProduct = ({
       <Typography
         variant="h4"
         component="div"
-        sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1, mr: 7 }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          pl: 1,
+          pb: 1,
+          mr: 7,
+          width: 120,
+        }}
       >
         {precioTotalProducto}
       </Typography>

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
+//import PropTypes from 'prop-types';
+//import Box from '@mui/material/Box';
+//import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,11 +10,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+//import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { Button, TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+//import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+//import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Button, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useState } from 'react';  
 import{getFacturasAdmin, setEstado} from '../../Redux/actions/facturaAction'
 import axios from 'axios';
@@ -22,7 +22,7 @@ import swal from 'sweetalert';
 import FiltroEstado from "./FiltroEstado";
 
 function Row({status, ammount, createDate, total, productos, nombreReceptor, id}) {
-        const [open, setOpen] = React.useState(false);
+    //    const [open, setOpen] = React.useState(false);
         const [estado, setEstado] = useState('');
         const dispatch = useDispatch();
 
@@ -43,19 +43,12 @@ function Row({status, ammount, createDate, total, productos, nombreReceptor, id}
         return (
         <React.Fragment>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-            <TableCell>
-                <IconButton
-                aria-label="expand row"
-                size="small"
-                >
-                🟢
-                </IconButton>
-            </TableCell>    
-            <TableCell align="left">{ammount}</TableCell>
+            <TableCell align="right">{nombreReceptor}</TableCell>
+            <TableCell align="center">{ammount}</TableCell>
 
             <FormControl>
             <InputLabel>Estado: {status}</InputLabel>
-            <Select name='status' className="levelAdminMaterialEdit" label="Estado" onChange={(e) => handleChangeEditar(e)} required>
+            <Select name='status' className="levelAdminMaterialEdit" label="Estado" onChange={(e) => handleChangeEditar(e)} required align="right"> 
             <MenuItem value="creada">Creada</MenuItem>
             <MenuItem value="procesando">Procesando</MenuItem>
             <MenuItem value="cancelada">Cancelada</MenuItem>
@@ -125,9 +118,8 @@ export default function EditarFacturas()
 
                         <TableHead>
                             <TableRow>
-                                <TableCell />
-                                <TableCell>Comprador</TableCell>
-                                <TableCell>Cantidad</TableCell>
+                                <TableCell align="right">Comprador</TableCell>
+                                <TableCell align="center">Cantidad Prod. </TableCell>
                                 <TableCell align="center">Estado</TableCell>
                                 <TableCell align="right">Total</TableCell>
                                 <TableCell align="right">Fecha</TableCell>

@@ -3,7 +3,6 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
@@ -25,7 +24,7 @@ export default function NavBar() {
   const preguntarSiHayAlgoEnElCarroDb = useSelector(
     (state) => state.cart.itemsCarritoDb
   );
-  const perfilImage = useSelector(state=>state.usuario.User)
+  const perfilImage = "" /* useSelector(state=>state.usuario.User.fotoDePerfil) */
   const dispatch = useDispatch();
   const refreshTienda = () => {
     dispatch(getProducts({}));
@@ -282,14 +281,14 @@ export default function NavBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle fontSize="large" />
+              {perfilImage&&perfilImage?<Avatar alt="userImage" src={perfilImage}/>:<AccountCircle fontSize="large" />}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId}
+              aria-controls={mobileMenuId} hola X3
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
@@ -297,6 +296,7 @@ export default function NavBar() {
               <MoreIcon fontSize="large" />
             </IconButton>
           </Box>
+          dejen de romper la pagina
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

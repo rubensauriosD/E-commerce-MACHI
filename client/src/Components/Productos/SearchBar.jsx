@@ -1,22 +1,22 @@
 import "../../Styles/SearchBar.css"
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts, setNombre, setPagina } from "../../Redux/actions/productAction"
 
 export default function SearchBar() {
-    const [input, setInput] = useState("")
+   const [input, setInput] = useState("")
     const dispatch = useDispatch()
-
+  //  const { nombre } = useSelector(state => state.productos)
     const handleInputChange = (e) => {
-        e.preventDefault()
         setInput(e.target.value)
+       // dispatch(setNombre(e.target[0].value))
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
-        dispatch(setNombre(input)) //guardo el name en store
-        dispatch(getProducts({ pagina: 1, nombre: input }))
-        dispatch(setPagina(1))
+        dispatch(getProducts({ pagina: 1, nombre:input, categoria:"", ordenamiento:"" }))
+        // dispatch(setPagina(1))
+        dispatch(setNombre(input))
         setInput("")
     }
 

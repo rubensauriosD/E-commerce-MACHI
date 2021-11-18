@@ -22,7 +22,7 @@ export default function MainPage() {
          <Courses/>
       </div>
 
-     {/*  <h1>-------------------------------------</h1>
+     {/* <h1>-------------------------------------</h1>
       
       <div className="helpDiv">
         <h1>COMPONENTE "ESTAMOS PARA AYUDARTE"</h1>
@@ -45,14 +45,14 @@ export default function MainPage() {
       <div className="statisticsDiv">
         <h1>COMPONENTE "ESTADISTICAS"</h1>
       </div>
-      
+       */}
       <h1>-------------------------------------</h1>
 
       <div className="phogaleryDiv">
         <h1>COMPONENTE "GALERIA DE FOTOS"</h1>
       </div>
 
-      <h1>-------------------------------------</h1>
+      {/* <h1>-------------------------------------</h1>
 
       <div className="contactDiv">
         <h1>COMPONENTE "FORMULARIO DE TRABAJO Y CONTACTO" (FOOTER)</h1>

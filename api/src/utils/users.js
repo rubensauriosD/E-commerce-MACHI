@@ -1,4 +1,4 @@
-const { Usuario, Carrito, Producto,Factura, Comentario } = require("../db");
+const { Usuario, Carrito, Producto, Factura, Comentario } = require("../db");
 const bCrypt = require("bcrypt-nodejs");
 const CreadorDeEncriptado = function (contrasenia) {
   return bCrypt.hashSync(contrasenia, bCrypt.genSaltSync(8), null);
@@ -82,8 +82,7 @@ async function putUsuario(req, res) {
 }
 
 async function postUsuario(req, res) {
-  const { nombre, apellido, email, contrasenia } =
-    req.body;
+  const { nombre, apellido, email, contrasenia } = req.body;
 
   try {
     if (nombre && apellido && email && contrasenia) {
@@ -125,6 +124,21 @@ async function inicioDeSesion(req, res) {
   try {
     if (carritos.length) {
       console.log("primer hola");
+      if (!idProductosusuario.length) {
+        console.log("el usuario no tiene nada y el carrito si tiene");
+        carritos.forEach(async (item) => {
+          let carritoCreado = await Carrito.create({
+            idCarrito: item.idCarrito,
+            idProducto: item.idProducto,
+            cantidad: item.qty,
+            nombre: item.nombre,
+            precio: item.precio,
+            imagen: item.imagen,
+          });
+          await usuario.addCarrito(carritoCreado);
+        });
+        res.json(usuario);
+      }
       for (let i = 0; i < carritos.length; i++) {
         console.log("i", i);
         for (let j = 0; j < idProductosusuario.length; j++) {
@@ -143,28 +157,11 @@ async function inicioDeSesion(req, res) {
               precio: carritos[i].precio,
               imagen: carritos[i].imagen,
             });
-            console.log(carritoCreado);
             await usuario.addCarrito(carritoCreado);
+            res.json(usuario);
           }
         }
       }
-      // const carrito = await Promise.all(
-      //   carritos.map((carrito) =>
-      //     Carrito.findOrCreate({
-      //       where: { idCarrito: carrito.idCarrito },
-      //       defaults: {
-      //         idCarrito: carrito.idCarrito,
-      //         idProducto: carrito.idProducto,
-      //         cantidad: carrito.qty,
-      //         nombre: carrito.nombre,
-      //         precio: carrito.precio,
-      //         imagen: carrito.imagen,
-      //       },
-      //     })
-      //   )
-      // );
-      //const carritoEncontrado= await Carrito.findAll({where:{usuarioId:usuario.id}})
-      // await usuario.addCarritos(carrito.flat().map((cart) => cart.idCarrito));
       res.json(usuario);
     } else {
       console.log("pasor por aca");
@@ -179,37 +176,62 @@ function pedidoCerrarSesion(req, res) {
   req.logout();
   res.json({ message: "Ok" });
 }
+
 async function inicioFacebook(req, res) {
-  const usuario = req.user;
   const { carritos } = req.body;
-  console.log("aca lo que llega por carrito: ", carritos);
+  const usuario = req.user;
+  console.log("este es el usuario", usuario);
+  const idProductosusuario = usuario.carritos.map((item) => item.idProducto);
+  console.log("los id de los productos del usuario", idProductosusuario);
+  console.log("y aca el carrito de invitado", carritos);
   try {
-    if (carritos) {
-      console.log("paso por aca");
-      const carritosCreadosOEncontrados = await Promise.all(
-        carritos.map((carrito) => {
-          return Carrito.findOrCreate({
-            where: { idCarrito: carrito.idCarrito },
-            defaults: {
-              idProducto: carrito.idProducto,
-              cantidad: carrito.qty,
-              nombre: carrito.nombre,
-              precio: carrito.precio,
-              imagen: carrito.imagen,
-            },
+    if (carritos.length) {
+      console.log("primer hola");
+      if (!idProductosusuario.length) {
+        console.log("el usuario no tiene nada y el carrito si tiene");
+        carritos.forEach(async (item) => {
+          let carritoCreado = await Carrito.create({
+            idCarrito: item.idCarrito,
+            idProducto: item.idProducto,
+            cantidad: item.qty,
+            nombre: item.nombre,
+            precio: item.precio,
+            imagen: item.imagen,
           });
-        })
-      );
-      await usuario.addCarritos(
-        carritosCreadosOEncontrados.flat().map((carrito) => carrito.idCarrito)
-      );
-      return res.json(usuario);
+          await usuario.addCarrito(carritoCreado);
+        });
+        res.json(usuario);
+      }
+      for (let i = 0; i < carritos.length; i++) {
+        console.log("i", i);
+        for (let j = 0; j < idProductosusuario.length; j++) {
+          console.log("j", j);
+          if (carritos[i].idProducto == idProductosusuario[j]) {
+            console.log("entro en el break");
+            break;
+          }
+          if (j >= idProductosusuario.length - 1) {
+            console.log("entro en la creacion", carritos[i].idCarrito);
+            let carritoCreado = await Carrito.create({
+              idCarrito: carritos[i].idCarrito,
+              idProducto: carritos[i].idProducto,
+              cantidad: carritos[i].qty,
+              nombre: carritos[i].nombre,
+              precio: carritos[i].precio,
+              imagen: carritos[i].imagen,
+            });
+            await usuario.addCarrito(carritoCreado);
+            res.json(usuario);
+          }
+        }
+      }
+      res.json(usuario);
+    } else {
+      console.log("pasor por aca");
+      res.json(usuario);
     }
-    res.json(usuario);
   } catch (e) {
-    res.status(401).json({
-      error: `el error que a ocurrido al intentar loguearse con el usuario: ${usuario.nombre} es: ${e}`,
-    });
+    res.status(401).json({ error: `${e}` });
   }
 }
 
@@ -227,11 +249,9 @@ const CambiarSeguridadDeContrasenia = async (req, res, next) => {
     // res.json({ mensaje: "Respuesta y Pregunta Correcta" });
     next();
   } catch (error) {
-    res
-      .status(401)
-      .json({
-        mensaje: `error al cambiar la seguridad de la contraseña ${error}`,
-      });
+    res.status(401).json({
+      mensaje: `error al cambiar la seguridad de la contraseña ${error}`,
+    });
   }
 };
 
@@ -257,26 +277,38 @@ const CambioContraseñaUsuario = async (req, res) => {
   }
 };
 
-const verficacionUsuarioFactura=async (req,res)=>{
-  const usuario=req.user                    // el usuario que posteo el comentario
-  const  { comentario,idProducto } = req.body       // el comentario que llega y el id del producto
-  try{
-    const facturaDeUsuario=await Factura.findAll({      // Buscar facturas del usuario
-      where:{
-        usuarioId:usuario.id
+const verficacionUsuarioFactura = async (req, res) => {
+  const usuario = req.user; // el usuario que posteo el comentario
+  const { comentario, idProducto } = req.body; // el comentario que llega y el id del producto
+  try {
+    const facturaDeUsuario = await Factura.findAll({
+      // Buscar facturas del usuario
+      where: {
+        usuarioId: usuario.id,
       },
-      include:{
-        model:Producto
-      }
-    })
-    const productoEncontrado=facturaDeUsuario.map(factura=>factura.productos.filter(producto=>producto.id===idProducto)).flat()     // encontrar el producto entre las facturas del usuario
-    if(!productoEncontrado.length)return res.status(401).json({error:`no se encontro que el usuario  ${usuario.nombre} halla hecho una compra de este producto`})
-    const comentariosParaModificar=await Comentario.create({comentarios:comentario})
-    res.json({mensaje:"comentario modificado"})
-  }catch(e){
-    res.status(401).json({error:`error al postear un comentario por parte del usuario ${usuario.nombre}, el error es: ${e}`})
+      include: {
+        model: Producto,
+      },
+    });
+    const productoEncontrado = facturaDeUsuario
+      .map((factura) =>
+        factura.productos.filter((producto) => producto.id === idProducto)
+      )
+      .flat(); // encontrar el producto entre las facturas del usuario
+    if (!productoEncontrado.length)
+      return res.status(401).json({
+        error: `no se encontro que el usuario  ${usuario.nombre} halla hecho una compra de este producto`,
+      });
+    const comentariosParaModificar = await Comentario.create({
+      comentarios: comentario,
+    });
+    res.json({ mensaje: "comentario modificado" });
+  } catch (e) {
+    res.status(401).json({
+      error: `error al postear un comentario por parte del usuario ${usuario.nombre}, el error es: ${e}`,
+    });
   }
-}
+};
 
 module.exports = {
   getUsuario,
@@ -289,5 +321,5 @@ module.exports = {
   becomeAdmin,
   becomeUser,
   CambioContraseñaUsuario,
-  CambiarSeguridadDeContrasenia,
+  // CambiarSeguridadDeContrasenia,
 };

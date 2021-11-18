@@ -1,6 +1,8 @@
 import { Controller, useForm } from "react-hook-form";
 import { Button, TextField, Box, Alert } from "@mui/material";
+import { useHistory } from "react-router";
 export default function Login({ SubmitL }) {
+  const history=useHistory()
   const {
     handleSubmit,
     formState: { errors },
@@ -9,6 +11,11 @@ export default function Login({ SubmitL }) {
   const onSubmit = (data) => {
     SubmitL(data);
   };
+  const redirectToReset=()=>{
+    history.push("/reset")
+  }
+
+
   return (
     <div>
       <h2>Inicia Sesion con tu Cuenta Machi</h2>
@@ -24,6 +31,7 @@ export default function Login({ SubmitL }) {
           <Controller
             name="email"
             control={control}
+            defaultValue=""
             rules={{
               required: { value: true, message: "email requerido" },
               pattern: {
@@ -50,9 +58,10 @@ export default function Login({ SubmitL }) {
           <Controller
           name="contrasenia"
           control={control}
+          defaultValue=""
           rules={{ required: { value: true, message: "contraseña es requerida" },
           pattern: {
-            value: /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+            // value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
             message: "debe tener Min, Mayu, y un simbolo",
           }}}
           render={({field})=>
@@ -77,6 +86,14 @@ export default function Login({ SubmitL }) {
             type="submit"
           >
             Iniciar Sesión
+          </Button>
+          <Button
+            sx={{ justifySelf: "center" }}
+            variant="contained"
+            color="warning"
+            onClick={redirectToReset}
+          >
+            Olvidaste tu contraseña?
           </Button>
         </Box>
       </form>
