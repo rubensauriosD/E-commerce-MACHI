@@ -87,6 +87,15 @@ export const productReducer = (state = productState, {type, payload}) => {
         comments: payload
       }
     }
+    case productoConstante.RESET: {
+      return {
+        ...state,
+        filtroC:"",
+        nombre:"",
+        ordenP:"",
+        ordenA:""
+      }
+    }
     default:
       return state;
     }

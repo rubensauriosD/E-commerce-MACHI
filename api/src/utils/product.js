@@ -26,11 +26,14 @@ async function getProductos(req, res) {
       productos = productos.sort((a,b) =>{
         return a.nombre.toLowerCase().localeCompare(b.nombre.toLowerCase()) 
       })
+      console.log("asc " + productos)
     }
     if (ordenA === "desc"){
       productos = productos.sort((a,b) =>{
-        return b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase())
+       return b.nombre.toLowerCase().localeCompare(a.nombre.toLowerCase()) 
+        
       })
+      console.log("desc" + productos)
     }
     //#endregion
 

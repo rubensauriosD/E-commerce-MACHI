@@ -36,11 +36,14 @@
 }
 
 .levelAdminMaterialEdit{
-    width: 150px;
+    width: 120px;
+}
+.levelAdminMaterialEditimg{
+    width: 170px;
 }
 
 .levelAdminMaterialEdit Select{
-    width: 150px;
+    width: 120px;
 }
 
 .levelAdminMaterialUser{

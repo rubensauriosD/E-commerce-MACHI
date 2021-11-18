@@ -16,7 +16,7 @@ export default function CargarProducto(){
         imagen:'',
         descripcion: '',
         categoria: '',
-        disponibilidad:false  
+        disponibilidad:true 
     })
     const [imagen, setImagen] = useState('')
   
@@ -53,7 +53,7 @@ export default function CargarProducto(){
                 imagen:'',
                 descripcion: '',
                 categoria: '',
-                disponibilidad:false,
+                disponibilidad: true,
                 cantidadDeProducto:0
             })
             swal('El producto fue creado exitosamente')
@@ -93,7 +93,7 @@ export default function CargarProducto(){
                             </Select>
                         </FormControl><br/><br/>
                         <FormControl>
-                            <TextField className="levelAdminMaterial" label="Cantidad del producto" type="number" name="cantidadDeProducto" variant="filled" onChange={(e) => handleChange(e)} value={inputs.cantidadDeProducto} color="success" required/>
+                            <TextField className="levelAdminMaterial" InputProps={{inputProps: {min: 0}}} label="Cantidad del producto" type="number" name="cantidadDeProducto" variant="filled" onChange={(e) => handleChange(e)} value={inputs.cantidadDeProducto} color="success" required/>
                         </FormControl><br/><br/>
                         <FormControl>    
                             <InputLabel id="dos">Categoria</InputLabel>
