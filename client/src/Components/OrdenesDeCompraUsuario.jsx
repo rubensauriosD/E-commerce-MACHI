@@ -52,6 +52,7 @@ function Compras({estado,total,fecha,productos}) {
                     <TableCell>Nombre</TableCell>
                     <TableCell align="right">Categoria</TableCell>
                     <TableCell align="right">Precio</TableCell>
+                    <TableCell align="right">Reviews</TableCell>
                     {/* <TableCell align="right">Cantidad</TableCell> */}
                   </TableRow>
                 </TableHead>
@@ -65,6 +66,9 @@ function Compras({estado,total,fecha,productos}) {
                       </TableCell>
                       <TableCell align="right">{producto.categoria}</TableCell>
                       <TableCell align="right">{producto.precio}</TableCell>
+                      <Link exact to="/CommentProduct">
+                        <TableCell align="right">AddYourComment</TableCell> 
+                      </Link>
                       {/* <TableCell align="right">{producto.cantidadDeProducto}</TableCell> */}
                     </TableRow>
                   ))}
