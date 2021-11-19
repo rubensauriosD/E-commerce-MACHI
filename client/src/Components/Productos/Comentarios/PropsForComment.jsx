@@ -20,18 +20,15 @@ export default function PropsForComment() {
             {
               Facturas?.length !== 0?
                 Facturas.map((e) => 
+                e.productos((p) => {
                   <CommentProduct
                     key={e.id}
                     id={e.id}
-                    cantidad={e.ammount}
-                    total={e.total}
-                    status={e.status}
                     usuarioId={e.usuarioId}
-                    productoId={e.productos.map((e) => {e.id})}
-                    imagen={e.productos.map((e) => {e.imagen})}
-                    nombre={e.productos.map((e) => {e.nombre})}
-                    descripcion={e.productos.map((e) => {e.descripcion})}
+                    productoiId={p.id}
+                    imagen={p.imagen}
                   ></CommentProduct>
+                })
                 ):
             <div>No hay compras realizadas</div>
             }
