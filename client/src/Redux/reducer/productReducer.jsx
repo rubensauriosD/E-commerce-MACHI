@@ -106,7 +106,7 @@ export const productReducer = (state = productState, {type, payload}) => {
         ...state,
         ordenamiento: payload
       }
-
+    }
     case "CAMBIO_ORDENAMIENTO":{
       return{
         ...state,

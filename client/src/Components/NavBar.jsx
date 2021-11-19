@@ -296,7 +296,6 @@ export default function NavBar() {
               <MoreIcon fontSize="large" />
             </IconButton>
           </Box>
-          dejen de romper la pagina
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
