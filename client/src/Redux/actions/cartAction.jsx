@@ -94,17 +94,18 @@ export const CambiarCantidadDb = (idCarrito, valor) => {
     "lo que se le envia para encontrar le item del carro: ",
     idCarrito
   );
-  return (dispatch) => {
-    axios
-      .put(`/carrito/${idCarrito}`, { valor }, { withCredentials: true })
-      .then((resultadoDeCarrito) => {
-        console.log("hubo cambio, y el cambio fue: ", resultadoDeCarrito.data);
-        return resultadoDeCarrito.data;
-      })
-      .then((payload) =>
-        dispatch({ type: cartConstantes.CAMBIOCANTIDAD, payload })
-      )
-      .catch((e) => console.log("el error en el cambio del carro fue: ", e));
+  return async (dispatch) => {
+    try {
+      const resultadoDeCarrito = await axios.put(`/carrito/${idCarrito}`, { valor }, { withCredentials: true })
+      console.log("hubo cambio, y el cambio fue: ", resultadoDeCarrito.data);
+      
+      return dispatch({ 
+        type: cartConstantes.CAMBIOCANTIDAD, 
+        payload: resultadoDeCarrito.data 
+      });
+    } catch (e) {
+      console.log("el error en el cambio del carro fue: ", e);
+    }
   };
 };
 export const borrarCarritoDb=()=>{
