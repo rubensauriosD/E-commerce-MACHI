@@ -27,9 +27,9 @@ export default function Comment({ nombre, usuarioId, id, productoId, imagen}) {
             text: text,
             button: "Aceptar"
         })
-        .then(value => {
+        /* .then(value => {
             window.location.reload(false);
-        })
+        }) */
     }
 
     function handleChange(e) {
@@ -40,10 +40,10 @@ export default function Comment({ nombre, usuarioId, id, productoId, imagen}) {
         })
     }
 
-    async function addComment(usuarioId, productoId) {
-
-        const {comentario, puntuacion} = state
-        dispatch(addComentarios(usuarioId, productoId, comentario, puntuacion))
+    async function addComment() {
+        const {comentarios, puntuacion} = state
+        dispatch(addComentarios(usuarioId, productoId, comentarios, puntuacion))
+        console.log("saofas",usuarioId, productoId, state.comentarios, state.puntuacion)
         await showAlert('Yei!,', 'se publicó tu comentario correctamente')
     }
 
@@ -55,14 +55,14 @@ export default function Comment({ nombre, usuarioId, id, productoId, imagen}) {
                     <div class="flip-card__container">
                         <div class="card-front">
                             <div class="card-front__tp card-front__tp--camping">
-                                <img className="imagenFuera" src={imagen} alt="no esta la imagen"/>
+                                <img className="imagenFuera" src={imagen?imagen:null} alt="no esta la imagen"/>
                             </div>
                             <div class="card-front__bt">
                                 <p class="card-front__text-view card-front__text-view--camping">{nombre}</p>
                             </div>
                         </div>
                         <div class="card-back">
-                            <img className="imagenDentro" src={imagen} alt="no esta la imagen" />
+                            <img className="imagenDentro" src={imagen?imagen:null} alt="no esta la imagen" />
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,7 @@ export default function Comment({ nombre, usuarioId, id, productoId, imagen}) {
                                        <label className='labelEstrellitas' for={'J'+id}>★</label>
                                     </p>
                                 </form>
-                                <button className="inside-page__btn inside-page__btn--camping" onClick={() => addComment(usuarioId, productoId)}>Aceptar</button>
+                                <button className="inside-page__btn inside-page__btn--camping" onClick={() => addComment()}>Aceptar</button>
                             </div>
                         }
                     </div>

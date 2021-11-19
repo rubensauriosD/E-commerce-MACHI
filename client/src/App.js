@@ -19,6 +19,7 @@ import factura from "./Components/OrdenesDeCompraUsuario"
 import Reset from "./Pages/Reset";
 import NuevaContrasenia from "./ContenedoresTemporales/NuevaContraseña";
 import CommentProduct from "./Components/Productos/Comentarios/CommentProduct";
+import PropsForComment from "./Components/Productos/Comentarios/PropsForComment";
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
           <Route exact path="/facturas" component={factura} /> 
-          <Route exact path="/CommentProduct" component={CommentProduct}></Route>
+          <Route exact path="/CommentProduct" component={PropsForComment}></Route>
           <Route exact path="/checkout" component={MercadoPago} />
           <Route exact path="/reset" component={Reset} />
           <Route path="/" component={PieDePagina} />

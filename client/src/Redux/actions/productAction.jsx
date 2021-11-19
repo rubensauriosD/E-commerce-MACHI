@@ -161,16 +161,17 @@ export function getComentarios(id) {
   }
 }
 
-export function addComentarios(usuarioId, productoId, comentarios, puntuacion) {
+/* export function addComentarios(usuarioId, productoId, comentarios, puntuacion) {
   return function(dispath) {
     const request = {
       method: 'POST',
       headers: {'Content-Type': 'applicaton/json'},
       body: JSON.stringify({usuarioId, productoId, comentarios, puntuacion})  
     }
-    return fetch(`/comentarios/newComment`, request)
-      .then(res => res.json())
+    return axios.post(`/comentarios/newComment`, request)
+      .then(res => res.data())
       .then(obj => {
+        console.log("Este es el objeto 174", obj)
         dispath({
           type: productoConstante.ADD_COMENTARIOS,
           payload: {
@@ -183,7 +184,31 @@ export function addComentarios(usuarioId, productoId, comentarios, puntuacion) {
         })
       })
   }
-}
+} */
+
+export const addComentarios = (usuarioId, productoId, comentarios, puntuacion) => {
+  return (dispatch) => {
+    axios
+      .post(`/comentarios/newComment`, {usuarioId:usuarioId, productoId:productoId, comentarios:comentarios, puntuacion:puntuacion})
+      .then(res => console.log(res.data))
+      .then(obj => {
+        console.log("Este es el objeto 174", obj)
+        dispatch({
+          type: productoConstante.ADD_COMENTARIOS,
+          payload: {
+            id: obj.id,
+            comentarios: obj.comentarios,
+            puntuacion: obj.puntuacion,
+            usuarioId: obj.usuarioId,
+            productoId: obj.productoId
+          }
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
 export const reset = () => {
   return {

@@ -1,37 +1,36 @@
-import {getFacturasAdmin} from '../../../Redux/actions/facturaAction'
 import CommentProduct from './CommentProduct'
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export default function PropsForComment() {
 
-    const {Facturas} =useSelector(state=>state.factura)
-    const dispatch = useDispatch();
-    var id =useSelector(state=>state.usuario.Users.id)
+    const {FacturasUsuario} = useSelector(state=>state.factura)
   
     useEffect(() => {
-      const myProducts = () => dispatch(getFacturasAdmin(id))
-      myProducts();
+
+      console.log("WTFFF", FacturasUsuario);
+  
     }, []);
   
     return(
         <div>
             {
-              Facturas?.length !== 0?
-                Facturas.map((e) => 
-                e.productos((p) => {
+              FacturasUsuario?.length !== 0?
+              FacturasUsuario.map((e) => (
+                e.productos.map((p) => (
                   <CommentProduct
-                    key={e.id}
-                    id={e.id}
-                    usuarioId={e.usuarioId}
-                    productoiId={p.id}
-                    imagen={p.imagen}
-                  ></CommentProduct>
-                })
-                ):
+                  key={e.id}
+                  id={e.id}
+                  usuarioId={e.usuarioId}
+                  imagen={p.imagen}
+                  productoId={p.id}
+                ></CommentProduct>
+            ))
+            )
+            ):
             <div>No hay compras realizadas</div>
-            }
+            } 
           </div>
     )
   }
