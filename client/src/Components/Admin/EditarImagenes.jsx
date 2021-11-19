@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getImages } from "../../Redux/actions/imageAction";
+import { Button } from "@mui/material";
+import swal from 'sweetalert';
 
 export default function EditarImagenes(){
 
@@ -10,30 +12,25 @@ export default function EditarImagenes(){
     
     const borrar = (e) => {
         axios.delete(`/imagenes/${e.target.id}`);
-        alert(`La imagen fue eliminada con exito`);
+        swal(`La imagen fue eliminada con exito`);
         return dispatch(getImages());
     }
     
     return(
+        <div>
+        <h3>Editar Imagenes</h3>
         <div className="editarImagenesAdmin">
-            <h3>Editar Imagenes</h3>
-            <ol>
+            
+            
                 {imagenes&&imagenes.map((imagen, i) => {
                         return(
-                            <li key={imagen.id}>
-                                <div>
-                                    <img src={imagen.imagen} alt="imagen galeria"/>
-                                    <div>
-                                        <button id={imagen.id} onClick={(e) => { borrar(e) }} type="submit">
-                                            Eliminar
-                                        </button>
-                                    </div>
-                                
-                                </div>
-                                
-                            </li>)
+                        <div className="carruselGaleria">
+                             <div className="carruselGaleriaImgButton"><button style={{backgroundColor:"red", color:"white", margin:"2px", boxShadow:"none", cursor:"pointer"}} id={imagen.id} onClick={(e) => { borrar(e) }} type="submit" variant="contained" color="error" type="submit">X</button><br/></div>
+                             <img className="carruselGaleriaImg" src={imagen.imagen} alt="imagen galeria"/><br/>
+                        </div>)      
+                                    
                 })}
-            </ol>
+        </div>
         </div>
     )
 }
