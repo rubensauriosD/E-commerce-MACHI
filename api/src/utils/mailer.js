@@ -27,7 +27,7 @@ const resetPassword = (req,res)=>{
                   subject:"password reset",
                   html:`
                   <p>You requested for password reset</p>
-                  <p>click in this to reset </p> <a href="http://localhost:3000/#/mailer/reset/${hash}">link</a> 
+                  <p>click in this to reset </p> <a href="https://ecommerce-machi.netlify.app/#/mailer/reset/${hash}">link</a> 
                   `
               })
               res.json({message:"check your email"})
