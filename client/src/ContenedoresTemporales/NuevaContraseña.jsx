@@ -2,7 +2,8 @@ import { useForm, Controller } from "react-hook-form";
 import { TextField, Button, Box } from "@mui/material";
 import { nuevaContraseña, pedirUsuarioPorToken } from "../Redux/actions/userAction";
 import {useDispatch, useSelector} from "react-redux"
-import { useEffect} from "react"
+import { useEffect} from "react";
+import swal from 'sweetalert';
 
 
 export default function NuevaContrasenia({props}) {
@@ -29,9 +30,11 @@ export default function NuevaContrasenia({props}) {
     const {nuevaContrasenia} = data
     dispatch(nuevaContraseña(nuevaContrasenia,mail));
     reset({ nuevaContrasenia: "", repetirContrasenia: "" });
+    swal('Tu contraseña ha cambiado! Cierra sesión para volver a entrar')
   };
 
   return (
+    
     <Box component="div" sx={{display:"grid",gap:1}}>
       <form onSubmit={handleSubmit(handleOnSubmit)}>
         <Controller
