@@ -72,6 +72,17 @@ const cambiarCantidadDeCarrito = async (req, res) => {
     });
   }
 };
+const eliminarCarritoUsuario= async(req,res)=>{
+  const usuario = req.user
+  try {
+    const carritoAEliminar = await Carrito.destroy({where:{usuarioId:usuario.id}})
+    res.json(carritoAEliminar)
+  } catch (error) {
+        res
+      .status(401)
+      .json(`el error al eliminar un elemento del carrito fue: ${error}`);
+  }
+}
 const eliminarCarritoDeLaDB = async (req, res) => {
   const usuario = req.user;
   const { idCarrito } = req.params;
@@ -94,4 +105,5 @@ module.exports = {
   cambiarCantidadDeCarrito,
   eliminarCarritoDeLaDB,
   obtenerCarrito,
+  eliminarCarritoUsuario
 };

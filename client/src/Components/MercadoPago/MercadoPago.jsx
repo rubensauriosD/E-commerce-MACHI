@@ -84,6 +84,9 @@ function handleChange(e) {
             
             dispatch(datosDeFactura(payer, items))
             dispatch(checkout(payer, items,history))
+            setTimeout(()=>{
+                history.push("/")
+            },5000)
         } 
        
         

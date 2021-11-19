@@ -24,7 +24,7 @@ export default function NavBar() {
   const preguntarSiHayAlgoEnElCarroDb = useSelector(
     (state) => state.cart.itemsCarritoDb
   );
-  const perfilImage = "" /* useSelector(state=>state.usuario.User.fotoDePerfil) */
+  const perfilImage =  useSelector(state=>state.usuario.User.fotoDePerfil) 
   const dispatch = useDispatch();
   const refreshTienda = () => {
     dispatch(getProducts({}));

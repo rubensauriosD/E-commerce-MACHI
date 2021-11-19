@@ -1,10 +1,4 @@
-const { Imagen } = require("../db");
-const cloudinary = require("cloudinary").v2;
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME, // Mismo de la url de front para cargar productos y editar "mau-ar"
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const { Imagen, cloud } = require("../db");
 
 async function getImagenes(req, res) {
   let image = await Imagen.findAll();
@@ -24,7 +18,7 @@ async function deleteImagenes(req, res) {
   const { id } = req.params;
 
   const image = await Imagen.findByPk(id);
-  cloudinary.uploader.destroy(image.id);
+  cloud.uploader.destroy(image.id);
   await image.destroy();
   res.json(image);
 }

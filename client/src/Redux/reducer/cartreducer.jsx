@@ -91,6 +91,13 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
         itemsCarritoDb: state.itemsCarritoDb.concat(payload),
       };
     }
+    case cartConstantes.BORRADOCARRITOUSUARIO:{
+      state.itemsCarritoDb.length=0;
+      return {
+        ...state,
+        itemsCarritoDb:[],
+      };      
+    }
     case cartConstantes.CAMBIOCANTIDAD: {
       state.itemsCarritoDb.length = 0;
       return {

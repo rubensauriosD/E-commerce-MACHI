@@ -53,6 +53,8 @@ const edicionDeFacturas=async(req,res)=>{
         res.status(401).json({error:`sucedio un error la intentar actualizar la factura con id ${id} debido a: ${e}`})
     }
 }
+
+
 const eliminarFactura = async(req,res) =>{
     const {id} = req.params
     try{

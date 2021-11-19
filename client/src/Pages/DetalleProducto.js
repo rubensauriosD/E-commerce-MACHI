@@ -1,4 +1,5 @@
 import "../Styles/DetalleProducto.css";
+import Button from '@mui/material/Button';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -76,15 +77,12 @@ export default function DetalleProducto({ props }) {
           <p className="priceInfo">$ {Product.precio}</p>
           <p className="desInfo">Descripción: {Product.descripcion}</p>
           <div className="carrito-products">
-            <button onClick={handleOnClick}>
-              <FontAwesomeIcon
-                icon={faShoppingCart}
-                style={{ color: "grey" }}
-              />
-            </button>
+            <Button variant="outlined" onClick={handleOnClick}>Agregar al Carrito</Button>
           </div>
         </div>
         <div>
+        </div>
+      </div>
           <div>
             Reseñas del producto
             <div className="comm-scrll">
@@ -102,8 +100,6 @@ export default function DetalleProducto({ props }) {
                             }
                         </div>
           </div>
-        </div>
-      </div>
       <button className="infoButton" onClick={goToBack}>
         ⏪Volver a la Tienda
       </button>

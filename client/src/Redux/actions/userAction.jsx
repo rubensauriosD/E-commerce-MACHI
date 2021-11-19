@@ -90,7 +90,7 @@ export const postUser = (user) => {
   export const facebookIni = (carritos,history) => {
   return (dispatch) => {
     let timer = null; 
-    const facebookLoginURL = "http://localhost:3001/usuarios/auth/facebook";
+    const facebookLoginURL = "https://e-commerce-machi.herokuapp.com/usuarios/auth/facebook";
     const newWindow = window.open(
       facebookLoginURL,
       "_blank",
