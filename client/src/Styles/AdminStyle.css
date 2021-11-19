@@ -168,9 +168,31 @@
 .editarImagenesAdmin{
     margin-top: 5%;
     margin-bottom: 150px;
-   
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-evenly;
+    
+}
+.carruselGaleria{
+    background-color: #F0F0F0;
+    margin: 3px;
+    padding: 7px;
+    border-radius: 4px;
+    
+    
+}
+.carruselGaleriaImg{
+    width: 120px;
+    height: 120px;
 }
 
+.carruselGaleriaImgButton{
+  display:flex;
+  justify-content: flex-end;
+  text-align: center;
+  font-size: 10px;
+}
 
 @media (max-width: 1300px){
     .levelAdminMaterialEdit{

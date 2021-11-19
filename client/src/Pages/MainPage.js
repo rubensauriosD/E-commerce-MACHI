@@ -1,7 +1,8 @@
 import "../Styles/MainPage.css";
 import Categorias from "../Components/Categorias/Categorias";
 import Courses from "../Components/Courses/Courses";
-import Carrusel from "../Components/Carrusel/Carrusel"
+import Carrusel from "../Components/Carrusel/Carrusel";
+import CarruselGaleria from "../Components/Carrusel/CarruselGaleria";
 import { categoria } from "../Elements/ArrayCategoria";
 
 
@@ -23,18 +24,6 @@ export default function MainPage() {
       </div>
 
      {/* <h1>-------------------------------------</h1>
-      
-      <div className="helpDiv">
-        <h1>COMPONENTE "ESTAMOS PARA AYUDARTE"</h1>
-      </div>
-      
-      <h1>-------------------------------------</h1>
-
-      <div className="imgaleryDiv">
-        <h1>COMPONENTE "IMAGEN CON FRASE"</h1>
-      </div>
-      
-      <h1>-------------------------------------</h1>
 
       <div className="reviewsDiv">
         <h1>COMPONENTE "RESEÑAS DESTACADAS?"</h1>
@@ -46,10 +35,8 @@ export default function MainPage() {
         <h1>COMPONENTE "ESTADISTICAS"</h1>
       </div>
        */}
-      <h1>-------------------------------------</h1>
-
-      <div className="phogaleryDiv">
-        <h1>COMPONENTE "GALERIA DE FOTOS"</h1>
+      <div className="phogaleryDiv" >
+        <CarruselGaleria />
       </div>
 
       {/* <h1>-------------------------------------</h1>

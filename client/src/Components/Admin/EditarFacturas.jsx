@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
-//import PropTypes from 'prop-types';
-//import Box from '@mui/material/Box';
-//import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,10 +7,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-//import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-//import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-//import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Button, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { useState } from 'react';  
 import{getFacturasAdmin, setEstado} from '../../Redux/actions/facturaAction'
@@ -48,7 +42,7 @@ function Row({status, ammount, createDate, total, productos, nombreReceptor, id}
 
             <FormControl>
             <InputLabel>Estado: {status}</InputLabel>
-            <Select name='status' className="levelAdminMaterialEdit" label="Estado" onChange={(e) => handleChangeEditar(e)} required align="right"> 
+            <Select name='status'  className="levelAdminMaterialEdit" label="Estado" onChange={(e) => handleChangeEditar(e)} required align="right"> 
             <MenuItem value="creada">Creada</MenuItem>
             <MenuItem value="procesando">Procesando</MenuItem>
             <MenuItem value="cancelada">Cancelada</MenuItem>
@@ -60,7 +54,7 @@ function Row({status, ammount, createDate, total, productos, nombreReceptor, id}
             <TableCell align="right">{createDate}</TableCell>
             <Button className="adminButtonED" sx={{margin: "4px", marginLeft: "16px" }} id={id} onClick={(e) => {editar(e)}} variant="contained" color="success" type="submit">Editar</Button> 
 
-            </TableRow>
+            </TableRow> 
             {/* <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                 <Collapse in={open} timeout="auto" unmountOnExit>

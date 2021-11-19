@@ -116,6 +116,7 @@ const Cart = () => {
           cartItems={itemsCarrito.length ? itemsCarrito : cartItems}
         />
       </div>
+      
       <div className="parrafoCompra">
         <div className="parrafoCompraInterno">
           <p>
@@ -125,6 +126,7 @@ const Cart = () => {
             <PaymentIcon style={{ fontSize: "35px" }} />
           </NavLink>
         </div>
+
         <div className="parrafoCompraInterno">
           <p>
             Para continuar tu compra por transferencia o efectivo con{" "}
