@@ -4,9 +4,9 @@ const { Usuario } = require("../db");
 passport.use(
   new FacebookStrategy(
     {
-      clientID: "593541735027050",
-      clientSecret: "f60d89eff6085886da441c385c43f8de",
-      callbackURL: "http://localhost:3001/usuarios/auth/facebook/inicioDeSesion",
+      clientID: process.env.ID_FACEBOOK || "593541735027050",
+      clientSecret: process.env.SECRET_KEY_FACEBOOK ||"f60d89eff6085886da441c385c43f8de",
+      callbackURL: process.env.CALLBACK_URL || "http://localhost:3001/usuarios/auth/facebook/inicioDeSesion",
       profileFields:["id","name","photos","email","displayName"]
     },
     async function (accessToken, refreshToken, profile, cb) {
