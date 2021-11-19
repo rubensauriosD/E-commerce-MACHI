@@ -9,6 +9,7 @@ export default function SuccesPayment() {
   const { datosFactura } = useSelector((state) => state.cart);
   const dispatch=useDispatch()
   console.log(datosFactura)
+  
   useEffect(()=>{
 //       setTimeout(()=>{
 //           window.close()

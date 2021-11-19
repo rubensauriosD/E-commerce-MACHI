@@ -103,10 +103,9 @@ async function putProductos(req, res) {
 
 async function descuentoStock(req,res){
   const {id,cantidad}=req.body
-  
   try{
     const producto=await Producto.findByPk(id)
-    const descuento=producto.cantidadDeProducto-1
+    const descuento=producto.cantidadDeProducto-cantidad
     await producto.update({cantidadDeProducto:descuento})
     res.json(producto)
   }catch(e){
