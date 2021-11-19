@@ -4,9 +4,9 @@ const { Usuario } = require("../db");
 passport.use(
   new FacebookStrategy(
     {
-      clientID: process.env.ID_FACEBOOK,
-      clientSecret: process.env.SECRET_KEY_FACEBOOK,
-      callbackURL: process.env.CALLBACK_URL,
+      clientID: process.env.ID_FACEBOOK || "177394221274773",
+      clientSecret: process.env.SECRET_KEY_FACEBOOK || "05795f5ce726d31257b2e6eb9a611e0b",
+      callbackURL: process.env.CALLBACK_URL || "https://e-commerce-machi.herokuapp.com/usuarios/auth/facebook/inicioDeSesion",
       profileFields:["id","name","photos","email","displayName"]
     },
     async function (accessToken, refreshToken, profile, cb) {
