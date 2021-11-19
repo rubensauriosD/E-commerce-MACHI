@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {addComentarios, getComentarios} from '../../../Redux/actions/productAction';
-import swal from "sweetalert";
+import swal from "sweetalert2";
 import "../../../Styles/Comments.css";
 import '../../../Styles/Estrellitas.css'
 
