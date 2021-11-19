@@ -20,7 +20,7 @@ const PrecioTotal = ({ cartItems }) => {
     <div>
       {PrecioTotal?
          <Typography variant="h4" component="div" gutterBottom >
-          `Precio Total: ${formatter.format(PrecioTotal)}`
+          Precio Total: {formatter.format(PrecioTotal)}
          </Typography>
          :<Typography variant="h4" component="div" gutterBottom mt={17} color="#777">
           Tu carrito esta vacio
