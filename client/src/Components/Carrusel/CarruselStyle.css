@@ -10,6 +10,16 @@
   box-shadow: 0 0 0 10px #fff, 0 15px 50px;
   position: relative;
 }
+.container-slider-galeria{
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 45px;
+  margin-right: auto;
+  margin-left:auto;
+  overflow: hidden;
+  box-shadow: 0 0 0 10px #fff, 0 15px 50px;
+  position: relative;
+}
 .slider {
   display: flex;
   width: 300%;

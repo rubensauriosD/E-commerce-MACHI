@@ -116,6 +116,7 @@ const Cart = () => {
           cartItems={itemsCarrito.length ? itemsCarrito : cartItems}
         />
       </div>
+      
       <div className="parrafoCompra">
       <Link to="/checkout" style={{textDecoration:"none",color:"black"}}>
         <div className="parrafoCompraInterno">

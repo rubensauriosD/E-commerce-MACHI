@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postImage } from '../../Redux/actions/imageAction';
 import { Button, TextField } from "@mui/material";
+import swal from 'sweetalert';
 import axios from 'axios';
 
 export default function CargarImagen(){   
@@ -18,10 +19,10 @@ export default function CargarImagen(){
     
         axios.post(`https://api.cloudinary.com/v1_1/mau-ar/image/upload`, formData)
         .then((response) => {
-            return dispatch(postImage(response.data) )
+            dispatch(postImage(response.data) )
         })
         .then(() => {
-            alert('La imagen fue recibida exitosamente')
+            swal('La imagen fue recibida exitosamente')
         })
         .catch((err) => {
             console.log(err)

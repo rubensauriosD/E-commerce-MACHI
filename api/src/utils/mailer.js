@@ -1,7 +1,7 @@
 //const { Factura, Producto } = require("../db");
 const  transporter  = require("../config/mailer");
 const crypto = require('crypto-js')
-const {Usuario} = require("../db")
+const {Usuario, Factura} = require("../db")
 
 
 const resetPassword = (req,res)=>{
@@ -10,7 +10,7 @@ const resetPassword = (req,res)=>{
   //     if(err){
   //         console.log(err)
   //     }
-      var hash = crypto.AES.encrypt(email, 'secret key 123').toString();
+      var hash = crypto.AES.encrypt(email, 'secret key 123').toString().split('/').join("");
       console.log(hash)
       // const token = buffer.toString("hex");
       Usuario.findOne({where: {email: email}})
@@ -39,12 +39,14 @@ const resetPassword = (req,res)=>{
 
 const traerUsuarioPorToken = async (req, res) => {
   const { token } = req.params;
+  console.log("toquen en el back", token)
   try {
     const resultado = await Usuario.findOne({
     where:
       {resetToken: token}
   })
   res.json(resultado)
+  console.log("resultado", resultado)
   } catch(error) {
     return res.status(404).send("no se ha encontrado un usuario con token válido")
   }  
@@ -53,9 +55,8 @@ const traerUsuarioPorToken = async (req, res) => {
 
 const successMail = async (req,res) =>{ 
     const {payer, items } = req.body;
-    //console.log(items&&"aca llega los items:",items)
-    const itemsP = items.map(item => item.title);
-    const itemsS = itemsP.join();
+    //const factura = Usuario.findOne({where: {email: payer.email}, include: [{model: Factura, include: [{model: Producto}]}]})
+    const date = Date.now()
     const total = items.reduce((total, item) => total + item.unit_price * item.quantity , 0);
     
     const htmlTemplate = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -351,7 +352,7 @@ const successMail = async (req,res) =>{
             
       <div class="v-text-align" style="color: #565656; line-height: 140%; text-align: center; word-wrap: break-word;">
         <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><span style="color: #969696; line-height: 22.4px; font-size: 16px;">Fecha:</span></span></p>
-    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong>${""}</strong></span></p>
+    <p style="font-size: 14px; line-height: 140%;"><span style="font-size: 16px; line-height: 22.4px;"><strong>${date}</strong></span></p>
       </div>
     
           </td>

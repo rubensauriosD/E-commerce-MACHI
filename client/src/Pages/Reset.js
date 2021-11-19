@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {useDispatch} from "react-redux";
 import { resetearContraseña } from '../Redux/actions/userAction';
+import { Button, TextField} from "@mui/material";
 import swal from 'sweetalert';
 
 const Reset  = ()=>{
@@ -20,14 +21,15 @@ const Reset  = ()=>{
     return (
       <div className="divReset">
           <div className="">
-            <h2>Ingrese el mail de usuario</h2>
-            <input
-            type="text"
+            <h3>Ingrese su email</h3>
+            <TextField type="text"
             placeholder="email"
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
-            />
-            <button className="btnReset"onClick={onReset} >Resetear Contraseña</button>
+            onChange={(e)=>setEmail(e.target.value)} />
+            <br/>
+            <br/>
+            <Button onClick={onReset} variant="contained" color="success">Resetear Contraseña</Button>
+            
             
     
         </div>
