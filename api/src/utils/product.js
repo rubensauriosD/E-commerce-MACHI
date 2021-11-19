@@ -101,6 +101,19 @@ async function putProductos(req, res) {
 
 }
 
+async function descuentoStock(req,res){
+  const {id,cantidad}=req.body
+  
+  try{
+    const producto=await Producto.findByPk(id)
+    const descuento=producto.cantidadDeProducto-1
+    await producto.update({cantidadDeProducto:descuento})
+    res.json(producto)
+  }catch(e){
+    res.status(404).json({error:`el error es: ${e}`})
+  }
+}
+
 async function postProductos(req, res) {
   const {nombre, precio, imagen, categoria, descripcion, disponibilidad, cantidadDeProducto } = req.body
   try {

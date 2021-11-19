@@ -137,7 +137,7 @@ async function inicioDeSesion(req, res) {
           });
           await usuario.addCarrito(carritoCreado);
         });
-        res.json(usuario);
+        return res.json(usuario);
       }
       for (let i = 0; i < carritos.length; i++) {
         console.log("i", i);
@@ -158,7 +158,7 @@ async function inicioDeSesion(req, res) {
               imagen: carritos[i].imagen,
             });
             await usuario.addCarrito(carritoCreado);
-            res.json(usuario);
+            return res.json(usuario);
           }
         }
       }
@@ -180,15 +180,11 @@ function pedidoCerrarSesion(req, res) {
 async function inicioFacebook(req, res) {
   const { carritos } = req.body;
   const usuario = req.user;
-  console.log("este es el usuario", usuario);
-  const idProductosusuario = usuario.carritos.map((item) => item.idProducto);
-  console.log("los id de los productos del usuario", idProductosusuario);
-  console.log("y aca el carrito de invitado", carritos);
+  const usuarioFacebookDb=await Usuario.findByPk(usuario.id,{include:{model:Carrito}})
+  const idProductosusuario = usuarioFacebookDb.carritos.map((item) => item.idProducto);
   try {
     if (carritos.length) {
-      console.log("primer hola");
       if (!idProductosusuario.length) {
-        console.log("el usuario no tiene nada y el carrito si tiene");
         carritos.forEach(async (item) => {
           let carritoCreado = await Carrito.create({
             idCarrito: item.idCarrito,
@@ -211,7 +207,6 @@ async function inicioFacebook(req, res) {
             break;
           }
           if (j >= idProductosusuario.length - 1) {
-            console.log("entro en la creacion", carritos[i].idCarrito);
             let carritoCreado = await Carrito.create({
               idCarrito: carritos[i].idCarrito,
               idProducto: carritos[i].idProducto,

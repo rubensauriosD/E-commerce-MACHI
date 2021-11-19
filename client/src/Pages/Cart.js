@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import CartProduct from "../Components/CartProduct";
 import { useSelector, useDispatch } from "react-redux";
 import PrecioTotal from "../Components/PrecioTotal";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   CambioDeLocalADb,
   removeFromCart,
@@ -117,6 +117,7 @@ const Cart = () => {
         />
       </div>
       <div className="parrafoCompra">
+      <Link to="/checkout" style={{textDecoration:"none",color:"black"}}>
         <div className="parrafoCompraInterno">
           <p>
             Para pagar con Debito, Pago Facil, Rapi Pago o Credito clickea aqui
@@ -125,6 +126,7 @@ const Cart = () => {
             <PaymentIcon style={{ fontSize: "35px" }} />
           </NavLink>
         </div>
+        </Link>
         <div className="parrafoCompraInterno">
           <p>
             Para continuar tu compra por transferencia o efectivo con{" "}

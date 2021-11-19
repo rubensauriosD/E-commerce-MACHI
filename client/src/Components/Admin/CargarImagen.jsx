@@ -40,7 +40,7 @@ export default function CargarImagen(){
 
                 <br/><button className="buttonAdmin" type='submit' onClick={subirImagen}>Crear</button> */}
                 
-                <TextField className="levelAdminMaterial" name="imagen" type="file" variant="filled" color="success" onChange={(e)=>{setImg(e.target.files[0])}} required/><br/><br/>
+                <TextField className="levelAdminMaterial" name="imagen" type="file" variant="filled" value={img} color="success" onChange={(e)=>{setImg(e.target.files[0])}} required/><br/><br/>
                 <Button sx={{justifySelf:"center", margin: '25px'}} variant="contained" color="success" type="submit" onClick={subirImagen}>Crear</Button>     
             
             </form>

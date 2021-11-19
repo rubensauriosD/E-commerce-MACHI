@@ -58,8 +58,8 @@ Producto.belongsTo(Usuario);
 
 Usuario.hasMany(Factura)
 Factura.belongsTo(Usuario)
-Factura.hasMany(Producto)
-
+Factura.belongsToMany(Producto,{through:"FacturaProducto"})
+Producto.belongsToMany(Factura,{through:"FacturaProducto"})
 //Relacion entre Usuario-carrito
 
 Usuario.hasMany(Carrito)

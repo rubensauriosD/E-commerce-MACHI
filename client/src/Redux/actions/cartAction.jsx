@@ -107,7 +107,12 @@ export const CambiarCantidadDb = (idCarrito, valor) => {
       .catch((e) => console.log("el error en el cambio del carro fue: ", e));
   };
 };
-
+export const borrarCarritoDb=()=>{
+  return async (dispatch)=>{
+     const resultado= await axios.delete("/carrito",{ withCredentials: true });
+    dispatch({type:cartConstantes.BORRADOCARRITOUSUARIO})
+  }
+}
 export const removerDeDb = (idCarrito) => {
   return (dispatch) => {
     axios

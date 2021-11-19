@@ -22,7 +22,8 @@ import { Link } from "react-router-dom"
 function Compras({estado,total,fecha,productos}) {
 
   const [open, setOpen] = React.useState(false);
-
+  let fechaNormal = fecha.substr(0,10);
+  console.log("los productos que recibe por parametro",productos)
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -37,7 +38,7 @@ function Compras({estado,total,fecha,productos}) {
         </TableCell>
         <TableCell align="right">{estado}</TableCell>
         <TableCell align="right">{total}</TableCell>
-        <TableCell align="right">{fecha}</TableCell>
+        <TableCell align="right">{fechaNormal}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -58,21 +59,25 @@ function Compras({estado,total,fecha,productos}) {
                 </TableHead>
 
                 <TableBody>
-                {productos&&productos.map((producto)=>(
-                    <TableRow key={producto.id}>
-                      <TableCell component="th" scope="row">
-                        <Link style={{textDecoration:"none", color:"black"}} to={`/producto/${producto.id}`}>
-                        {producto.nombre}
-                        </Link>
-                      </TableCell>
-                      <TableCell align="right">{producto.categoria}</TableCell>
-                      <TableCell align="right">{producto.precio}</TableCell>
-                      <Link exact to="/CommentProduct">
-                        <TableCell align="right">AddYourComment</TableCell> 
-                      </Link>
-                      {/* <TableCell align="right">{producto.cantidadDeProducto}</TableCell> */}
-                    </TableRow>
-                  ))}
+                {productos&&productos.map((producto, indice)=>{
+                console.log(` que llega por el mapeo: ${indice}`,producto)
+                return(
+                  <TableRow key={producto.id}>
+                  <TableCell component="th" scope="row">
+                    <Link style={{textDecoration:"none", color:"black"}} to={`/producto/${producto.id}`}>
+                    {producto.nombre}
+                    </Link>
+                  </TableCell>
+                  <TableCell align="right">{producto.categoria}</TableCell>
+                  <TableCell align="right">{producto.precio}</TableCell>
+                  <Link exact to="/CommentProduct">
+                    <TableCell align="right">AddYourComment</TableCell> 
+                  </Link>
+                  {/* <TableCell align="right">{producto.cantidadDeProducto}</TableCell> */}
+                </TableRow>
+                )
+                })
+                }
                 </TableBody>
 
               </Table>
@@ -93,7 +98,7 @@ export default function CollapsibleTable() {
     dispatch(getProducts({}))
   },[dispatch,history])
   const facturas = useSelector(state => state.factura.FacturasUsuario)
-  console.log(facturas);
+  console.log("aca las facturas",facturas);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
@@ -101,9 +106,9 @@ export default function CollapsibleTable() {
           <TableRow>
             
             <TableCell >Historial de compras</TableCell>
-            <TableCell align="auto">Estado</TableCell>
-            <TableCell align="auto">Precio total</TableCell>
-            <TableCell align="auto">fecha de compra</TableCell>
+            <TableCell align="right">Estado</TableCell>
+            <TableCell align="right">Precio total</TableCell>
+            <TableCell align="right">Fecha de compra</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

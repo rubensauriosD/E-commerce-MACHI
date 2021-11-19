@@ -28,11 +28,11 @@ const checkoutPase=(req, res) => {
           surname: req.body.payer.apellido,
           date_created: null,
           last_purchase: null
-        },
+        }, 
         back_urls: {
             success: process.env.SUCCESS_MP ||"http://localhost:3000/#/successPayment",
-            failure: "http://localhost:3000/#/",
-            pending: "http://localhost:3000/#/",
+            failure:  process.env.FAILURE_MP || "http://localhost:3000/#/failurePayment",
+            pending:  process.env.PENDING_MP || "http://localhost:3000/#/pendingPayment",
           },
           auto_return: "approved",
       };

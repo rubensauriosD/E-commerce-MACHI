@@ -127,8 +127,9 @@ export default function EditarFacturas()
                         </TableHead>
 
                     <TableBody>
-                    {Array.isArray(facturas)&&facturas.map((fac) => (
-                        <Row key={fac.id} id={fac.id} status={fac.status} ammount={fac.ammount}createDate={fac.createDate} total={fac.total} productos={fac.productos} nombreReceptor={fac.nombreReceptor}/>
+                    {Array.isArray(facturas)&&facturas.map((fac) => 
+                    (
+                        <Row key={fac.id} id={fac.id} status={fac.status} ammount={fac.ammount}createDate={fac.createDate.substr(0,10)} total={fac.total} productos={fac.productos} nombreReceptor={fac.nombreReceptor}/>
                     ))}
                     </TableBody>
                     </Table>

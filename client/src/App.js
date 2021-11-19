@@ -19,6 +19,8 @@ import factura from "./Components/OrdenesDeCompraUsuario"
 import Reset from "./Pages/Reset";
 import NuevaContrasenia from "./ContenedoresTemporales/NuevaContraseña";
 import CommentProduct from "./Components/Productos/Comentarios/CommentProduct";
+import FailurePayment from "./ContenedoresTemporales/FailurePayment";
+import PendingPayment from "./ContenedoresTemporales/PendingPayment";
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
         </Switch> 
           <Route path="/successLogin" component={SuccesLogin}/> {/*guia para ruben y vero*/}
           <Route path="/successPayment" component={SuccesPayment}/>
+          <Route path="/failurePayment" component={FailurePayment}/>
+          <Route path="/pendingPayment" component={PendingPayment}/>
           <Route path="/mailer/reset/:token" render={({match}) => <NuevaContrasenia props={match.params.token}/>}/>
           <Route exact path="/admin" component={Admin} /> 
           <Route exact path="/cart" component={Cart} />
