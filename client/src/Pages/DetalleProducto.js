@@ -1,5 +1,5 @@
 import "../Styles/DetalleProducto.css";
-import Button from '@mui/material/Button';
+import { Button, Alert} from '@mui/material';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -25,11 +25,12 @@ export default function DetalleProducto({ props }) {
   const objetosCarrito = useSelector((state) => state.cart.itemsCarritoDb);
   const dispatch = useDispatch();
   const history = useHistory();
-  const [nombre, imagen, precio, id] = [
+  const [nombre, imagen, precio, id, disponibilidad] = [
     Product.nombre,
     Product.imagen,
     Product.precio,
     Product.id,
+    Product.disponibilidad
   ];
   useEffect(() => {
     dispatch(getComentarios(props));
@@ -77,14 +78,17 @@ export default function DetalleProducto({ props }) {
           <p className="priceInfo">$ {Product.precio}</p>
           <p className="desInfo">Descripción: {Product.descripcion}</p>
           <div className="carrito-products">
+            { !disponibilidad ? <Alert severity="warning">Sin Stock</Alert> :
             <Button variant="outlined" onClick={handleOnClick}>Agregar al Carrito</Button>
+            }
           </div>
         </div>
         <div>
         </div>
       </div>
+          { !!comments.length &&
           <div>
-            Reseñas del producto
+            <h4>Reseñas del producto</h4>
             <div className="comm-scrll">
                             {
                                 productComment?.length !== 0 ?
@@ -100,9 +104,11 @@ export default function DetalleProducto({ props }) {
                             }
                         </div>
           </div>
-      <button className="infoButton" onClick={goToBack}>
+          }
+      <br/>
+      <Button className="infoButton" variant="outlined" onClick={goToBack}>
         ⏪Volver a la Tienda
-      </button>
+      </Button>
     </div>
   );
 }

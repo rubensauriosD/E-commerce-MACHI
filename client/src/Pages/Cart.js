@@ -13,6 +13,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import "../Styles/Cart.css";
 import { getProducts } from "../Redux/actions/productAction";
+import swal from 'sweetalert';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Cart = () => {
   const usuarioAutenticado = useSelector((state) => state.usuario.User);
   const itemsCarrito = useSelector((state) => state.cart.itemsCarritoDb);
   const products = useSelector((state) => state.productos.products);
+  
 
   console.log("carrito de usuario  primer console", itemsCarrito);
   console.log("products", products);
@@ -73,6 +75,10 @@ const Cart = () => {
     cartItems.reduce((total, item) => total + item.precio * item.qty, 0) * 0.9
   );
 
+  function sendAlert(){
+    swal('Por favor para pagar por este medio logeate')
+  }
+
   return (
     <div>
       <div>
@@ -112,14 +118,28 @@ const Cart = () => {
                 />
               );
             })}
-        <PrecioTotal
-          cartItems={itemsCarrito.length ? itemsCarrito : cartItems}
+        <PrecioTotal cartItems={itemsCarrito.length ? itemsCarrito : cartItems}
         />
       </div>
-      
+
+
+      { (!!cartItems.length || !!itemsCarrito.length) &&  
+
+
       <div className="parrafoCompra">
-      <Link to="/checkout" style={{textDecoration:"none",color:"black"}}>
-        <div className="parrafoCompraInterno">
+      { !Object.values(usuarioAutenticado).length ?
+       <Link className="parrafoCompraInterno" to="#" onClick={sendAlert} style={{textDecoration:"none",color:"black"}}>
+        <div>
+          <p>
+            Para pagar con Debito, Pago Facil, Rapi Pago o Credito clickea aqui
+          </p>
+          <NavLink exact to="#">
+            <PaymentIcon style={{ fontSize: "35px" }} />
+          </NavLink>
+        </div>
+        </Link> :
+      <Link className="parrafoCompraInterno" to="/checkout" style={{textDecoration:"none",color:"black"}}>
+        <div>
           <p>
             Para pagar con Debito, Pago Facil, Rapi Pago o Credito clickea aqui
           </p>
@@ -128,6 +148,9 @@ const Cart = () => {
           </NavLink>
         </div>
         </Link>
+        }
+
+        
         <div className="parrafoCompraInterno">
           <p>
             Para continuar tu compra por transferencia o efectivo con{" "}
@@ -142,8 +165,11 @@ const Cart = () => {
             <WhatsAppIcon style={{ color: "green", fontSize: "35px" }} />
           </a>
         </div>
+        
       </div>
+      }
     </div>
+    
   );
 };
 

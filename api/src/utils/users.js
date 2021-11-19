@@ -162,13 +162,13 @@ async function inicioDeSesion(req, res) {
           }
         }
       }
-      res.json(usuario);
+      return res.json(usuario);
     } else {
       console.log("pasor por aca");
-      res.json(usuario);
+      return res.json(usuario);
     }
   } catch (e) {
-    res.status(401).json({ error: `${e}` });
+    return res.status(401).json({ error: `${e}` });
   }
 }
 
