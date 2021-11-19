@@ -137,7 +137,7 @@ async function inicioDeSesion(req, res) {
           });
           await usuario.addCarrito(carritoCreado);
         });
-        res.json(usuario);
+        return res.json(usuario);
       }
       for (let i = 0; i < carritos.length; i++) {
         console.log("i", i);
@@ -158,17 +158,17 @@ async function inicioDeSesion(req, res) {
               imagen: carritos[i].imagen,
             });
             await usuario.addCarrito(carritoCreado);
-            res.json(usuario);
+            return res.json(usuario);
           }
         }
       }
-      res.json(usuario);
+      return res.json(usuario);
     } else {
       console.log("pasor por aca");
-      res.json(usuario);
+      return res.json(usuario);
     }
   } catch (e) {
-    res.status(401).json({ error: `${e}` });
+    return res.status(401).json({ error: `${e}` });
   }
 }
 
