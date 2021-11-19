@@ -31,7 +31,7 @@ app.get(
     failureMessage: "Error de autenticacion",
     successRedirect: `${
       process.env.DIRECCIONSUCCESFACEBOOK
-        ? process.env.DIRECCIONSUCCESFACEBOOK + "/successLogin"
+        ? process.env.DIRECCIONSUCCESFACEBOOK + "/#/successLogin"
         : "http://localhost:3000/#/successLogin"
     }`,
   }),
