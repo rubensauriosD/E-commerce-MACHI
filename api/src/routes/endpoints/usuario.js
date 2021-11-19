@@ -29,11 +29,8 @@ app.get(
   "/auth/facebook/inicioDeSesion",
   passport.authenticate("facebook", {
     failureMessage: "Error de autenticacion",
-    successRedirect: `${
-      process.env.DIRECCIONSUCCESFACEBOOK
-        ? process.env.DIRECCIONSUCCESFACEBOOK + "/#/successLogin"
-        : "http://localhost:3000/#/successLogin"
-    }`,
+    successRedirect:
+      "https://ecommerce-machi.netlify.app/#/successLogin",
   }),
   (req, res) => console.log(req.user)
 );
