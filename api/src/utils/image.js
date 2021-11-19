@@ -16,11 +16,16 @@ async function getImagenes(req, res) {
 
 async function deleteImagenes(req, res) {
   const { id } = req.params;
-
-  const image = await Imagen.findByPk(id);
-  cloud.uploader.destroy(image.id);
-  await image.destroy();
-  res.json(image);
+  try{
+    const image = await Imagen.findByPk(id);
+    cloud.uploader.destroy(image.id);
+    await image.destroy();
+    const imagenes= await Imagen.findAll()
+    res.json(imagenes);
+  }
+  catch(e){
+    res.status(404).json(e)
+  }
 }
 
 async function postImagenes(req, res) {
@@ -30,7 +35,8 @@ async function postImagenes(req, res) {
           id: public_id,
           imagen: url,
       });
-      res.send('Imagen recibida');
+      const imagenes=await Imagen.findAll()
+      res.json(imagenes)
   } catch (error) {
       console.log(error);
   }

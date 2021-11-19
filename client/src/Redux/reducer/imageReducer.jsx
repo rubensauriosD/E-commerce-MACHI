@@ -9,15 +9,17 @@ export const imageReducer = (state = imageState, {type, payload}) => {
         case imagenConstantes.POST_IMAGE:
             return {
                 ...state,
+                Images:[...payload]
             };
         case imagenConstantes.GET_IMAGES:
             return {
                 ...state,
-            Images: payload,
+            Images: [...payload]
             };
         case imagenConstantes.DELETE_IMAGE:
             return {
             ...state,
+            Images: [...payload]
             };
         default:
         return state;
