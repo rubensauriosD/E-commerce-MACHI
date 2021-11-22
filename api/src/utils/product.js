@@ -1,7 +1,6 @@
 const { Producto, Op, cloud } = require("../db");
 
 async function getProductos(req, res) {
-  console.log("lo que llega por query",req.query)
   try {
     let { nombre, ordenamiento, categoria, pagina } = req.query;
     let productos = []
@@ -9,7 +8,6 @@ async function getProductos(req, res) {
     const productosXpagina = 6
     //#region search by NAME
     if (nombre !== "" && typeof nombre === "string") {
-      console.log("paso por la busqueda de nombre")
       productos = await Producto.findAll({
         where: {
           nombre: {
@@ -18,9 +16,7 @@ async function getProductos(req, res) {
         },
         order:[["createdAt","DESC"]]
       });
-      console.log("paso por nombre y devolvio esto: ",productos)
     } else {
-      console.log("paso por la traida de todos los productos")
       productos = await Producto.findAll({order:[["createdAt","DESC"]]}); //Si no hay input devuelve todo
     }
     //#endregion
@@ -120,7 +116,6 @@ async function postProductos(req, res) {
     return res.send('Producto publicado con exito');
 
   } catch (error) {
-    console.log(error);
     res.status(404).json({error:`Error al generar un  nuevo producto, debido a: ${error}`})
   }
 }

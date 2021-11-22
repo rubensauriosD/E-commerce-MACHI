@@ -70,6 +70,7 @@ function handleChange(e) {
         const items = itemsCarritoDb.map(producto => {
             return(
                     {
+                        key:producto.nombre,
                         idProductos: producto.idProducto,
                         title: producto.nombre,
                         unit_price: producto.precio,
@@ -95,17 +96,17 @@ function handleChange(e) {
             <div>
                 <form  onSubmit={handleOnSubmit} >
                     <Box>
-                        <TextField error={error.nombre}  className="input-buyer" onChange={handleChange} value={payer.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
-                        <TextField error={error.apellido}  className="input-buyer" onChange={handleChange} value={payer.apellido} name="apellido" type="text" label="Apellido" variant="filled" color="success"/><br/><br/>
+                        <TextField helperText={error.nombre}  className="input-buyer" onChange={handleChange} value={payer.nombre} name="nombre" type="text" label="Nombre" variant="filled" color="success"/><br/><br/>
+                        <TextField helperText={error.apellido}  className="input-buyer" onChange={handleChange} value={payer.apellido} name="apellido" type="text" label="Apellido" variant="filled" color="success"/><br/><br/>
 
-                        <TextField error={error.codigo}  className="input-buyer-short" onChange={handleChange} value={payer.codigo} name="codigo" type="number" label="Codigo Area (sin 0)" variant="filled" color="success"/>
-                        <TextField error={error.telefono}  className="input-buyer-phone" onChange={handleChange} value={payer.telefono} name="telefono" type="number" label="Telefono (sin 15)" variant="filled" color="success"/><br/><br/>
+                        <TextField helperText={error.codigo}  className="input-buyer-short" onChange={handleChange} value={payer.codigo} name="codigo" type="number" label="Codigo Area (sin 0)" variant="filled" color="success"/>
+                        <TextField helperText={error.telefono}  className="input-buyer-phone" onChange={handleChange} value={payer.telefono} name="telefono" type="number" label="Telefono (sin 15)" variant="filled" color="success"/><br/><br/>
 
-                        <TextField error={error.codigoPostal}  className="input-buyer-short" onChange={handleChange} value={payer.codigoPostal} name="codigoPostal" type="text" label="Codigo Postal" variant="filled" color="success"/>
-                        <TextField error={error.calle}  className="input-buyer-adress" onChange={handleChange} value={payer.calle} name="calle" type="text" label="Calle" variant="filled" color="success"/>
-                        <TextField error={error.altura}  className="input-buyer-short" onChange={handleChange} value={payer.altura} name="altura" type="integer" label="Altura" variant="filled" color="success"/><br/><br/>
+                        <TextField helperText={error.codigoPostal}  className="input-buyer-short" onChange={handleChange} value={payer.codigoPostal} name="codigoPostal" type="text" label="Codigo Postal" variant="filled" color="success"/>
+                        <TextField helperText={error.calle}  className="input-buyer-adress" onChange={handleChange} value={payer.calle} name="calle" type="text" label="Calle" variant="filled" color="success"/>
+                        <TextField helperText={error.altura}  className="input-buyer-short" onChange={handleChange} value={payer.altura} name="altura" type="integer" label="Altura" variant="filled" color="success"/><br/><br/>
 
-                        <TextField  error={error.email} helperText={error.email} className="input-buyer" onChange={handleChange} value={payer.email} name="email" type="text" label="Email" variant="filled" color="success"/><br/><br/>
+                        <TextField  helperText={error.email} className="input-buyer" onChange={handleChange} value={payer.email} name="email" type="text" label="Email" variant="filled" color="success"/><br/><br/>
                     
                         <Button  sx={{justifySelf:"center"}} variant="contained" color="success" type="submit">Finalizar Compra</Button>
                         
@@ -116,7 +117,7 @@ function handleChange(e) {
                 {itemsCarritoDb && itemsCarritoDb.map((producto) => {
                     return (
                      <CartProductCheckout
-                            key={producto.id}
+                            key={producto.idProducto}
                             imagen={producto.imagen}
                             nombre={producto.nombre}
                             precio={producto.precio}

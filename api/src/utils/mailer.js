@@ -11,7 +11,7 @@ const resetPassword = (req,res)=>{
   //         console.log(err)
   //     }
       var hash = crypto.AES.encrypt(email, 'secret key 123').toString().split('/').join("");
-      console.log(hash)
+     //console.log(hash)
       // const token = buffer.toString("hex");
       Usuario.findOne({where: {email: email}})
       .then(user=>{
@@ -24,10 +24,10 @@ const resetPassword = (req,res)=>{
               transporter.sendMail({
                   to:user.email,
                   from: '"Machi" <Machiwebsite@gmail.com>',
-                  subject:"password reset",
+                  subject:"Cambio de contraseña",
                   html:`
-                  <p>You requested for password reset</p>
-                  <p>click in this to reset </p> <a href="https://ecommerce-machi.netlify.app/#/mailer/reset/${hash}">link</a> 
+                  <p>Solicistaste un cambio de contraseña?</p>
+                  <p>Si has sido tu, haz click en el siguiente link: </p> <a href="https://ecommerce-machi.netlify.app/#/mailer/reset/${hash}">Cambio De Contraseña</a> 
                   `
               })
               res.json({message:"check your email"})
@@ -39,14 +39,14 @@ const resetPassword = (req,res)=>{
 
 const traerUsuarioPorToken = async (req, res) => {
   const { token } = req.params;
-  console.log("toquen en el back", token)
+  //console.log("toquen en el back", token)
   try {
     const resultado = await Usuario.findOne({
     where:
       {resetToken: token}
   })
   res.json(resultado)
-  console.log("resultado", resultado)
+  //console.log("resultado", resultado)
   } catch(error) {
     return res.status(404).send("no se ha encontrado un usuario con token válido")
   }  
@@ -1038,7 +1038,7 @@ const successMail = async (req,res) =>{
         res.status(200).send("mail enviado")
     }
     catch(error){
-      console.log(error)
+      //console.log(error)
       return res.status(404).send("no se pudo enviar el mail")
     }
   };

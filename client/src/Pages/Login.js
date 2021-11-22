@@ -10,6 +10,7 @@ import { useHistory } from "react-router-dom";
 import InterfazDeUsuario from "../Components/InterfazDeUsuario";
 import "../Styles/paginaDeLogin.css";
 import { removeAllCartItems } from "../Redux/actions/cartAction";
+import swal from "sweetalert"
 
 const LoginPage = () => {
   const history = useHistory();
@@ -25,12 +26,11 @@ const LoginPage = () => {
 
   const Registrarse = (Usuario) => {
     Usuario.tipo = "user";
-    dispatch(postUser(Usuario));
+    dispatch(postUser(Usuario,swal));
   };
   const RegistroEInicioConFacebook=()=>{
     dispatch(facebookIni(carrito,history))
   }
-  console.log("el usuario: ",usuario)
   if (usuario && Object.values(usuario).length !== 0) {
     return (
       <div className="InterfazDeUsuario">

@@ -1,5 +1,4 @@
 function UsuarioAutenticado(req, res, next) {
-  console.log("aca cuando sale de la deserializacion", req.user);
   if (req.isAuthenticated()) {
     return next();
   }

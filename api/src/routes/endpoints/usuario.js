@@ -30,9 +30,8 @@ app.get(
   passport.authenticate("facebook", {
     failureMessage: "Error de autenticacion",
     successRedirect:
-      "https://ecommerce-machi.netlify.app/#/successLogin",
-  }),
-  (req, res) => console.log(req.user)
+      process.env.SUCCESS_LOGIN_FACEBOOK || "http://localhost:3000/#/successLogin",
+  })
 );
 app.get("/test", UsuarioAutenticadoAdmin, (req, res) =>
   res.json({ message: "success"})

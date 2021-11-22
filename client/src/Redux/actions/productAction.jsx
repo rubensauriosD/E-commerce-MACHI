@@ -19,7 +19,6 @@ export const postProduct = (producto) => {
   
   // obtener todos los productos, paginado, filtros y ordenamientos para la tienda
   export const getProducts = ({ nombre, ordenamiento, categoria, pagina }) => {
-    console.log("aca el nombre",nombre,"aca el ordenamiento:",ordenamiento,"aca la categoria",categoria,"el numero de pagina es:", pagina)
     return async (dispatch) => {
       try {
         const response = await axios.get(
@@ -42,7 +41,7 @@ export const postProduct = (producto) => {
   export const getProductsAdmin = () => {
     return async (dispatch) => {
       try {
-        const response = await axios.get(`/productos`/* ,{withCredentials:true} */);
+        const response = await axios.get(`/productos`);
         return dispatch({
           type: productoConstante.GET_PRODUCTS_ADMIN,
           payload: response.data,
@@ -58,7 +57,7 @@ export const postProduct = (producto) => {
   export const deleteProduct = ({ id }) => {
     return (dispatch) => {
       axios
-        .delete(`/productos/${id}`/* ,{withCredentials:true} */)
+        .delete(`/productos/${id}`)
         .then((res) => {
           return dispatch({
             type: productoConstante.DELETE_PRODUCT,
@@ -77,7 +76,7 @@ export const postProduct = (producto) => {
   export const putProduct = ({ id }) => {
     return (dispatch) => {
       axios
-        .put(`/productos/${id}`/* ,{withCredentials:true} */)
+        .put(`/productos/${id}`)
         .then((productUpdated) => {
           return dispatch({
             type: productoConstante.PUT_PRODUCT,
@@ -165,9 +164,8 @@ export const addComentarios = (usuarioId, productoId, comentarios, puntuacion) =
   return (dispatch) => {
     axios
       .post(`/comentarios/newComment`, {usuarioId:usuarioId, productoId:productoId, comentarios:comentarios, puntuacion:puntuacion})
-      .then(res => console.log(res.data))
+      .then(res => res.data)
       .then(obj => {
-        console.log("Este es el objeto 174", obj)
         dispatch({
           type: productoConstante.ADD_COMENTARIOS,
           payload: {
@@ -190,10 +188,3 @@ export const reset = () => {
     type: productoConstante.RESET,
   };
 };
-
-// export const setCategoria=(categoria)=>{
-//   return{
-//     type:"CAMBIO_DE_CATEGORIA",
-//     payload:categoria
-//   }
-// }

@@ -31,7 +31,7 @@ process.env.COOKIE
     )
   : app.use(
       session({
-        secret: "eMachiComercioWebPage",
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: false,
       })
@@ -42,11 +42,10 @@ app.use(passport.session());
 app.use("/", routes);
 app.use(errorHandler);
 //precargar un usuario y un admin
-const { becomeAdmin, becomeUser } = require("./src/utils/users");
+const { becomeAdmin } = require("./src/utils/users");
 
-conn.sync({ force: true }).then(async () => {
+conn.sync({ force: false }).then(async () => {
   const preloadAdmin = await becomeAdmin();
-  const preloadUser = await becomeUser();
   console.log("Base de Datos conectada");
   app.listen(app.get("puerto"), () => {
     //puerto que pide heroku para el deploy

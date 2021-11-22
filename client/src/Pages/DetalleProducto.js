@@ -14,12 +14,11 @@ import {
   removeProduct,
   getComentarios,
 } from "../Redux/actions/productAction";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import ShowComment from '../Components/Productos/Comentarios/ShowComment'
 import "../Styles/Comments.css";
 
 export default function DetalleProducto({ props }) {
+  console.log(props)
   const { Product, comments } = useSelector((state) => state.productos);
   const usuario = useSelector((state) => state.usuario.User);
   const objetosCarrito = useSelector((state) => state.cart.itemsCarritoDb);
