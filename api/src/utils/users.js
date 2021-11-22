@@ -7,30 +7,36 @@ async function becomeUser(req, res) {
   try {
     const contrasenia = "Ab12345*";
     const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
-    const nuevoUser = await Usuario.create({
-      nombre: "fish",
-      apellido: "san",
+const nuevoUsuario = await Usuario.findOrCreate({
+      where: { nombre: "Dieguito"},
+      defaults: {
+      nombre: "Dieguito",
+      apellido: "Maradona",
       email: "user@gmail.com",
       contrasenia: contraseñaEncriptada,
       tipo: "user",
+      },
     });
   } catch (error) {
-    console.log(error);
+    res.status(404).json({error:`${error}`})
   }
 }
 async function becomeAdmin(req, res) {
   try {
     const contrasenia = "Ab12345*";
     const contraseñaEncriptada = CreadorDeEncriptado(contrasenia);
-    const nuevoAdmin = await Usuario.create({
-      nombre: "fish",
-      apellido: "san",
+const nuevoAdmin = await Usuario.findOrCreate({
+      where: { nombre: "Ronaldinho"},
+      defaults: {
+      nombre: "Ronaldinho",
+      apellido: "Gaucho",
       email: "admin@gmail.com",
       contrasenia: contraseñaEncriptada,
       tipo: "admin",
+      },
     });
   } catch (error) {
-    console.log(error);
+    res.status(404).json({error:`${error}`})
   }
 }
 
@@ -72,7 +78,6 @@ async function putUsuario(req, res) {
     });
     await user.save();
     const todosLosUsuarios = await Usuario.findAll();
-    console.log("todos los usuario despues de actualizar: ", todosLosUsuarios);
     res.json(todosLosUsuarios);
   } catch (e) {
     res.status(404).json({
@@ -108,24 +113,17 @@ async function postUsuario(req, res) {
       res.status(404).json({ error: "Faltan Datos" });
     }
   } catch (error) {
-    console.log(error);
-    apellidores.json({ error: "this is the error: " + error });
+    res.status(404).json({error: "this is the error: " + error });
   }
 }
 
 async function inicioDeSesion(req, res) {
   const { carritos } = req.body;
-
   const usuario = req.user;
-  console.log("este es el usuario", usuario);
   const idProductosusuario = usuario.carritos.map((item) => item.idProducto);
-  console.log("los id de los productos del usuario", idProductosusuario);
-  console.log("y aca el carrito de invitado", carritos);
   try {
     if (carritos.length) {
-      console.log("primer hola");
       if (!idProductosusuario.length) {
-        console.log("el usuario no tiene nada y el carrito si tiene");
         carritos.forEach(async (item) => {
           let carritoCreado = await Carrito.create({
             idCarrito: item.idCarrito,
@@ -140,15 +138,11 @@ async function inicioDeSesion(req, res) {
         return res.json(usuario);
       }
       for (let i = 0; i < carritos.length; i++) {
-        console.log("i", i);
         for (let j = 0; j < idProductosusuario.length; j++) {
-          console.log("j", j);
           if (carritos[i].idProducto == idProductosusuario[j]) {
-            console.log("entro en el break");
             break;
           }
           if (j >= idProductosusuario.length - 1) {
-            console.log("entro en la creacion", carritos[i].idCarrito);
             let carritoCreado = await Carrito.create({
               idCarrito: carritos[i].idCarrito,
               idProducto: carritos[i].idProducto,
@@ -164,7 +158,6 @@ async function inicioDeSesion(req, res) {
       }
       return res.json(usuario);
     } else {
-      console.log("pasor por aca");
       return res.json(usuario);
     }
   } catch (e) {
@@ -199,11 +192,8 @@ async function inicioFacebook(req, res) {
         return res.json(usuario);
       }
       for (let i = 0; i < carritos.length; i++) {
-        console.log("i", i);
         for (let j = 0; j < idProductosusuario.length; j++) {
-          console.log("j", j);
           if (carritos[i].idProducto == idProductosusuario[j]) {
-            console.log("entro en el break");
             break;
           }
           if (j >= idProductosusuario.length - 1) {
@@ -222,7 +212,6 @@ async function inicioFacebook(req, res) {
       }
       return res.json(usuario);
     } else {
-      console.log("pasor por aca");
       return res.json(usuario);
     }
   } catch (e) {
@@ -230,25 +219,6 @@ async function inicioFacebook(req, res) {
   }
 }
 
-const CambiarSeguridadDeContrasenia = async (req, res, next) => {
-  const { email, respuesta, pregunta } = req.body;
-  try {
-    const usuarioEncontrado = await Usuario.findOne({ where: { email } });
-    if (
-      usuarioEncontrado.respuesta !== respuesta ||
-      usuarioEncontrado.pregunta !== pregunta
-    )
-      return res
-        .status(401)
-        .json({ mensaje: "Pregunta o Respuesta Incorrecta" });
-    // res.json({ mensaje: "Respuesta y Pregunta Correcta" });
-    next();
-  } catch (error) {
-    res.status(401).json({
-      mensaje: `error al cambiar la seguridad de la contraseña ${error}`,
-    });
-  }
-};
 
 const CambioContraseñaUsuario = async (req, res) => {
   const { nuevaContrasenia, email } = req.body;
@@ -272,38 +242,6 @@ const CambioContraseñaUsuario = async (req, res) => {
   }
 };
 
-const verficacionUsuarioFactura = async (req, res) => {
-  const usuario = req.user; // el usuario que posteo el comentario
-  const { comentario, idProducto } = req.body; // el comentario que llega y el id del producto
-  try {
-    const facturaDeUsuario = await Factura.findAll({
-      // Buscar facturas del usuario
-      where: {
-        usuarioId: usuario.id,
-      },
-      include: {
-        model: Producto,
-      },
-    });
-    const productoEncontrado = facturaDeUsuario
-      .map((factura) =>
-        factura.productos.filter((producto) => producto.id === idProducto)
-      )
-      .flat(); // encontrar el producto entre las facturas del usuario
-    if (!productoEncontrado.length)
-      return res.status(401).json({
-        error: `no se encontro que el usuario  ${usuario.nombre} halla hecho una compra de este producto`,
-      });
-    const comentariosParaModificar = await Comentario.create({
-      comentarios: comentario,
-    });
-    res.json({ mensaje: "comentario modificado" });
-  } catch (e) {
-    res.status(401).json({
-      error: `error al postear un comentario por parte del usuario ${usuario.nombre}, el error es: ${e}`,
-    });
-  }
-};
 
 module.exports = {
   getUsuario,
@@ -315,6 +253,5 @@ module.exports = {
   inicioFacebook,
   becomeAdmin,
   becomeUser,
-  CambioContraseñaUsuario,
-  // CambiarSeguridadDeContrasenia,
+  CambioContraseñaUsuario
 };

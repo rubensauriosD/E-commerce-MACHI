@@ -8,7 +8,6 @@ export default function Categoria({nombreCategoria,imagenCategoria}){
 
     const dispatch= useDispatch();
     const history = useHistory();
-    //const { filtroC } = useSelector(state => state) 
 
     function handleChange(){
         dispatch(setCategoria(nombreCategoria))

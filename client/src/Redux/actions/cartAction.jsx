@@ -15,7 +15,6 @@ export const addToCartGuest = (productID, qty) => async (
 ) => {
   try {
     const { data } = await axios.get(`/productos/${productID}`);
-    //console.log("lo que llega de la base de datos",data)
     dispatch({
       type: cartConstantes.ADD_TO_CART_GUEST,
       payload: {
@@ -29,12 +28,12 @@ export const addToCartGuest = (productID, qty) => async (
         qty,
       },
     });
-    console.log("el getState: ", getState().cart.cartItems);
     localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
   } catch (error) {
     console.log(error);
   }
 };
+
 //borrar del carrito como invitado
 export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
@@ -54,17 +53,11 @@ export const changetQty = (id, action) => (dispatch, getState) => {
 };
 
 export const checkout = (payer, items) => {
-  //const data={payer,items}
-  console.log("se disparo el boton");
   return (dispatch) => {
-    // const urlMercadoPago=process.env.REACT_APP_API? `${process.env.REACT_APP_API}/checkout`:"http://localhost:3001/checkout"
     axios
       .post("/checkout", { payer, items }, { withCredentials: true })
       .then((resul) => {
-        console.log("llego", resul.data);
-        const windowMercado = window.open(
-          resul.data,
-        );
+        window.open(resul.data);
       })
       .catch((e) => console.log(e));
   };
@@ -75,7 +68,6 @@ export const CambioDeLocalADb = () => {
       .get("/carrito", { withCredentials: true })
       .then((objetosDelCarrito) => objetosDelCarrito.data)
       .then((resultado) => {
-        console.log("aca el resultado", resultado);
         return resultado;
       })
       .then((payload) =>
@@ -90,36 +82,39 @@ export const CambioDeLocalADb = () => {
 };
 //arregle esto para que no se mostraran numeros negativos en la cantidad
 export const CambiarCantidadDb = (idCarrito, valor) => {
-  console.log(
-    "lo que se le envia para encontrar le item del carro: ",
-    idCarrito
-  );
   return async (dispatch) => {
     try {
-      const resultadoDeCarrito = await axios.put(`/carrito/${idCarrito}`, { valor }, { withCredentials: true })
-      console.log("hubo cambio, y el cambio fue: ", resultadoDeCarrito.data);
-      
-      return dispatch({ 
-        type: cartConstantes.CAMBIOCANTIDAD, 
-        payload: resultadoDeCarrito.data 
+      const resultadoDeCarrito = await axios.put(
+        `/carrito/${idCarrito}`,
+        { valor },
+        { withCredentials: true }
+      );
+     
+
+      return dispatch({
+        type: cartConstantes.CAMBIOCANTIDAD,
+        payload: resultadoDeCarrito.data,
       });
     } catch (e) {
       console.log("el error en el cambio del carro fue: ", e);
     }
   };
 };
-export const borrarCarritoDb=()=>{
-  return async (dispatch)=>{
-     const resultado= await axios.delete("/carrito",{ withCredentials: true });
-    dispatch({type:cartConstantes.BORRADOCARRITOUSUARIO})
-  }
-}
+export const borrarCarritoDb = () => {
+  return (dispatch) => {
+    axios
+      .delete("/carrito", { withCredentials: true })
+      .then((resul) =>
+        dispatch({ type: cartConstantes.BORRADOCARRITOUSUARIO })
+      );
+  };
+};
 export const removerDeDb = (idCarrito) => {
   return (dispatch) => {
     axios
       .delete(`/carrito/${idCarrito}`, { withCredentials: true })
       .then((resultado) => {
-        console.log(resultado.data);
+        
         return resultado.data;
       })
       .then((payload) =>
@@ -134,10 +129,7 @@ export const aniadirObjetoCarritoDb = (data) => {
     axios
       .post("/carrito", data, { withCredentials: true })
       .then((resultado) => {
-        console.log(
-          "aca el resultado de añadir desde el carro: ",
-          resultado.data
-        );
+        
         return resultado.data;
       })
       .then((payload) =>
@@ -149,33 +141,37 @@ export const aniadirObjetoCarritoDb = (data) => {
   };
 };
 export const removerAlCerrarSesion = () => {
-  console.log("llego al action");
+ 
   return {
     type: cartConstantes.REMOVERDELCARROCERRARSESION,
   };
 };
 
-export const datosDeFactura = (payer, items) =>(dispatch,getState)=>{
-  console.log('recibir datos de factura: ',payer,items)
+export const datosDeFactura = (payer, items) => (dispatch, getState) => {
+  
   const datosFacturas = {
     payer,
-    items
-  }
+    items,
+  };
   dispatch({
     type: cartConstantes.DATOSDEFACTURA,
-    payload: datosFacturas
-  })
-  console.log("se lleva al local storage")
-  localStorage.setItem("datosFactura",JSON.stringify(getState().cart.datosFactura))
-}
-
+    payload: datosFacturas,
+  });
+  
+  localStorage.setItem(
+    "datosFactura",
+    JSON.stringify(getState().cart.datosFactura)
+  );
+};
 
 export const sendMail = (payer, items) => {
-  console.log("se hace el envio",payer ,items);
-  return (dispatch) => {    
+ 
+  return (dispatch) => {
     axios
       .post("/mailer", { payer, items })
-      .then((result) => { console.log("Mail enviado")})
+      .then((result) => {
+        console.log("Mail enviado");
+      })
       .catch((e) => console.log(e));
   };
 };

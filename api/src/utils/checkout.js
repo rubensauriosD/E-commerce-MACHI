@@ -45,7 +45,6 @@ const checkoutPase=(req, res) => {
        
       }).catch(function(error){
         res.status(404).json({error})
-        console.log(error);
       });
     }
 

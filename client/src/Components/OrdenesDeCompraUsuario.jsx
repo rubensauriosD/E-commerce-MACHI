@@ -23,7 +23,6 @@ function Compras({estado,total,fecha,productos}) {
 
   const [open, setOpen] = React.useState(false);
   let fechaNormal = fecha.substr(0,10);
-  console.log("los productos que recibe por parametro",productos)
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -60,7 +59,6 @@ function Compras({estado,total,fecha,productos}) {
 
                 <TableBody>
                 {productos&&productos.map((producto, indice)=>{
-                console.log(` que llega por el mapeo: ${indice}`,producto)
                 return(
                   <TableRow key={producto.id}>
                   <TableCell component="th" scope="row">
@@ -70,9 +68,7 @@ function Compras({estado,total,fecha,productos}) {
                   </TableCell>
                   <TableCell align="right">{producto.categoria}</TableCell>
                   <TableCell align="right">{producto.precio}</TableCell>
-                  <Link exact to="/CommentProduct">
-                    <TableCell align="right">AddYourComment</TableCell> 
-                  </Link>
+                    <TableCell align="right"><Link style={{textDecoration:"none",color:"black"}}  to="/CommentProduct">AddYourComment</Link></TableCell> 
                   {/* <TableCell align="right">{producto.cantidadDeProducto}</TableCell> */}
                 </TableRow>
                 )
@@ -98,7 +94,6 @@ export default function CollapsibleTable() {
     dispatch(getProducts({}))
   },[dispatch,history])
   const facturas = useSelector(state => state.factura.FacturasUsuario)
-  console.log("aca las facturas",facturas);
   return (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">

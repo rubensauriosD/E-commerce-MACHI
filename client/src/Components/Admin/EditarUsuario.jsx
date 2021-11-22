@@ -50,7 +50,7 @@ return (
 
                         <FormControl>    
                         <InputLabel id="dos">Tipo Actual: {usuario.tipo}</InputLabel>
-                        <Select labelId="dos" name='tipo' className="levelAdminMaterialUser" label="Tipo" onChange={(e) => handleChangeEditar(e)} required>
+                        <Select labelId="dos" name='tipo' className="levelAdminMaterialUser" label="Tipo" value={inputsTipo} onChange={(e) => handleChangeEditar(e)} required>
                             <MenuItem value="user">Usuario</MenuItem>
                             <MenuItem value="admin" >Admin</MenuItem>
                         </Select>

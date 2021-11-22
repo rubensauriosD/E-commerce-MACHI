@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
 import "./ProductStyle.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addToCartGuest,

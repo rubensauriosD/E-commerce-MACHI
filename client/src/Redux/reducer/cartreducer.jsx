@@ -18,7 +18,6 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
       };
     case cartConstantes.ADD_TO_CART_GUEST:
       let item = payload;
-      console.log(item);
       const existItem = state.cartItems.find(
         (x) => x.idProducto === item.idProducto
       );
@@ -37,24 +36,6 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
           cartItems: [...state.cartItems, item],
         };
       }
-    /*  let item = payload.product;
-      const existItem = state.cartItems.find((x) => x.id === item.id);
-      if (existItem) {
-        item = { ...item, qty: ++existItem.qty };
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.id === existItem.id ? item : x
-          ),
-        };
-      } else {
-        item = { ...item, qty: 1 };
-        console.log(item.qty);
-        return {
-          ...state,
-          cartItems: [...state.cartItems, item],
-        };
-      } */
     case cartConstantes.REMOVE_FROM_CART:
       return {
         ...state,
@@ -77,11 +58,9 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
         };
       }
     case cartConstantes.OBTENCIONDELADB: {
-      console.log("si paso por aca con: ", payload);
-      state.itemsCarritoDb.length = 0;
       return {
         ...state,
-        itemsCarritoDb: state.itemsCarritoDb.concat(payload),
+        itemsCarritoDb: [...payload],
       };
     }
     case cartConstantes.REMOVIDODELADB: {
@@ -113,7 +92,6 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
       };
     }
     case cartConstantes.REMOVERDELCARROCERRARSESION: {
-      console.log("llego al reducer");
       return {
         ...state,
         itemsCarritoDb: [],
@@ -121,7 +99,6 @@ export const cartReducer = (state = CART_INITIAL_STATE, { type, payload }) => {
       };
     }
     case cartConstantes.DATOSDEFACTURA: {
-      console.log('llego al reducer los datos de la factura: ', payload)
       return {
         ...state,
         datosFactura: payload
