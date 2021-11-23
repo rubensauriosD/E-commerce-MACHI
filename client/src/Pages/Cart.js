@@ -152,7 +152,7 @@ const Cart = () => {
             </p>
             <a
               href={`https://wa.me/${
-                process.env.CEL_WHAT
+                process.env.REACT_APP_CEL_WHAT
               }?text=Hola%20Machi,%20quiero%20comprar%20${cartItems.map(
                 (el) => `${el.qty} ${el.nombre} de $${el.precio}`
               )}%20por%20una%20suma%20de%20$${totalSinDescuento}%20mas%20el%2010%%20de%20descuento%20por%20comprar%20por%20transferencia%20o%20efectivo,%20que%20queda%20en%20un%20total%20%20$${totalConDescuento}`}
