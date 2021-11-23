@@ -31,8 +31,9 @@ h1{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
-    background-color: rgb(249,249,249)
+    justify-content: space-around;
+    margin: auto;
+    /* background-color: rgb(249,249,249) */
 }
 .items{
     color: rgba(148, 142, 142, 0.438);
@@ -141,4 +142,10 @@ h1{
 .PageNumber{
     font-family: 'Roboto', sans-serif; 
     font: bold;
+}
+
+@media (max-width: 920px ){
+    .SearchContainer{
+        flex-direction: column;
+    }
 }

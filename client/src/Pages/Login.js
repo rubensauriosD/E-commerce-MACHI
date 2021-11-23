@@ -33,16 +33,16 @@ const LoginPage = () => {
   }
   if (usuario && Object.values(usuario).length !== 0) {
     return (
-      <div className="InterfazDeUsuario">
+      <div className="InterfazDeUsuario1">
         {" "}
         <InterfazDeUsuario datosUsuario={usuario} />
       </div>
     );
   } else {
     return (
-      <div className="InterfazDeFormulario">
-        <Login SubmitL={InicioSesion} />
-        <SignIn SubmitS={Registrarse} submitFace={RegistroEInicioConFacebook} />
+      <div className="InterfazDeFormulario1">
+        <div className="interfazFormA"><Login SubmitL={InicioSesion} /></div>
+        <div className="interfazFormB" ><SignIn SubmitS={Registrarse} submitFace={RegistroEInicioConFacebook} /></div>
       </div>
     );
   }

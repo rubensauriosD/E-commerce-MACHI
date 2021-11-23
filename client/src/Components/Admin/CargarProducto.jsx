@@ -58,6 +58,7 @@ export default function CargarProducto(){
             })
             swal('El producto fue creado exitosamente')
             return dispatch(getProductsAdmin());
+            
         })
         .catch((err) => {
             console.log(err)
