@@ -16,8 +16,10 @@ export const productReducer = (state = productState, {type, payload}) => {
     switch (type) {
         //Productos
     case productoConstante.POST_PRODUCT:
+      console.log("lo que llega a reducer: ",payload)
         return {
           ...state,
+          productsAdmin:[...payload]
         };
     case productoConstante.GET_PRODUCTS:
     return {
@@ -25,13 +27,15 @@ export const productReducer = (state = productState, {type, payload}) => {
         products: payload,
     };
     case productoConstante.GET_PRODUCTS_ADMIN:
+      console.log("productos del admin: ",payload)
     return {
         ...state,
-        productsAdmin: payload,
+        productsAdmin: [...payload],
     };
     case productoConstante.DELETE_PRODUCT:
     return {
         ...state,
+        productsAdmin:[...payload]
     };
     case productoConstante.PUT_PRODUCT:
     return {
