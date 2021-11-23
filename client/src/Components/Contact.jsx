@@ -53,7 +53,7 @@ const Contact = () => {
       </div>
       
       <div className={ContactCSS.form_container}>
-        {done && <h3>Gracias por contactarnos</h3>}
+        {done && <h3>Gracias por contactarnos, te contestaremos por email a la brevedad</h3>}
         <form ref={form} onSubmit={sendEmail}>
           <label htmlFor="name">Nombre</label>
           <input type="text" name="name" id="name" required />
@@ -63,7 +63,7 @@ const Contact = () => {
           <input type="tel" id="phone" name="phone" required />
           <label htmlFor="message">Mensaje</label>
           <textarea id="message" name="message" required></textarea>
-          <button>Send </button>
+          <button style={{marginBottom:"100px"}}>Send </button>
         </form>
       </div>
     </div>
