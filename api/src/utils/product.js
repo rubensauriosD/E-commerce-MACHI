@@ -64,7 +64,7 @@ async function deleteProductos(req, res) {
   const idImagenCloudinary = product.imagen.split('/').pop().split('.').shift();
   await product.destroy();
   await cloud.uploader.destroy(idImagenCloudinary);
-  const todosLosProductos=await Producto.findAll()
+  const todosLosProductos = await Producto.findAll({order:[["createdAt","DESC"]]})
   res.json(todosLosProductos); //devuelvo el producto eliminado
 }
 
@@ -113,8 +113,8 @@ async function postProductos(req, res) {
   const {nombre, precio, imagen, categoria, descripcion, disponibilidad, cantidadDeProducto } = req.body
   try {
     await Producto.create({ nombre, imagen, precio, categoria, descripcion, disponibilidad, cantidadDeProducto })
-    const todosLosProductos=await Producto.findAll()
-    res.json(todosLosProductos);
+    const TodosLosProductos=await Producto.findAll({order:[["createdAt","DESC"]]})
+    res.json(TodosLosProductos);
 
   } catch (error) {
     res.status(404).json({error:`Error al generar un  nuevo producto, debido a: ${error}`})

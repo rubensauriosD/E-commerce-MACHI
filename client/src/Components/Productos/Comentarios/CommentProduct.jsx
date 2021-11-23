@@ -42,7 +42,7 @@ export default function Comment({ nombre, usuarioId, id, productoId, imagen}) {
         swal('Yei!,', 'se publicó tu comentario correctamente')
         //history.push("/");
     }
-    const yaComentados=comments?.filter(comentarios => comentarios.productoId === productoId)
+    // const yaComentados=comments?.filter(comentarios => comentarios.productoId === productoId)
     return (
         <div style={{ margin: 15 }}>Hey!, que tal tu producto?
             <div className="card">

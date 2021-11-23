@@ -44,7 +44,7 @@ export default function CargarProducto(){
         })
         .then(({url}) => {
             inputs.imagen = url;
-            return dispatch(postProduct(inputs))
+            return dispatch(postProduct(inputs,swal))
         })
         .then(() => {
             setInputs({
@@ -56,9 +56,6 @@ export default function CargarProducto(){
                 disponibilidad: true,
                 cantidadDeProducto:0
             })
-            swal('El producto fue creado exitosamente')
-            return dispatch(getProductsAdmin());
-            
         })
         .catch((err) => {
             console.log(err)

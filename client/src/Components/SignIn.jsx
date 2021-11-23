@@ -42,6 +42,7 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
+                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 label="Ingresa Nombre"
                 variant="filled"
                 color="success"
@@ -61,6 +62,7 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
+                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw",justifySelf:"center"}}}
                 label="Ingresa Apellido"
                 variant="filled"
                 color="success"
@@ -86,6 +88,7 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
+                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 type="email"
                 label="Ingresa tu correo electronico"
                 variant="filled"
@@ -112,6 +115,7 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
+                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 type="password"
                 label="Ingresa Contraseña"
                 variant="filled"
@@ -137,6 +141,7 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
+                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 type="password"
                 label="Escribe de nuevo la contraseña"
                 variant="filled"
@@ -149,10 +154,10 @@ export default function SignIn({ SubmitS, submitFace }) {
               {errors.validacionContrasenia.message}
             </Alert>
           )}
-          <Button variant="outlined" color="success" type="submit">
+          <Button variant="outlined" color="success" type="submit" sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}>
             <Typography>Registrate</Typography>
           </Button>
-          <Button variant="contained" onClick={submitFace}>
+          <Button variant="contained" onClick={submitFace} sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}>
             <FacebookIcon fontSize="large" />
             <Typography>Registrate con facebook</Typography>
           </Button>

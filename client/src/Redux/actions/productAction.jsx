@@ -2,13 +2,15 @@ import {productoConstante} from "../constants/tipadosDespacho";
 import axios from 'axios';
 
 //postear producto
-export const postProduct = (producto) => {
+export const postProduct = (producto,swal) => {
     return (dispatch) => {
       axios
         .post(`/productos`, producto ,{withCredentials:true} )
-        .then(() => {
+        .then((resultado) => {
+          swal('El producto fue creado exitosamente')
           return dispatch({
             type: productoConstante.POST_PRODUCT,
+            payload:resultado.data
           });
         })
         .catch((err) => {
@@ -28,6 +30,7 @@ export const postProduct = (producto) => {
             categoria ? categoria : ""
           }&nombre=${nombre ? nombre : ""}`
          );
+        console.log("en el action de la tienda", response.data)
         return dispatch({
           type: productoConstante.GET_PRODUCTS,
           payload: response.data,
@@ -44,7 +47,7 @@ export const postProduct = (producto) => {
         const response = await axios.get(`/productos`);
         return dispatch({
           type: productoConstante.GET_PRODUCTS_ADMIN,
-          payload: response.data,
+          payload: response.data.productos,
         });
       } catch (err) {
         console.log(err);
@@ -61,7 +64,7 @@ export const postProduct = (producto) => {
         .then((res) => {
           return dispatch({
             type: productoConstante.DELETE_PRODUCT,
-            payload: id,
+            payload: res.data,
           });
         })
         .catch((err) => {
