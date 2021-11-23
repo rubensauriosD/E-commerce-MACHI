@@ -88,11 +88,11 @@ export const postUser = (user,swal) => {
         });
     };
   };
-  export const facebookIni = (carritos,history) => {
+  export const facebookIni = (carritos,history) => { 
   return (dispatch) => {
     let timer = null; 
-    const facebookLoginURL = process.env.ROUTE_BACK_FACEBOOK || "http://localhost:3001/usuarios/auth/facebook";
-    console.log("variable de entorno: ",process.env.ROUTE_BACK_FACEBOOK)
+    const facebookLoginURL = process.env.REACT_APP_ROUTE_BACK_FACEBOOK;
+    console.log("variable de entorno: ",process.env.REACT_APP_ROUTE_BACK_FACEBOOK,"y el url es: ",facebookLoginURL)
     const newWindow = window.open(
       facebookLoginURL,
       "_blank",
