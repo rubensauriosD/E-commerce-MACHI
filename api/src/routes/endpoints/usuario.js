@@ -10,7 +10,6 @@ const {
   pedidoCerrarSesion,
   inicioFacebook,
   CambioContraseñaUsuario,
-  CambiarSeguridadDeContrasenia
 } = require("../../utils/users");
 const {
   UsuarioAutenticado,

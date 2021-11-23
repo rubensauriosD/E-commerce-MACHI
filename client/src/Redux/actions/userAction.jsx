@@ -1,6 +1,7 @@
 import {constanteUsuarios} from '../constants/tipadosDespacho';
 import axios from 'axios';
-
+import dotenv from "dotenv";
+dotenv.config();
 //postear usuario
 export const postUser = (user,swal) => {
     return (dispatch) => { 
