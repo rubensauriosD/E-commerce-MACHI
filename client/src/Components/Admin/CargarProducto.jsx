@@ -36,9 +36,9 @@ export default function CargarProducto(){
         e.preventDefault();
         const formData = new FormData()
         formData.append("file", imagen)
-        formData.append("upload_preset", "tpvdkdav") //Esto tiene que ser variable de entorno "tpvdkdav"
+        formData.append("upload_preset", `${process.env.REACT_APP_UPLOAD_PRESET}`)
     
-        axios.post(`https://api.cloudinary.com/v1_1/mau-ar/image/upload`, formData) //Esto tiene que ser variable de entorno "mau-ar"
+        axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, formData)
         .then((response)=>{
             return response.data
         })

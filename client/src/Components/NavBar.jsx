@@ -8,14 +8,18 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Link, NavLink } from "react-router-dom";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Avatar } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import { getProducts } from "../Redux/actions/productAction";
 import { useDispatch, useSelector } from "react-redux";
-import LogoMachi from "../../src/logo.png";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import BuildIcon from '@mui/icons-material/Build';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import LogoMachi from "../logo.png"
 
 export default function NavBar() {
   const preguntarSiHayAlgoEnElCarro = useSelector(
@@ -24,7 +28,7 @@ export default function NavBar() {
   const preguntarSiHayAlgoEnElCarroDb = useSelector(
     (state) => state.cart.itemsCarritoDb
   );
-  const perfilImage =  useSelector(state=>state.usuario.User.fotoDePerfil) 
+  const perfilImage = useSelector((state) => state.usuario.User.fotoDePerfil);
   const dispatch = useDispatch();
   const refreshTienda = () => {
     dispatch(getProducts({}));
@@ -99,26 +103,27 @@ export default function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-
       <MenuItem>
-      <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge
-            badgeContent={
-              preguntarSiHayAlgoEnElCarro.length ||
-              preguntarSiHayAlgoEnElCarroDb.length
-                ? "!"
-                : 0
-            }
-            color="success"
+        <Link to="/cart" style={{ textDecoration: "none", color: "black" }}>
+          <IconButton
+            size="large"
+            aria-label="show 17 new notifications"
+            color="inherit"
           >
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton>
+            <Badge
+              badgeContent={
+                preguntarSiHayAlgoEnElCarro.length ||
+                preguntarSiHayAlgoEnElCarroDb.length
+                  ? preguntarSiHayAlgoEnElCarro.length ||
+                    preguntarSiHayAlgoEnElCarroDb.length
+                  : 0
+              }
+              color="success"
+            >
+              <ShoppingCartIcon color="success"/>
+            </Badge>
+            Carrito
+          </IconButton>
         </Link>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -129,16 +134,74 @@ export default function NavBar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          {perfilImage && perfilImage ? (
+                <Avatar alt="userImage" src={perfilImage} />
+              ) : (
+                <AccountCircle color="info"/>
+              )}
+               <p>Perfil</p>
         </IconButton>
-        <p>Perfil</p>
       </MenuItem>
+      <Link style={{textDecoration:"none",color:"black"}} to="/tienda">
+      <MenuItem>
+      <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <StorefrontIcon color="secondary"/>
+          <p>Tienda</p>
+        </IconButton>
+      </MenuItem>
+      </Link>
+      <Link style={{textDecoration:"none",color:"black"}} to="/servicios">
+      <MenuItem>
+      <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <BuildIcon color="warning"/>
+          <p>Servicios</p>
+        </IconButton>
+      </MenuItem>
+      </Link>
+      <Link style={{textDecoration:"none",color:"black"}} to="/nosotros">
+            <MenuItem>
+      <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AssignmentIndIcon color="error"/>
+          <p>Nosotros</p>
+        </IconButton>
+      </MenuItem>
+      </Link>
+      <Link style={{textDecoration:"none",color:"black"}} to="/contact">
+      <MenuItem>
+      <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="primary-search-account-menu"
+                aria-haspopup="true"
+                color="inherit"
+      >
+      <ContactMailIcon color='action'/>
+      <p>Contactanos</p>
+      </IconButton>
+      </MenuItem>
+      </Link>
     </Menu>
   );
 
   return (
-
-
     <Box sx={{ flexColumn: 5, flexGrow: 1, justifyContent: "space-between" }}>
       <AppBar position="static" color="inherit">
         <Toolbar>
@@ -254,10 +317,7 @@ export default function NavBar() {
                 color: "black",
               })}
             >
-              <IconButton
-                size="large"
-                color="inherit"
-              >
+              <IconButton size="large" color="inherit">
                 <Badge
                   badgeContent={
                     preguntarSiHayAlgoEnElCarro.length ||
@@ -281,19 +341,23 @@ export default function NavBar() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              {perfilImage&&perfilImage?<Avatar alt="userImage" src={perfilImage}/>:<AccountCircle fontSize="large" />}
+              {perfilImage && perfilImage ? (
+                <Avatar alt="userImage" src={perfilImage} />
+              ) : (
+                <AccountCircle fontSize="large" />
+              )}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId} 
+              aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              <MoreIcon fontSize="large" />
+              <MoreVertIcon fontSize="large" />
             </IconButton>
           </Box>
         </Toolbar>
