@@ -24,11 +24,12 @@ export default function SignIn({ SubmitS, submitFace }) {
       <h2>REGISTRATE YA!</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
-          component="div"
+           component="div"
           sx={{
             display: "flex",
             flexDirection: "column",
-            /* gridTemplateColumns: { sm: "20vw 20vw" },
+            /*gridTemplateColumns: { sm: "20vw 20vw" },
+
             gap: 1,
             maxHeight: "60vh",
             overflow: "auto", */
