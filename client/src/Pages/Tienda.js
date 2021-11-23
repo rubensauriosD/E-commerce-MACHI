@@ -14,12 +14,9 @@ import {
   faChevronRight,
   faChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import { useHistory } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Tienda({ props }) {
-  const history = useHistory();
-  // const productosPorCategorias=useSelector(state=>state.productosPorCategorias)
   const { products, nombre, pagina, ordenamiento, categoria } =
     useSelector((state) => state.productos);
   const dispatch = useDispatch();

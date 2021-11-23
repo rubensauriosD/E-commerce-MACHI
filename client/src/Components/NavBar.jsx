@@ -288,7 +288,7 @@ export default function NavBar() {
             <IconButton
               size="large"
               aria-label="show more"
-              aria-controls={mobileMenuId} hola X3
+              aria-controls={mobileMenuId} 
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
               color="inherit"

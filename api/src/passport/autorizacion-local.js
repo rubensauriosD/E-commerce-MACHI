@@ -21,14 +21,11 @@ passport.use(
       passReqToCallback: true,
     },  
     (req, email, contrasenia, done) => {
-     // console.log("aca los datos: ",email,contrasenia)
       const ComparadorDeEncriptado = function (contraseniaEnviada,contraseniaEnBaseDeDatos) {
-       // console.log("Lo que llega al comparar: ",bCrypt.compareSync(contraseniaEnviada,contraseniaEnBaseDeDatos))
         return bCrypt.compareSync(contraseniaEnviada,contraseniaEnBaseDeDatos)
       };
       Usuario.findOne({ where: { email }, include:{model:Carrito}}).then(
         (resultadoUsuario) => {
-          //console.log("Aca los Datos en passport: ",resultadoUsuario&&resultadoUsuario.contrasenia)
           if (!resultadoUsuario) {
             return done(null, false, {
               message: "Error en Login",

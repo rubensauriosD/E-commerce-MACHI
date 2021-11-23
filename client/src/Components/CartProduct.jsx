@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   changetQty,
   removeFromCart,
   CambiarCantidadDb,
   removerDeDb,
 } from "../Redux/actions/cartAction";
+import { getComentarios } from "../Redux/actions/productAction";
+import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -29,6 +31,22 @@ const CartProduct = ({
   qty,
 }) => {
   const dispatch = useDispatch();
+  console.log("id del producto", idProducto);
+  useEffect(() => {
+    dispatch(getComentarios(idProducto));
+  }, [dispatch, idProducto]);
+
+  const { comments } = useSelector((state) => state.productos);
+  console.log("aca los comentarios", comments);
+
+  let puntuacionMedia = 0;
+  comments.forEach((element) => {
+    console.log(element.puntuacion);
+    puntuacionMedia += element.puntuacion;
+  });
+  puntuacionMedia = puntuacionMedia / comments.length;
+  console.log("puntuacion media", puntuacionMedia);
+
   const handleOnClick = () => {
     usuarioId ? dispatch(removerDeDb(id)) : dispatch(removeFromCart(id));
   };
@@ -72,9 +90,19 @@ const CartProduct = ({
             <Typography component="div" variant="h5">
               {nombre}
             </Typography>
-            <Stack spacing={1}>
-              <Rating name="size-small" value={4.5} precision={0.5} readOnly />
-            </Stack>
+            {puntuacionMedia ? (
+              <Stack spacing={1}>
+                <Rating
+                  name="size-small"
+                  value={puntuacionMedia}
+                  precision={0.5}
+                  readOnly
+                />
+              </Stack>
+            ) : (
+              "Aun no hay reseñas del producto"
+            )}
+
             <Typography
               variant="subtitle1"
               color={"text.secondary"}

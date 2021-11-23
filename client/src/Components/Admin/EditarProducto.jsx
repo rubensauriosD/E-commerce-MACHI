@@ -19,8 +19,8 @@ export default function EditarProducto(){
         precio: productos.precio,
         descripcion: productos.descripcion,
         imagen: productos.imagen,
-        categoria: productos.categoria,
-        disponibilidad: productos.disponibilidad,  
+        categoria: productos.categoria || "",
+        disponibilidad: productos.disponibilidad || "false",  
         cantidadDeProducto: productos.cantidadDeProducto
     })
     const [imagen, setImagen] = useState('')
@@ -84,13 +84,13 @@ export default function EditarProducto(){
                                 {/* </div>  */}   
                                 
                              
-                                <TextField className="levelAdminMaterialEdit" placeholder={producto.nombre} onChange={(e) => handleChangeEditar(e)} name="nombre" type="text" label={producto.nombre} variant="filled" color="success"/>
+                                <TextField className="levelAdminMaterialEdit" placeholder={producto.nombre} onChange={(e) => handleChangeEditar(e)} name="nombre" type="text" value={inputsEditar.nombre} label={producto.nombre} variant="filled" color="success"/>
 
-                                <TextField className="levelAdminMaterialEdit" placeholder={producto.precio} onChange={(e) => handleChangeEditar(e)}  name="precio" type="number" label={producto.precio} variant="filled" color="success"/>
+                                <TextField className="levelAdminMaterialEdit" placeholder={`${producto.precio}`} onChange={(e) => handleChangeEditar(e)}  name="precio" type="number" label={producto.precio} variant="filled" color="success"/>
                                 
                                 <TextField className="levelAdminMaterialEdit" placeholder={producto.descripcion} onChange={(e) => handleChangeEditar(e)}  name="descripcion" type="text" label={producto.descripcion} variant="filled" color="success"/>
 
-                                <TextField className="levelAdminMaterialEdit" placeholder={producto.cantidadDeProducto} onChange={(e) => handleChangeEditar(e)}  name="cantidadDeProducto" type="number" label={producto.cantidadDeProducto} variant="filled" color="success"/>
+                                <TextField className="levelAdminMaterialEdit" placeholder={`${producto.cantidadDeProducto}`} onChange={(e) => handleChangeEditar(e)}  name="cantidadDeProducto" type="number" label={producto.cantidadDeProducto} variant="filled" color="success"/>
  
                                 <FormControl>
                                 <InputLabel>Disponibilidad: {producto.disponibilidad? 'Disponible' : 'No disponible'}</InputLabel>
@@ -100,7 +100,6 @@ export default function EditarProducto(){
                                 </Select>
                                 </FormControl>
                                 
-
                                 <FormControl>    
                                 <InputLabel id="dos">Categoria: {producto.categoria}</InputLabel>
                                 <Select labelId="dos" name='categoria' className="levelAdminMaterialEdit" label="Categoria" onChange={(e) => handleChangeEditar(e)} value={inputsEditar.categoria} required>

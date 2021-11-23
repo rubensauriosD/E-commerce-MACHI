@@ -7,7 +7,7 @@ async function newComment(data){
 };
 
 
-async function getComments(id){
+async function getCommentarios(id){
     try{
         return await Comentario.findAll({
             where:{
@@ -20,10 +20,9 @@ async function getComments(id){
         });
     }
     catch(error){
-        console.log(error)
         throw error
     };
 };
 
 
-module.exports = {newComment,getComments}
+module.exports = {newComment,getCommentarios}

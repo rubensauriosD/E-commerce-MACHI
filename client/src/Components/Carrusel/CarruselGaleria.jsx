@@ -74,7 +74,6 @@ export default function CarruselGaleria() {
   }, []);
 
   let numGal = (imagenes.length +'00%' )
-  console.log(numGal)
 
   return (
     <div>
