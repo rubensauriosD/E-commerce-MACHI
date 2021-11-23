@@ -92,7 +92,7 @@ export const postUser = (user,swal) => {
   return (dispatch) => {
     let timer = null; 
     const facebookLoginURL = process.env.ROUTE_BACK_FACEBOOK || "http://localhost:3001/usuarios/auth/facebook";
-    console.log(facebookLoginURL)
+    console.log("variable de entorno: ",process.env.ROUTE_BACK_FACEBOOK)
     const newWindow = window.open(
       facebookLoginURL,
       "_blank",
