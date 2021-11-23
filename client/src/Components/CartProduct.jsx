@@ -31,22 +31,23 @@ const CartProduct = ({
   qty,
 }) => {
   const dispatch = useDispatch();
-  console.log("id del producto", idProducto);
+  // console.log("id del producto", idProducto);
   useEffect(() => {
     dispatch(getComentarios(idProducto));
   }, [dispatch, idProducto]);
 
   const { comments } = useSelector((state) => state.productos);
-  console.log("aca los comentarios", comments);
+  // console.log("aca los comentarios", comments);
 
   let puntuacionMedia = 0;
   comments.forEach((element) => {
-    console.log(element.puntuacion);
+    // console.log("las diferentes puntuaciones",element.puntuacion);
     puntuacionMedia += element.puntuacion;
   });
   puntuacionMedia = puntuacionMedia / comments.length;
-  console.log("puntuacion media", puntuacionMedia);
-
+  // console.log("puntuacion media", puntuacionMedia);
+  const cantidadResenias= comments.length;
+  // console.log(cantidadResenias);
   const handleOnClick = () => {
     usuarioId ? dispatch(removerDeDb(id)) : dispatch(removeFromCart(id));
   };
@@ -95,22 +96,30 @@ const CartProduct = ({
                 <Rating
                   name="size-small"
                   value={puntuacionMedia}
-                  precision={0.5}
+                  precision={0.2}
                   readOnly
                 />
+           <Typography
+              variant="subtitle2"
+              color={"text.secondary"}
+              component="div"
+            >
+              {`${cantidadResenias} calificaciones`}
+            </Typography>
+                
               </Stack>
             ) : (
-              "Aun no hay reseñas del producto"
-            )}
-
             <Typography
               variant="subtitle1"
               color={"text.secondary"}
               component="div"
             >
               {/**aca lo pongo rojito si no esta diponible tambien falta categoria*/}
-              {disponibilidad ? "disponible" : "No disponible"}
+              {"No hay reseñas disponibles aun"}
             </Typography>
+              
+            )}
+
           </CardContent>
           <Button
             onClick={handleOnClick}
