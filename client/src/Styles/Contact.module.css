@@ -3,9 +3,9 @@
   margin-top: 7%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 47vw;
-  height: 50vh;
+  justify-content: space-around;
+  width: 60vw;
+  height: 80vh;
   background-color: rgb(255, 255, 255);
   flex-wrap: wrap;
 }
@@ -40,7 +40,8 @@
 }
 .form_container {
   height: 97%;
-  width: 47%;
+  width: 50%;
+  
 }
 .form_container form {
   display: flex;
@@ -84,3 +85,10 @@ textarea {
 /* .form_container form input {
 
 } */
+
+@media (max-width: 900px;){
+  .form_container {
+    width: 90%;
+    margin-bottom: 50px;
+  }
+}

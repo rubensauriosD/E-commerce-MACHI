@@ -63,7 +63,7 @@ const Contact = () => {
           <input type="tel" id="phone" name="phone" required />
           <label htmlFor="message">Mensaje</label>
           <textarea id="message" name="message" required></textarea>
-          <button>Send </button>
+          <button style={{marginBottom:"50px"}}>Send </button>
         </form>
       </div>
     </div>
