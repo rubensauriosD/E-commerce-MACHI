@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-evenly;
   width: 47vw;
-  height: 50vh;
+  max-height: 90vh;
   background-color: rgb(255, 255, 255);
   flex-wrap: wrap;
 }
@@ -24,6 +24,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: 10px;
   height: 47%;
   align-self: flex-start;
 }
@@ -41,6 +42,7 @@
 .form_container {
   height: 97%;
   width: 47%;
+  margin: 10px;
 }
 .form_container form {
   display: flex;
