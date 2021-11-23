@@ -40,7 +40,7 @@ const LoginPage = () => {
     );
   } else {
     return (
-      <div className="InterfazDeFormulario1">
+      <div className="InterfazDeFormulario1"> 
         <div className="interfazFormA"><Login SubmitL={InicioSesion} /></div>
         <div className="interfazFormB" ><SignIn SubmitS={Registrarse} submitFace={RegistroEInicioConFacebook} /></div>
       </div>
