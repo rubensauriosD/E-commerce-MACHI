@@ -35,6 +35,7 @@ const Contact = () => {
   }, 5000);
   return (
     <div className={ContactCSS.wrapper}>
+
       <div className={ContactCSS.icons_container}>
         <h2>Contacto</h2>
         <i>
@@ -50,6 +51,7 @@ const Contact = () => {
           <a href="mailto:machiwebsite@gmail.com">machiwebsite@gmail.com</a>
         </i>
       </div>
+      
       <div className={ContactCSS.form_container}>
         {done && <h3>Gracias por contactarnos</h3>}
         <form ref={form} onSubmit={sendEmail}>
