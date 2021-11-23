@@ -6,22 +6,20 @@ const productState = {
     Product: {},
     nombre: "",
     comments: [],
-
     pagina: 1,
     categoria:"",
     ordenamiento:"",
-    addComments: [],
-    
-
-   
+    addComments: []
 }
 
 export const productReducer = (state = productState, {type, payload}) => {
     switch (type) {
         //Productos
     case productoConstante.POST_PRODUCT:
+      console.log("lo que llega a reducer: ",payload)
         return {
           ...state,
+          productsAdmin:[...payload]
         };
     case productoConstante.GET_PRODUCTS:
     return {
@@ -29,13 +27,15 @@ export const productReducer = (state = productState, {type, payload}) => {
         products: payload,
     };
     case productoConstante.GET_PRODUCTS_ADMIN:
+      console.log("productos del admin: ",payload)
     return {
         ...state,
-        productsAdmin: payload,
+        productsAdmin: [...payload],
     };
     case productoConstante.DELETE_PRODUCT:
     return {
         ...state,
+        productsAdmin:[...payload]
     };
     case productoConstante.PUT_PRODUCT:
     return {
@@ -73,15 +73,14 @@ export const productReducer = (state = productState, {type, payload}) => {
     case productoConstante.GET_COMENTARIOS: {
       return {
         ...state,
-        comments: payload
+        comments: [...payload]
       }
     }
-    case productoConstante.ADD_COMENTARIOS: {
+    case productoConstante.ADD_COMENTARIOS: 
       return {
         ...state,
-        addComments: payload
+        addComments: [...payload]
       }
-    };
     case productoConstante.RESET: {
       return {
         ...state,
@@ -95,18 +94,6 @@ export const productReducer = (state = productState, {type, payload}) => {
       }
     }
 
-    case productoConstante.ADD_COMENTARIOS: {
-      return {
-        ...state,
-        addComments: payload
-      }
-    };
-    case productoConstante.RESET: {
-      return {
-        ...state,
-        ordenamiento: payload
-      }
-    }
     case "CAMBIO_ORDENAMIENTO":{
       return{
         ...state,

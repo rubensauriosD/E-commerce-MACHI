@@ -15,9 +15,9 @@ export default function CargarImagen(){
         e.preventDefault();
         const formData = new FormData() 
         formData.append("file", img)
-        formData.append("upload_preset", "tpvdkdav")
+        formData.append("upload_preset", `${process.env.REACT_APP_UPLOAD_PRESET}`)
     
-        axios.post(`https://api.cloudinary.com/v1_1/mau-ar/image/upload`, formData)
+        axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`, formData)
         .then((response) => {
             dispatch(postImage(response.data) )
         })

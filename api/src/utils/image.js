@@ -10,7 +10,7 @@ async function getImagenes(req, res) {
       return res.status(404).send("No hay imagenes existentes.");
     }
   } catch (error) {
-    return res.status(404);
+    return res.status(404).json({error: error});
   }
 }
 
@@ -37,8 +37,8 @@ async function postImagenes(req, res) {
       });
       const imagenes=await Imagen.findAll()
       res.json(imagenes)
-  } catch (error) {
-      console.log(error);
+  } catch (e) {
+    res.status(404).json({error:`no se pudo debido a: ${e}`})
   }
 }
 

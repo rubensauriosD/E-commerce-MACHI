@@ -9,19 +9,17 @@
           box-shadow: 5px 5px 2px #4da45f;
 }
 
-.InterfazDeUsuario {
+.InterfazDeUsuario1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+
 }
 /*# sourceMappingURL=paginaDeLogin.css.map */
 
-.InterfazDeUsuario1 {
-    
-}
 
 .InterfazDeFormulario1 {
     display: flex;

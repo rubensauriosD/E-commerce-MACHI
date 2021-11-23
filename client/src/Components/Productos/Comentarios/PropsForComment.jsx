@@ -1,5 +1,5 @@
 import CommentProduct from './CommentProduct'
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 
@@ -7,11 +7,11 @@ export default function PropsForComment() {
 
   const {FacturasUsuario} = useSelector(state=>state.factura)
   
-  useEffect(() => {
+  // useEffect(() => {
 
-    console.log("WTFFF", FacturasUsuario);
+  //   console.log("WTFFF", FacturasUsuario);
 
-  }, []);
+  // }, []);
   
     return(
       <div>
@@ -20,7 +20,7 @@ export default function PropsForComment() {
               FacturasUsuario.map((e) => (
                 e.productos.map((p) => (
                   <CommentProduct
-                  key={e.id}
+                  key={p.id}
                   id={e.id}
                   usuarioId={e.usuarioId}
                   imagen={p.imagen}

@@ -4,17 +4,21 @@ const newComment = async (req,res) =>{
   const {comentarios, puntuacion, usuarioId, productoId} = req.body;
   try{
       await utilsComments.newComment({comentarios, puntuacion, usuarioId, productoId})
-          res.status(200).json({success:true})
+          res.status.json({success:true})
   }
   catch(error){
-    console.log(error)
+    res.status.json({error:`${error}`})
     throw error
   }
 };
 
 const getComments = async (req,res)=>{
   const {id} = req.params;
-  res.json( await utilsComments.getComments(id))
+  try{
+    res.json( await utilsComments.getCommentarios(id))
+  }catch(e){
+    res.status(404).json({error:`${e}`})
+  }
 };
 
 

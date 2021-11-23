@@ -62,25 +62,24 @@ export default function CarruselGaleria() {
   useEffect(() => {
     intervalContainer.current = setInterval(() => {
       handleNext();
-    }, 10000);
+    }, 7000);
     container.current.addEventListener("mouseenter", () => {
       clearInterval(intervalContainer.current);
     });
     container.current.addEventListener("mouseleave", () => {
       intervalContainer.current = setInterval(() => {
         handleNext();
-      }, 10000);
+      }, 7000);
     });
   }, []);
 
   let numGal = (imagenes.length +'00%' )
-  console.log(numGal)
 
   return (
     <div>
     <h1>Nuestros Clientes Felices</h1>
       <div className="container-slider-galeria">
-        <div className="slider" style={{width: numGal}} id="slider" ref={container}>
+        <div className="sliderClientes" style={{width: numGal}} id="slider" ref={container}>
                {imagenes&&imagenes.map((imagen, i) => {
                     return(
                         <div className="slider_section" key={imagen.id}>

@@ -3,24 +3,17 @@ import { useEffect } from "react";
 import { sendMail } from "../Redux/actions/cartAction";
 import {useDispatch,useSelector} from "react-redux";
 import { postFactura } from "../Redux/actions/facturaAction"
-import { borrarCarritoDb, CambiarCantidadDb } from "../Redux/actions/cartAction";
+import { borrarCarritoDb } from "../Redux/actions/cartAction";
 
 export default function SuccesPayment() {
   const { datosFactura } = useSelector((state) => state.cart);
   const dispatch=useDispatch()
-  console.log(datosFactura)
-  const cambioStock = () => {
-    if(datosFactura.items && typeof datosFactura.items === "array") {
-      datosFactura.items.map((item) => {return dispatch(CambiarCantidadDb(item.idCarrito, item.qty))})
-    }
-  } 
   useEffect(()=>{
-//       setTimeout(()=>{
-//           window.close()
-//       },5000)
+        setTimeout(()=>{
+            window.close()
+        },5000)
   dispatch(postFactura(datosFactura.payer, datosFactura.items))
   dispatch(sendMail(datosFactura.payer, datosFactura.items));
-  cambioStock()
   dispatch(borrarCarritoDb())
     },[dispatch, datosFactura])
   return (

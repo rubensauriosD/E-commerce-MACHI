@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import * as React from 'react';
-import IconButton from '@mui/material/IconButton';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -99,7 +98,6 @@ export default function EditarFacturas()
     var facturas = useSelector(state => state.factura.Facturas)
     var dispatch = useDispatch();
 
-    console.log(facturas)
 
     return(
         <div>

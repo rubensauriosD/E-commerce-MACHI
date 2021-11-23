@@ -25,7 +25,6 @@ export const userReducer = (state = userState, {type, payload}) => {
             User: payload,
         };
         case constanteUsuarios.INICIARS: {
-        console.log(payload);
         return {
             ...state,
             User: payload,

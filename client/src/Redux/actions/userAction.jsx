@@ -1,12 +1,14 @@
 import {constanteUsuarios} from '../constants/tipadosDespacho';
 import axios from 'axios';
-
+import dotenv from "dotenv";
+dotenv.config();
 //postear usuario
-export const postUser = (user) => {
-    return (dispatch) => {
+export const postUser = (user,swal) => {
+    return (dispatch) => { 
       axios
         .post(`/usuarios`, user,{withCredentials:true})
         .then((response) => {
+          swal("Felicidades, te haz registrado a Machi")
           return dispatch({
             type: constanteUsuarios.POST_USER,
             payload: response,
@@ -36,7 +38,6 @@ export const postUser = (user) => {
   };
   //Iniciar Sesion
   export const IniciarSesion = (usuario, history) => {
-    console.log(usuario)
     return (dispatch) => {
       axios.post("/usuarios/inicioSesion", usuario,{withCredentials:true}).then((resultadoDeUsuario) => {
         dispatch({ type: constanteUsuarios.INICIARS, payload: resultadoDeUsuario.data });
@@ -87,10 +88,11 @@ export const postUser = (user) => {
         });
     };
   };
-  export const facebookIni = (carritos,history) => {
+  export const facebookIni = (carritos,history) => { 
   return (dispatch) => {
     let timer = null; 
-    const facebookLoginURL = "https://e-commerce-machi.herokuapp.com/usuarios/auth/facebook";
+    const facebookLoginURL = process.env.REACT_APP_ROUTE_BACK_FACEBOOK;
+    console.log("variable de entorno: ",process.env.REACT_APP_ROUTE_BACK_FACEBOOK,"y el url es: ",facebookLoginURL)
     const newWindow = window.open(
       facebookLoginURL,
       "_blank",
@@ -123,13 +125,11 @@ export const comprobanteSiEsAdmin=(history)=>{
 export const comprobanteSiEsUsuario=(history)=>{
   return(dispatch)=>{
     axios.get("usuarios/testUsuario",{withCredentials:true})
-    .then(()=>console.log("si es usuario"))
     .catch(()=>history.push("/login"))
   }
 }
 
 export const resetearContraseña= (email) => {
-  console.log("se envia el mail a", email)
   
   return (dispatch) => { axios
     .post("/mailer/reset", {email})
@@ -141,7 +141,6 @@ export const resetearContraseña= (email) => {
 
 
 export const nuevaContraseña= (nuevaContrasenia, email) => {
-  console.log("email pa",email)
   return (dispatch) => {
     axios.put(`usuarios`,{nuevaContrasenia, email})
     .then((updateContrasenia)=>{
@@ -154,7 +153,6 @@ export const nuevaContraseña= (nuevaContrasenia, email) => {
 }
 
 export const pedirUsuarioPorToken = (token) => {
-  console.log("token en la action", token)
   return (dispatch) => {
     axios.get(`mailer/reset/${token}`)
     .then((usuario) => {

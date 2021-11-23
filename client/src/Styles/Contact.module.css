@@ -3,9 +3,11 @@
   margin-top: 7%;
   display: flex;
   align-items: center;
+
   justify-content: space-around;
   width: 60vw;
   height: 80vh;
+
   background-color: rgb(255, 255, 255);
   flex-wrap: wrap;
 }
@@ -24,6 +26,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin: 10px;
   height: 47%;
   align-self: flex-start;
 }
@@ -40,8 +43,9 @@
 }
 .form_container {
   height: 97%;
-  width: 50%;
-  
+  width: 47%;
+  margin: 10px;
+
 }
 .form_container form {
   display: flex;

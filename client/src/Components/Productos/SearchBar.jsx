@@ -1,7 +1,7 @@
 import "../../Styles/SearchBar.css"
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setNombre, setPagina } from "../../Redux/actions/productAction"
+import { useDispatch } from "react-redux";
+import { getProducts, setNombre  } from "../../Redux/actions/productAction"
 
 export default function SearchBar() {
    const [input, setInput] = useState("")
@@ -22,8 +22,8 @@ export default function SearchBar() {
 
     return (
         <form className="search" onSubmit={onSubmit}>
-            <input className="input" type="text" placeholder="Busca un producto" onChange={handleInputChange} value={input} />
-            <button className="lupa" type="submit">🔍</button>
+            <div><input className="input" type="text" placeholder="Busca un producto" onChange={handleInputChange} value={input} /></div>
+            <div><button className="lupa" type="submit">🔍</button></div>
         </form>
     )
 }
