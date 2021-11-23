@@ -26,11 +26,12 @@ export default function SignIn({ SubmitS, submitFace }) {
         <Box
           component="div"
           sx={{
-            display: "grid",
-            gridTemplateColumns: { xl: "20vw 20vw", md:"20vw 20vw",sm:"40vw" },
+            display: "flex",
+            flexDirection: "column",
+            /* gridTemplateColumns: { sm: "20vw 20vw" },
             gap: 1,
             maxHeight: "60vh",
-            overflow: "auto",
+            overflow: "auto", */
           }}
         >
           <Controller

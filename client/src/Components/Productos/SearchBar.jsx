@@ -22,8 +22,8 @@ export default function SearchBar() {
 
     return (
         <form className="search" onSubmit={onSubmit}>
-            <input className="input" type="text" placeholder="Busca un producto" onChange={handleInputChange} value={input} />
-            <button className="lupa" type="submit">🔍</button>
+            <div><input className="input" type="text" placeholder="Busca un producto" onChange={handleInputChange} value={input} /></div>
+            <div><button className="lupa" type="submit">🔍</button></div>
         </form>
     )
 }

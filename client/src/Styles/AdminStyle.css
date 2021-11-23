@@ -202,7 +202,9 @@
     .levelAdminMaterialEdit Select{
         width: 50px;
     }
-    
+    .ordererAdminEdit{
+        margin: auto;
+    }
 }
 
 @media (max-width: 1024px ) {

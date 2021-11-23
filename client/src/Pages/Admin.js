@@ -8,11 +8,11 @@ import { getFacturasAdmin } from "../Redux/actions/facturaAction";
 import CargarProducto from '../Components/Admin/CargarProducto'
 import CargarImagen from "../Components/Admin/CargarImagen";
 import EditarProducto from "../Components/Admin/EditarProducto";
-import '../Styles/AdminStyle.css'
 import EditarUsuario from "../Components/Admin/EditarUsuario";
 import EditarFactura from "../Components/Admin/EditarFacturas";
 import EditarImagenes from "../Components/Admin/EditarImagenes";
 import { useHistory } from "react-router";
+import '../Styles/AdminStyle.css'
 
 export default function Admin(){
 const history=useHistory()
