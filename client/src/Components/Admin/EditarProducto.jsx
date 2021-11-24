@@ -103,7 +103,6 @@ export default function EditarProducto() {
                     onChange={(e) => handleChangeEditar(e)}
                     name="nombre"
                     type="text"
-                    value={inputsEditar.nombre}
                     label={producto.nombre}
                     variant="filled"
                     color="success"
@@ -152,7 +151,6 @@ export default function EditarProducto() {
                       className="levelAdminMaterialEdit"
                       label="Disponibilidad"
                       onChange={(e) => handleChangeEditar(e)}
-                      value={inputsEditar.disponibilidad}
                       required
                     >
                       <MenuItem value="true">Disponible</MenuItem>
@@ -170,7 +168,6 @@ export default function EditarProducto() {
                       className="levelAdminMaterialEdit"
                       label="Categoria"
                       onChange={(e) => handleChangeEditar(e)}
-                      value={inputsEditar.categoria}
                       required
                     >
                       <MenuItem value="Cajones y Cultivos">
