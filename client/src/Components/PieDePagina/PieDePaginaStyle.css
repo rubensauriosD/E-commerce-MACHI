@@ -73,8 +73,10 @@
     margin: 8px;
 }
 
-@media (max-width: 650px){
+
+@media (max-width: 700px){
     .BoxContenedora-footer{
-        margin-top: 36%;
+        margin-top: 45%;
+
     }
 }

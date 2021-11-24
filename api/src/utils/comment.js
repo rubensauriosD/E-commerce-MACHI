@@ -4,10 +4,10 @@ const newComment = async (req,res) =>{
   const {comentarios, puntuacion, usuarioId, productoId} = req.body;
   try{
       await utilsComments.newComment({comentarios, puntuacion, usuarioId, productoId})
-          res.status.json({success:true})
+          res.status(404).json({success:true})
   }
   catch(error){
-    res.status.json({error:`${error}`})
+    res.status(404).json({error:`${error}`})
     throw error
   }
 };

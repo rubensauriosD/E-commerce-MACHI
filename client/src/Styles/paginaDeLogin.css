@@ -1,8 +1,8 @@
 .InterfazDeFormulario {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 50vw 50vw;
-      grid-template-columns: 50vw 50vw;
+  -ms-grid-columns: 100w;
+      grid-template-columns: 100vw;
   -ms-grid-rows: 74.5vh;
       grid-template-rows: 74.5vh;
   -webkit-box-shadow: 5px 5px 2px #4da45f;
@@ -16,44 +16,52 @@
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
-  
 
 }
-
 /*# sourceMappingURL=paginaDeLogin.css.map */
 
-.InterfazDeFormulario1{
- display: flex;
- flex-wrap: wrap;
- margin-left: auto;
- margin-right: auto;
- 
+
+.InterfazDeFormulario1 {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    
+}
+
+.InterfazDeFormB{
+    width: 50%;
+    max-width: 600px;
+    display:flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+    padding: 10px;
+    margin-right: auto;
+    margin-left:auto;
+    
+    
+}
+
+
+.InterfazDeFormA{
+    width: 50%;
+    display:flex;
+    margin-right: auto;
+    margin-left:auto;
+    align-items: center;
 
 }
 
-.interfazFormA{
-   width: 50%;
-   margin-left: auto;
-   margin-right: auto;
-}
-.interfazFormB{
-   padding-left: 8%;
-   padding-right: 8%; 
-   margin-left: auto;
-   margin-right: auto;
-   max-width: 900px;
-   width: 50%;
-}
-
-@media (max-width: 630px){
-    .InterfazDeFormulario1{
-        width: 90%;
-        margin-left: 10px;
-        margin-right: 10px;
-        flex-direction: column;
+@media (max-width: 1000px){
+    .InterfazDeFormulario1 {
+       flex-direction: column;
     }
-    .interfazFormB{
-        padding: 0px;
+    .InterfazDeFormB{
+        margin-top: 60px;
+    }
+    .InterfazDeFormA{
+        margin-top: 60px;
     }
 }
-

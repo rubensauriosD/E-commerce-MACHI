@@ -74,9 +74,11 @@ const CartProduct = ({
       sx={{
         display: "flex",
         justifyContent: "space-between",
+        flexWrap: "wrap",
         width: "50%",
         margin: "auto",
         mt: 2,
+        marginBottom: "4%",
       }}
     >
       <Box sx={{ display: "flex" }}>
@@ -125,7 +127,10 @@ const CartProduct = ({
             onClick={handleOnClick}
             variant="outlined"
             startIcon={<DeleteIcon />}
-            sx={{ alignSelf: "center" }}
+            sx={{ alignSelf: "center",
+            marginBottom: "2%",
+            marginLeft:"4%",
+           }}
           >
             Eliminar
           </Button>
@@ -135,8 +140,6 @@ const CartProduct = ({
         sx={{
           display: "flex",
           alignItems: "center",
-          pl: 0.5,
-          pb: 0.5,
           height: "50%",
           border: "1px solid rgba(6,25,38,0.11)",
           borderRadius: "3px",

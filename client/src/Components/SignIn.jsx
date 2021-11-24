@@ -20,18 +20,15 @@ export default function SignIn({ SubmitS, submitFace }) {
     });
   };
   return (
-    <div>
+    <div >
       <h2>REGISTRATE YA!</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
-          component="div"
+           
           sx={{
             display: "flex",
             flexDirection: "column",
-            /* gridTemplateColumns: { sm: "20vw 20vw" },
-            gap: 1,
-            maxHeight: "60vh",
-            overflow: "auto", */
+         
           }}
         >
           <Controller
@@ -42,7 +39,6 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
-                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 label="Ingresa Nombre"
                 variant="filled"
                 color="success"
@@ -62,7 +58,6 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
-                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw",justifySelf:"center"}}}
                 label="Ingresa Apellido"
                 variant="filled"
                 color="success"
@@ -88,7 +83,6 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
-                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 type="email"
                 label="Ingresa tu correo electronico"
                 variant="filled"
@@ -115,7 +109,6 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
-                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 type="password"
                 label="Ingresa Contraseña"
                 variant="filled"
@@ -141,7 +134,6 @@ export default function SignIn({ SubmitS, submitFace }) {
             render={({ field }) => (
               <TextField
                 {...field}
-                sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}
                 type="password"
                 label="Escribe de nuevo la contraseña"
                 variant="filled"
@@ -154,10 +146,10 @@ export default function SignIn({ SubmitS, submitFace }) {
               {errors.validacionContrasenia.message}
             </Alert>
           )}
-          <Button variant="outlined" color="success" type="submit" sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}>
+          <Button variant="outlined" color="success" type="submit">
             <Typography>Registrate</Typography>
           </Button>
-          <Button variant="contained" onClick={submitFace} sx={{width:{xl: "20vw", md:"20vw",sm:"30vw", xs:"80vw"},justifySelf:"center"}}>
+          <Button variant="contained" onClick={submitFace}>
             <FacebookIcon fontSize="large" />
             <Typography>Registrate con facebook</Typography>
           </Button>

@@ -21,7 +21,7 @@ export default function Login({ SubmitL }) {
       <h2>Inicia Sesion con tu Cuenta Machi</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box
-          component="div"
+          
           sx={{
             display: "grid",
             gridTemplateColumns: { sm: "45vw" },
